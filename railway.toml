@@ -10,7 +10,10 @@ healthcheckTimeout = 100
 [phases.setup]
 nixPkgs = [
     "swig",
-    "wkhtmltopdf"
+    "wkhtmltopdf",
+    "cmake",
+    "gcc",
+    "python3-dev"
 ]
 
 [restart]

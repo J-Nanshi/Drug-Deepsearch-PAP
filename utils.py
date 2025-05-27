@@ -27,7 +27,11 @@ import requests
 import fitz  # PyMuPDF
 import nltk
 import numpy as np
-import faiss
+try:
+    import faiss
+    FAISS_AVAILABLE = True
+except ImportError:
+    FAISS_AVAILABLE = False
 from sentence_transformers import SentenceTransformer
 from nltk.tokenize import sent_tokenize
 import torch
@@ -66,6 +70,8 @@ def chunk_text(text, chunk_size=10):
 
 # Step 2: Create FAISS index
 def build_faiss_index(embeddings):
+    if not FAISS_AVAILABLE:
+        raise ImportError("FAISS is not available. Please install faiss-cpu or use a different vector store.")
     embeddings = embeddings / np.linalg.norm(embeddings, axis=1, keepdims=True)  # Normalize for cosine similarity
     index = faiss.IndexFlatIP(embeddings.shape[1])  # Inner Product == cosine if vectors are normalized
     index.add(embeddings)
@@ -73,6 +79,8 @@ def build_faiss_index(embeddings):
 
 # Step 3: Query FAISS
 def search_faiss(query, model, index, chunks, top_n=3):
+    if not FAISS_AVAILABLE:
+        raise ImportError("FAISS is not available. Please install faiss-cpu or use a different vector store.")
     query_embedding = model.encode([query], convert_to_numpy=True)
     query_embedding = query_embedding / np.linalg.norm(query_embedding, axis=1, keepdims=True)
     scores, indices = index.search(query_embedding, top_n)

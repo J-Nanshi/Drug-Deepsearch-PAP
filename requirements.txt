@@ -14,6 +14,7 @@ beautifulsoup4>=4.12.3
 PyMuPDF==1.23.26
 nltk==3.8.1
 numpy==1.26.4
+faiss-cpu==1.7.4
 torch>=2.0.0
 torchvision>=0.15.0
 torchaudio>=2.0.0
@@ -24,3 +25,6 @@ transformers>=4.38.2
 scikit-learn>=1.4.1
 pandas>=2.2.1
 gunicorn>=21.2.0
+wkhtmltopdf-pack>=0.12.3.0
+lxml>=5.1.0
+html5lib>=1.1
