@@ -2,9 +2,9 @@ flask==3.0.2
 markdown2==2.4.12
 pdfkit==1.0.0
 langgraph==0.0.26
-langchain==0.1.12
-langchain-community==0.0.27
-langsmith==0.1.22
+langchain>=0.1.0
+langchain-community>=0.0.10
+langsmith>=0.0.69
 IPython==8.22.2
 sentence-transformers==2.5.1
 aiohttp==3.9.3
