@@ -27,3 +27,4 @@ pandas>=2.2.1
 gunicorn>=21.2.0
 lxml>=5.1.0
 html5lib>=1.1
+dotenv
