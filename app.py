@@ -31,7 +31,7 @@ app = Flask(__name__)
 # --- Configuration for wkhtmltopdf (UPDATE THIS PATH) ---
 # IMPORTANT: Replace with the actual path to your wkhtmltopdf.exe
 # If on Linux/macOS, it might just be 'wkhtmltopdf' if it's in your PATH
-path_to_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
 # Ensure the path is correct for your system!
 config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
 # --- End wkhtmltopdf Config ---
