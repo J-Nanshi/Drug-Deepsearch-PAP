@@ -25,6 +25,5 @@ transformers>=4.38.2
 scikit-learn>=1.4.1
 pandas>=2.2.1
 gunicorn>=21.2.0
-wkhtmltopdf-pack>=0.12.3.0
 lxml>=5.1.0
 html5lib>=1.1
