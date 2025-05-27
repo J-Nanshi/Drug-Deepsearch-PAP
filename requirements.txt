@@ -7,7 +7,7 @@ langchain-community>=0.0.10
 langsmith>=0.0.69
 IPython==8.22.2
 sentence-transformers==2.5.1
-aiohttp==3.9.3
+aiohttp>=3.8.0,<4.0.0
 tavily-python==0.3.1
 duckduckgo-search==4.4.3
 beautifulsoup4==4.12.3
@@ -15,10 +15,10 @@ PyMuPDF==1.23.26
 nltk==3.8.1
 numpy==1.26.4
 faiss-cpu==1.7.4
-torch==2.2.1
-torchvision==0.17.1
-torchaudio==2.2.1
-requests==2.31.0
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+requests>=2.28.0
 python-dotenv==1.0.1
 tqdm==4.66.2
 transformers==4.38.2
