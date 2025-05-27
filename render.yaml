@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: deep-review
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false 
