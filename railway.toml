@@ -1,0 +1,18 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt"
+
+[deploy]
+startCommand = "gunicorn app:app"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+
+[phases.setup]
+nixPkgs = [
+    "swig",
+    "wkhtmltopdf"
+]
+
+[restart]
+policy = "on-failure"
+maxRetries = 10 
