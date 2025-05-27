@@ -9,7 +9,6 @@ import logging
 from typing import List, Optional, Dict, Any, Union
 from urllib.parse import unquote
 
-from exa_py import Exa
 from tavily import AsyncTavilyClient
 from duckduckgo_search import DDGS 
 from bs4 import BeautifulSoup
@@ -1187,9 +1186,6 @@ async def select_and_execute_search(search_api: str, query_list: list[str], para
         return deduplicate_and_format_sources(search_results, max_tokens_per_source=4000, include_raw_content=False)
     elif search_api == "perplexity":
         search_results = perplexity_search(query_list, **params_to_pass)
-        return deduplicate_and_format_sources(search_results, max_tokens_per_source=4000)
-    elif search_api == "exa":
-        search_results = await exa_search(query_list, **params_to_pass)
         return deduplicate_and_format_sources(search_results, max_tokens_per_source=4000)
     elif search_api == "arxiv":
         search_results = await arxiv_search_async(query_list, **params_to_pass)
