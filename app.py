@@ -16,11 +16,11 @@ import asyncio
 from langgraph.types import Command
 import os
 import markdown2
-import pdfkit
 import tempfile
 import shutil
 import time
 import threading
+from xhtml2pdf import pisa
 
 # Import your actual graph object and Command class
 from prompts import REPORT_STRUCTURE
@@ -28,13 +28,9 @@ from graph import graph
 
 app = Flask(__name__)
 
-# --- Configuration for wkhtmltopdf (UPDATE THIS PATH) ---
-# IMPORTANT: Replace with the actual path to your wkhtmltopdf.exe
-# If on Linux/macOS, it might just be 'wkhtmltopdf' if it's in your PATH
-path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
-# Ensure the path is correct for your system!
-config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
-# --- End wkhtmltopdf Config ---
+# --- Configuration for PDF Generation (xhtml2pdf) ---
+# No external binary needed for xhtml2pdf
+# --- End PDF Config ---
 
 
 # --- Helper Functions for Markdown and PDF Generation ---
@@ -185,13 +181,9 @@ def generate_and_download_pdf():
         temp_dir = tempfile.mkdtemp()
         pdf_path = os.path.join(temp_dir, "generated_report.pdf")
 
-        options = {
-            'enable-local-file-access': True,
-            'enable-javascript': True,
-            'no-stop-slow-scripts': True,
-        }
-
-        pdfkit.from_string(full_html_for_pdf, pdf_path, configuration=config, options=options)
+        # Use xhtml2pdf to generate PDF
+        with open(pdf_path, "wb") as f:
+            pisa.CreatePDF(full_html_for_pdf, dest=f)
 
         # Background thread to clean up temp folder after a delay
         def delayed_cleanup(path):
@@ -217,4 +209,5 @@ def generate_and_download_pdf():
 
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
