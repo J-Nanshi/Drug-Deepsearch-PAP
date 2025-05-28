@@ -7,15 +7,6 @@ startCommand = "gunicorn --bind 0.0.0.0:$PORT app:app"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 
-[phases.setup]
-nixPkgs = [
-    "swig",
-    "wkhtmltopdf",
-    "cmake",
-    "gcc",
-    "python3-dev"
-]
-
 [restart]
 policy = "on-failure"
-maxRetries = 10 
+maxRetries = 10
