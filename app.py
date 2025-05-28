@@ -130,6 +130,10 @@ def prepare_report_for_pdf(report_text):
 def index():
     return render_template('index.html')
 
+@app.route('/healthz')
+def healthz():
+    return 'OK', 200
+
 from flask import after_this_request
 
 @app.route('/generate_and_download_pdf', methods=['POST'])
