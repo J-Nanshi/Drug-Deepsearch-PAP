@@ -1,6 +1,6 @@
 flask
 markdown2
-xhtml2pdf
+pdfkit
 langgraph
 langchain
 langchain-community

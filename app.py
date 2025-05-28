@@ -21,6 +21,7 @@ import shutil
 import time
 import threading
 from xhtml2pdf import pisa
+import pdfkit
 
 # Import your actual graph object and Command class
 from prompts import REPORT_STRUCTURE
@@ -32,6 +33,11 @@ app = Flask(__name__)
 # No external binary needed for xhtml2pdf
 # --- End PDF Config ---
 
+# --- Configuration for wkhtmltopdf (UPDATE THIS PATH) ---
+# IMPORTANT: Replace with the actual path to your wkhtmltopdf binary
+path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
+config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
+# --- End wkhtmltopdf Config ---
 
 # --- Helper Functions for Markdown and PDF Generation ---
 def replace_pmid_with_links(text):
@@ -185,9 +191,13 @@ def generate_and_download_pdf():
         temp_dir = tempfile.mkdtemp()
         pdf_path = os.path.join(temp_dir, "generated_report.pdf")
 
-        # Use xhtml2pdf to generate PDF
-        with open(pdf_path, "wb") as f:
-            pisa.CreatePDF(full_html_for_pdf, dest=f)
+        options = {
+            'enable-local-file-access': True,
+            'enable-javascript': True,
+            'no-stop-slow-scripts': True,
+        }
+
+        pdfkit.from_string(full_html_for_pdf, pdf_path, configuration=config, options=options)
 
         # Background thread to clean up temp folder after a delay
         def delayed_cleanup(path):
