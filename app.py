@@ -22,6 +22,8 @@ import time
 import threading
 from xhtml2pdf import pisa
 import pdfkit
+import nltk
+nltk.download('punkt')
 
 # Import your actual graph object and Command class
 from prompts import REPORT_STRUCTURE
@@ -158,7 +160,7 @@ def generate_and_download_pdf():
             "planner_provider": "openai",
             "planner_model": "o3-mini",
             "writer_provider": "openai",
-            "writer_model": "gpt-4.1",
+            "writer_model": "gpt-4.1-mini",
             "report_structure": REPORT_STRUCTURE,
             "max_search_depth": 2,
             "number_of_queries": 3,
@@ -223,5 +225,5 @@ def generate_and_download_pdf():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+ 
+    app.run(host='0.0.0.0', port=80)

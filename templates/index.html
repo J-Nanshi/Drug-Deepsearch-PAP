@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+̂̂<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Report Generator</title>
+  <title>Neuro Deep Research AI</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     :root {
-      --bg-light: #f9f9f9;
-      --bg-dark: #121212;
-      --text-light: #111;
-      --text-dark: #eee;
-      --box-light: #e6e6e6;
-      --box-dark: #2a2a2a;
-      --input-light: #fff;
-      --input-dark: #1e1e1e;
-      --primary: #10a37f;
-      --radius: 12px;
+      --bg-light: #f4f8fb;
+      --bg-dark: #181c23;
+      --text-light: #1a1a1a;
+      --text-dark: #f4f8fb;
+      --primary: #3a86ff;
+      --secondary: #8338ec;
+      --accent: #ffbe0b;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(58,134,255,0.08);
     }
 
     [data-theme="light"] {
@@ -30,215 +30,378 @@
     }
 
     body {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s, color 0.3s;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #e0e7ff 0%, #f4f8fb 100%);
+      transition: background 0.3s, color 0.3s;
     }
 
     header {
-      padding: 1rem 2rem;
+      padding: 1.5rem 2rem 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #ccc;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
     }
 
     header h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
     }
 
     .theme-toggle {
       background: none;
       border: none;
-      font-size: 1rem;
+      font-size: 1.5rem;
       cursor: pointer;
-      color: inherit;
+      color: #fff;
+      transition: color 0.2s;
     }
 
     .main {
       display: flex;
       flex: 1;
       overflow: hidden;
+      margin: 0;
+      min-height: 70vh;
+      max-width: none;
+      width: 100vw;
+      gap: 2.5rem;
     }
 
     .left-panel {
-      width: 300px;
-      border-right: 1px solid #ccc;
-      padding: 1.5rem;
+      width: 30vw;
+      min-width: 300px;
+      max-width: 500px;
+      padding: 2rem 1.5rem;
       box-sizing: border-box;
+      background: linear-gradient(135deg, #e0e7ff 0%, #fff 100%);
+      border-top-left-radius: var(--radius);
+      border-bottom-left-radius: var(--radius);
       font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
-    .left-panel textarea {
+    .left-panel label {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .left-panel textarea,
+    .left-panel input[type="text"] {
       width: 100%;
-      height: 100%;
-      min-height: 300px;
       padding: 1rem;
       border-radius: var(--radius);
-      border: none;
+      border: 1px solid #e0e7ff;
       resize: vertical;
-      background-color: var(--input-light);
+      background-color: #f8fafc;
       color: var(--text-light);
       font-weight: 400;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(58,134,255,0.03);
+      transition: border 0.2s;
     }
 
-    [data-theme="dark"] .left-panel textarea {
-      background-color: var(--input-dark);
+    .left-panel textarea:focus,
+    .left-panel input[type="text"]:focus {
+      border: 1.5px solid var(--primary);
+      outline: none;
+    }
+
+    [data-theme="dark"] .left-panel {
+      background: linear-gradient(135deg, #232946 0%, #181c23 100%);
+      border-right: 1px solid #232946;
+    }
+
+    [data-theme="dark"] .left-panel textarea,
+    [data-theme="dark"] .left-panel input[type="text"] {
+      background-color: #232946;
       color: var(--text-dark);
+      border: 1px solid #232946;
     }
 
     .chat-area {
       flex: 1;
+      min-width: 400px;
+      max-width: 70vw;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 2rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 3.5rem;
+      padding: 2.5rem 2rem;
+      background: #f8fafc;
+      border-top-right-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+    }
+
+    [data-theme="dark"] .chat-area {
+      background: #181c23;
     }
 
     .input-section {
       display: flex;
-      gap: 1rem;
+      gap: 1.2rem;
       align-items: center;
+      margin-top: 2rem;
+      width: 100%;
     }
 
     .input-section input[type="text"] {
       flex: 1;
-      padding: 1rem;
+      padding: 1.1rem;
       border-radius: var(--radius);
-      border: none;
-      background-color: var(--input-light);
+      border: 1px solid #e0e7ff;
+      background-color: #fff;
       color: var(--text-light);
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(58,134,255,0.03);
+      transition: border 0.2s;
+      min-height: 70px;
+    }
+
+    .input-section input[type="text"]:focus {
+      border: 1.5px solid var(--primary);
+      outline: none;
     }
 
     [data-theme="dark"] .input-section input[type="text"] {
-      background-color: var(--input-dark);
+      background-color: #232946;
       color: var(--text-dark);
+      border: 1px solid #232946;
     }
 
     button {
-      background-color: var(--primary);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
-      padding: 1rem 1.5rem;
+      padding: 1.1rem 2rem;
       border: none;
       border-radius: var(--radius);
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(58,134,255,0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+      box-shadow: 0 4px 16px rgba(131,56,236,0.12);
     }
 
     .writing-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    text-align: center;
-    padding: 2rem;
+      position: fixed;
+      inset: 0;
+      background: rgba(24,28,35, 0.92);
+      color: white;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      text-align: center;
+      padding: 2rem;
     }
 
     .writing-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
     }
 
     .writing-subtitle {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #ccc;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #e0e7ff;
     }
 
     .blinking::after {
-    content: '...';
-    animation: blink 1.2s steps(2, start) infinite;
+      content: '...';
+      animation: blink 1.2s steps(2, start) infinite;
     }
 
     @keyframes blink {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
     }
 
-
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .main {
         flex-direction: column;
+        max-width: 98vw;
+      }
+
+      .left-panel, .chat-area {
+        border-radius: 0;
       }
 
       .left-panel {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #e0e7ff;
+      }
+
+      .chat-area {
+        padding: 1.5rem 1rem;
       }
 
       .input-section {
         flex-direction: column;
         align-items: stretch;
+        gap: 0.7rem;
       }
+    }
+
+    /* Login Page Styles */
+    #login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #login-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #3a86ff;
+      font-weight: 700;
+    }
+
+    #login-container label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    #login-container select,
+    #login-container input[type="password"] {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #e0e7ff;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    #login-container button {
+      width: 100%;
+      padding: 0.9rem 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3a86ff 0%, #8338ec 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #login-error {
+      color: #e63946;
+      text-align: center;
+      margin-top: 1rem;
+      display: none;
+      font-weight: 600;
+    }
+
+    #user_instructions {
+      min-height: 400px !important;
+      font-size: 1.3rem !important;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>AI Report Generator</h1>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</button>
-  </header>
-
-  <div class="main">
-    <div class="left-panel">
-      <label for="user_instructions"><strong>User Instructions</strong></label>
-      <textarea id="user_instructions" placeholder="Add instructions here...">1. More facts and reviews.
-2. Tabular representation for visual ease.</textarea>
+  <div id="login-container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;">
+    <div style="background:#fff;padding:2.5rem 2rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.08);min-width:320px;max-width:90vw;">
+      <h2 style="text-align:center;margin-bottom:1.5rem;color:#3a86ff;font-weight:700;">Login to Neuro Deep Research AI</h2>
+      <form id="login-form" onsubmit="return handleLogin(event)">
+        <div style="margin-bottom:1.2rem;">
+          <label for="username" style="font-weight:600;">Username</label>
+          <select id="username" style="width:100%;padding:0.7rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1rem;">
+            <option value="">Select User</option>
+            <option value="Debarka">Debarka</option>
+            <option value="Kartik">Kartik</option>
+            <option value="Dr.Karnik">Dr.Karnik</option>
+            <option value="Dr.Bob">Dr.Bob</option>
+            <option value="Aman">Aman</option>
+          </select>
+        </div>
+        <div style="margin-bottom:1.2rem;">
+          <label for="password" style="font-weight:600;">Password</label>
+          <input type="password" id="password" style="width:100%;padding:0.7rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1rem;" required />
+        </div>
+        <button type="submit" style="width:100%;padding:0.9rem 0;font-size:1.1rem;font-weight:700;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);color:#fff;border:none;border-radius:8px;cursor:pointer;">Login</button>
+        <div id="login-error" style="color:#e63946;text-align:center;margin-top:1rem;display:none;font-weight:600;"></div>
+      </form>
     </div>
+  </div>
+  <div id="main-app" style="display:none;">
+    <header>
+      <h1><i class="fas fa-brain"></i> Neuro Deep Research AI</h1>
+      <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> / <i class="fas fa-sun"></i></button>
+    </header>
+    <div class="main">
+      <div class="left-panel">
+        <label for="user_instructions"><strong>Instructions</strong></label>
+        <textarea id="user_instructions" placeholder="Type your instructions here..." style="width:100%;min-height:300px;font-size:1.2rem;box-sizing:border-box;max-width:100%;background:#f8fafc;">
+1. Pediatric, adult, condition based Dosage Details
 
-    <div class="chat-area">
-      <div class="input-section">
-        <input type="text" id="topic" placeholder="Enter topic..." value="Alzheimer disease seen through the lens of sex and gender.">
-        <button onclick="generateAndDownloadPdf()">Generate</button>
+2. Common Side Effects
+
+3. Mechanism of Action E.g., receptor binding, neurotransmitter reuptake inhibition, enzyme modulation
+
+4. Tabular representation for better readability
+</textarea>
+      </div>
+      <div class="chat-area">
+        <h2 style="margin-top:0;margin-bottom:2rem;color:#3a86ff;font-weight:700;">Deep Research</h2>
+        <div class="input-section" style="width:100%;gap:1.2rem;align-items:center;">
+          <input type="text" id="topic" placeholder="Enter topic here..." style="flex:1;margin-right:1rem;font-size:1.1rem;min-width:220px;" autofocus />
+          <button onclick="generateAndDownloadPdf()"><i class="fas fa-file-pdf"></i> Generate PDF</button>
+        </div>
+      </div>
+    </div>
+    <div id="writing-overlay" class="writing-overlay">
+      <div class="writing-title"><i class="fas fa-pen-nib"></i> Writing Report</div>
+      <div class="writing-subtitle">
+        Please wait 4-5 minutes<span class="blinking">...</span>
       </div>
     </div>
   </div>
-
-  <div id="writing-overlay" class="writing-overlay">
-  <div class="writing-title">Writing Report.</div>
-  <div class="writing-subtitle">
-    Please wait 4-5 minutes<span class="blinking">...</span>
-  </div>
-</div>
-
-
   <script>
     async function generateAndDownloadPdf() {
       const topic = document.getElementById('topic').value;
       const userInstructions = document.getElementById('user_instructions').value;
       const overlay = document.getElementById('writing-overlay');
-
       overlay.style.display = 'flex';
-
       try {
         const response = await fetch('/generate_and_download_pdf', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic, user_instructions: userInstructions })
+          body: JSON.stringify({ topic: topic, user_instructions: userInstructions })
         });
-
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
-
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
-
         const a = document.createElement('a');
         a.href = url;
         a.download = 'generated_report.pdf';
@@ -246,7 +409,6 @@
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
-
         overlay.style.display = 'none';
         alert("Report downloaded successfully.");
       } catch (error) {
@@ -268,6 +430,33 @@
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.dataset.theme = savedTheme;
     });
+
+    // --- LOGIN LOGIC ---
+    const staticUsers = {
+      'Debarka': 'debarka123',
+      'Kartik': 'kartik123',
+      'Dr.Karnik': 'karnik123',
+      'Dr.Bob': 'bob123',
+      'Aman': 'aman123'
+    };
+    function handleLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('login-error');
+      if (!staticUsers[username] || staticUsers[username] !== password) {
+        errorDiv.textContent = 'Invalid username or password';
+        errorDiv.style.display = 'block';
+        return false;
+      }
+      // Hide login, show app
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('main-app').style.display = 'block';
+      errorDiv.style.display = 'none';
+      return false;
+    }
+    // --- END LOGIN LOGIC ---
   </script>
 </body>
 </html>
+
