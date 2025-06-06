@@ -25,9 +25,6 @@ import pdfkit
 import nltk
 nltk.download('punkt')
 
-import smtplib
-from email.message import EmailMessage
-
 # Import your actual graph object and Command class
 from prompts import REPORT_STRUCTURE
 from graph import graph
@@ -280,28 +277,21 @@ def send_pdf_email():
         }
         pdfkit.from_string(full_html_for_pdf, pdf_path, configuration=config, options=options)
 
-        # Email sending logic (using Gmail SMTP as example)
-        EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
-        EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
-        if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
-            return jsonify({'error': 'Email credentials not set in environment variables.'}), 500
-
-        msg = EmailMessage()
-        msg['Subject'] = f'AI Generated Report: {topic}'
-        msg['From'] = EMAIL_ADDRESS
-        msg['To'] = email
-        msg.set_content(f'Please find attached the AI generated report for: {topic}')
+        # Send PDF and metadata to n8n webhook instead of direct email
+        import requests
+        n8n_webhook_url = "https://podhealthn8n.4gd.ai/prod/v1/5155b38d-47e4-4be9-a3d5-6803cbe044e7"
         with open(pdf_path, 'rb') as f:
-            file_data = f.read()
-            msg.add_attachment(file_data, maintype='application', subtype='pdf', filename='generated_report.pdf')
-
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            smtp.send_message(msg)
+            files = {'pdf': ('generated_report.pdf', f, 'application/pdf')}
+            data = {'email': email, 'topic': topic}
+            response = requests.post(n8n_webhook_url, data=data, files=files)
 
         # Clean up temp folder
         shutil.rmtree(temp_dir)
-        return jsonify({'success': True}), 200
+
+        if response.status_code == 200:
+            return jsonify({'success': True}), 200
+        else:
+            return jsonify({'error': f'n8n webhook failed: {response.text}'}), 500
     except Exception as e:
         return jsonify({'error': f'Failed to send email: {str(e)}'}), 500
 
