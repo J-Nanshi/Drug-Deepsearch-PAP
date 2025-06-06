@@ -1,4 +1,4 @@
-̂̂<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -324,6 +324,46 @@
       min-height: 400px !important;
       font-size: 1.3rem !important;
     }
+
+    .profile-dropdown {
+      position: relative;
+    }
+
+    #profileBtn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    #profileMenu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 2.5rem;
+      background: #fff;
+      color: #333;
+      min-width: 120px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      z-index: 100;
+    }
+
+    #profileMenu button {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      text-align: left;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    #logoutBtn {
+      color: #3a86ff;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -354,7 +394,15 @@
   <div id="main-app" style="display:none;">
     <header>
       <h1><i class="fas fa-brain"></i> Neuro Deep Research AI</h1>
-      <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> / <i class="fas fa-sun"></i></button>
+      <div style="display:flex;align-items:center;gap:1.2rem;">
+        <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> / <i class="fas fa-sun"></i></button>
+        <div class="profile-dropdown" style="position:relative;">
+          <button id="profileBtn" onclick="toggleProfileMenu()" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;"><i class="fas fa-user-circle"></i></button>
+          <div id="profileMenu" style="display:none;position:absolute;right:0;top:2.5rem;background:#fff;color:#333;min-width:120px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.12);z-index:100;">
+            <button id="logoutBtn" onclick="logout()" style="width:100%;background:none;border:none;padding:0.8rem 1.2rem;text-align:left;font-size:1rem;cursor:pointer;color:#3a86ff;font-weight:600;">Logout Kartik</button>
+          </div>
+        </div>
+      </div>
     </header>
     <div class="main">
       <div class="left-panel">
@@ -371,9 +419,15 @@
       </div>
       <div class="chat-area">
         <h2 style="margin-top:0;margin-bottom:2rem;color:#3a86ff;font-weight:700;">Deep Research</h2>
-        <div class="input-section" style="width:100%;gap:1.2rem;align-items:center;">
-          <input type="text" id="topic" placeholder="Enter topic here..." style="flex:1;margin-right:1rem;font-size:1.1rem;min-width:220px;" autofocus />
-          <button onclick="generateAndDownloadPdf()"><i class="fas fa-file-pdf"></i> Generate PDF</button>
+        <div class="input-section" style="width:100%;gap:1.2rem;align-items:flex-start;flex-direction:column;margin-top:2.5rem;">
+          <div style="display:flex;width:100%;gap:1.2rem;align-items:center;">
+            <input type="text" id="topic" placeholder="Enter topic here..." style="flex:2;font-size:1.1rem;min-width:180px;padding:1.1rem;border-radius:var(--radius);border:1px solid #e0e7ff;" autofocus />
+            <input type="email" id="email" placeholder="Recipient Email" style="flex:2;font-size:1.1rem;min-width:180px;padding:1.1rem;border-radius:var(--radius);border:1px solid #e0e7ff;" />
+          </div>
+          <div style="display:flex;width:100%;gap:1.2rem;justify-content:flex-end;">
+            <button onclick="generateAndDownloadPdf()" style="min-width:180px;"><i class="fas fa-file-pdf"></i> Generate PDF</button>
+            <button onclick="sendPdfToEmail()" style="min-width:180px;"><i class="fas fa-envelope"></i> Send to Email</button>
+          </div>
         </div>
       </div>
     </div>
@@ -418,6 +472,35 @@
       }
     }
 
+    async function sendPdfToEmail() {
+      const topic = document.getElementById('topic').value;
+      const userInstructions = document.getElementById('user_instructions').value;
+      const email = document.getElementById('email').value;
+      if (!email) {
+        alert('Please enter a recipient email address.');
+        return;
+      }
+      const overlay = document.getElementById('writing-overlay');
+      overlay.style.display = 'flex';
+      try {
+        const response = await fetch('/send_pdf_email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic: topic, user_instructions: userInstructions, email: email })
+        });
+        const result = await response.json();
+        overlay.style.display = 'none';
+        if (response.ok) {
+          alert('Report sent to email successfully!');
+        } else {
+          alert('Error: ' + (result.error || 'Failed to send email.'));
+        }
+      } catch (error) {
+        overlay.style.display = 'none';
+        alert('Error: ' + error.message);
+      }
+    }
+
     function toggleTheme() {
       const html = document.documentElement;
       const newTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -456,6 +539,23 @@
       return false;
     }
     // --- END LOGIN LOGIC ---
+
+    function toggleProfileMenu() {
+      const menu = document.getElementById('profileMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      document.addEventListener('click', function handler(e) {
+        if (!document.getElementById('profileBtn').contains(e.target)) {
+          menu.style.display = 'none';
+          document.removeEventListener('click', handler);
+        }
+      });
+    }
+
+    function logout() {
+      document.getElementById('main-app').style.display = 'none';
+      document.getElementById('login-container').style.display = 'flex';
+      document.getElementById('profileMenu').style.display = 'none';
+    }
   </script>
 </body>
 </html>

@@ -25,6 +25,9 @@ import pdfkit
 import nltk
 nltk.download('punkt')
 
+import smtplib
+from email.message import EmailMessage
+
 # Import your actual graph object and Command class
 from prompts import REPORT_STRUCTURE
 from graph import graph
@@ -222,6 +225,85 @@ def generate_and_download_pdf():
 
     except Exception as e:
         return jsonify({"error": f"Failed to generate PDF: {str(e)}"}), 500
+
+@app.route('/send_pdf_email', methods=['POST'])
+def send_pdf_email():
+    data = request.json
+    topic = data.get('topic')
+    user_instructions = data.get('user_instructions')
+    email = data.get('email')
+
+    if not topic or not email:
+        return jsonify({'error': 'Topic and email are required'}), 400
+
+    thread_config = {
+        "configurable": {
+            "thread_id": str(uuid.uuid4()),
+            "search_api": "tavily",
+            "planner_provider": "openai",
+            "planner_model": "o3-mini",
+            "writer_provider": "openai",
+            "writer_model": "gpt-4.1-mini",
+            "report_structure": REPORT_STRUCTURE,
+            "max_search_depth": 2,
+            "number_of_queries": 3,
+            "user_instructions": user_instructions
+        }
+    }
+
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+        async def run_graph():
+            async for event in graph.astream({"topic": topic}, thread_config, stream_mode="updates"):
+                if '__interrupt__' in event:
+                    break
+            async for event in graph.astream(Command(resume=True), thread_config, stream_mode="updates"):
+                pass
+            return graph.get_state(thread_config).values.get('final_report')
+
+        final_report_raw = loop.run_until_complete(run_graph())
+    except Exception as e:
+        return jsonify({"error": f"Error generating report: {str(e)}"}), 500
+    finally:
+        loop.close()
+
+    try:
+        full_html_for_pdf = prepare_report_for_pdf(final_report_raw)
+        temp_dir = tempfile.mkdtemp()
+        pdf_path = os.path.join(temp_dir, "generated_report.pdf")
+        options = {
+            'enable-local-file-access': True,
+            'enable-javascript': True,
+            'no-stop-slow-scripts': True,
+        }
+        pdfkit.from_string(full_html_for_pdf, pdf_path, configuration=config, options=options)
+
+        # Email sending logic (using Gmail SMTP as example)
+        EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
+        EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
+        if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
+            return jsonify({'error': 'Email credentials not set in environment variables.'}), 500
+
+        msg = EmailMessage()
+        msg['Subject'] = f'AI Generated Report: {topic}'
+        msg['From'] = EMAIL_ADDRESS
+        msg['To'] = email
+        msg.set_content(f'Please find attached the AI generated report for: {topic}')
+        with open(pdf_path, 'rb') as f:
+            file_data = f.read()
+            msg.add_attachment(file_data, maintype='application', subtype='pdf', filename='generated_report.pdf')
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
+
+        # Clean up temp folder
+        shutil.rmtree(temp_dir)
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        return jsonify({'error': f'Failed to send email: {str(e)}'}), 500
 
 
 if __name__ == '__main__':
