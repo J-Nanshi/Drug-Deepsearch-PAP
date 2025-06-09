@@ -576,17 +576,16 @@
         alert('Please enter a recipient email address.');
         return;
       }
-      await animateProgressOverlay('email', async () => {
-        const response = await fetch('/send_pdf_email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic: topic, user_instructions: userInstructions, email: email })
-        });
-        const result = await response.json();
-        if (!response.ok) {
-          throw new Error(result.error || 'Failed to send email.');
-        }
+      // Immediately show confirmation pop-up and reset UI for new report
+      alert('Your report is on its way! Check your email in 5 minutes and download it.');
+      // Fire and forget the backend request
+      fetch('/send_pdf_email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: topic, user_instructions: userInstructions, email: email })
       });
+      // Optionally clear the email field for next use
+      // document.getElementById('email').value = '';
     }
 
     function toggleTheme() {
