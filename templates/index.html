@@ -364,6 +364,23 @@
       color: #3a86ff;
       font-weight: 600;
     }
+
+    #progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 6px;
+      z-index: 2000;
+      display: none;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);
+      transition: width 0.3s;
+    }
   </style>
 </head>
 <body>
@@ -437,13 +454,49 @@
         Please wait 4-5 minutes<span class="blinking">...</span>
       </div>
     </div>
+    <div id="progress-bar-container" style="position:fixed;top:0;left:0;width:100vw;height:6px;z-index:2000;display:none;">
+      <div id="progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);transition:width 0.3s;"></div>
+    </div>
   </div>
   <script>
+    function showProgressBar() {
+      document.getElementById('progress-bar-container').style.display = 'block';
+      setProgressBar(0);
+    }
+    function hideProgressBar() {
+      document.getElementById('progress-bar-container').style.display = 'none';
+      setProgressBar(0);
+    }
+    function setProgressBar(percent) {
+      document.getElementById('progress-bar').style.width = percent + '%';
+    }
+    // Simulate progress for async tasks
+    function animateProgressBar(duration, onDone) {
+      let percent = 0;
+      setProgressBar(0);
+      showProgressBar();
+      const interval = 40; // ms
+      const steps = duration / interval;
+      const increment = 100 / steps;
+      const timer = setInterval(() => {
+        percent += increment;
+        if (percent >= 98) {
+          setProgressBar(98);
+          clearInterval(timer);
+          if (onDone) onDone();
+        } else {
+          setProgressBar(percent);
+        }
+      }, interval);
+      return timer;
+    }
     async function generateAndDownloadPdf() {
       const topic = document.getElementById('topic').value;
       const userInstructions = document.getElementById('user_instructions').value;
       const overlay = document.getElementById('writing-overlay');
       overlay.style.display = 'flex';
+      showProgressBar();
+      let timer = animateProgressBar(4000); // Simulate 4s progress
       try {
         const response = await fetch('/generate_and_download_pdf', {
           method: 'POST',
@@ -454,6 +507,8 @@
           const errorData = await response.json();
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
+        setProgressBar(100);
+        clearInterval(timer);
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -464,14 +519,16 @@
         a.remove();
         URL.revokeObjectURL(url);
         overlay.style.display = 'none';
+        hideProgressBar();
         alert("Report downloaded successfully.");
       } catch (error) {
-        console.error('Error generating report:', error);
+        clearInterval(timer);
         overlay.style.display = 'none';
+        hideProgressBar();
+        console.error('Error generating report:', error);
         alert("Error: " + error.message);
       }
     }
-
     async function sendPdfToEmail() {
       const topic = document.getElementById('topic').value;
       const userInstructions = document.getElementById('user_instructions').value;
@@ -482,6 +539,8 @@
       }
       const overlay = document.getElementById('writing-overlay');
       overlay.style.display = 'flex';
+      showProgressBar();
+      let timer = animateProgressBar(4000); // Simulate 4s progress
       try {
         const response = await fetch('/send_pdf_email', {
           method: 'POST',
@@ -489,14 +548,19 @@
           body: JSON.stringify({ topic: topic, user_instructions: userInstructions, email: email })
         });
         const result = await response.json();
+        setProgressBar(100);
+        clearInterval(timer);
         overlay.style.display = 'none';
+        hideProgressBar();
         if (response.ok) {
           alert('Report sent to email successfully!');
         } else {
           alert('Error: ' + (result.error || 'Failed to send email.'));
         }
       } catch (error) {
+        clearInterval(timer);
         overlay.style.display = 'none';
+        hideProgressBar();
         alert('Error: ' + error.message);
       }
     }
