@@ -449,9 +449,15 @@
       </div>
     </div>
     <div id="writing-overlay" class="writing-overlay">
-      <div class="writing-title"><i class="fas fa-pen-nib"></i> Writing Report</div>
-      <div class="writing-subtitle">
-        Please wait 4-5 minutes<span class="blinking">...</span>
+      <div class="writing-title" id="writing-title"><i class="fas fa-pen-nib"></i> Progress</div>
+      <div class="writing-subtitle" id="writing-subtitle">
+        <span id="progress-text">Starting...</span>
+      </div>
+      <div style="width: 60%; margin: 2rem auto 0 auto;">
+        <div style="background:#23294633;border-radius:8px;height:18px;width:100%;overflow:hidden;">
+          <div id="progress-inner-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);transition:width 0.3s;"></div>
+        </div>
+        <div id="progress-percent" style="text-align:right;font-size:1.1rem;font-weight:600;margin-top:0.3rem;">0%</div>
       </div>
     </div>
     <div id="progress-bar-container" style="position:fixed;top:0;left:0;width:100vw;height:6px;z-index:2000;display:none;">
@@ -490,14 +496,58 @@
       }, interval);
       return timer;
     }
+    function showProgressOverlay(action) {
+      document.getElementById('writing-overlay').style.display = 'flex';
+      document.getElementById('progress-inner-bar').style.width = '0%';
+      document.getElementById('progress-percent').textContent = '0%';
+      document.getElementById('progress-text').textContent = (action === 'download') ? 'Generating and downloading PDF...' : 'Generating and sending email...';
+      document.getElementById('writing-title').innerHTML = (action === 'download') ? '<i class="fas fa-file-pdf"></i> Downloading PDF' : '<i class="fas fa-envelope"></i> Sending Email';
+    }
+    function hideProgressOverlay() {
+      document.getElementById('writing-overlay').style.display = 'none';
+    }
+    function updateProgressOverlay(percent, text) {
+      document.getElementById('progress-inner-bar').style.width = percent + '%';
+      document.getElementById('progress-percent').textContent = Math.floor(percent) + '%';
+      if (text) document.getElementById('progress-text').textContent = text;
+    }
+    async function animateProgressOverlay(action, asyncTask) {
+      showProgressOverlay(action);
+      let percent = 0;
+      let interval = 40;
+      let duration = 4000; // 4s
+      let steps = duration / interval;
+      let increment = 100 / steps;
+      let running = true;
+      let progressTimer = setInterval(() => {
+        if (!running) return;
+        percent += increment;
+        if (percent >= 98) {
+          updateProgressOverlay(98);
+        } else {
+          updateProgressOverlay(percent);
+        }
+      }, interval);
+      try {
+        await asyncTask();
+        running = false;
+        clearInterval(progressTimer);
+        updateProgressOverlay(100, (action === 'download') ? 'PDF downloaded successfully!' : 'Mail sent successfully!');
+        await new Promise(res => setTimeout(res, 1200));
+        hideProgressOverlay();
+      } catch (error) {
+        running = false;
+        clearInterval(progressTimer);
+        updateProgressOverlay(percent, 'Error: ' + error.message);
+        await new Promise(res => setTimeout(res, 1800));
+        hideProgressOverlay();
+        throw error;
+      }
+    }
     async function generateAndDownloadPdf() {
       const topic = document.getElementById('topic').value;
       const userInstructions = document.getElementById('user_instructions').value;
-      const overlay = document.getElementById('writing-overlay');
-      overlay.style.display = 'flex';
-      showProgressBar();
-      let timer = animateProgressBar(4000); // Simulate 4s progress
-      try {
+      await animateProgressOverlay('download', async () => {
         const response = await fetch('/generate_and_download_pdf', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -507,8 +557,6 @@
           const errorData = await response.json();
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
-        setProgressBar(100);
-        clearInterval(timer);
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -518,16 +566,7 @@
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
-        overlay.style.display = 'none';
-        hideProgressBar();
-        alert("Report downloaded successfully.");
-      } catch (error) {
-        clearInterval(timer);
-        overlay.style.display = 'none';
-        hideProgressBar();
-        console.error('Error generating report:', error);
-        alert("Error: " + error.message);
-      }
+      });
     }
     async function sendPdfToEmail() {
       const topic = document.getElementById('topic').value;
@@ -537,32 +576,17 @@
         alert('Please enter a recipient email address.');
         return;
       }
-      const overlay = document.getElementById('writing-overlay');
-      overlay.style.display = 'flex';
-      showProgressBar();
-      let timer = animateProgressBar(4000); // Simulate 4s progress
-      try {
+      await animateProgressOverlay('email', async () => {
         const response = await fetch('/send_pdf_email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ topic: topic, user_instructions: userInstructions, email: email })
         });
         const result = await response.json();
-        setProgressBar(100);
-        clearInterval(timer);
-        overlay.style.display = 'none';
-        hideProgressBar();
-        if (response.ok) {
-          alert('Report sent to email successfully!');
-        } else {
-          alert('Error: ' + (result.error || 'Failed to send email.'));
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to send email.');
         }
-      } catch (error) {
-        clearInterval(timer);
-        overlay.style.display = 'none';
-        hideProgressBar();
-        alert('Error: ' + error.message);
-      }
+      });
     }
 
     function toggleTheme() {
