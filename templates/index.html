@@ -584,8 +584,9 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: topic, user_instructions: userInstructions, email: email })
       });
-      // Optionally clear the email field for next use
-      // document.getElementById('email').value = '';
+      // Clear the topic and email fields for next use
+      document.getElementById('topic').value = '';
+      document.getElementById('email').value = '';
     }
 
     function toggleTheme() {
