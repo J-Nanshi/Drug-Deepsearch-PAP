@@ -336,15 +336,32 @@ For Conclusion/Summary:
 </Quality Checks>"""
 
 
-REPORT_STRUCTURE = """Use this structure to create a report on the user-provided topic:
+REPORT_STRUCTURE = """
+Use this structure to create a comprehensive, deeply-researched report on the user-provided topic:
 
 1. Introduction (no research needed)
-   - Brief overview of the topic area
+   - Brief overview of the topic area (50-100 words)
+   - No references
 
 2. Main Body Sections:
-   - Each section should focus on a sub-topic of the user-provided topic
-   
-3. Conclusion
-   - Aim for 1 structural element (either a list of table) that distills the main body sections 
-   - Provide a concise summary of the report"""
-#- 50-100 word limit
+   - For each major sub-topic, create a section with:
+     a. Section Title (## in Markdown)
+     b. 2-4 well-organized paragraphs covering:
+        - Key concepts and mechanisms
+        - Recent advances or controversies
+        - Practical implications or examples
+     c. At least one table or list if it helps clarify information
+     d. Sub-sections if needed for clarity and depth
+     e. References at the end of the section (numbered, no inline clutter)
+
+3. Comparative Analysis (if applicable)
+   - Table comparing key aspects of main sub-topics
+
+4. Conclusion
+   - Concise summary (100-150 words)
+   - Key takeaways and next steps
+   - No references
+
+5. References
+   - Numbered list of all sources cited in the report, grouped at the end
+"""
