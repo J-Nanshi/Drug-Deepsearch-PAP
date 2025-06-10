@@ -515,30 +515,53 @@
       showProgressOverlay(action);
       let percent = 0;
       let interval = 40;
-      let duration = 4000; // 4s
+      let duration = 4000; // 4s minimum
       let steps = duration / interval;
-      let increment = 100 / steps;
+      let increment = 98 / steps; // Only go to 98% during animation
       let running = true;
+      let startTime = Date.now();
+      let timerDiv = document.getElementById('progress-timer');
+      if (!timerDiv) {
+        timerDiv = document.createElement('div');
+        timerDiv.id = 'progress-timer';
+        timerDiv.style = 'text-align:left;font-size:1.1rem;font-weight:600;margin-top:0.3rem;color:#fff;';
+        document.getElementById('writing-overlay').appendChild(timerDiv);
+      }
+      timerDiv.textContent = 'Elapsed: 0.0s';
+      let elapsedTimer = setInterval(() => {
+        let elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+        timerDiv.textContent = `Elapsed: ${elapsed}s`;
+      }, 100);
       let progressTimer = setInterval(() => {
         if (!running) return;
         percent += increment;
         if (percent >= 98) {
-          updateProgressOverlay(98);
+          percent = 98;
+          updateProgressOverlay(percent);
+          clearInterval(progressTimer);
         } else {
           updateProgressOverlay(percent);
         }
       }, interval);
+      let taskStart = Date.now();
       try {
+        await new Promise(res => setTimeout(res, duration)); // Ensure minimum duration
         await asyncTask();
         running = false;
         clearInterval(progressTimer);
-        updateProgressOverlay(100, (action === 'download') ? 'PDF downloaded successfully!' : 'Mail sent successfully!');
+        clearInterval(elapsedTimer);
+        let totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+        updateProgressOverlay(100, (action === 'download') ? `PDF downloaded successfully! (Time: ${totalTime}s)` : `Mail sent successfully! (Time: ${totalTime}s)`);
+        timerDiv.textContent = `Total time: ${totalTime}s`;
         await new Promise(res => setTimeout(res, 1200));
         hideProgressOverlay();
       } catch (error) {
         running = false;
         clearInterval(progressTimer);
+        clearInterval(elapsedTimer);
+        let totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
         updateProgressOverlay(percent, 'Error: ' + error.message);
+        timerDiv.textContent = `Total time: ${totalTime}s`;
         await new Promise(res => setTimeout(res, 1800));
         hideProgressOverlay();
         throw error;
