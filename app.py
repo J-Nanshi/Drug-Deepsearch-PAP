@@ -160,7 +160,7 @@ def generate_and_download_pdf():
             "planner_provider": "openai",
             "planner_model": "o3-mini",
             "writer_provider": "openai",
-            "writer_model": "gpt-4.1-mini",
+            "writer_model": "gpt-4.1",
             "report_structure": REPORT_STRUCTURE,
             "max_search_depth": 2,
             "number_of_queries": 3,
