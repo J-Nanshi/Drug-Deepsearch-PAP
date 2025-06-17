@@ -70,12 +70,35 @@
       transition: color 0.2s;
     }
 
+    /* --- LOGIN PAGE STYLES --- */
     #login-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      background: linear-gradient(135deg,#e0e7ff 0%,#f4f8fb 100%);
+    }
+
+    #login-container > div {
+      border-radius: 20px;
+      overflow: hidden;
+      width: 350px;
+      max-width: 90vw;
+    }
+
+    #login-container h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    #login-container .logo {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
     }
 
     #login-container h2 {
@@ -83,6 +106,7 @@
       margin-bottom: 1.5rem;
       color: #3a86ff;
       font-weight: 700;
+      font-size: 1.3rem;
     }
 
     #login-container label {
@@ -380,9 +404,14 @@
   </style>
 </head>
 <body>
-  <div id="login-container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;">
-    <div style="background:#fff;padding:2.5rem 2rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.08);min-width:320px;max-width:90vw;">
-      <h2 style="text-align:center;margin-bottom:1.5rem;color:#3a86ff;font-weight:700;">Login to Neuro Deep Research AI</h2>
+  <!-- Redesigned Login Page -->
+  <div id="login-container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:linear-gradient(135deg,#e0e7ff 0%,#f4f8fb 100%);">
+    <div style="background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);border-radius:20px 20px 0 0;padding:1.5rem 2rem 1rem 2rem;text-align:center;">
+      <i class="fas fa-brain" style="font-size:2.5rem;color:#fff;"></i>
+      <h1 style="margin:0;font-size:2rem;font-weight:700;color:#fff;letter-spacing:1px;">Neuro Deep Research AI</h1>
+    </div>
+    <div style="background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:0 0 20px 20px;box-shadow:0 4px 24px rgba(58,134,255,0.10);min-width:340px;max-width:90vw;width:350px;">
+      <h2 style="text-align:center;margin-bottom:1.5rem;color:#3a86ff;font-weight:700;font-size:1.3rem;">Sign in to your account</h2>
       <form id="login-form" onsubmit="return handleLogin(event)">
         <div style="margin-bottom:1.2rem;">
           <label for="username" style="font-weight:600;">Username</label>
@@ -475,12 +504,14 @@
     </div>
     <!-- Email Modal -->
     <div id="email-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:3000;align-items:center;justify-content:center;">
-      <div style="background:#fff;padding:2rem 2.5rem;border-radius:14px;box-shadow:0 4px 24px rgba(58,134,255,0.12);min-width:320px;max-width:90vw;">
-        <h3 style="margin-top:0;margin-bottom:1.2rem;font-size:1.2rem;font-weight:700;">Send Report to Email</h3>
-        <input id="modal-email" type="email" placeholder="Recipient Email" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:1.2rem;" />
+      <div id="email-modal-card" style="background:#fff;padding:2.2rem 2.5rem 2rem 2.5rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.12);min-width:340px;max-width:90vw;width:370px;">
+        <h3 style="margin-top:0;margin-bottom:1.2rem;font-size:1.25rem;font-weight:700;color:#3a86ff;"><i class="fas fa-envelope"></i> Send Research Report</h3>
+        <input id="modal-email" type="email" placeholder="Recipient Email" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:1.1rem;" />
+        <textarea id="modal-message" placeholder="Optional message (e.g., notes for the recipient)" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.05rem;min-height:70px;margin-bottom:1.2rem;resize:vertical;"></textarea>
+        <div id="email-modal-feedback" style="display:none;color:#27ae60;font-weight:600;text-align:center;margin-bottom:1.2rem;"></div>
         <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
           <button onclick="hideEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
-          <button onclick="sendModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;">Send</button>
+          <button id="send-email-btn" onclick="sendModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;">Send</button>
         </div>
       </div>
     </div>
@@ -785,22 +816,41 @@
     function hideEmailModal() {
       document.getElementById('email-modal').style.display = 'none';
     }
+    // Update sendModalEmail for feedback and message
     function sendModalEmail() {
       const email = document.getElementById('modal-email').value;
+      const message = document.getElementById('modal-message').value;
+      const feedback = document.getElementById('email-modal-feedback');
       if (!email) {
-        alert('Please enter a recipient email address.');
+        feedback.textContent = 'Please enter a recipient email address.';
+        feedback.style.display = 'block';
         return;
       }
       if (!lastResearch || !lastResearch.topic) {
-        alert('No research topic found.');
+        feedback.textContent = 'No research topic found.';
+        feedback.style.display = 'block';
         return;
       }
-      hideEmailModal();
-      alert('Your report is on its way! Check your email in 5 minutes and download it.');
+      feedback.style.display = 'none';
+      document.getElementById('send-email-btn').disabled = true;
       fetch('/send_pdf_email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions, email: email })
+        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions, email: email, message: message })
+      }).then(() => {
+        feedback.textContent = 'Your report is on its way! Check your email in 5 minutes.';
+        feedback.style.display = 'block';
+        document.getElementById('modal-email').value = '';
+        document.getElementById('modal-message').value = '';
+        setTimeout(() => {
+          hideEmailModal();
+          feedback.style.display = 'none';
+          document.getElementById('send-email-btn').disabled = false;
+        }, 2000);
+      }).catch(() => {
+        feedback.textContent = 'Failed to send email. Please try again.';
+        feedback.style.display = 'block';
+        document.getElementById('send-email-btn').disabled = false;
       });
     }
   </script>
