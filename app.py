@@ -144,6 +144,7 @@ def healthz():
 
 from flask import after_this_request
 
+<<<<<<< HEAD
 @app.route('/generate_and_download_pdf', methods=['POST'])
 def generate_and_download_pdf():
     data = request.json
@@ -295,6 +296,10 @@ def send_pdf_email():
             return jsonify({'error': f'n8n webhook failed: {response.text}'}), 500
     except Exception as e:
         return jsonify({'error': f'Failed to send email: {str(e)}'}), 500
+=======
+# In-memory cache for research results (for demo; use persistent storage in production)
+RESEARCH_CACHE = {}
+>>>>>>> 6c4f2e908317bb77ade922d278877b8721ba2d29
 
 @app.route('/start_research', methods=['POST'])
 def start_research():
@@ -345,20 +350,93 @@ def start_research():
         summary = final_report_raw.split('\n')[0][:300]  # First paragraph or 300 chars
     word_count = len(final_report_raw.split()) if final_report_raw else 0
     pages = max(1, word_count // 400)  # Roughly 400 words per page
-    # Count unique sources by looking for 'http' links
     import re
     sources = set(re.findall(r'https?://\S+', final_report_raw or ''))
     elapsed = time.time() - start_time
     minutes = int(elapsed // 60)
     seconds = int(elapsed % 60)
     time_str = f"{minutes} Minutes" if minutes else f"{seconds} Seconds"
+    # Generate PDF and cache everything
+    research_id = str(uuid.uuid4())
+    full_html_for_pdf = prepare_report_for_pdf(final_report_raw)
+    temp_dir = tempfile.mkdtemp()
+    pdf_path = os.path.join(temp_dir, f"{research_id}.pdf")
+    options = {
+        'enable-local-file-access': True,
+        'enable-javascript': True,
+        'no-stop-slow-scripts': True,
+    }
+    pdfkit.from_string(full_html_for_pdf, pdf_path, configuration=config, options=options)
+    RESEARCH_CACHE[research_id] = {
+        'topic': topic,
+        'summary': summary,
+        'pages': pages,
+        'sources': len(sources),
+        'time': time_str,
+        'user_instructions': user_instructions,
+        'report': final_report_raw,
+        'pdf_path': pdf_path,
+        'temp_dir': temp_dir
+    }
     return jsonify({
         "topic": topic,
         "summary": summary,
         "pages": pages,
         "sources": len(sources),
-        "time": time_str
+        "time": time_str,
+        "research_id": research_id
     })
+
+@app.route('/generate_and_download_pdf', methods=['POST'])
+def generate_and_download_pdf():
+    data = request.json
+    research_id = data.get('research_id')
+    if not research_id or research_id not in RESEARCH_CACHE:
+        return jsonify({"error": "Invalid or expired research ID. Please run research again."}), 400
+    pdf_path = RESEARCH_CACHE[research_id]['pdf_path']
+    temp_dir = RESEARCH_CACHE[research_id]['temp_dir']
+    # Schedule cleanup
+    def delayed_cleanup(path):
+        time.sleep(10)
+        try:
+            shutil.rmtree(path)
+        except Exception as e:
+            print(f"[CLEANUP ERROR] {e}")
+    threading.Thread(target=delayed_cleanup, args=(temp_dir,), daemon=True).start()
+    return send_file(
+        pdf_path,
+        as_attachment=True,
+        download_name="generated_report.pdf",
+        mimetype='application/pdf',
+        conditional=False
+    )
+
+@app.route('/send_pdf_email', methods=['POST'])
+def send_pdf_email():
+    data = request.json
+    research_id = data.get('research_id')
+    email = data.get('email')
+    message = data.get('message', '')
+    if not research_id or research_id not in RESEARCH_CACHE or not email:
+        return jsonify({'error': 'Research ID and email are required'}), 400
+    pdf_path = RESEARCH_CACHE[research_id]['pdf_path']
+    topic = RESEARCH_CACHE[research_id]['topic']
+    user_instructions = RESEARCH_CACHE[research_id]['user_instructions']
+    temp_dir = RESEARCH_CACHE[research_id]['temp_dir']
+    try:
+        import requests
+        n8n_webhook_url = "https://podhealthn8n.4gd.ai/prod/v1/5155b38d-47e4-4be9-a3d5-6803cbe044e7"
+        with open(pdf_path, 'rb') as f:
+            files = {'pdf': ('generated_report.pdf', f, 'application/pdf')}
+            data = {'email': email, 'topic': topic, 'message': message}
+            response = requests.post(n8n_webhook_url, data=data, files=files)
+        shutil.rmtree(temp_dir)
+        if response.status_code == 200:
+            return jsonify({'success': True}), 200
+        else:
+            return jsonify({'error': f'n8n webhook failed: {response.text}'}), 500
+    except Exception as e:
+        return jsonify({'error': f'Failed to send email: {str(e)}'}), 500
 
 
 if __name__ == '__main__':
