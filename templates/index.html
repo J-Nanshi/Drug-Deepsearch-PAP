@@ -517,6 +517,7 @@
     </div>
   </div>
   <script>
+    let lastResearch = null;
     function showProgressBar() {
       document.getElementById('progress-bar-container').style.display = 'block';
       setProgressBar(0);
@@ -620,19 +621,20 @@
       }
     }
     async function generateAndDownloadPdf() {
-      const topic = document.getElementById('topic').value;
-      const userInstructions = document.getElementById('user_instructions').value;
-      await animateProgressOverlay('download', async () => {
-        const response = await fetch('/generate_and_download_pdf', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic: topic, user_instructions: userInstructions })
-        });
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-        }
-        const blob = await response.blob();
+      if (!lastResearch || !lastResearch.topic) {
+        alert('No research topic found.');
+        return;
+      }
+      fetch('/generate_and_download_pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to generate PDF');
+        return response.blob();
+      })
+      .then(blob => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -641,29 +643,35 @@
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        alert('Error: ' + error.message);
       });
     }
     async function sendPdfToEmail() {
-      const topic = document.getElementById('topic').value;
-      const userInstructions = document.getElementById('user_instructions').value;
+      if (!lastResearch || !lastResearch.topic) {
+        alert('No research topic found.');
+        return;
+      }
       const email = document.getElementById('email').value;
       if (!email) {
         alert('Please enter a recipient email address.');
         return;
       }
-      // Immediately show confirmation pop-up and reset UI for new report
-      alert('Your report is on its way! Check your email in 5 minutes and download it.');
-      // Fire and forget the backend request
       fetch('/send_pdf_email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic: topic, user_instructions: userInstructions, email: email })
+        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions, email: email })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to send email');
+        alert('Your report is on its way! Check your email in 5 minutes.');
+        document.getElementById('email').value = '';
+      })
+      .catch(error => {
+        alert('Error: ' + error.message);
       });
-      // Clear the topic and email fields for next use
-      document.getElementById('topic').value = '';
-      document.getElementById('email').value = '';
     }
-
     function toggleTheme() {
       const html = document.documentElement;
       const newTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -774,6 +782,11 @@
       document.getElementById('complete-pages').textContent = result.pages || '-';
       document.getElementById('complete-sources').textContent = result.sources || '-';
       document.getElementById('complete-time').textContent = result.time || '-';
+      // Save last research for PDF/email actions
+      lastResearch = {
+        topic: result.topic,
+        user_instructions: document.getElementById('research-depth').value === 'detailed' ? 'Provide a detailed analysis with tables and examples.' : (document.getElementById('research-depth').value === 'deep' ? 'Provide a deep research report with in-depth analysis, multiple tables, and comprehensive references.' : 'Provide a basic overview.')
+      };
     }
     function resetResearch() {
       document.getElementById('research-card').style.display = 'block';
@@ -786,7 +799,6 @@
         alert('No research topic found.');
         return;
       }
-      // Use the last topic and summary for PDF
       fetch('/generate_and_download_pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -837,7 +849,9 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions, email: email, message: message })
-      }).then(() => {
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to send email');
         feedback.textContent = 'Your report is on its way! Check your email in 5 minutes.';
         feedback.style.display = 'block';
         document.getElementById('modal-email').value = '';
@@ -847,7 +861,8 @@
           feedback.style.display = 'none';
           document.getElementById('send-email-btn').disabled = false;
         }, 2000);
-      }).catch(() => {
+      })
+      .catch(() => {
         feedback.textContent = 'Failed to send email. Please try again.';
         feedback.style.display = 'block';
         document.getElementById('send-email-btn').disabled = false;
