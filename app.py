@@ -229,6 +229,7 @@ def send_pdf_email():
     topic = data.get('topic')
     user_instructions = data.get('user_instructions')
     email = data.get('email')
+    message = data.get('message', '')  # Accept optional message
 
     if not topic or not email:
         return jsonify({'error': 'Topic and email are required'}), 400
@@ -282,7 +283,7 @@ def send_pdf_email():
         n8n_webhook_url = "https://podhealthn8n.4gd.ai/prod/v1/5155b38d-47e4-4be9-a3d5-6803cbe044e7"
         with open(pdf_path, 'rb') as f:
             files = {'pdf': ('generated_report.pdf', f, 'application/pdf')}
-            data = {'email': email, 'topic': topic}
+            data = {'email': email, 'topic': topic, 'message': message}
             response = requests.post(n8n_webhook_url, data=data, files=files)
 
         # Clean up temp folder
