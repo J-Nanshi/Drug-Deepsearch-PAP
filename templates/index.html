@@ -724,7 +724,7 @@
     let researchState = 'input'; // input, loading, result
     let researchResult = null;
     document.getElementById('start-research-btn').onclick = async function() {
-      const topic = document.getElementById('topic').value;
+      const topic = document.getElementById('research-topic').value;
       const depth = document.getElementById('research-depth').value;
       if (!topic) { alert('Please enter a research topic.'); return; }
       researchState = 'loading';
