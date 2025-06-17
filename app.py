@@ -295,6 +295,70 @@ def send_pdf_email():
     except Exception as e:
         return jsonify({'error': f'Failed to send email: {str(e)}'}), 500
 
+@app.route('/start_research', methods=['POST'])
+def start_research():
+    data = request.json
+    topic = data.get('topic')
+    depth = data.get('depth', 'basic')
+    user_instructions = ''
+    if depth == 'detailed':
+        user_instructions = 'Provide a detailed analysis with tables and examples.'
+    elif depth == 'deep':
+        user_instructions = 'Provide a deep research report with in-depth analysis, multiple tables, and comprehensive references.'
+    else:
+        user_instructions = 'Provide a basic overview.'
+
+    thread_config = {
+        "configurable": {
+            "thread_id": str(uuid.uuid4()),
+            "search_api": "tavily",
+            "planner_provider": "openai",
+            "planner_model": "o3-mini",
+            "writer_provider": "openai",
+            "writer_model": "gpt-4.1-mini",
+            "report_structure": REPORT_STRUCTURE,
+            "max_search_depth": 2,
+            "number_of_queries": 3,
+            "user_instructions": user_instructions
+        }
+    }
+    start_time = time.time()
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        async def run_graph():
+            async for event in graph.astream({"topic": topic}, thread_config, stream_mode="updates"):
+                if '__interrupt__' in event:
+                    break
+            async for event in graph.astream(Command(resume=True), thread_config, stream_mode="updates"):
+                pass
+            return graph.get_state(thread_config).values.get('final_report')
+        final_report_raw = loop.run_until_complete(run_graph())
+    except Exception as e:
+        return jsonify({"error": f"Error generating report: {str(e)}"}), 500
+    finally:
+        loop.close()
+    # Estimate summary, pages, sources, time
+    summary = ''
+    if final_report_raw:
+        summary = final_report_raw.split('\n')[0][:300]  # First paragraph or 300 chars
+    word_count = len(final_report_raw.split()) if final_report_raw else 0
+    pages = max(1, word_count // 400)  # Roughly 400 words per page
+    # Count unique sources by looking for 'http' links
+    import re
+    sources = set(re.findall(r'https?://\S+', final_report_raw or ''))
+    elapsed = time.time() - start_time
+    minutes = int(elapsed // 60)
+    seconds = int(elapsed % 60)
+    time_str = f"{minutes} Minutes" if minutes else f"{seconds} Seconds"
+    return jsonify({
+        "topic": topic,
+        "summary": summary,
+        "pages": pages,
+        "sources": len(sources),
+        "time": time_str
+    })
+
 
 if __name__ == '__main__':
  
