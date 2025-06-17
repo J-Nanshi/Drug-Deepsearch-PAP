@@ -200,7 +200,7 @@
       margin: 2.5rem auto 0 auto;
       background: #fff;
       padding: 2.5rem 2rem;
-      border-radius: 16px;
+      border-radius: 18px;
       box-shadow: 0 4px 24px rgba(58,134,255,0.08);
     }
 
@@ -208,27 +208,23 @@
       font-size: 2rem;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 1.2rem;
-    }
-
-    #research-card p {
-      text-align: center;
-      color: #555;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     #research-card label {
       font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
     }
 
     #research-card input[type="text"],
     #research-card select {
       width: 100%;
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #e0e7ff;
       font-size: 1.1rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
     #research-card button {
@@ -239,83 +235,84 @@
       background: linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
     }
 
-    #loading-card {
+    #processing-card {
       display: none;
       max-width: 600px;
       margin: 2.5rem auto 0 auto;
       background: #fff;
       padding: 2.5rem 2rem;
-      border-radius: 16px;
+      border-radius: 18px;
       box-shadow: 0 4px 24px rgba(58,134,255,0.08);
       text-align: center;
     }
 
-    #loading-card img {
-      width: 60px;
-      height: 60px;
+    #processing-card img {
+      width: 48px;
+      height: 48px;
       margin-bottom: 1.5rem;
+      animation: spin 1.2s linear infinite;
     }
 
-    #loading-card h3 {
+    #processing-card h3 {
       font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 0.7rem;
     }
 
-    #loading-card p {
+    #processing-card p {
       color: #555;
       margin-bottom: 1.5rem;
     }
 
-    #loading-progress-bar {
+    #processing-bar {
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);
       transition: width 0.4s;
     }
 
-    #loading-progress-text {
+    #processing-percent {
       font-size: 1.1rem;
       font-weight: 600;
     }
 
-    #result-card {
+    #complete-card {
       display: none;
       max-width: 700px;
       margin: 2.5rem auto 0 auto;
       background: #fff;
       padding: 2.5rem 2rem 2rem 2rem;
-      border-radius: 16px;
+      border-radius: 18px;
       box-shadow: 0 4px 24px rgba(58,134,255,0.08);
     }
 
-    #result-card div {
+    #complete-card div {
       margin-bottom: 1.2rem;
     }
 
-    #result-card h3 {
+    #complete-card h3 {
       font-size: 1.3rem;
       font-weight: 700;
       margin: 0;
       color: #3a86ff;
     }
 
-    #result-card span {
+    #complete-card span {
       color: #2ecc40;
       font-weight: 600;
     }
 
-    #result-summary {
+    #complete-summary {
       font-size: 1.1rem;
       color: #333;
       margin-bottom: 1.5rem;
     }
 
-    #result-card .result-metric {
+    #complete-card .result-metric {
       flex: 1;
       background: #e7f0fd;
       border-radius: 10px;
@@ -323,13 +320,13 @@
       text-align: center;
     }
 
-    #result-card .result-metric div {
+    #complete-card .result-metric div {
       font-size: 1.3rem;
       font-weight: 700;
       margin: 0;
     }
 
-    #result-card .result-metric div.metric-label {
+    #complete-card .result-metric div.metric-label {
       font-size: 1rem;
       color: #555;
     }
@@ -351,26 +348,31 @@
       transition: width 0.3s;
     }
 
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     @media (max-width: 900px) {
       #research-card,
-      #loading-card,
-      #result-card {
+      #processing-card,
+      #complete-card {
         width: 90vw;
         padding: 2rem;
       }
 
       #research-card h2,
-      #loading-card h3 {
+      #processing-card h3 {
         font-size: 1.8rem;
       }
 
-      #result-card h3 {
+      #complete-card h3 {
         font-size: 1.2rem;
       }
 
       #research-card button,
-      #loading-card button,
-      #result-card button {
+      #processing-card button,
+      #complete-card button {
         padding: 0.9rem 0;
         font-size: 1rem;
       }
@@ -404,7 +406,7 @@
   </div>
   <div id="main-app" style="display:none;">
     <header>
-      <h1 style="font-size:1.7rem;font-weight:700;letter-spacing:1px;margin:0;display:flex;align-items:center;gap:0.7rem;"><i class="fas fa-brain"></i> AI Research Hub</h1>
+      <h1 style="font-size:1.7rem;"><i class="fas fa-brain"></i> AI Research Hub</h1>
       <div style="display:flex;align-items:center;gap:1.2rem;">
         <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> / <i class="fas fa-sun"></i></button>
         <div class="profile-dropdown" style="position:relative;">
@@ -415,60 +417,72 @@
         </div>
       </div>
     </header>
-    <div id="research-card" style="max-width:600px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.08);">
-      <h2 style="font-size:2rem;font-weight:700;text-align:center;margin-bottom:1.2rem;">Enter Research Topic</h2>
-      <p style="text-align:center;color:#555;margin-bottom:2rem;">Provide your research topic and our AI will generate comprehensive insights</p>
-      <label for="topic" style="font-weight:600;">Research Topic</label>
-      <input type="text" id="topic" placeholder="Enter your research topic here... (e.g., Impact of AI on healthcare, Climate change solutions, etc.)" style="width:100%;padding:1rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:1.2rem;">
-      <label for="research-depth" style="font-weight:600;">Research Depth</label>
-      <select id="research-depth" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:2rem;">
-        <option value="basic">Basic Overview</option>
-        <option value="detailed">Detailed Analysis</option>
-        <option value="deep">Deep Research</option>
-      </select>
-      <button id="start-research-btn" style="width:100%;padding:1.1rem 0;font-size:1.1rem;font-weight:700;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);color:#fff;border:none;border-radius:8px;cursor:pointer;"><i class="fas fa-search"></i> Start Research</button>
+    <div id="research-card" style="max-width:600px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem;border-radius:18px;box-shadow:0 4px 24px rgba(58,134,255,0.08);">
+      <h2 style="font-size:2rem;font-weight:700;text-align:center;margin-bottom:1.5rem;">Enter Research Topic</h2>
+      <div style="margin-bottom:1.5rem;">
+        <label for="research-topic" style="font-weight:600;">Research Topic</label>
+        <input id="research-topic" type="text" placeholder="Enter your research topic here... (e.g., Impact of AI on healthcare, Climate change solutions, etc.)" style="width:100%;padding:1rem;border-radius:10px;border:1px solid #e0e7ff;font-size:1.1rem;margin-top:0.5rem;">
+      </div>
+      <div style="margin-bottom:2rem;">
+        <label for="research-depth" style="font-weight:600;">Research Depth</label>
+        <select id="research-depth" style="width:100%;padding:0.9rem;border-radius:10px;border:1px solid #e0e7ff;font-size:1.1rem;margin-top:0.5rem;">
+          <option value="basic">Basic Overview</option>
+          <option value="detailed">Detailed</option>
+          <option value="deep">Deep Research</option>
+        </select>
+      </div>
+      <button id="start-research-btn" onclick="startResearch()" style="width:100%;padding:1.1rem 0;font-size:1.1rem;font-weight:700;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);color:#fff;border:none;border-radius:10px;cursor:pointer;"><i class="fas fa-search"></i> Start Research</button>
     </div>
-    <div id="loading-card" style="display:none;max-width:600px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.08);text-align:center;">
-      <img src="https://cdn.jsdelivr.net/gh/kartikcodes/ai-research-hub-assets@main/loader.gif" alt="Loading..." style="width:60px;height:60px;margin-bottom:1.5rem;" />
+    <div id="processing-card" style="display:none;max-width:600px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem;border-radius:18px;box-shadow:0 4px 24px rgba(58,134,255,0.08);text-align:center;">
+      <div style="margin-bottom:1.5rem;">
+        <img src="https://cdn.jsdelivr.net/gh/edent/SuperTinyIcons/images/svg/loading.svg" alt="Loading" style="width:48px;height:48px;animation:spin 1.2s linear infinite;" />
+      </div>
       <h3 style="font-size:1.3rem;font-weight:600;margin-bottom:0.7rem;">Processing Your Research</h3>
-      <p style="color:#555;margin-bottom:1.5rem;">Our AI is analyzing your topic and gathering comprehensive insights...</p>
-      <div style="width:100%;background:#e0e7ff;border-radius:8px;height:18px;overflow:hidden;margin-bottom:0.7rem;">
-        <div id="loading-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);transition:width 0.4s;"></div>
+      <div style="color:#555;margin-bottom:1.2rem;">Our AI is analyzing your topic and gathering comprehensive insights...</div>
+      <div style="width:100%;background:#e0e7ff;border-radius:8px;height:12px;overflow:hidden;margin-bottom:0.7rem;">
+        <div id="processing-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);transition:width 0.4s;"></div>
       </div>
-      <div id="loading-progress-text" style="font-size:1.1rem;font-weight:600;">0% Complete</div>
+      <div id="processing-percent" style="font-size:1.1rem;font-weight:600;">0% Complete</div>
     </div>
-    <div id="result-card" style="display:none;max-width:700px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.08);">
+    <div id="complete-card" style="display:none;max-width:700px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:18px;box-shadow:0 4px 24px rgba(58,134,255,0.08);">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;">
-        <h3 id="result-topic" style="font-size:1.3rem;font-weight:700;margin:0;color:#3a86ff;"></h3>
-        <span id="result-status" style="color:#2ecc40;font-weight:600;"><i class="fas fa-check-circle"></i> Complete</span>
+        <h3 style="font-size:1.3rem;font-weight:700;margin:0;">Research Complete</h3>
+        <span id="complete-status" style="color:#2ecc40;font-weight:700;"><i class="fas fa-check-circle"></i> Complete</span>
       </div>
-      <div id="result-summary" style="font-size:1.1rem;color:#333;margin-bottom:1.5rem;"></div>
-      <div style="display:flex;gap:1.5rem;margin-bottom:1.5rem;">
-        <div style="flex:1;background:#e7f0fd;border-radius:10px;padding:1.2rem;text-align:center;">
-          <div style="font-size:1.3rem;font-weight:700;color:#3a86ff;" id="result-pages">-</div>
-          <div style="font-size:1rem;color:#555;">Pages Generated</div>
+      <div style="font-size:1.1rem;color:#333;margin-bottom:1.2rem;"><b>Topic:</b> <span id="complete-topic"></span></div>
+      <div id="complete-summary" style="font-size:1.1rem;color:#444;margin-bottom:1.5rem;"></div>
+      <div style="display:flex;gap:1.2rem;margin-bottom:1.5rem;">
+        <div style="flex:1;background:#e7f0fd;padding:1.2rem 0;border-radius:10px;text-align:center;font-weight:600;font-size:1.1rem;">
+          <div id="complete-pages" style="font-size:1.5rem;font-weight:700;">-</div>
+          <div style="font-size:1rem;color:#3a86ff;">Pages Generated</div>
         </div>
-        <div style="flex:1;background:#eafbe7;border-radius:10px;padding:1.2rem;text-align:center;">
-          <div style="font-size:1.3rem;font-weight:700;color:#27ae60;" id="result-sources">-</div>
-          <div style="font-size:1rem;color:#555;">Sources Analyzed</div>
+        <div style="flex:1;background:#eafbe7;padding:1.2rem 0;border-radius:10px;text-align:center;font-weight:600;font-size:1.1rem;">
+          <div id="complete-sources" style="font-size:1.5rem;font-weight:700;">-</div>
+          <div style="font-size:1rem;color:#27ae60;">Sources Analyzed</div>
         </div>
-        <div style="flex:1;background:#fdf6e7;border-radius:10px;padding:1.2rem;text-align:center;">
-          <div style="font-size:1.3rem;font-weight:700;color:#e67e22;" id="result-time">-</div>
-          <div style="font-size:1rem;color:#555;">Processing Time</div>
+        <div style="flex:1;background:#fdf7e7;padding:1.2rem 0;border-radius:10px;text-align:center;font-weight:600;font-size:1.1rem;">
+          <div id="complete-time" style="font-size:1.5rem;font-weight:700;">-</div>
+          <div style="font-size:1rem;color:#e67e22;">Processing Time</div>
         </div>
       </div>
       <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
-        <button onclick="generateAndDownloadPdf()" style="min-width:180px;background:#e74c3c;color:#fff;"><i class="fas fa-file-pdf"></i> Generate PDF</button>
-        <button onclick="sendPdfToEmail()" style="min-width:180px;background:#3a86ff;color:#fff;"><i class="fas fa-envelope"></i> Send to Mail</button>
+        <button onclick="generateAndDownloadPdf()" style="background:#e63946;color:#fff;min-width:180px;font-size:1.1rem;font-weight:700;border:none;border-radius:10px;padding:1.1rem 0;display:flex;align-items:center;justify-content:center;gap:0.7rem;"><i class="fas fa-file-pdf"></i> Generate PDF</button>
+        <button onclick="showEmailModal()" style="background:#3a86ff;color:#fff;min-width:180px;font-size:1.1rem;font-weight:700;border:none;border-radius:10px;padding:1.1rem 0;display:flex;align-items:center;justify-content:center;gap:0.7rem;"><i class="fas fa-envelope"></i> Send to Mail</button>
       </div>
-      <div style="display:flex;gap:1.2rem;justify-content:flex-end;margin-top:1.2rem;">
-        <button onclick="shareLink()" style="background:#f4f8fb;color:#3a86ff;font-weight:600;border:1px solid #e0e7ff;">Share Link</button>
-        <button onclick="saveToLibrary()" style="background:#f4f8fb;color:#3a86ff;font-weight:600;border:1px solid #e0e7ff;">Save to Library</button>
-        <button onclick="startNewResearch()" style="background:#f4f8fb;color:#3a86ff;font-weight:600;border:1px solid #e0e7ff;">New Research</button>
+      <div style="margin-top:1.5rem;display:flex;gap:1.2rem;justify-content:flex-end;">
+        <button onclick="resetResearch()" style="background:none;color:#3a86ff;font-weight:600;border:none;">New Research</button>
       </div>
     </div>
-    <div id="progress-bar-container" style="position:fixed;top:0;left:0;width:100vw;height:6px;z-index:2000;display:none;">
-      <div id="progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);transition:width 0.3s;"></div>
+    <!-- Email Modal -->
+    <div id="email-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:3000;align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:2rem 2.5rem;border-radius:14px;box-shadow:0 4px 24px rgba(58,134,255,0.12);min-width:320px;max-width:90vw;">
+        <h3 style="margin-top:0;margin-bottom:1.2rem;font-size:1.2rem;font-weight:700;">Send Report to Email</h3>
+        <input id="modal-email" type="email" placeholder="Recipient Email" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:1.2rem;" />
+        <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
+          <button onclick="hideEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
+          <button onclick="sendModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;">Send</button>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -684,12 +698,12 @@
       if (!topic) { alert('Please enter a research topic.'); return; }
       researchState = 'loading';
       document.getElementById('research-card').style.display = 'none';
-      document.getElementById('loading-card').style.display = 'block';
-      document.getElementById('result-card').style.display = 'none';
+      document.getElementById('processing-card').style.display = 'block';
+      document.getElementById('complete-card').style.display = 'none';
       // Simulate progress bar
       let progress = 0;
-      const progressBar = document.getElementById('loading-progress-bar');
-      const progressText = document.getElementById('loading-progress-text');
+      const progressBar = document.getElementById('processing-bar');
+      const progressText = document.getElementById('processing-percent');
       let progressTimer = setInterval(() => {
         if (progress < 98) {
           progress += Math.random() * 2 + 1;
@@ -718,28 +732,77 @@
         clearInterval(progressTimer);
         alert('Error: ' + e.message);
         document.getElementById('research-card').style.display = 'block';
-        document.getElementById('loading-card').style.display = 'none';
+        document.getElementById('processing-card').style.display = 'none';
       }
     };
     function showResultCard(result) {
-      document.getElementById('loading-card').style.display = 'none';
-      document.getElementById('result-card').style.display = 'block';
-      document.getElementById('result-topic').textContent = 'Topic: ' + (result.topic || '-');
-      document.getElementById('result-summary').textContent = result.summary || '-';
-      document.getElementById('result-pages').textContent = result.pages || '-';
-      document.getElementById('result-sources').textContent = result.sources || '-';
-      document.getElementById('result-time').textContent = result.time || '-';
+      document.getElementById('processing-card').style.display = 'none';
+      document.getElementById('complete-card').style.display = 'block';
+      document.getElementById('complete-topic').textContent = 'Topic: ' + (result.topic || '-');
+      document.getElementById('complete-summary').textContent = result.summary || '-';
+      document.getElementById('complete-pages').textContent = result.pages || '-';
+      document.getElementById('complete-sources').textContent = result.sources || '-';
+      document.getElementById('complete-time').textContent = result.time || '-';
     }
-    function startNewResearch() {
-      researchState = 'input';
-      researchResult = null;
+    function resetResearch() {
       document.getElementById('research-card').style.display = 'block';
-      document.getElementById('loading-card').style.display = 'none';
-      document.getElementById('result-card').style.display = 'none';
-      document.getElementById('topic').value = '';
+      document.getElementById('processing-card').style.display = 'none';
+      document.getElementById('complete-card').style.display = 'none';
+      document.getElementById('research-topic').value = '';
     }
-    function shareLink() { alert('Share link feature coming soon!'); }
-    function saveToLibrary() { alert('Save to library feature coming soon!'); }
+    function generateAndDownloadPdf() {
+      if (!lastResearch || !lastResearch.topic) {
+        alert('No research topic found.');
+        return;
+      }
+      // Use the last topic and summary for PDF
+      fetch('/generate_and_download_pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to generate PDF');
+        return response.blob();
+      })
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'generated_report.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        alert('Error: ' + error.message);
+      });
+    }
+    function showEmailModal() {
+      document.getElementById('email-modal').style.display = 'flex';
+    }
+    function hideEmailModal() {
+      document.getElementById('email-modal').style.display = 'none';
+    }
+    function sendModalEmail() {
+      const email = document.getElementById('modal-email').value;
+      if (!email) {
+        alert('Please enter a recipient email address.');
+        return;
+      }
+      if (!lastResearch || !lastResearch.topic) {
+        alert('No research topic found.');
+        return;
+      }
+      hideEmailModal();
+      alert('Your report is on its way! Check your email in 5 minutes and download it.');
+      fetch('/send_pdf_email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions, email: email })
+      });
+    }
   </script>
 </body>
 </html>
