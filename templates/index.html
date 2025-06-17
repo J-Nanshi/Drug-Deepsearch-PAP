@@ -620,15 +620,30 @@
         throw error;
       }
     }
-    async function generateAndDownloadPdf() {
-      if (!lastResearch || !lastResearch.topic) {
+    function getUserInstructionsFromDepth(depth) {
+      if (depth === 'detailed') return 'Provide a detailed analysis with tables and examples.';
+      if (depth === 'deep') return 'Provide a deep research report with in-depth analysis, multiple tables, and comprehensive references.';
+      return 'Provide a basic overview.';
+    }
+    function generateAndDownloadPdf() {
+      let topic, user_instructions;
+      // Prefer lastResearch if available (after research complete)
+      if (lastResearch && lastResearch.topic) {
+        topic = lastResearch.topic;
+        user_instructions = lastResearch.user_instructions;
+      } else {
+        topic = document.getElementById('research-topic')?.value || document.getElementById('topic')?.value;
+        const depth = document.getElementById('research-depth')?.value || 'basic';
+        user_instructions = getUserInstructionsFromDepth(depth);
+      }
+      if (!topic) {
         alert('No research topic found.');
         return;
       }
       fetch('/generate_and_download_pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions })
+        body: JSON.stringify({ topic, user_instructions })
       })
       .then(response => {
         if (!response.ok) throw new Error('Failed to generate PDF');
@@ -648,12 +663,22 @@
         alert('Error: ' + error.message);
       });
     }
-    async function sendPdfToEmail() {
-      if (!lastResearch || !lastResearch.topic) {
+    function sendPdfToEmail() {
+      let topic, user_instructions;
+      // Prefer lastResearch if available (after research complete)
+      if (lastResearch && lastResearch.topic) {
+        topic = lastResearch.topic;
+        user_instructions = lastResearch.user_instructions;
+      } else {
+        topic = document.getElementById('research-topic')?.value || document.getElementById('topic')?.value;
+        const depth = document.getElementById('research-depth')?.value || 'basic';
+        user_instructions = getUserInstructionsFromDepth(depth);
+      }
+      const email = document.getElementById('email').value;
+      if (!topic) {
         alert('No research topic found.');
         return;
       }
-      const email = document.getElementById('email').value;
       if (!email) {
         alert('Please enter a recipient email address.');
         return;
@@ -661,7 +686,7 @@
       fetch('/send_pdf_email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions, email: email })
+        body: JSON.stringify({ topic, user_instructions, email })
       })
       .then(response => {
         if (!response.ok) throw new Error('Failed to send email');
@@ -795,14 +820,24 @@
       document.getElementById('research-topic').value = '';
     }
     function generateAndDownloadPdf() {
-      if (!lastResearch || !lastResearch.topic) {
+      let topic, user_instructions;
+      // Prefer lastResearch if available (after research complete)
+      if (lastResearch && lastResearch.topic) {
+        topic = lastResearch.topic;
+        user_instructions = lastResearch.user_instructions;
+      } else {
+        topic = document.getElementById('research-topic')?.value || document.getElementById('topic')?.value;
+        const depth = document.getElementById('research-depth')?.value || 'basic';
+        user_instructions = getUserInstructionsFromDepth(depth);
+      }
+      if (!topic) {
         alert('No research topic found.');
         return;
       }
       fetch('/generate_and_download_pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic: lastResearch.topic, user_instructions: lastResearch.user_instructions })
+        body: JSON.stringify({ topic, user_instructions })
       })
       .then(response => {
         if (!response.ok) throw new Error('Failed to generate PDF');
