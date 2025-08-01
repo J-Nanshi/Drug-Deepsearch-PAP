@@ -545,6 +545,7 @@
   </div>
   <script>
     let lastResearch = null;
+    let lastResearchId = null;
     function showProgressBar() {
       document.getElementById('progress-bar-container').style.display = 'block';
       setProgressBar(0);
@@ -653,24 +654,14 @@
       return 'Provide a basic overview.';
     }
     function generateAndDownloadPdf() {
-      let topic, user_instructions;
-      // Prefer lastResearch if available (after research complete)
-      if (lastResearch && lastResearch.topic) {
-        topic = lastResearch.topic;
-        user_instructions = lastResearch.user_instructions;
-      } else {
-        topic = document.getElementById('research-topic')?.value || document.getElementById('topic')?.value;
-        const depth = document.getElementById('research-depth')?.value || 'basic';
-        user_instructions = getUserInstructionsFromDepth(depth);
-      }
-      if (!topic) {
-        alert('No research topic found.');
+      if (!lastResearchId) {
+        alert('No research result found. Please run research first.');
         return;
       }
       fetch('/generate_and_download_pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic, user_instructions })
+        body: JSON.stringify({ research_id: lastResearchId })
       })
       .then(response => {
         if (!response.ok) throw new Error('Failed to generate PDF');
@@ -818,6 +809,7 @@
           researchState = 'result';
           researchResult = result;
           showResultCard(result);
+          lastResearchId = result.research_id || null;
         }, 800);
       } catch (e) {
         clearInterval(progressTimer);
@@ -847,24 +839,14 @@
       document.getElementById('research-topic').value = '';
     }
     function generateAndDownloadPdf() {
-      let topic, user_instructions;
-      // Prefer lastResearch if available (after research complete)
-      if (lastResearch && lastResearch.topic) {
-        topic = lastResearch.topic;
-        user_instructions = lastResearch.user_instructions;
-      } else {
-        topic = document.getElementById('research-topic')?.value || document.getElementById('topic')?.value;
-        const depth = document.getElementById('research-depth')?.value || 'basic';
-        user_instructions = getUserInstructionsFromDepth(depth);
-      }
-      if (!topic) {
-        alert('No research topic found.');
+      if (!lastResearchId) {
+        alert('No research result found. Please run research first.');
         return;
       }
       fetch('/generate_and_download_pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic, user_instructions })
+        body: JSON.stringify({ research_id: lastResearchId })
       })
       .then(response => {
         if (!response.ok) throw new Error('Failed to generate PDF');
@@ -986,14 +968,17 @@
           document.getElementById('send-initial-email-btn').disabled = false;
           return;
         }
-        feedback.textContent = 'Your report will be sent to your email in 5 minutes.';
-        feedback.style.display = 'block';
-        document.getElementById('send-initial-email-btn').disabled = false;
-        setTimeout(() => {
-          hideInitialEmailModal();
-          feedback.style.display = 'none';
-        }, 2500);
+        // Show popup and reset UI for next research
+        alert('You will get your mail in five minutes.');
+        hideInitialEmailModal();
+        document.getElementById('research-card').style.display = 'block';
+        document.getElementById('processing-card').style.display = 'none';
+        document.getElementById('complete-card').style.display = 'none';
         document.getElementById('research-topic').value = '';
+        document.getElementById('initial-modal-email').value = '';
+        document.getElementById('initial-modal-message').value = '';
+        feedback.style.display = 'none';
+        document.getElementById('send-initial-email-btn').disabled = false;
       } catch (e) {
         feedback.textContent = e.message || 'Failed to send email.';
         feedback.style.display = 'block';
