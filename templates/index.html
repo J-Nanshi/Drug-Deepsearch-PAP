@@ -401,6 +401,24 @@
         font-size: 1rem;
       }
     }
+
+    #send-email-btn {
+      cursor: pointer;
+      transition: background 0.18s, box-shadow 0.18s, transform 0.08s;
+    }
+    #send-email-btn:hover:not(:disabled) {
+      background: #295ecb;
+      box-shadow: 0 2px 8px rgba(58,134,255,0.18);
+      transform: translateY(-2px) scale(1.03);
+    }
+    #send-email-btn:active:not(:disabled) {
+      background: #1d4fa1;
+      transform: scale(0.97);
+    }
+    #send-email-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
@@ -891,8 +909,10 @@
       // Show animation and popup immediately
       showProgressOverlay('email');
       setTimeout(() => {
-        alert('You will get your mail in five minutes.');
+        alert('You will get pdf to your mail in five minutes.');
         hideEmailModal();
+        document.getElementById('email-modal').style.display = 'none';
+
         document.getElementById('research-card').style.display = 'block';
         document.getElementById('processing-card').style.display = 'none';
         document.getElementById('complete-card').style.display = 'none';
@@ -900,7 +920,7 @@
         document.getElementById('modal-message').value = '';
         feedback.style.display = 'none';
         hideProgressOverlay();
-      }, 1200);
+      }, 1000);
       // Fire and forget the email request
       fetch('/send_pdf_email', {
         method: 'POST',
