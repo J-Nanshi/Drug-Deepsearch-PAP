@@ -888,19 +888,9 @@
       }
       feedback.style.display = 'none';
       document.getElementById('send-email-btn').disabled = true;
-      fetch('/send_pdf_email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ research_id: lastResearchId, email, message })
-      })
-      .then(async response => {
-        document.getElementById('send-email-btn').disabled = false;
-        if (!response.ok) {
-          const errText = await response.text();
-          feedback.textContent = 'Failed to send email.';
-          feedback.style.display = 'block';
-          return;
-        }
+      // Show animation and popup immediately
+      showProgressOverlay('email');
+      setTimeout(() => {
         alert('You will get your mail in five minutes.');
         hideEmailModal();
         document.getElementById('research-card').style.display = 'block';
@@ -909,10 +899,15 @@
         document.getElementById('modal-email').value = '';
         document.getElementById('modal-message').value = '';
         feedback.style.display = 'none';
+        hideProgressOverlay();
+      }, 1200);
+      // Fire and forget the email request
+      fetch('/send_pdf_email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ research_id: lastResearchId, email, message })
       })
-      .catch(() => {
-        feedback.textContent = 'Failed to send email. Please try again.';
-        feedback.style.display = 'block';
+      .finally(() => {
         document.getElementById('send-email-btn').disabled = false;
       });
     }
