@@ -450,7 +450,7 @@
       <h2 style="font-size:2rem;font-weight:700;text-align:center;margin-bottom:1.5rem;">Enter Research Topic</h2>
       <div style="margin-bottom:1.5rem;">
         <label for="research-topic" style="font-weight:600;">Research Topic</label>
-        <input id="research-topic" type="text" placeholder="Enter your research topic here... (e.g., Impact of AI on healthcare, Climate change solutions, etc.)" style="width:100%;padding:1rem;border-radius:10px;border:1px solid #e0e7ff;font-size:1.1rem;margin-top:0.5rem;">
+        <input id="research-topic" type="text" placeholder="Enter your research topic here... (e.g., Impact of AI on healthcare, Climate change solutions, etc.)" style="width:100%;padding:1rem;border-radius:10px;border:1px solid #e0e7ff;font-size:1.1rem;margin-top:0.5rem;box-sizing:border-box;margin-right:0.2rem;" />
       </div>
       <div style="margin-bottom:2rem;">
         <label for="research-depth" style="font-weight:600;">Research Depth</label>
@@ -460,7 +460,10 @@
           <option value="deep">Deep Research</option>
         </select>
       </div>
-      <button id="start-research-btn" onclick="startResearch()" style="width:100%;padding:1.1rem 0;font-size:1.1rem;font-weight:700;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);color:#fff;border:none;border-radius:10px;cursor:pointer;"><i class="fas fa-search"></i> Start Research</button>
+      <div style="display:flex; gap:1rem; margin-bottom:2rem;">
+        <button id="send-email-btn-initial" style="flex:1; background:#3a86ff; color:#fff; font-weight:700; border:none; border-radius:10px; padding:1.1rem 0; font-size:1.1rem; cursor:pointer;" onclick="showInitialEmailModal()"><i class="fas fa-envelope"></i> Send Email</button>
+        <button id="start-research-btn" style="flex:1; background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%); color:#fff; font-weight:700; border:none; border-radius:10px; padding:1.1rem 0; font-size:1.1rem; cursor:pointer;"><i class="fas fa-search"></i> Start Research</button>
+      </div>
     </div>
     <div id="processing-card" style="display:none;max-width:600px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem;border-radius:18px;box-shadow:0 4px 24px rgba(58,134,255,0.08);text-align:center;">
       <div style="margin-bottom:1.5rem;">
@@ -512,6 +515,19 @@
         <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
           <button onclick="hideEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
           <button id="send-email-btn" onclick="sendModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;">Send</button>
+        </div>
+      </div>
+    </div>
+    <!-- Initial Email Modal -->
+    <div id="initial-email-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:3000;align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:2.2rem 2.5rem 2rem 2.5rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.12);min-width:340px;max-width:90vw;width:370px;">
+        <h3 style="margin-top:0;margin-bottom:1.2rem;font-size:1.25rem;font-weight:700;color:#3a86ff;"><i class="fas fa-envelope"></i> Send Research Report</h3>
+        <input id="initial-modal-email" type="email" placeholder="Recipient Email" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:1.1rem;" />
+        <textarea id="initial-modal-message" placeholder="Optional message (e.g., notes for the recipient)" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.05rem;min-height:70px;margin-bottom:1.2rem;resize:vertical;"></textarea>
+        <div id="initial-email-modal-feedback" style="display:none;color:#27ae60;font-weight:600;text-align:center;margin-bottom:1.2rem;"></div>
+        <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
+          <button onclick="hideInitialEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
+          <button id="send-initial-email-btn" onclick="sendInitialModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;">Send</button>
         </div>
       </div>
     </div>
@@ -916,6 +932,62 @@
         feedback.style.display = 'block';
         document.getElementById('send-email-btn').disabled = false;
       });
+    }
+    function showInitialEmailModal() {
+      document.getElementById('initial-email-modal').style.display = 'flex';
+    }
+    function hideInitialEmailModal() {
+      document.getElementById('initial-email-modal').style.display = 'none';
+    }
+    async function sendInitialModalEmail() {
+      const email = document.getElementById('initial-modal-email').value;
+      const message = document.getElementById('initial-modal-message').value;
+      const feedback = document.getElementById('initial-email-modal-feedback');
+      const topic = document.getElementById('research-topic').value;
+      const depth = document.getElementById('research-depth').value;
+      if (!email) {
+        feedback.textContent = 'Please enter a recipient email address.';
+        feedback.style.display = 'block';
+        return;
+      }
+      if (!topic) {
+        feedback.textContent = 'Please enter a research topic.';
+        feedback.style.display = 'block';
+        return;
+      }
+      feedback.style.display = 'none';
+      document.getElementById('send-initial-email-btn').disabled = true;
+      // Start research in background, get research_id, then send email
+      try {
+        // Start research (but do not show loading UI)
+        const res = await fetch('/start_research', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic, depth })
+        });
+        const result = await res.json();
+        if (!result.research_id) throw new Error(result.error || 'Failed to start research.');
+        // Send email request
+        const emailRes = await fetch('/send_pdf_email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ research_id: result.research_id, email, message })
+        });
+        if (!emailRes.ok) throw new Error('Failed to send email.');
+        feedback.textContent = 'Your report will be sent to your email in 5 minutes.';
+        feedback.style.display = 'block';
+        document.getElementById('send-initial-email-btn').disabled = false;
+        setTimeout(() => {
+          hideInitialEmailModal();
+          feedback.style.display = 'none';
+        }, 2500);
+        // Optionally reset topic input
+        document.getElementById('research-topic').value = '';
+      } catch (e) {
+        feedback.textContent = e.message || 'Failed to send email.';
+        feedback.style.display = 'block';
+        document.getElementById('send-initial-email-btn').disabled = false;
+      }
     }
   </script>
 </body>
