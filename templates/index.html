@@ -956,8 +956,6 @@
       const topic = document.getElementById('research-topic').value;
       const depth = document.getElementById('research-depth').value;
       const sendBtn = document.getElementById('send-initial-email-btn');
-      const sendBtnText = document.getElementById('send-initial-email-btn-text');
-      const sendBtnSpinner = document.getElementById('send-initial-email-btn-spinner');
       if (!email) {
         feedback.textContent = 'Please enter a recipient email address.';
         feedback.style.display = 'block';
@@ -970,58 +968,34 @@
       }
       feedback.style.display = 'none';
       sendBtn.disabled = true;
-      sendBtnText.style.display = 'none';
-      sendBtnSpinner.style.display = 'inline-block';
+      // Immediately hide modal and reset UI
+      hideInitialEmailModal();
+      document.getElementById('research-card').style.display = 'block';
+      document.getElementById('processing-card').style.display = 'none';
+      document.getElementById('complete-card').style.display = 'none';
+      document.getElementById('research-topic').value = '';
+      document.getElementById('initial-modal-email').value = '';
+      document.getElementById('initial-modal-message').value = '';
+      feedback.style.display = 'none';
+      sendBtn.disabled = false;
+      // Fire and forget backend requests
       try {
-        // Start research (but do not show loading UI)
         const res = await fetch('/start_research', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ topic, depth })
         });
         const result = await res.json();
-        if (!result.research_id) {
-          console.error('No research_id in response:', result);
-          feedback.textContent = result.error || 'Failed to start research.';
-          feedback.style.display = 'block';
-          sendBtn.disabled = false;
-          sendBtnText.style.display = 'inline';
-          sendBtnSpinner.style.display = 'none';
-          return;
+        if (result.research_id) {
+          await fetch('/send_pdf_email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ research_id: result.research_id, email, message })
+          });
         }
-        // Send email request
-        const emailRes = await fetch('/send_pdf_email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ research_id: result.research_id, email, message })
-        });
-        if (!emailRes.ok) {
-          const errText = await emailRes.text();
-          console.error('Email send failed:', errText);
-          feedback.textContent = 'Failed to send email.';
-          feedback.style.display = 'block';
-          sendBtn.disabled = false;
-          sendBtnText.style.display = 'inline';
-          sendBtnSpinner.style.display = 'none';
-          return;
-        }
-        // Show popup and reset UI for next research
-        alert('You will get your mail in five minutes.');
-        hideInitialEmailModal();
-        document.getElementById('research-card').style.display = 'block';
-        document.getElementById('processing-card').style.display = 'none';
-        document.getElementById('complete-card').style.display = 'none';
-        document.getElementById('research-topic').value = '';
-        document.getElementById('initial-modal-email').value = '';
-        document.getElementById('initial-modal-message').value = '';
-        feedback.style.display = 'none';
       } catch (e) {
-        feedback.textContent = e.message || 'Failed to send email.';
-        feedback.style.display = 'block';
-      } finally {
-        sendBtn.disabled = false;
-        sendBtnText.style.display = 'inline';
-        sendBtnSpinner.style.display = 'none';
+        // Optionally log error, but do not show to user
+        console.error('Background email send error:', e);
       }
     }
   </script>
