@@ -957,7 +957,6 @@
       }
       feedback.style.display = 'none';
       document.getElementById('send-initial-email-btn').disabled = true;
-      // Start research in background, get research_id, then send email
       try {
         // Start research (but do not show loading UI)
         const res = await fetch('/start_research', {
@@ -966,14 +965,27 @@
           body: JSON.stringify({ topic, depth })
         });
         const result = await res.json();
-        if (!result.research_id) throw new Error(result.error || 'Failed to start research.');
+        if (!result.research_id) {
+          console.error('No research_id in response:', result);
+          feedback.textContent = result.error || 'Failed to start research.';
+          feedback.style.display = 'block';
+          document.getElementById('send-initial-email-btn').disabled = false;
+          return;
+        }
         // Send email request
         const emailRes = await fetch('/send_pdf_email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ research_id: result.research_id, email, message })
         });
-        if (!emailRes.ok) throw new Error('Failed to send email.');
+        if (!emailRes.ok) {
+          const errText = await emailRes.text();
+          console.error('Email send failed:', errText);
+          feedback.textContent = 'Failed to send email.';
+          feedback.style.display = 'block';
+          document.getElementById('send-initial-email-btn').disabled = false;
+          return;
+        }
         feedback.textContent = 'Your report will be sent to your email in 5 minutes.';
         feedback.style.display = 'block';
         document.getElementById('send-initial-email-btn').disabled = false;
@@ -981,7 +993,6 @@
           hideInitialEmailModal();
           feedback.style.display = 'none';
         }, 2500);
-        // Optionally reset topic input
         document.getElementById('research-topic').value = '';
       } catch (e) {
         feedback.textContent = e.message || 'Failed to send email.';
