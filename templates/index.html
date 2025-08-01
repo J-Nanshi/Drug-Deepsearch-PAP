@@ -531,7 +531,7 @@
         <div id="email-modal-feedback" style="display:none;color:#27ae60;font-weight:600;text-align:center;margin-bottom:1.2rem;"></div>
         <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
           <button onclick="hideEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
-          <button id="send-email-btn" onclick="sendModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;">Send</button>
+          <button id="send-email-btn" onclick="sendModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;position:relative;overflow:hidden;min-width:90px;"><span id="send-email-btn-text">Send</span><span id="send-email-btn-spinner" style="display:none;margin-left:8px;"><i class='fas fa-spinner fa-spin'></i></span></button>
         </div>
       </div>
     </div>
@@ -544,7 +544,10 @@
         <div id="initial-email-modal-feedback" style="display:none;color:#27ae60;font-weight:600;text-align:center;margin-bottom:1.2rem;"></div>
         <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
           <button onclick="hideInitialEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
-          <button id="send-initial-email-btn" onclick="sendInitialModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;">Send</button>
+          <button id="send-initial-email-btn" onclick="sendInitialModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;display:flex;align-items:center;gap:0.7rem;">
+            <span id="send-initial-email-btn-text">Send</span>
+            <span id="send-initial-email-btn-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
+          </button>
         </div>
       </div>
     </div>
@@ -905,14 +908,18 @@
         return;
       }
       feedback.style.display = 'none';
-      document.getElementById('send-email-btn').disabled = true;
+      const btn = document.getElementById('send-email-btn');
+      const btnText = document.getElementById('send-email-btn-text');
+      const btnSpinner = document.getElementById('send-email-btn-spinner');
+      btn.disabled = true;
+      btnText.style.display = 'none';
+      btnSpinner.style.display = 'inline-block';
       // Show animation and popup immediately
       showProgressOverlay('email');
       setTimeout(() => {
         alert('You will get pdf to your mail in five minutes.');
         hideEmailModal();
         document.getElementById('email-modal').style.display = 'none';
-
         document.getElementById('research-card').style.display = 'block';
         document.getElementById('processing-card').style.display = 'none';
         document.getElementById('complete-card').style.display = 'none';
@@ -920,6 +927,9 @@
         document.getElementById('modal-message').value = '';
         feedback.style.display = 'none';
         hideProgressOverlay();
+        btn.disabled = false;
+        btnText.style.display = 'inline';
+        btnSpinner.style.display = 'none';
       }, 1000);
       // Fire and forget the email request
       fetch('/send_pdf_email', {
@@ -928,7 +938,9 @@
         body: JSON.stringify({ research_id: lastResearchId, email, message })
       })
       .finally(() => {
-        document.getElementById('send-email-btn').disabled = false;
+        btn.disabled = false;
+        btnText.style.display = 'inline';
+        btnSpinner.style.display = 'none';
       });
     }
     function showInitialEmailModal() {
@@ -943,6 +955,9 @@
       const feedback = document.getElementById('initial-email-modal-feedback');
       const topic = document.getElementById('research-topic').value;
       const depth = document.getElementById('research-depth').value;
+      const sendBtn = document.getElementById('send-initial-email-btn');
+      const sendBtnText = document.getElementById('send-initial-email-btn-text');
+      const sendBtnSpinner = document.getElementById('send-initial-email-btn-spinner');
       if (!email) {
         feedback.textContent = 'Please enter a recipient email address.';
         feedback.style.display = 'block';
@@ -954,7 +969,9 @@
         return;
       }
       feedback.style.display = 'none';
-      document.getElementById('send-initial-email-btn').disabled = true;
+      sendBtn.disabled = true;
+      sendBtnText.style.display = 'none';
+      sendBtnSpinner.style.display = 'inline-block';
       try {
         // Start research (but do not show loading UI)
         const res = await fetch('/start_research', {
@@ -967,7 +984,9 @@
           console.error('No research_id in response:', result);
           feedback.textContent = result.error || 'Failed to start research.';
           feedback.style.display = 'block';
-          document.getElementById('send-initial-email-btn').disabled = false;
+          sendBtn.disabled = false;
+          sendBtnText.style.display = 'inline';
+          sendBtnSpinner.style.display = 'none';
           return;
         }
         // Send email request
@@ -981,7 +1000,9 @@
           console.error('Email send failed:', errText);
           feedback.textContent = 'Failed to send email.';
           feedback.style.display = 'block';
-          document.getElementById('send-initial-email-btn').disabled = false;
+          sendBtn.disabled = false;
+          sendBtnText.style.display = 'inline';
+          sendBtnSpinner.style.display = 'none';
           return;
         }
         // Show popup and reset UI for next research
@@ -994,11 +1015,13 @@
         document.getElementById('initial-modal-email').value = '';
         document.getElementById('initial-modal-message').value = '';
         feedback.style.display = 'none';
-        document.getElementById('send-initial-email-btn').disabled = false;
       } catch (e) {
         feedback.textContent = e.message || 'Failed to send email.';
         feedback.style.display = 'block';
-        document.getElementById('send-initial-email-btn').disabled = false;
+      } finally {
+        sendBtn.disabled = false;
+        sendBtnText.style.display = 'inline';
+        sendBtnSpinner.style.display = 'none';
       }
     }
   </script>
