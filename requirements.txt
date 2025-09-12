@@ -28,4 +28,3 @@ pandas
 gunicorn
 lxml
 html5lib
-dotenv
