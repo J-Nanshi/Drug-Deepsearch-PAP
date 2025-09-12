@@ -16,9 +16,9 @@ PyMuPDF
 nltk
 numpy
 faiss-cpu
-torch
-torchvision
-torchaudio
+torch==2.2.2
+torchvision==0.17.2
+torchaudio==2.2.2
 requests
 python-dotenv
 tqdm
@@ -28,3 +28,4 @@ pandas
 gunicorn
 lxml
 html5lib
+# dotenv  # REMOVE this line, use only python-dotenv
