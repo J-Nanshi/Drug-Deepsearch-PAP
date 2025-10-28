@@ -1,6 +1,7 @@
 flask
 markdown2
-pdfkit
+weasyprint
+reportlab
 langgraph
 langchain
 langchain-community
@@ -16,16 +17,17 @@ PyMuPDF
 nltk
 numpy
 faiss-cpu
-torch==2.2.2
-torchvision==0.17.2
-torchaudio==2.2.2
+torch
+torchvision
+torchaudio
 requests
 python-dotenv
 tqdm
-transformers==4.40.2
+transformers==4.35.2
 scikit-learn
 pandas
 gunicorn
 lxml
 html5lib
-# dotenv  # REMOVE this line, use only python-dotenv
+dotenv
+xmltodict

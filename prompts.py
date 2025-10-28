@@ -180,39 +180,43 @@ section_writer_instructions = """Write one section of a research report.
 <Task>
 1. Review the report topic, section name, and section topic carefully.
 2. If present, review any existing section content. 
-4. Decide the sources that you will use it to write a report section.
-5. Write the report section and list your sources.
-7. You will be penalized for over summarizing the given Source Material. More information from Source Material you retain, more points will be awarded.
-6. The more elaborate report you write, more points you will get.
-7. The more source material you use, more points you will get.
-8. After using the source material, you can use your own knowledge base to add additonal information as well.
-9. You will get most points if you follow these instructions along with the above eight (Ignore if None): {user_instructions}
+3. Decide the sources that you will use to write a report section.
+4. Write a comprehensive, well-researched section with scientific rigor.
+5. Include specific findings, mechanisms, and data from the sources.
+6. Use proper scientific terminology and cite with PMID/PMC IDs when available.
+7. Include tables or lists to organize complex information clearly.
+8. Prioritize the most recent research (2023-2025) when available.
+9. Follow these specific instructions: {user_instructions}
 </Task>
 
-<Writing Guidelines>
-- If existing section content is not populated, write from scratch
-- If existing section content is populated, synthesize it with the source material
-- You should try to incorporate as much information as you can from the source material
-- Use simple, clear language
-- You are writing a section of a longer research report. So you should refrain from introducing introductory, concluding or summary sections in it.
-- Use ## for section title (Markdown format)
+<Writing Guidelines for Neuroscience Research>
+- Write detailed, information-rich paragraphs (not summaries)
+- Include specific molecular mechanisms, pathways, and interactions
+- Cite numerical data, effect sizes, and statistical findings when available
+- Use tables to compare studies, mechanisms, or therapeutic approaches
+- Mention specific brain regions, neurotransmitters, receptors, and proteins
+- Include methodological details when relevant
+- Discuss both preclinical and clinical findings
+- Use ## for section title, ### for subsections (Markdown format)
+- Aim for 400-600 words per section (detailed reports need depth)
 </Writing Guidelines>
 
-<Citation Rules>
-- Assign each unique URL a single citation number in your text
-- In <Source material> section, you will find context and source URLs. Access those URLs to read Source Title.
-- End with ### Sources that lists each source with corresponding numbers
-- IMPORTANT: Number sources sequentially without gaps (1,2,3,4...) in the final list regardless of which sources you choose
-- Example format:
-  [1] Source Title: URL
-  [2] Source Title: URL
-</Citation Rules>
+<Scientific Citation Rules>
+- Assign each unique URL a single citation number
+- Extract PMID or PMC IDs from PubMed URLs and cite as [PMID: 12345678]
+- End with ### Sources listing each source with numbers
+- Format: [1] Author et al. Title. Journal. Year. PMID: xxxxx - URL
+- Number sources sequentially (1,2,3,4...) without gaps
+</Scientific Citation Rules>
 
-<Final Check>
-1. Verify that EVERY claim is grounded in the provided Source material
-2. Confirm each URL appears ONLY ONCE in the Source list
-3. Verify that sources are numbered sequentially (1,2,3...) without any gaps
-</Final Check>
+<Quality Standards>
+1. Every scientific claim must be cited with source material
+2. Include specific gene names, protein names, and molecular pathways
+3. Use tables for comparing multiple studies or mechanisms
+4. Mention specific experimental models (cell lines, animal models, clinical cohorts)
+5. Include statistical significance and effect sizes when available
+6. Discuss both positive and negative findings
+</Quality Standards>
 """
 
 #- Strict 150-200 word limit
@@ -337,31 +341,41 @@ For Conclusion/Summary:
 
 
 REPORT_STRUCTURE = """
-Use this structure to create a comprehensive, deeply-researched report on the user-provided topic:
+Use this structure to create a well-formatted, comprehensive neuroscience research report:
 
-1. Introduction (no research needed)
-   - Brief overview of the topic area (50-100 words)
+1. Executive Summary
+   - Brief overview and key findings (75-100 words)
    - No references
 
-2. Main Body Sections:
-   - For each major sub-topic, create a section with:
-     a. Section Title (## in Markdown)
-     b. 2-4 well-organized paragraphs covering:
-        - Key concepts and mechanisms
-        - Recent advances or controversies
-        - Practical implications or examples
-     c. At least one table or list if it helps clarify information
-     d. Sub-sections if needed for clarity and depth
-     e. References at the end of the section (numbered, no inline clutter)
+2. Introduction and Background
+   - Current understanding and foundational concepts
+   - Historical context
+   - Summary table of key concepts
 
-3. Comparative Analysis (if applicable)
-   - Table comparing key aspects of main sub-topics
+3. Recent Research Advances (2023-2025)
+   - Latest breakthrough discoveries
+   - Comparative table of major studies
+   - Novel methodologies and technologies
+   - Cite with PMID/PMC IDs
 
-4. Conclusion
-   - Concise summary (100-150 words)
-   - Key takeaways and next steps
-   - No references
+4. Mechanistic Insights
+   - Molecular and cellular mechanisms
+   - Signaling pathways and key interactions
+   - Genetic factors and regulation
+   - Mechanism comparison tables
 
-5. References
-   - Numbered list of all sources cited in the report, grouped at the end
+5. Clinical and Therapeutic Implications
+   - Disease biomarkers and diagnostics
+   - Current therapeutic strategies
+   - Clinical trials summary table
+   - Emerging therapeutic targets
+
+6. Conclusion and Future Directions
+   - Key takeaways (100-150 words)
+   - Research gaps and opportunities
+   - Clinical implications
+
+7. References
+   - Comprehensive citations with PMID/PMC IDs
+   - Organized by relevance
 """
