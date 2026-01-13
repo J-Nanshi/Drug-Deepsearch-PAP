@@ -1,784 +1,1481 @@
 <!DOCTYPE html>
+<!-- Drug Effect Research AI - Version 2.0 -->
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Neuro Deep Research AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Drug Effect Research AI - Precision Oncology Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
-      --bg-light: #f4f8fb;
-      --bg-dark: #181c23;
-      --text-light: #1a1a1a;
-      --text-dark: #f4f8fb;
-      --primary: #3a86ff;
-      --secondary: #8338ec;
-      --accent: #ffbe0b;
-      --radius: 16px;
-      --shadow: 0 4px 24px rgba(58,134,255,0.08);
-    }
-
-    [data-theme="light"] {
-      background-color: var(--bg-light);
-      color: var(--text-light);
-    }
-
-    [data-theme="dark"] {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
+      --primary: #0066cc;
+      --primary-dark: #004d99;
+      --primary-light: #3385d6;
+      --secondary: #00a859;
+      --secondary-dark: #008645;
+      --accent: #ff6b35;
+      --accent-light: #ff8c66;
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #718096;
+      --border: #e2e8f0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+      --shadow-xl: 0 20px 40px rgba(0,0,0,0.15);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --gradient-primary: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
+      --gradient-accent: linear-gradient(135deg, #00a859 0%, #008645 100%);
+      --gradient-hero: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 50%, #f0f7ff 100%);
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-weight: 400;
-      margin: 0;
-      padding: 0;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-light);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(135deg, #e0e7ff 0%, #f4f8fb 100%);
-      transition: background 0.3s, color 0.3s;
     }
 
+    /* Header Styles */
     header {
-      padding: 1.5rem 2rem 1rem 2rem;
+      background: var(--gradient-primary);
+      padding: 1.25rem 2.5rem;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    header .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      color: #fff;
-      box-shadow: var(--shadow);
     }
 
     header h1 {
-      font-size: 2.2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      color: #fff;
       margin: 0;
       display: flex;
       align-items: center;
-      gap: 0.7rem;
+      gap: 0.75rem;
+      letter-spacing: -0.5px;
     }
 
-    .theme-toggle {
-      background: none;
-      border: none;
+    header h1 i {
       font-size: 1.5rem;
-      cursor: pointer;
-      color: #fff;
-      transition: color 0.2s;
+      color: var(--accent);
     }
 
-    /* --- LOGIN PAGE STYLES --- */
+    header .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .theme-toggle, #profileBtn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .theme-toggle:hover, #profileBtn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Login Page */
     #login-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      background: linear-gradient(135deg,#e0e7ff 0%,#f4f8fb 100%);
-    }
-
-    #login-container > div {
-      border-radius: 20px;
+      min-height: 100vh;
+      background: var(--gradient-hero);
+      padding: 2rem;
+      position: relative;
       overflow: hidden;
-      width: 350px;
-      max-width: 90vw;
     }
 
-    #login-container h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fff;
-      margin: 0;
-      letter-spacing: 1px;
+    #login-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0,102,204,0.1) 0%, transparent 70%);
+      animation: pulse 8s ease-in-out infinite;
     }
 
-    #login-container .logo {
-      font-size: 2.5rem;
-      color: #fff;
-      margin-bottom: 0.5rem;
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
     }
 
-    #login-container h2 {
+    .login-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 1;
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-header {
+      background: var(--gradient-primary);
+      padding: 2.5rem 2rem;
       text-align: center;
-      margin-bottom: 1.5rem;
-      color: #3a86ff;
-      font-weight: 700;
-      font-size: 1.3rem;
-    }
-
-    #login-container label {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    #login-container select,
-    #login-container input[type="password"] {
-      width: 100%;
-      padding: 0.7rem;
-      border-radius: 8px;
-      border: 1px solid #e0e7ff;
-      font-size: 1rem;
-      margin-bottom: 1.2rem;
-    }
-
-    #login-container button {
-      width: 100%;
-      padding: 0.9rem 0;
-      font-size: 1.1rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #3a86ff 0%, #8338ec 100%);
       color: #fff;
+    }
+
+    .login-header .logo-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .login-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .login-header p {
+      margin-top: 0.5rem;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .login-body {
+      padding: 2.5rem 2rem;
+    }
+
+    .login-body h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.75rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: var(--bg-white);
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.05rem;
+      font-weight: 600;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: #fff;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
     }
 
     #login-error {
-      color: #e63946;
+      color: var(--accent);
       text-align: center;
       margin-top: 1rem;
       display: none;
       font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      background: rgba(255,107,53,0.1);
+      border-radius: 6px;
     }
 
-    /* --- MAIN APP STYLES --- */
+    /* Main App */
     #main-app {
-      display: none;
-    }
-
-    header {
-      padding: 1.5rem 2rem;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-      color: #fff;
-      box-shadow: var(--shadow);
+      flex: 1;
+      min-height: 100vh;
+      flex-direction: column;
     }
 
-    header h1 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin: 0;
+    /* Main Layout with Sidebar */
+    .app-container {
       display: flex;
-      align-items: center;
-      gap: 0.7rem;
+      flex: 1;
+      overflow: hidden;
     }
 
-    .theme-toggle {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
       color: #fff;
-      transition: color 0.2s;
-    }
-
-    .profile-dropdown {
+      display: flex;
+      flex-direction: column;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+      z-index: 100;
       position: relative;
     }
 
-    #profileBtn {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
+    .sidebar-header {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.2);
     }
 
+    .sidebar-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .sidebar-header h2 i {
+      color: var(--accent);
+      font-size: 1.75rem;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 1.5rem 0;
+      overflow-y: auto;
+    }
+
+    /* Custom scrollbar for sidebar */
+    .sidebar-nav::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar-nav::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.2);
+    }
+
+    .sidebar-nav::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+    }
+
+    .sidebar-nav::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .nav-item:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border-left-color: var(--primary);
+    }
+
+    .nav-item.active {
+      background: rgba(0,102,204,0.2);
+      color: #fff;
+      border-left-color: var(--primary);
+    }
+
+    .nav-item i {
+      font-size: 1.25rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .sidebar-footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .sidebar-footer .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-footer .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .sidebar-footer .user-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      overflow-y: auto;
+      background: var(--bg-light);
+      padding: 3rem;
+      width: 100%;
+      position: relative;
+    }
+
+    /* Custom scrollbar for main content */
+    .main-content::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .main-content::-webkit-scrollbar-track {
+      background: var(--bg-light);
+    }
+
+    .main-content::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 5px;
+    }
+
+    .main-content::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    .main-content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Research Card */
+    #research-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      padding: 4rem;
+      margin-bottom: 2rem;
+      animation: fadeIn 0.5s ease-out;
+      border: 1px solid var(--border);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #research-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    #research-card .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 1.75rem;
+    }
+
+    .input-wrapper label {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.625rem;
+      font-size: 0.95rem;
+    }
+
+    .input-wrapper input,
+    .input-wrapper select {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: var(--bg-white);
+    }
+
+    .input-wrapper input:focus,
+    .input-wrapper select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(0,102,204,0.1);
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .input-wrapper input {
+      padding-right: 3rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn-secondary {
+      background: var(--gradient-accent);
+      color: #fff;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Processing Card */
+    #processing-card {
+      display: none;
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 3.5rem 3rem;
+      text-align: center;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .spinner {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 2rem;
+      border: 4px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #processing-card h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    #processing-card p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 14px;
+      background: var(--border);
+      border-radius: 7px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-primary);
+      border-radius: 7px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    #processing-percent {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Complete Card */
+    #complete-card {
+      display: none;
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 3rem;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .complete-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .complete-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gradient-accent);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .drug-info {
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      padding: 1rem;
+      background: rgba(0,102,204,0.05);
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .drug-info b {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    #complete-summary {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      padding: 1.25rem;
+      background: var(--bg-light);
+      border-radius: 8px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+    }
+
+    .btn-danger {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: var(--shadow-md);
+      min-width: 200px;
+    }
+
+    .btn-danger:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-link {
+      background: none;
+      color: var(--primary);
+      font-weight: 600;
+      padding: 1rem 0;
+      text-decoration: none;
+    }
+
+    .btn-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-card {
+      background: var(--bg-white);
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      min-width: 400px;
+      max-width: 90vw;
+      width: 420px;
+      animation: modalSlide 0.3s ease-out;
+    }
+
+    @keyframes modalSlide {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .modal-header i {
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      resize: vertical;
+      min-height: 100px;
+      transition: all 0.3s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+    }
+
+    .feedback-message {
+      display: none;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .feedback-success {
+      background: rgba(0,168,89,0.1);
+      color: var(--secondary-dark);
+    }
+
+    /* Progress Overlay */
+    #writing-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 4000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .overlay-card {
+      background: #1a202c;
+      color: #fff;
+      padding: 3rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      min-width: 400px;
+      max-width: 90vw;
+      width: 420px;
+      text-align: center;
+    }
+
+    .overlay-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    /* Profile Menu */
     #profileMenu {
       display: none;
       position: absolute;
       right: 0;
-      top: 2.5rem;
-      background: #fff;
-      color: #333;
-      min-width: 120px;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      top: 3.5rem;
+      background: var(--bg-white);
+      color: var(--text-primary);
+      min-width: 160px;
+      border-radius: 10px;
+      box-shadow: var(--shadow-lg);
       z-index: 100;
+      overflow: hidden;
+      border: 1px solid var(--border);
     }
 
     #profileMenu button {
       width: 100%;
       background: none;
       border: none;
-      padding: 0.8rem 1.2rem;
+      padding: 1rem 1.25rem;
       text-align: left;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
+      transition: background 0.2s;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+    }
+
+    #profileMenu button:hover {
+      background: var(--bg-light);
     }
 
     #logoutBtn {
-      color: #3a86ff;
+      color: var(--accent);
       font-weight: 600;
     }
 
-    #research-card {
-      max-width: 600px;
-      margin: 2.5rem auto 0 auto;
-      background: #fff;
-      padding: 2.5rem 2rem;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(58,134,255,0.08);
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 240px;
+      }
+      
+      .main-content {
+        padding: 2rem 1.5rem;
+      }
     }
 
-    #research-card h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 1.5rem;
+      }
 
-    #research-card label {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
+      header h1 {
+        font-size: 1.4rem;
+      }
 
-    #research-card input[type="text"],
-    #research-card select {
-      width: 100%;
-      padding: 1rem;
-      border-radius: 10px;
-      border: 1px solid #e0e7ff;
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
+      .app-container {
+        flex-direction: column;
+      }
 
-    #research-card button {
-      width: 100%;
-      padding: 1.1rem 0;
-      font-size: 1.1rem;
-      font-weight: 700;
-      background: linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        order: 2;
+      }
 
-    #processing-card {
-      display: none;
-      max-width: 600px;
-      margin: 2.5rem auto 0 auto;
-      background: #fff;
-      padding: 2.5rem 2rem;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(58,134,255,0.08);
-      text-align: center;
-    }
+      .main-content {
+        order: 1;
+        padding: 2rem 1.5rem;
+      }
 
-    #processing-card img {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 1.5rem;
-      animation: spin 1.2s linear infinite;
-    }
-
-    #processing-card h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-    }
-
-    #processing-card p {
-      color: #555;
-      margin-bottom: 1.5rem;
-    }
-
-    #processing-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);
-      transition: width 0.4s;
-    }
-
-    #processing-percent {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    #complete-card {
-      display: none;
-      max-width: 700px;
-      margin: 2.5rem auto 0 auto;
-      background: #fff;
-      padding: 2.5rem 2rem 2rem 2rem;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(58,134,255,0.08);
-    }
-
-    #complete-card div {
-      margin-bottom: 1.2rem;
-    }
-
-    #complete-card h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin: 0;
-      color: #3a86ff;
-    }
-
-    #complete-card span {
-      color: #2ecc40;
-      font-weight: 600;
-    }
-
-    #complete-summary {
-      font-size: 1.1rem;
-      color: #333;
-      margin-bottom: 1.5rem;
-    }
-
-    #complete-card .result-metric {
-      flex: 1;
-      background: #e7f0fd;
-      border-radius: 10px;
-      padding: 1.2rem;
-      text-align: center;
-    }
-
-    #complete-card .result-metric div {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin: 0;
-    }
-
-    #complete-card .result-metric div.metric-label {
-      font-size: 1rem;
-      color: #555;
-    }
-
-    #progress-bar-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 6px;
-      z-index: 2000;
-      display: none;
-    }
-
-    #progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);
-      transition: width 0.3s;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 900px) {
       #research-card,
       #processing-card,
       #complete-card {
-        width: 90vw;
+        padding: 2rem 1.5rem;
+      }
+
+      #research-card h2 {
+        font-size: 1.75rem;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-card,
+      .overlay-card {
+        min-width: 90vw;
         padding: 2rem;
       }
-
-      #research-card h2,
-      #processing-card h3 {
-        font-size: 1.8rem;
-      }
-
-      #complete-card h3 {
-        font-size: 1.2rem;
-      }
-
-      #research-card button,
-      #processing-card button,
-      #complete-card button {
-        padding: 0.9rem 0;
-        font-size: 1rem;
-      }
     }
 
-    #send-email-btn {
-      cursor: pointer;
-      transition: background 0.18s, box-shadow 0.18s, transform 0.08s;
-    }
-    #send-email-btn:hover:not(:disabled) {
-      background: #295ecb;
-      box-shadow: 0 2px 8px rgba(58,134,255,0.18);
-      transform: translateY(-2px) scale(1.03);
-    }
-    #send-email-btn:active:not(:disabled) {
-      background: #1d4fa1;
-      transform: scale(0.97);
-    }
-    #send-email-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+    /* Utility Classes */
+    .hidden { display: none !important; }
+    .text-center { text-align: center; }
+    .mt-1 { margin-top: 0.5rem; }
+    .mt-2 { margin-top: 1rem; }
+    .mb-1 { margin-bottom: 0.5rem; }
+    .mb-2 { margin-bottom: 1rem; }
   </style>
 </head>
 <body>
-  <!-- Redesigned Login Page -->
-  <div id="login-container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:linear-gradient(135deg,#e0e7ff 0%,#f4f8fb 100%);">
-    <div style="background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);border-radius:20px 20px 0 0;padding:1.5rem 2rem 1rem 2rem;text-align:center;">
-      <i class="fas fa-brain" style="font-size:2.5rem;color:#fff;"></i>
-      <h1 style="margin:0;font-size:2rem;font-weight:700;color:#fff;letter-spacing:1px;">Neuro Deep Research AI</h1>
-    </div>
-    <div style="background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:0 0 20px 20px;box-shadow:0 4px 24px rgba(58,134,255,0.10);min-width:340px;max-width:90vw;width:350px;">
-      <h2 style="text-align:center;margin-bottom:1.5rem;color:#3a86ff;font-weight:700;font-size:1.3rem;">Sign in to your account</h2>
-      <form id="login-form" onsubmit="return handleLogin(event)">
-        <div style="margin-bottom:1.2rem;">
-          <label for="username" style="font-weight:600;">Username</label>
-          <select id="username" style="width:100%;padding:0.7rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1rem;">
-            <option value="">Select User</option>
-            <option value="Debarka">Debarka</option>
-            <option value="Kartik">Kartik</option>
-            <option value="Dr.Karnik">Dr.Karnik</option>
-            <option value="Dr.Bob">Dr.Bob</option>
-            <option value="Aman">Aman</option>
-          </select>
-        </div>
-        <div style="margin-bottom:1.2rem;">
-          <label for="password" style="font-weight:600;">Password</label>
-          <input type="password" id="password" style="width:100%;padding:0.7rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1rem;" required />
-        </div>
-        <button type="submit" style="width:100%;padding:0.9rem 0;font-size:1.1rem;font-weight:700;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);color:#fff;border:none;border-radius:8px;cursor:pointer;">Login</button>
-        <div id="login-error" style="color:#e63946;text-align:center;margin-top:1rem;display:none;font-weight:600;"></div>
-      </form>
-    </div>
-  </div>
-  <div id="main-app" style="display:none;">
+  <!-- Main App -->
+  <div id="main-app">
     <header>
-      <h1 style="font-size:1.7rem;"><i class="fas fa-brain"></i> AI Research Hub</h1>
-      <div style="display:flex;align-items:center;gap:1.2rem;">
-        <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i> / <i class="fas fa-sun"></i></button>
-        <div class="profile-dropdown" style="position:relative;">
-          <button id="profileBtn" onclick="toggleProfileMenu()" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;"><i class="fas fa-user-circle"></i></button>
-          <div id="profileMenu" style="display:none;position:absolute;right:0;top:2.5rem;background:#fff;color:#333;min-width:120px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.12);z-index:100;">
-            <button id="logoutBtn" onclick="logout()" style="width:100%;background:none;border:none;padding:0.8rem 1.2rem;text-align:left;font-size:1rem;cursor:pointer;color:#3a86ff;font-weight:600;">Logout Kartik</button>
+      <div class="header-content">
+        <h1><i class="fas fa-pills"></i> Drug Effect Research AI</h1>
+        <div class="header-actions">
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div style="position: relative;">
+            <button id="profileBtn" onclick="toggleProfileMenu()" title="Profile">
+              <i class="fas fa-user-circle"></i>
+            </button>
+            <div id="profileMenu">
+              <!-- Profile menu (no logout needed) -->
+            </div>
           </div>
         </div>
       </div>
     </header>
-    <div id="research-card" style="max-width:600px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem;border-radius:18px;box-shadow:0 4px 24px rgba(58,134,255,0.08);">
-      <h2 style="font-size:2rem;font-weight:700;text-align:center;margin-bottom:1.5rem;">Enter Research Topic</h2>
-      <div style="margin-bottom:1.5rem;">
-        <label for="research-topic" style="font-weight:600;">Research Topic</label>
-        <input id="research-topic" type="text" placeholder="Enter your research topic here... (e.g., Impact of AI on healthcare, Climate change solutions, etc.)" style="width:100%;padding:1rem;border-radius:10px;border:1px solid #e0e7ff;font-size:1.1rem;margin-top:0.5rem;box-sizing:border-box;margin-right:0.2rem;" />
+
+    <div class="app-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2><i class="fas fa-flask"></i> Research</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-item active" onclick="showResearchCard()">
+            <i class="fas fa-search"></i>
+            <span>New Research</span>
+          </div>
+          <div class="nav-item" onclick="showHistory()">
+            <i class="fas fa-history"></i>
+            <span>Research History</span>
+          </div>
+          <div class="nav-item" onclick="showSettings()">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </div>
+          <div class="nav-item" onclick="showHelp()">
+            <i class="fas fa-question-circle"></i>
+            <span>Help & Support</span>
+          </div>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-info">
+            <div class="user-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div>
+              <div class="user-name" id="sidebar-username">User</div>
+              <div style="font-size: 0.8rem; opacity: 0.7;">Online</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <div class="main-content-wrapper">
+      <!-- Research Card -->
+      <div id="research-card">
+        <h2>Drug Effect Research</h2>
+        <p class="subtitle">Comprehensive analysis of drug mechanisms, pathways, and clinical effects in breast cancer</p>
+        
+        <div class="input-wrapper">
+          <label for="research-topic">
+            <i class="fas fa-capsules"></i> Drug Name
+          </label>
+          <input 
+            id="research-topic" 
+            type="text" 
+            placeholder="Enter drug name (e.g., Olaparib, Trastuzumab, Palbociclib)" 
+          />
+          <i class="fas fa-search"></i>
       </div>
-      <div style="margin-bottom:2rem;">
-        <label for="research-depth" style="font-weight:600;">Research Depth</label>
-        <select id="research-depth" style="width:100%;padding:0.9rem;border-radius:10px;border:1px solid #e0e7ff;font-size:1.1rem;margin-top:0.5rem;">
-          <option value="basic">Basic Overview</option>
-          <option value="detailed">Detailed</option>
-          <option value="deep">Deep Research</option>
-        </select>
-      </div>
-      <div style="display:flex; gap:1rem; margin-bottom:2rem;">
-        <button id="send-email-btn-initial" style="flex:1; background:#3a86ff; color:#fff; font-weight:700; border:none; border-radius:10px; padding:1.1rem 0; font-size:1.1rem; cursor:pointer;" onclick="showInitialEmailModal()"><i class="fas fa-envelope"></i> Send Email</button>
-        <button id="start-research-btn" style="flex:1; background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%); color:#fff; font-weight:700; border:none; border-radius:10px; padding:1.1rem 0; font-size:1.1rem; cursor:pointer;"><i class="fas fa-search"></i> Start Research</button>
+
+        <!-- Deep search only - no depth selector needed -->
+        <div style="background: linear-gradient(135deg, #e8f4fd 0%, #f0f7ff 100%); padding: 1.25rem; border-radius: 10px; margin-bottom: 1.75rem; border-left: 4px solid var(--primary);">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i class="fas fa-layer-group" style="color: var(--primary); font-size: 1.25rem;"></i>
+            <div>
+              <div style="font-weight: 600; color: var(--text-primary);">Deep Search Mode</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Comprehensive analysis with extensive pathway research</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button id="send-email-btn-initial" class="btn btn-secondary" onclick="showInitialEmailModal()">
+            <i class="fas fa-envelope"></i> Send Email
+          </button>
+          <button id="start-research-btn" class="btn btn-primary" onclick="startResearch()">
+            <i class="fas fa-search"></i> Start Research
+          </button>
       </div>
     </div>
-    <div id="processing-card" style="display:none;max-width:600px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem;border-radius:18px;box-shadow:0 4px 24px rgba(58,134,255,0.08);text-align:center;">
-      <div style="margin-bottom:1.5rem;">
-        <img src="https://cdn.jsdelivr.net/gh/edent/SuperTinyIcons/images/svg/loading.svg" alt="Loading" style="width:48px;height:48px;animation:spin 1.2s linear infinite;" />
+
+      <!-- Processing Card -->
+      <div id="processing-card">
+        <div class="spinner"></div>
+        <h3>Processing Drug Effect Research</h3>
+        <p id="processing-stage">Initializing research...</p>
+        <div class="progress-bar">
+          <div id="processing-bar" class="progress-fill"></div>
+        </div>
+        <div id="processing-percent" style="font-size: 1.15rem; font-weight: 600; color: var(--primary); margin-top: 0.5rem;">0% Complete</div>
+        <div id="processing-time" style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.5rem;"></div>
       </div>
-      <h3 style="font-size:1.3rem;font-weight:600;margin-bottom:0.7rem;">Processing Your Research</h3>
-      <div style="color:#555;margin-bottom:1.2rem;">Our AI is analyzing your topic and gathering comprehensive insights...</div>
-      <div style="width:100%;background:#e0e7ff;border-radius:8px;height:12px;overflow:hidden;margin-bottom:0.7rem;">
-        <div id="processing-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);transition:width 0.4s;"></div>
-      </div>
-      <div id="processing-percent" style="font-size:1.1rem;font-weight:600;">0% Complete</div>
+
+      <!-- Complete Card -->
+      <div id="complete-card">
+        <div class="complete-header">
+          <h3>Research Complete</h3>
+          <div class="status-badge">
+            <i class="fas fa-check-circle"></i>
+            Complete
     </div>
-    <div id="complete-card" style="display:none;max-width:700px;margin:2.5rem auto 0 auto;background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:18px;box-shadow:0 4px 24px rgba(58,134,255,0.08);">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;">
-        <h3 style="font-size:1.3rem;font-weight:700;margin:0;">Research Complete</h3>
-        <span id="complete-status" style="color:#2ecc40;font-weight:700;"><i class="fas fa-check-circle"></i> Complete</span>
       </div>
-      <div style="font-size:1.1rem;color:#333;margin-bottom:1.2rem;"><b>Topic:</b> <span id="complete-topic"></span></div>
-      <div id="complete-summary" style="font-size:1.1rem;color:#444;margin-bottom:1.5rem;"></div>
-      <div style="display:flex;gap:1.2rem;margin-bottom:1.5rem;">
-        <div style="flex:1;background:#e7f0fd;padding:1.2rem 0;border-radius:10px;text-align:center;font-weight:600;font-size:1.1rem;">
-          <div id="complete-pages" style="font-size:1.5rem;font-weight:700;">-</div>
-          <div style="font-size:1rem;color:#3a86ff;">Pages Generated</div>
+        
+        <div class="drug-info">
+          <b>Drug:</b> <span id="complete-topic"></span>
         </div>
-        <div style="flex:1;background:#eafbe7;padding:1.2rem 0;border-radius:10px;text-align:center;font-weight:600;font-size:1.1rem;">
-          <div id="complete-sources" style="font-size:1.5rem;font-weight:700;">-</div>
-          <div style="font-size:1rem;color:#27ae60;">Sources Analyzed</div>
+        
+        <div id="complete-summary"></div>
+        
+        <!-- Report Preview Section -->
+        <div id="report-preview-section" style="margin: 2rem 0; display: none;">
+          <div style="background: var(--bg-white); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border);">
+              <h3 style="margin: 0; color: var(--text-primary); font-size: 1.5rem;">Report Preview</h3>
+              <button onclick="toggleReportPreview()" class="btn-link" style="padding: 0.5rem 1rem;">
+                <i class="fas fa-eye" id="preview-toggle-icon"></i> <span id="preview-toggle-text">Show Preview</span>
+              </button>
+            </div>
+            <div id="report-preview-content" style="max-height: 700px; overflow-y: auto; padding: 2rem; background: #ffffff; border-radius: 8px; border: 1px solid var(--border); display: none;">
+              <div id="report-html-content" style="color: #2c3e50; line-height: 1.8;"></div>
+            </div>
+          </div>
         </div>
-        <div style="flex:1;background:#fdf7e7;padding:1.2rem 0;border-radius:10px;text-align:center;font-weight:600;font-size:1.1rem;">
-          <div id="complete-time" style="font-size:1.5rem;font-weight:700;">-</div>
-          <div style="font-size:1rem;color:#e67e22;">Processing Time</div>
+        
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div id="complete-pages" class="metric-value">-</div>
+            <div class="metric-label">Pages Generated</div>
+        </div>
+          <div class="metric-card">
+            <div id="complete-sources" class="metric-value">-</div>
+            <div class="metric-label">Sources Analyzed</div>
+        </div>
+          <div class="metric-card">
+            <div id="complete-time" class="metric-value">-</div>
+            <div class="metric-label">Processing Time</div>
+      </div>
+      </div>
+        
+        <div class="action-buttons">
+          <button onclick="showReportPreview()" class="btn btn-secondary" id="preview-btn" style="display: none;">
+            <i class="fas fa-eye"></i> View Report
+          </button>
+          <button onclick="downloadMarkdown()" class="btn btn-danger">
+            <i class="fas fa-download"></i> Download Report
+          </button>
+      </div>
+        
+        <div class="text-center mt-2">
+          <button onclick="resetResearch()" class="btn-link">New Research</button>
         </div>
       </div>
-      <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
-        <button onclick="generateAndDownloadPdf()" style="background:#e63946;color:#fff;min-width:180px;font-size:1.1rem;font-weight:700;border:none;border-radius:10px;padding:1.1rem 0;display:flex;align-items:center;justify-content:center;gap:0.7rem;"><i class="fas fa-file-pdf"></i> Generate PDF</button>
-      </div>
-      <div style="margin-top:1.5rem;display:flex;gap:1.2rem;justify-content:flex-end;">
-        <button onclick="resetResearch()" style="background:none;color:#3a86ff;font-weight:600;border:none;">New Research</button>
-      </div>
+        </div>
+      </main>
     </div>
+
     <!-- Email Modal -->
-    <div id="email-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:3000;align-items:center;justify-content:center;">
-      <div id="email-modal-card" style="background:#fff;padding:2.2rem 2.5rem 2rem 2.5rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.12);min-width:340px;max-width:90vw;width:370px;">
-        <h3 style="margin-top:0;margin-bottom:1.2rem;font-size:1.25rem;font-weight:700;color:#3a86ff;"><i class="fas fa-envelope"></i> Send Research Report</h3>
-        <input id="modal-email" type="email" placeholder="Recipient Email" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:1.1rem;" />
-        <textarea id="modal-message" placeholder="Optional message (e.g., notes for the recipient)" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.05rem;min-height:70px;margin-bottom:1.2rem;resize:vertical;"></textarea>
-        <div id="email-modal-feedback" style="display:none;color:#27ae60;font-weight:600;text-align:center;margin-bottom:1.2rem;"></div>
-        <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
-          <button onclick="hideEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
-          <button id="send-email-btn" onclick="sendModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;position:relative;overflow:hidden;min-width:90px;"><span id="send-email-btn-text">Send</span><span id="send-email-btn-spinner" style="display:none;margin-left:8px;"><i class='fas fa-spinner fa-spin'></i></span></button>
+    <div id="email-modal" class="modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <i class="fas fa-envelope"></i>
+          <h3>Send Research Report</h3>
         </div>
+        <div class="form-group">
+          <label for="modal-email">Recipient Email</label>
+          <input id="modal-email" type="email" placeholder="recipient@example.com" />
       </div>
+        <div class="form-group">
+          <label for="modal-message">Optional Message</label>
+          <textarea id="modal-message" placeholder="Add any notes for the recipient..."></textarea>
     </div>
-    <!-- Initial Email Modal -->
-    <div id="initial-email-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.25);z-index:3000;align-items:center;justify-content:center;">
-      <div style="background:#fff;padding:2.2rem 2.5rem 2rem 2.5rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.12);min-width:340px;max-width:90vw;width:370px;">
-        <h3 style="margin-top:0;margin-bottom:1.2rem;font-size:1.25rem;font-weight:700;color:#3a86ff;"><i class="fas fa-envelope"></i> Send Research Report</h3>
-        <input id="initial-modal-email" type="email" placeholder="Recipient Email" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.1rem;margin-bottom:1.1rem;" />
-        <textarea id="initial-modal-message" placeholder="Optional message (e.g., notes for the recipient)" style="width:100%;padding:0.9rem;border-radius:8px;border:1px solid #e0e7ff;font-size:1.05rem;min-height:70px;margin-bottom:1.2rem;resize:vertical;"></textarea>
-        <div id="initial-email-modal-feedback" style="display:none;color:#27ae60;font-weight:600;text-align:center;margin-bottom:1.2rem;"></div>
-        <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
-          <button onclick="hideInitialEmailModal()" style="background:none;color:#e63946;font-weight:600;border:none;">Cancel</button>
-          <button id="send-initial-email-btn" onclick="sendInitialModalEmail()" style="background:#3a86ff;color:#fff;font-weight:700;border:none;border-radius:8px;padding:0.9rem 1.5rem;display:flex;align-items:center;gap:0.7rem;">
-            <span id="send-initial-email-btn-text">Send</span>
-            <span id="send-initial-email-btn-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
+        <div id="email-modal-feedback" class="feedback-message feedback-success"></div>
+        <div class="modal-footer">
+          <button onclick="hideEmailModal()" class="btn-link">Cancel</button>
+          <button id="send-email-btn" onclick="sendModalEmail()" class="btn btn-primary">
+            <span id="send-email-btn-text">Send</span>
+            <span id="send-email-btn-spinner" class="hidden"><i class="fas fa-spinner fa-spin"></i></span>
           </button>
         </div>
       </div>
     </div>
-    <!-- Add progress overlay for PDF/email actions -->
-    <div id="writing-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:4000;align-items:center;justify-content:center;">
-      <div style="background:#222;color:#fff;padding:2.2rem 2.5rem 2rem 2.5rem;border-radius:16px;box-shadow:0 4px 24px rgba(58,134,255,0.18);min-width:340px;max-width:90vw;width:370px;display:flex;flex-direction:column;align-items:center;">
-        <div id="writing-title" style="font-size:1.3rem;font-weight:700;margin-bottom:1.2rem;"></div>
-        <div style="width:100%;background:#444;border-radius:8px;height:14px;overflow:hidden;margin-bottom:1.1rem;">
-          <div id="progress-inner-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3a86ff 0%,#8338ec 100%);transition:width 0.4s;"></div>
+
+    <!-- Initial Email Modal -->
+    <div id="initial-email-modal" class="modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <i class="fas fa-envelope"></i>
+          <h3>Send Research Report</h3>
         </div>
-        <div id="progress-percent" style="font-size:1.1rem;font-weight:600;">0%</div>
-        <div id="progress-text" style="font-size:1.05rem;margin-top:0.7rem;text-align:center;"></div>
+        <div class="form-group">
+          <label for="initial-modal-email">Recipient Email</label>
+          <input id="initial-modal-email" type="email" placeholder="recipient@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="initial-modal-message">Optional Message</label>
+          <textarea id="initial-modal-message" placeholder="Add any notes for the recipient..."></textarea>
+        </div>
+        <div id="initial-email-modal-feedback" class="feedback-message feedback-success"></div>
+        <div class="modal-footer">
+          <button onclick="hideInitialEmailModal()" class="btn-link">Cancel</button>
+          <button id="send-initial-email-btn" onclick="sendInitialModalEmail()" class="btn btn-primary">
+            <span id="send-initial-email-btn-text">Send</span>
+            <span id="send-initial-email-btn-spinner" class="hidden"><i class="fas fa-spinner fa-spin"></i></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal">
+      <div class="modal-card" style="max-width: 700px;">
+        <div class="modal-header">
+          <i class="fas fa-comments"></i>
+          <h3>Review Research Plan</h3>
+        </div>
+        <div class="form-group">
+          <label>Proposed Report Sections:</label>
+          <div id="plan-sections-list" style="background: var(--bg-light); padding: 1rem; border-radius: 8px; margin-top: 0.5rem; max-height: 300px; overflow-y: auto;">
+            <!-- Sections will be populated here -->
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="feedback-text">Feedback (Optional):</label>
+          <textarea id="feedback-text" rows="4" placeholder="Provide feedback on the plan or type 'approve' to continue..."></textarea>
+          <small style="color: var(--text-muted); margin-top: 0.25rem; display: block;">
+            Leave empty or type "approve" to continue with the current plan. Provide feedback to modify the plan.
+          </small>
+        </div>
+        <div id="feedback-modal-feedback" class="feedback-message"></div>
+        <div class="modal-footer">
+          <button onclick="hideFeedbackModal()" class="btn-link">Cancel</button>
+          <button onclick="submitFeedback()" class="btn btn-primary">
+            <span id="submit-feedback-btn-text">Submit Feedback</span>
+            <span id="submit-feedback-btn-spinner" class="hidden"><i class="fas fa-spinner fa-spin"></i></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Overlay -->
+    <div id="writing-overlay" class="modal">
+      <div class="overlay-card">
+        <h3 id="writing-title">
+          <i class="fas fa-file-alt"></i>
+          <span>Downloading Markdown</span>
+        </h3>
+        <div class="progress-bar" style="background: #2d3748;">
+          <div id="progress-inner-bar" class="progress-fill" style="background: linear-gradient(90deg, #0066cc 0%, #004d99 100%);"></div>
+        </div>
+        <div id="progress-percent" style="font-size: 1.25rem; font-weight: 600; margin-top: 1rem;">0%</div>
+        <div id="progress-text" style="margin-top: 1rem; opacity: 0.9;"></div>
       </div>
     </div>
   </div>
+
   <script>
     let lastResearch = null;
     let lastResearchId = null;
-    function showProgressBar() {
-      document.getElementById('progress-bar-container').style.display = 'block';
-      setProgressBar(0);
-    }
-    function hideProgressBar() {
-      document.getElementById('progress-bar-container').style.display = 'none';
-      setProgressBar(0);
-    }
-    function setProgressBar(percent) {
-      document.getElementById('progress-bar').style.width = percent + '%';
-    }
-    // Simulate progress for async tasks
-    function animateProgressBar(duration, onDone) {
-      let percent = 0;
-      setProgressBar(0);
-      showProgressBar();
-      const interval = 40; // ms
-      const steps = duration / interval;
-      const increment = 100 / steps;
-      const timer = setInterval(() => {
-        percent += increment;
-        if (percent >= 98) {
-          setProgressBar(98);
-          clearInterval(timer);
-          if (onDone) onDone();
-        } else {
-          setProgressBar(percent);
-        }
-      }, interval);
-      return timer;
-    }
-    function showProgressOverlay(action) {
-      document.getElementById('writing-overlay').style.display = 'flex';
-      document.getElementById('progress-inner-bar').style.width = '0%';
-      document.getElementById('progress-percent').textContent = '0%';
-      document.getElementById('progress-text').textContent = (action === 'download') ? 'Generating and downloading PDF...' : 'Generating and sending email...';
-      document.getElementById('writing-title').innerHTML = (action === 'download') ? '<i class="fas fa-file-pdf"></i> Downloading PDF' : '<i class="fas fa-envelope"></i> Sending Email';
-    }
-    function hideProgressOverlay() {
-      document.getElementById('writing-overlay').style.display = 'none';
-    }
-    function updateProgressOverlay(percent, text) {
-      document.getElementById('progress-inner-bar').style.width = percent + '%';
-      document.getElementById('progress-percent').textContent = Math.floor(percent) + '%';
-      if (text) document.getElementById('progress-text').textContent = text;
-    }
-    async function animateProgressOverlay(action, asyncTask) {
-      showProgressOverlay(action);
-      let percent = 0;
-      let interval = 40;
-      let duration = 4000; // 4s minimum
-      let steps = duration / interval;
-      let increment = 98 / steps; // Only go to 98% during animation
-      let running = true;
-      let startTime = Date.now();
-      let timerDiv = document.getElementById('progress-timer');
-      if (!timerDiv) {
-        timerDiv = document.createElement('div');
-        timerDiv.id = 'progress-timer';
-        timerDiv.style = 'text-align:left;font-size:1.1rem;font-weight:600;margin-top:0.3rem;color:#fff;';
-        document.getElementById('writing-overlay').appendChild(timerDiv);
-      }
-      timerDiv.textContent = 'Elapsed: 0.0s';
-      let elapsedTimer = setInterval(() => {
-        let elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-        timerDiv.textContent = `Elapsed: ${elapsed}s`;
-      }, 100);
-      let progressTimer = setInterval(() => {
-        if (!running) return;
-        percent += increment;
-        if (percent >= 98) {
-          percent = 98;
-          updateProgressOverlay(percent);
-          clearInterval(progressTimer);
-        } else {
-          updateProgressOverlay(percent);
-        }
-      }, interval);
-      let taskStart = Date.now();
-      try {
-        await new Promise(res => setTimeout(res, duration)); // Ensure minimum duration
-        await asyncTask();
-        running = false;
-        clearInterval(progressTimer);
-        clearInterval(elapsedTimer);
-        let totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
-        updateProgressOverlay(100, (action === 'download') ? `PDF downloaded successfully! (Time: ${totalTime}s)` : `Mail sent successfully! (Time: ${totalTime}s)`);
-        timerDiv.textContent = `Total time: ${totalTime}s`;
-        await new Promise(res => setTimeout(res, 1200));
-        hideProgressOverlay();
-      } catch (error) {
-        running = false;
-        clearInterval(progressTimer);
-        clearInterval(elapsedTimer);
-        let totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
-        updateProgressOverlay(percent, 'Error: ' + error.message);
-        timerDiv.textContent = `Total time: ${totalTime}s`;
-        await new Promise(res => setTimeout(res, 1800));
-        hideProgressOverlay();
-        throw error;
-      }
-    }
-    function getUserInstructionsFromDepth(depth) {
-      if (depth === 'detailed') return 'Provide a detailed analysis with tables and examples.';
-      if (depth === 'deep') return 'Provide a deep research report with in-depth analysis, multiple tables, and comprehensive references.';
-      return 'Provide a basic overview.';
-    }
-    function generateAndDownloadPdf() {
-      if (!lastResearchId) {
-        alert('No research result found. Please run research first.');
-        return;
-      }
-      fetch('/generate_and_download_pdf', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ research_id: lastResearchId })
-      })
-      .then(response => {
-        if (!response.ok) throw new Error('Failed to generate PDF');
-        return response.blob();
-      })
-      .then(blob => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'generated_report.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      })
-      .catch(error => {
-        alert('Error: ' + error.message);
-      });
-    }
-    function sendPdfToEmail() {
-      let topic, user_instructions;
-      // Prefer lastResearch if available (after research complete)
-      if (lastResearch && lastResearch.topic) {
-        topic = lastResearch.topic;
-        user_instructions = lastResearch.user_instructions;
-      } else {
-        topic = document.getElementById('research-topic')?.value || document.getElementById('topic')?.value;
-        const depth = document.getElementById('research-depth')?.value || 'basic';
-        user_instructions = getUserInstructionsFromDepth(depth);
-      }
-      const email = document.getElementById('email').value;
+
+    // Define startResearch immediately so it's available for onclick
+    function startResearch() {
+      console.log('========================================');
+      console.log('START RESEARCH FUNCTION CALLED!');
+      console.log('========================================');
+      
+      const topicInput = document.getElementById('research-topic');
+      const topic = topicInput ? topicInput.value.trim() : '';
+      
+      console.log('Topic entered:', topic);
+      console.log('Topic input element:', topicInput);
+      
       if (!topic) {
-        alert('No research topic found.');
+        alert('Please enter a drug name.');
         return;
       }
-      if (!email) {
-        alert('Please enter a recipient email address.');
-        return;
+
+      console.log('Starting research for:', topic);
+
+      const researchCard = document.getElementById('research-card');
+      const processingCard = document.getElementById('processing-card');
+      const completeCard = document.getElementById('complete-card');
+      
+      if (researchCard) researchCard.style.display = 'none';
+      if (processingCard) processingCard.style.display = 'block';
+      if (completeCard) completeCard.style.display = 'none';
+
+      let progress = 0;
+      const progressBar = document.getElementById('processing-bar');
+      const progressText = document.getElementById('processing-percent');
+      let currentResearchId = null;
+      let progressPollInterval = null;
+      let startTime = Date.now();
+      
+      // Define updateProgress function
+      function updateProgress(percent, stage, elapsed = '', estimated = '') {
+        const safePercent = Math.min(100, Math.max(1, percent));
+        if (progressBar) progressBar.style.width = safePercent + '%';
+        if (progressBar) progressBar.style.transition = 'width 0.5s ease';
+        const displayPercent = safePercent < 1 && stage && stage !== 'Initializing...' ? 1 : safePercent;
+        if (progressText) progressText.textContent = `${Math.floor(displayPercent)}% Complete`;
+        const stageElement = document.getElementById('processing-stage');
+        if (stageElement) {
+          if (stage) {
+            stageElement.textContent = stage;
+          } else if (!stageElement.textContent || stageElement.textContent === 'Initializing research...') {
+            stageElement.textContent = 'Processing research...';
+          }
+        }
+        const timeElement = document.getElementById('processing-time');
+        if (timeElement) {
+          let timeText = '';
+          if (elapsed) timeText += `Elapsed: ${elapsed}`;
+          if (estimated) timeText += timeText ? ` | Est: ${estimated}` : `Est: ${estimated}`;
+          timeElement.textContent = timeText;
+        }
       }
-      fetch('/send_pdf_email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic, user_instructions, email })
+      
+      // Start with initial progress - show immediately
+      updateProgress(5, 'Starting research...');
+      
+      console.log('Making API request to /api/start_research');
+      console.log('Topic:', topic);
+      console.log('Payload:', JSON.stringify({ topic }));
+      
+      // Start the research request
+      fetch('/api/start_research', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic })
       })
       .then(response => {
-        if (!response.ok) throw new Error('Failed to send email');
-        alert('Your report is on its way! Check your email in 5 minutes.');
-        document.getElementById('email').value = '';
+        console.log('API response status:', response.status);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(result => {
+        console.log('API response:', result);
+        currentResearchId = result.research_id || null;
+        if (!currentResearchId) {
+          throw new Error('No research ID returned from API');
+        }
+        console.log('Research ID received:', currentResearchId);
+        
+        // Check if already complete (quick completion)
+        if (result.status === 'complete' || result.complete) {
+          updateProgress(100, 'Complete!');
+          setTimeout(() => {
+            showResultCard(result);
+            lastResearchId = currentResearchId;
+          }, 500);
+          return;
+        }
+        
+        // Update progress to show we've started
+        updateProgress(10, 'Research initialized...');
+        
+        let consecutiveZeroProgress = 0;
+        let lastProgress = 0;
+        let pollCount = 0;
+        
+        // Start polling for progress
+        progressPollInterval = setInterval(() => {
+          pollCount++;
+          
+          // Fetch progress
+          fetch(`/api/progress/${currentResearchId}`)
+            .then(res => res.json())
+            .then(progressData => {
+              const prog = Math.max(progressData.progress || 0, lastProgress);
+              const stage = progressData.stage || 'Processing...';
+              const elapsed = progressData.elapsed_time || '';
+              const estimated = progressData.estimated_time || '';
+              
+              if (prog > lastProgress) {
+                consecutiveZeroProgress = 0;
+                lastProgress = prog;
+              } else if (prog === 0 && pollCount > 3) {
+                consecutiveZeroProgress++;
+              }
+              
+              updateProgress(prog, stage, elapsed, estimated);
+              
+              if (progressData.needs_feedback && progressData.plan_sections) {
+                showFeedbackModal(currentResearchId, progressData.plan_sections);
+              }
+              
+              if (progressData.status === 'complete' || prog >= 100) {
+                clearInterval(progressPollInterval);
+                updateProgress(100, 'Complete!');
+                
+                fetch(`/api/result/${currentResearchId}`)
+                  .then(res => res.json())
+                  .then(result => {
+                    showResultCard(result);
+                    lastResearchId = currentResearchId;
+                  })
+                  .catch(() => {
+                    setTimeout(() => {
+                      showResultCard({
+                        topic: topic,
+                        summary: 'Research completed successfully',
+                        pages: '-',
+                        sources: '-',
+                        time: elapsed || '-'
+                      });
+                      lastResearchId = currentResearchId;
+                    }, 500);
+                  });
+              } else if (consecutiveZeroProgress > 10) {
+                updateProgress(1, 'Research in progress... This may take a few minutes');
+              }
+            })
+            .catch(err => {
+              console.error('Progress poll error:', err);
+            });
+        }, 1500);
+        
+        setTimeout(() => {
+          if (progressPollInterval) {
+            clearInterval(progressPollInterval);
+          }
+        }, 900000);
       })
       .catch(error => {
-        alert('Error: ' + error.message);
+        console.error('Error starting research:', error);
+        if (progressPollInterval) clearInterval(progressPollInterval);
+        alert('Error starting research: ' + error.message + '\n\nPlease check console for details.');
+        const researchCard = document.getElementById('research-card');
+        const processingCard = document.getElementById('processing-card');
+        if (researchCard) researchCard.style.display = 'block';
+        if (processingCard) processingCard.style.display = 'none';
       });
     }
+    
+    // Make it globally available
+    window.startResearch = startResearch;
+
+    // Theme Toggle
     function toggleTheme() {
       const html = document.documentElement;
       const newTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
       html.dataset.theme = newTheme;
       localStorage.setItem('theme', newTheme);
+      
+      const themeIcon = document.querySelector('.theme-toggle i');
+      themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     }
 
-    // Set saved theme
+    // Set saved theme on load
     document.addEventListener('DOMContentLoaded', () => {
+      // Set up theme
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.dataset.theme = savedTheme;
+      const themeIcon = document.querySelector('.theme-toggle i');
+      if (themeIcon) {
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      }
+      
+      // Set default username in sidebar
+      const sidebarUsername = document.getElementById('sidebar-username');
+      if (sidebarUsername) {
+        const savedUsername = localStorage.getItem('username') || 'User';
+        sidebarUsername.textContent = savedUsername;
+      }
     });
 
-    // --- LOGIN LOGIC ---
-    const staticUsers = {
-      'Debarka': 'debarka123',
-      'Kartik': 'kartik123',
-      'Dr.Karnik': 'karnik123',
-      'Dr.Bob': 'bob123',
-      'Aman': 'aman123'
-    };
-    function handleLogin(event) {
-      event.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const errorDiv = document.getElementById('login-error');
-      if (!staticUsers[username] || staticUsers[username] !== password) {
-        errorDiv.textContent = 'Invalid username or password';
-        errorDiv.style.display = 'block';
-        return false;
-      }
-      // Hide login, show app
-      document.getElementById('login-container').style.display = 'none';
-      document.getElementById('main-app').style.display = 'block';
-      errorDiv.style.display = 'none';
-      return false;
-    }
-    // --- END LOGIN LOGIC ---
-
+    // Profile Menu
     function toggleProfileMenu() {
       const menu = document.getElementById('profileMenu');
       menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      
       document.addEventListener('click', function handler(e) {
-        if (!document.getElementById('profileBtn').contains(e.target)) {
+        if (!document.getElementById('profileBtn').contains(e.target) && !menu.contains(e.target)) {
           menu.style.display = 'none';
           document.removeEventListener('click', handler);
         }
@@ -786,83 +1483,148 @@
     }
 
     function logout() {
-      document.getElementById('main-app').style.display = 'none';
-      document.getElementById('login-container').style.display = 'flex';
+      // Just hide the profile menu, no logout functionality needed
       document.getElementById('profileMenu').style.display = 'none';
     }
 
-    // --- New Research UI Logic ---
-    let researchState = 'input'; // input, loading, result
-    let researchResult = null;
-    document.getElementById('start-research-btn').onclick = async function() {
-      const topic = document.getElementById('research-topic').value;
-      const depth = document.getElementById('research-depth').value;
-      if (!topic) { alert('Please enter a research topic.'); return; }
-      researchState = 'loading';
-      document.getElementById('research-card').style.display = 'none';
-      document.getElementById('processing-card').style.display = 'block';
-      document.getElementById('complete-card').style.display = 'none';
-      // Simulate progress bar
-      let progress = 0;
-      const progressBar = document.getElementById('processing-bar');
-      const progressText = document.getElementById('processing-percent');
-      let progressTimer = setInterval(() => {
-        if (progress < 98) {
-          progress += Math.random() * 2 + 1;
-          if (progress > 98) progress = 98;
-          progressBar.style.width = progress + '%';
-          progressText.textContent = Math.floor(progress) + '% Complete';
-        }
-      }, 120);
-      // Call backend to start research
-      try {
-        const response = await fetch('/start_research', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic, depth })
-        });
-        const result = await response.json();
-        clearInterval(progressTimer);
-        progressBar.style.width = '100%';
-        progressText.textContent = '100% Complete';
-        setTimeout(() => {
-          researchState = 'result';
-          researchResult = result;
-          showResultCard(result);
-          lastResearchId = result.research_id || null;
-        }, 800);
-      } catch (e) {
-        clearInterval(progressTimer);
-        alert('Error: ' + e.message);
-        document.getElementById('research-card').style.display = 'block';
-        document.getElementById('processing-card').style.display = 'none';
-      }
-    };
     function showResultCard(result) {
       document.getElementById('processing-card').style.display = 'none';
       document.getElementById('complete-card').style.display = 'block';
-      document.getElementById('complete-topic').textContent = 'Topic: ' + (result.topic || '-');
+      document.getElementById('complete-topic').textContent = result.topic || '-';
       document.getElementById('complete-summary').textContent = result.summary || '-';
       document.getElementById('complete-pages').textContent = result.pages || '-';
       document.getElementById('complete-sources').textContent = result.sources || '-';
       document.getElementById('complete-time').textContent = result.time || '-';
-      // Save last research for PDF/email actions
+
+      // Show preview button
+      const previewBtn = document.getElementById('preview-btn');
+      if (previewBtn) {
+        previewBtn.style.display = 'inline-flex';
+      }
+      
+      // Show report preview section
+      const previewSection = document.getElementById('report-preview-section');
+      if (previewSection) {
+        previewSection.style.display = 'block';
+      }
+
       lastResearch = {
         topic: result.topic,
-        user_instructions: document.getElementById('research-depth').value === 'detailed' ? 'Provide a detailed analysis with tables and examples.' : (document.getElementById('research-depth').value === 'deep' ? 'Provide a deep research report with in-depth analysis, multiple tables, and comprehensive references.' : 'Provide a basic overview.')
+        user_instructions: 'Deep search with comprehensive drug effect research'
       };
+      
+      // Load report preview automatically
+      if (lastResearchId) {
+        loadReportPreview(lastResearchId);
+      }
+      
+      // Update download and preview links
+      const downloadBtn = document.getElementById('download-btn');
+      const previewBtn2 = document.getElementById('preview-btn');
+      if (downloadBtn) {
+        downloadBtn.onclick = () => window.open(`/api/download/${lastResearchId}`, '_blank');
+      }
+      if (previewBtn2) {
+        previewBtn2.onclick = () => window.open(`/api/report/${lastResearchId}`, '_blank');
+      }
     }
+    
+    function loadReportPreview(researchId) {
+      if (!researchId) return;
+      
+      fetch(`/api/report/${researchId}`)
+        .then(res => res.json())
+        .then(data => {
+          const contentDiv = document.getElementById('report-html-content');
+          if (contentDiv && data.html) {
+            contentDiv.innerHTML = data.html;
+            
+            // Make all tables scrollable
+            const tables = contentDiv.querySelectorAll('table');
+            tables.forEach(table => {
+              // Wrap table in a scrollable container
+              if (!table.parentElement.classList.contains('table-scroll-wrapper')) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-scroll-wrapper';
+                wrapper.style.cssText = 'overflow-x: auto; margin: 20px 0; border: 1px solid #e2e8f0; border-radius: 8px;';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+              }
+            });
+          }
+        })
+        .catch(err => {
+          console.error('Error loading report preview:', err);
+        });
+    }
+    
+    function showReportPreview() {
+      const previewContent = document.getElementById('report-preview-content');
+      if (previewContent) {
+        previewContent.style.display = previewContent.style.display === 'none' ? 'block' : 'none';
+        toggleReportPreview();
+      }
+    }
+    
+    function toggleReportPreview() {
+      const previewContent = document.getElementById('report-preview-content');
+      const toggleText = document.getElementById('preview-toggle-text');
+      const toggleIcon = document.getElementById('preview-toggle-icon');
+      
+      if (previewContent) {
+        const isVisible = previewContent.style.display !== 'none';
+        previewContent.style.display = isVisible ? 'none' : 'block';
+        
+        if (toggleText) {
+          toggleText.textContent = isVisible ? 'Show Preview' : 'Hide Preview';
+        }
+        
+        if (toggleIcon) {
+          toggleIcon.className = isVisible ? 'fas fa-eye' : 'fas fa-eye-slash';
+        }
+      }
+    }
+
     function resetResearch() {
       document.getElementById('research-card').style.display = 'block';
       document.getElementById('processing-card').style.display = 'none';
       document.getElementById('complete-card').style.display = 'none';
       document.getElementById('research-topic').value = '';
+      
+      // Hide preview section
+      const previewSection = document.getElementById('report-preview-section');
+      if (previewSection) {
+        previewSection.style.display = 'none';
+      }
+      
+      const previewBtn = document.getElementById('preview-btn');
+      if (previewBtn) {
+        previewBtn.style.display = 'none';
+      }
     }
+
+    // Deep search mode always - no depth selection needed
+
+    // Markdown Download
+    function downloadMarkdown() {
+      if (!lastResearchId) {
+        alert('No research result found. Please run research first.');
+        return;
+      }
+
+      // Direct download via link - downloads as .md file
+      window.location.href = `/api/download/${lastResearchId}`;
+    }
+    
+    // PDF Generation (optional - kept for backward compatibility)
     function generateAndDownloadPdf() {
       if (!lastResearchId) {
         alert('No research result found. Please run research first.');
         return;
       }
+
+      showProgressOverlay('download');
+      
       fetch('/generate_and_download_pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -876,116 +1638,128 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'generated_report.pdf';
+        a.download = 'drug_effect_research_report.md';
         document.body.appendChild(a);
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
+        setTimeout(() => hideProgressOverlay(), 1000);
       })
       .catch(error => {
+        hideProgressOverlay();
         alert('Error: ' + error.message);
       });
     }
+
+    // Email Functions
     function showEmailModal() {
       document.getElementById('email-modal').style.display = 'flex';
     }
+
     function hideEmailModal() {
       document.getElementById('email-modal').style.display = 'none';
+      document.getElementById('modal-email').value = '';
+      document.getElementById('modal-message').value = '';
+      document.getElementById('email-modal-feedback').style.display = 'none';
     }
-    // Update sendModalEmail for feedback and message
+
     function sendModalEmail() {
       const email = document.getElementById('modal-email').value;
       const message = document.getElementById('modal-message').value;
       const feedback = document.getElementById('email-modal-feedback');
+      
       if (!email) {
         feedback.textContent = 'Please enter a recipient email address.';
+        feedback.className = 'feedback-message';
         feedback.style.display = 'block';
         return;
       }
+
       if (!lastResearchId) {
         feedback.textContent = 'No research result found. Please run research first.';
+        feedback.className = 'feedback-message';
         feedback.style.display = 'block';
         return;
       }
-      feedback.style.display = 'none';
+
       const btn = document.getElementById('send-email-btn');
       const btnText = document.getElementById('send-email-btn-text');
       const btnSpinner = document.getElementById('send-email-btn-spinner');
+      
       btn.disabled = true;
-      btnText.style.display = 'none';
-      btnSpinner.style.display = 'inline-block';
-      // Show animation and popup immediately
-      showProgressOverlay('email');
-      setTimeout(() => {
-        alert('You will get pdf to your mail in five minutes.');
-        hideEmailModal();
-        document.getElementById('email-modal').style.display = 'none';
-        document.getElementById('research-card').style.display = 'block';
-        document.getElementById('processing-card').style.display = 'none';
-        document.getElementById('complete-card').style.display = 'none';
-        document.getElementById('modal-email').value = '';
-        document.getElementById('modal-message').value = '';
-        feedback.style.display = 'none';
-        hideProgressOverlay();
-        btn.disabled = false;
-        btnText.style.display = 'inline';
-        btnSpinner.style.display = 'none';
-      }, 1000);
-      // Fire and forget the email request
+      btnText.classList.add('hidden');
+      btnSpinner.classList.remove('hidden');
+
       fetch('/send_pdf_email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ research_id: lastResearchId, email, message })
       })
+      .then(response => response.json())
+      .then(data => {
+        feedback.textContent = 'Email sent successfully! The PDF will be delivered within 5 minutes.';
+        feedback.className = 'feedback-message feedback-success';
+        feedback.style.display = 'block';
+        
+        setTimeout(() => {
+          hideEmailModal();
+        }, 2000);
+      })
+      .catch(error => {
+        feedback.textContent = 'Error: ' + error.message;
+        feedback.className = 'feedback-message';
+        feedback.style.display = 'block';
+      })
       .finally(() => {
         btn.disabled = false;
-        btnText.style.display = 'inline';
-        btnSpinner.style.display = 'none';
+        btnText.classList.remove('hidden');
+        btnSpinner.classList.add('hidden');
       });
     }
+
     function showInitialEmailModal() {
       document.getElementById('initial-email-modal').style.display = 'flex';
     }
+
     function hideInitialEmailModal() {
       document.getElementById('initial-email-modal').style.display = 'none';
+      document.getElementById('initial-modal-email').value = '';
+      document.getElementById('initial-modal-message').value = '';
+      document.getElementById('initial-email-modal-feedback').style.display = 'none';
     }
+
     async function sendInitialModalEmail() {
       const email = document.getElementById('initial-modal-email').value;
       const message = document.getElementById('initial-modal-message').value;
+      const topic = document.getElementById('research-topic').value.trim();
       const feedback = document.getElementById('initial-email-modal-feedback');
-      const topic = document.getElementById('research-topic').value;
-      const depth = document.getElementById('research-depth').value;
       const sendBtn = document.getElementById('send-initial-email-btn');
+
       if (!email) {
         feedback.textContent = 'Please enter a recipient email address.';
+        feedback.className = 'feedback-message';
         feedback.style.display = 'block';
         return;
       }
+
       if (!topic) {
-        feedback.textContent = 'Please enter a research topic.';
+        feedback.textContent = 'Please enter a drug name.';
+        feedback.className = 'feedback-message';
         feedback.style.display = 'block';
         return;
       }
-      feedback.style.display = 'none';
+
       sendBtn.disabled = true;
-      // Immediately hide modal and reset UI
       hideInitialEmailModal();
-      document.getElementById('research-card').style.display = 'block';
-      document.getElementById('processing-card').style.display = 'none';
-      document.getElementById('complete-card').style.display = 'none';
-      document.getElementById('research-topic').value = '';
-      document.getElementById('initial-modal-email').value = '';
-      document.getElementById('initial-modal-message').value = '';
-      feedback.style.display = 'none';
-      sendBtn.disabled = false;
-      // Fire and forget backend requests
+
       try {
         const res = await fetch('/start_research', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic, depth })
+          body: JSON.stringify({ topic })
         });
         const result = await res.json();
+        
         if (result.research_id) {
           await fetch('/send_pdf_email', {
             method: 'POST',
@@ -994,11 +1768,102 @@
           });
         }
       } catch (e) {
-        // Optionally log error, but do not show to user
         console.error('Background email send error:', e);
+      } finally {
+        sendBtn.disabled = false;
       }
+    }
+
+    // Progress Overlay
+    function showProgressOverlay(action) {
+      const overlay = document.getElementById('writing-overlay');
+      const title = document.getElementById('writing-title');
+      const text = document.getElementById('progress-text');
+      
+      overlay.style.display = 'flex';
+      document.getElementById('progress-inner-bar').style.width = '0%';
+      document.getElementById('progress-percent').textContent = '0%';
+      
+      if (action === 'download') {
+        title.innerHTML = '<i class="fas fa-file-alt"></i> <span>Downloading Markdown</span>';
+        text.textContent = 'Downloading Markdown report...';
+      } else {
+        title.innerHTML = '<i class="fas fa-envelope"></i> <span>Sending Email</span>';
+        text.textContent = 'Generating and sending email with Markdown report...';
+      }
+    }
+
+    function hideProgressOverlay() {
+      document.getElementById('writing-overlay').style.display = 'none';
+    }
+
+    function updateProgressOverlay(percent, text) {
+      document.getElementById('progress-inner-bar').style.width = percent + '%';
+      document.getElementById('progress-percent').textContent = Math.floor(percent) + '%';
+      if (text) document.getElementById('progress-text').textContent = text;
+    }
+
+    // Setup event handlers when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Enter key to start research
+      const topicInput = document.getElementById('research-topic');
+      if (topicInput) {
+        topicInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            startResearch();
+          }
+        });
+      }
+      
+      // Also attach click handler directly to button (backup)
+      const startBtn = document.getElementById('start-research-btn');
+      if (startBtn) {
+        // Remove existing onclick and add event listener
+        startBtn.onclick = null;
+        startBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Button clicked - calling startResearch');
+          startResearch();
+        });
+        console.log('Button event listener attached');
+      }
+    });
+
+    // Sidebar navigation functions
+    function showResearchCard() {
+      document.getElementById('research-card').style.display = 'block';
+      document.getElementById('processing-card').style.display = 'none';
+      document.getElementById('complete-card').style.display = 'none';
+      updateActiveNav('New Research');
+    }
+
+    function showHistory() {
+      alert('Research History feature coming soon!');
+      updateActiveNav('Research History');
+    }
+
+    function showSettings() {
+      alert('Settings feature coming soon!');
+      updateActiveNav('Settings');
+    }
+
+    function showHelp() {
+      alert('Help & Support feature coming soon!');
+      updateActiveNav('Help & Support');
+    }
+
+    function updateActiveNav(activeText) {
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        if (item.textContent.trim() === activeText) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
     }
   </script>
 </body>
 </html>
-

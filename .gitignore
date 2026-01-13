@@ -1,13 +1,9 @@
-# Environment variables
-.env
-
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -25,15 +21,34 @@ wheels/
 *.egg
 
 # Virtual Environment
-
+venv/
+env/
 ENV/
+.venv
+
+# Environment variables
+.env
+.env.local
 
 # IDE
-.idea/
 .vscode/
+.idea/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Project specific
+*.pdf
+*.docx
+test_*.py
+test_*.html
+temp.*
+*.log
+
+# Research data cache (optional - uncomment if you don't want to track these)
+# reports/
+# cache/
