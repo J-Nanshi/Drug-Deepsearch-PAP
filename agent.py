@@ -140,12 +140,15 @@ DEFAULT_REPORT_STRUCTURE = """Use this structure to create a concise drug effect
    - NO detailed subsections - keep minimal
 
 6. Breast Cancer Subtype Evidence
-   - Brief table format preferred (maximum 150 words total)
+   - NOT tabular format - write as narrative paragraphs
    - Key subtypes: HR+/HER2–, HER2+, TNBC, gBRCA-mutated
-   - One sentence per subtype
+   - For each subtype found: 3-4 sentences summarizing overall effect, combining all knowledge
+   - Maximum 200 words total - be concise and focused on overall combined effect per subtype
 
 7. Contraindications and Safety
-   - Top 3-5 most critical contraindications only (brief table or bullets, 100-150 words max)
+   - Short narrative format: 3-4 paragraphs only
+   - Focus on most critical contraindications and safety concerns
+   - Maximum 200 words total - be concise
    - Key citations from FDA/EMA/NCCN
 
 8. Key Clinical Trials
@@ -153,17 +156,19 @@ DEFAULT_REPORT_STRUCTURE = """Use this structure to create a concise drug effect
    - Brief one-line outcomes
 
 9. Pathway Evidence Table (MAIN FOCUS - MOST IMPORTANT SECTION - MUST BE LAST SECTION BEFORE REFERENCES)
-   - ONE SINGLE comprehensive structured table with ALL pathways
+   - ONE SINGLE comprehensive structured table with pathways
    - NO subsections, NO multiple tables, NO numbered subsections (9.1, 9.2, etc.)
    - Columns: Pathway ID/Name, Regulation (Up/Down), Effect (Sensitive/Resistant), Biological Rationale, References
-   - This should be the most detailed section (can take 2-3 pages)
-   - Include ALL pathways found with complete details in ONE TABLE
+   - CRITICAL: Limit to maximum 12 rows (12 pathways only) - select the most important/relevant pathways
    - Must appear as section 9, immediately before References section
+   - After the table, include ### Sources listing ALL source URLs used for this section
 
 10. References
-    - CRITICAL: List ONLY sources that were ACTUALLY CITED in the report content
-    - Extract all citation numbers [1], [2], [3] etc. from the entire report
-    - For each citation number found in the report, include the corresponding source URL and information
+    - CRITICAL: Collect ALL sources from the entire report
+    - Extract all citation numbers [1], [2], [3] etc. from ALL sections of the report
+    - Include sources from Pathway Evidence Table section (which has its own ### Sources subsection)
+    - Also include any sources cited in other sections (even if they don't have ### Sources subsections)
+    - For each citation number found anywhere in the report, include the corresponding source URL and information
     - Must match citations used in the report - no extra sources
     - Format: [1] Source Title - URL (if PMID/ChEMBL/DrugBank/NCT ID available, include it)
     - DO NOT include sources that were not cited anywhere in the report content
@@ -412,10 +417,10 @@ The report must cover (MAXIMUM 7-8 PAGES TOTAL):
 - Mechanism of action (brief, 150 words max)
 - Primary human targets (brief table, 100-150 words max)
 - Pathways overview (brief list only, 150-200 words max, NO detailed subsections)
-- Breast cancer subtype evidence (brief table, 150 words max)
-- Contraindications and safety (brief, 100-150 words max)
+- Breast cancer subtype evidence (narrative format, 3-4 sentences per subtype, 200 words max)
+- Contraindications and safety (3-4 paragraphs only, 200 words max)
 - Key clinical trials (brief, 100 words max)
-- Pathway Evidence Table (MAIN FOCUS - ONE SINGLE table, 2-3 pages, most important section, NO subsections, NO numbered subsections like 9.1/9.2, NO multiple tables, NO category headings - entire section is one continuous table only)
+- Pathway Evidence Table (MAIN FOCUS - ONE SINGLE table, maximum 12 rows/pathways, most important section, NO subsections, NO numbered subsections like 9.1/9.2, NO multiple tables, NO category headings - entire section is one continuous table only)
 
 Each section should have the fields:
 - Name - Name for this section of the report.
@@ -493,8 +498,10 @@ SECTION_WRITER_INSTRUCTIONS = """Write one section of a drug effect research rep
    - DO NOT invent, guess, or make up any citation information
    - Each citation must trace back to an actual source URL provided
 4. CRITICAL: Total report must be MAXIMUM 7-8 pages. Follow strict word limits per section.
-5. For "Pathway Evidence Table" section: This is the MAIN FOCUS - create ONE SINGLE comprehensive table (2-3 pages allowed, NO subsections like 9.1, 9.2, NO multiple tables, NO numbered subsections of any kind). The entire section must contain ONLY one table with all pathways - no breaks, no subsections, no category groupings.
-6. For all other sections: Be extremely concise - use tables/lists where possible, maximum word limits apply.
+5. For "Breast Cancer Subtype Evidence" section: Write in narrative paragraph format (NOT tabular). For each subtype found (HR+/HER2–, HER2+, TNBC, gBRCA-mutated), provide 3-4 sentences summarizing the overall combined effect. Maximum 200 words total.
+6. For "Contraindications and Safety" section: Write in short narrative format with 3-4 paragraphs only. Focus on most critical contraindications and safety concerns. Maximum 200 words total.
+7. For "Pathway Evidence Table" section: This is the MAIN FOCUS - create ONE SINGLE table with maximum 12 rows (12 pathways only), NO subsections like 9.1, 9.2, NO multiple tables, NO numbered subsections of any kind). The entire section must contain ONLY one table - no breaks, no subsections, no category groupings. Select the most important/relevant pathways.
+8. For all other sections: Be extremely concise - use tables/lists where possible, maximum word limits apply.
 7. Include only essential findings, mechanisms, and data from the provided authoritative sources.
 8. Use proper scientific terminology and cite with identifiers ONLY if they appear in the actual sources.
 9. Prioritize tables or lists to organize complex information (pathways, targets, contraindications) to save space.
@@ -505,13 +512,14 @@ SECTION_WRITER_INSTRUCTIONS = """Write one section of a drug effect research rep
 <Writing Guidelines>
 - CRITICAL: Total report must be MAXIMUM 7-8 pages (approximately 2800-3200 words total)
 - Write concise, focused content - be brief and essential only
-- For Pathway Evidence Table section: This is the MAIN FOCUS - create ONE SINGLE comprehensive table (can take 2-3 pages, NO subsections, NO numbered subsections like 9.1/9.2, NO multiple tables, NO category headings within the section - ONLY one continuous table)
+- For Pathway Evidence Table section: This is the MAIN FOCUS - create ONE SINGLE table with maximum 12 rows (12 pathways only), NO subsections, NO numbered subsections like 9.1/9.2, NO multiple tables, NO category headings within the section - ONLY one continuous table. Select the most important/relevant pathways.
 - For all other sections: Maximum word limits strictly enforced
 - Use tables wherever possible to save space
 - Cite with PMID, ChEMBL IDs, DrugBank IDs, pathway identifiers (ONLY if found in actual sources)
 - Use ## for section title (Markdown format)
 - Human (Homo sapiens) breast cancer data only
-- At the end of EACH section, include ### Sources listing ONLY the sources you actually cited with [1], [2], [3] in that section
+- CRITICAL: Do NOT include ### Sources at the end of sections (except Pathway Evidence Table)
+- All sources will be collected together in the References section at the end
 - MANDATORY: Always create tables in Markdown format when listing multiple items
 </Writing Guidelines>
 
@@ -527,10 +535,12 @@ CRITICAL: ONLY cite from the ACTUAL sources provided in the <Source material> se
    - Assign each unique URL from <Source material> that you ACTUALLY USE a sequential citation number (1, 2, 3, ...)
    - In text: cite as [1], [2], [3] etc. corresponding to the source number
    - CRITICAL: Only assign citation numbers to sources you ACTUALLY CITE in your written content
-   - At the end of the section, include ### Sources listing ONLY the sources you actually cited (with their numbers)
+   - CRITICAL: Do NOT include ### Sources at the end of sections (except for Pathway Evidence Table section)
+   - All sources will be collected together in the References section at the end of the report
    - Format: [1] Title (from source) - URL (actual URL from source)
 
-3. Reference Section (at end of section):
+3. Reference Section (at end of report):
+   - All sources from all sections will be collected together in the final References section
    - List ONLY the sources that you ACTUALLY CITED in your written content with [1], [2], [3], etc.
    - Match the citation numbers exactly
    - Do NOT include sources you didn't cite, even if they were in <Source material>
@@ -627,23 +637,27 @@ For Pathway Evidence Table section:
 - Use ## for section title (Markdown format): "## Pathway Evidence Table"
 - This is the MAIN FOCUS and most important section - it should be the LAST main section before References
 - ABSOLUTELY CRITICAL: Create ONLY ONE SINGLE TABLE - do NOT create subsections (no 9.1, 9.2, etc.), do NOT create multiple tables, do NOT use ### or #### headings
-- MANDATORY: You MUST create ONE populated comprehensive table with pathways
-- Extract pathway information from ALL available sources in the <Available report content>
-- Include ALL pathways found in sources in ONE SINGLE TABLE with columns: Pathway ID/Name, Regulation (Up/Down), Effect (Sensitive/Resistant), Biological Rationale, References
+- MANDATORY: You MUST create ONE populated table with pathways
+- CRITICAL: Limit to maximum 12 rows (12 pathways only) - select the most important/relevant pathways from available sources
+- Extract pathway information from available sources in the <Available report content>
+- Include selected pathways in ONE SINGLE TABLE with columns: Pathway ID/Name, Regulation (Up/Down), Effect (Sensitive/Resistant), Biological Rationale, References
 - Format: ONE Markdown table with proper headers
-- After the table, end with ### Sources listing ALL source URLs used
+- After the table, end with ### Sources listing ALL source URLs used for this section
 
 For References section:
 - Use ## for section title (Markdown format): "## References"
 - CRITICAL: Extract ALL citation numbers [1], [2], [3], etc. from the ENTIRE report content above
-- List ONLY the sources that correspond to citation numbers actually used in the report
+- Include sources from Pathway Evidence Table section (which has its own ### Sources subsection)
+- Also include any sources cited in other sections (even if they don't have ### Sources subsections)
+- List ONLY the sources that correspond to citation numbers actually used anywhere in the report
 - Format: [1] Source Title - https://actual-url.com (PMID: 12345678 if available)
+- Collect ALL sources from all sections together in this References section
 
 For all other sections:
 - Use ## for section title (Markdown format)
 - Follow strict word limits from report structure
 - Be extremely concise - use tables/lists where possible
-- End with ### Sources listing ONLY the sources actually cited in this section
+- CRITICAL: Do NOT include ### Sources at the end - all sources will be collected in References section
 </Task>
 """
 
