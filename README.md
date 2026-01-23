@@ -15,18 +15,23 @@ A streamlined FastAPI application for automated drug effect research reports in 
 
 1. **Clone the repository**
    ```bash
-   cd pod_neuro_deep_search
+   git clone <repository-url>
+   cd Drug-Deepsearch-PAP
    ```
 
-2. **Create virtual environment**
+2. **Install dependencies using uv**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   # Install uv if not already installed
+   pip install uv
+   
+   # Sync dependencies
+   uv sync
    ```
 
-3. **Install dependencies**
+3. **Setup NLTK data**
    ```bash
-   pip install -r requirements.txt
+   # Download required NLTK tokenization data
+   uv run python src/setup_nltk.py
    ```
 
 4. **Set up environment variables**
@@ -40,14 +45,29 @@ A streamlined FastAPI application for automated drug effect research reports in 
    WRITER_MODEL=gpt-4o-2024-11-20
    ```
 
-5. **Run the application**
+5. **Run the main application**
    ```bash
-   python main.py
+   # Start the FastAPI server
+   uv run python src/main.py
    ```
    Or using uvicorn directly:
    ```bash
-   uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+   uv run uvicorn src.main:app --host 0.0.0.0 --port 8009 --reload
    ```
+
+## Batch Processing
+
+To process multiple drugs in batch:
+
+```bash
+# Using default drug list from utils/breast_cancer_fda_drugs.txt
+uv run python src/Step1_deepsearch.py
+
+# Or specify a custom drug list file
+uv run python src/Step1_deepsearch.py -i path/to/your/drug_list.txt
+```
+
+Reports will be saved to `output/step1_deepsearch/` with lowercase filenames (e.g., `abemaciclib.md`)
 
 ## Usage
 

@@ -1,0 +1,32 @@
+Abemaciclib
+Alpelisib
+Anastrozole
+Atezolizumab
+Bevacizumab
+Capivasertib
+Dostarlimab
+Elacestrant
+Entrectinib
+Everolimus
+Exemestane
+Fulvestrant
+Lapatinib
+Larotrectinib
+Letrozole
+Margetuximab
+Neratinib
+Olaparib
+Paclitaxel
+Palbociclib
+Pembrolizumab
+Pertuzumab
+Ribociclib
+Sacituzumab govitecan
+Selpercatinib
+Talazoparib
+Tamoxifen
+Toremifene
+Trastuzumab
+Trastuzumab deruxtecan
+Trastuzumab emtansine
+Tucatinib

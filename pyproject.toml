@@ -1,0 +1,29 @@
+[project]
+name = "drug-deepsearch-pap"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp==3.13.3",
+    "beautifulsoup4==4.12.3",
+    "fastapi==0.128.0",
+    "langchain==0.2.5",
+    "langchain-community==0.2.5",
+    "langchain-openai==0.1.14",
+    "langgraph==0.1.5",
+    "langsmith==0.1.81",
+    "markdown2==2.4.10",
+    "nltk==3.8.1",
+    "numpy>=1.24.0",
+    "pydantic>=2.10.0",
+    "python-dotenv==1.0.1",
+    "python-multipart==0.0.6",
+    "requests==2.31.0",
+    "sentence-transformers==5.2.0",
+    "tavily-python==0.7.17",
+    "uvicorn[standard]==0.27.0",
+]
+vectorsearch = [
+    "faiss-cpu; sys_platform != 'win32'",
+]
