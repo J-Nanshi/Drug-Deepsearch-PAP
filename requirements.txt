@@ -1,38 +1,38 @@
 # Core FastAPI dependencies
-fastapi==0.128.0
-uvicorn[standard]==0.27.0
-python-multipart==0.0.6
+fastapi==0.128.0 done
+uvicorn[standard]==0.27.0 done
+python-multipart==0.0.6 done
 
 # LangChain and LangGraph (using compatible versions)
-langchain==0.2.5
-langchain-community==0.2.5
-langchain-openai==0.1.14
-langgraph==0.1.5
-langsmith==0.1.81
+langchain==0.2.5 done 
+langchain-community==0.2.5 done
+langchain-openai==0.1.14 done
+langgraph==0.1.5 done
+langsmith==0.1.81 done
 
 # Search tools
-tavily-python==0.7.17
+tavily-python==0.7.17 done
 
 # NLP and ML
-sentence-transformers==5.2.0
-nltk==3.8.1
-numpy>=1.24.0
+sentence-transformers==5.2.0 done
+nltk==3.8.1 done
+numpy>=1.24.0 done
 
 # Vector search (optional but recommended)
-faiss-cpu>=1.9.0
+faiss-cpu>=1.9.0    
 
 # HTML processing
-beautifulsoup4==4.12.3
-markdown2==2.4.10
+beautifulsoup4==4.12.3 done
+markdown2==2.4.10 done
 
 # PDF processing (optional - only needed if extracting from PDF URLs)
 # PyMuPDF may not install on Python 3.13 - install separately if needed
 # pymupdf>=1.24.0  # Uncomment if you need PDF extraction
 
 # Utilities
-requests==2.31.0
-python-dotenv==1.0.1
-aiohttp==3.13.3
+requests==2.31.0  done
+python-dotenv==1.0.1 done
+aiohttp==3.13.3     done
 
 # Pydantic for data validation (updated for Python 3.13 compatibility)
-pydantic>=2.10.0
+pydantic>=2.10.0 done
