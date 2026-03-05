@@ -225,7 +225,7 @@ class SectionOutputState(ExtTypedDict):
 
 # ============ CONFIGURATION ============
 
-DEFAULT_REPORT_STRUCTURE = """Use this structure to create a concise drug effect research report for breast cancer (MAXIMUM 7-8 PAGES TOTAL):
+DEFAULT_REPORT_STRUCTURE = """Use this structure to create a concise drug effect research report for {cancer_name} cancer (MAXIMUM 7-8 PAGES TOTAL):
 
 1. Drug Summary
    - Very brief overview (1-2 paragraphs, maximum 4-5 lines)
@@ -236,7 +236,7 @@ DEFAULT_REPORT_STRUCTURE = """Use this structure to create a concise drug effect
    - ChEMBL ID, DrugBank ID only (table format preferred, 50-100 words max)
    - Top 3-5 most important synonyms/brand names
 
-3. Mechanism of Action (Breast Cancer Context)
+3. Mechanism of Action ({cancer_name_title} Cancer Context)
    - Concise MoA (maximum 150 words)
    - Primary biochemical mechanism only
    - Key subtype relevance in 1-2 sentences
@@ -247,14 +247,13 @@ DEFAULT_REPORT_STRUCTURE = """Use this structure to create a concise drug effect
    - Citations
 
 5. Pathways (Brief Overview)
-   - List top 5-8 key pathways only (brief 1-2 lines each, 150-200 words max)
+   - List top 5-8 key pathways only (brief 1-2 lines each, 70-100 words max)
    - Pathway identifiers (MSigDB / Reactome / KEGG)
    - Regulation direction (Up/Down) and Effect (Sensitive/Resistant) only
    - NO detailed subsections - keep minimal
 
-6. Breast Cancer Subtype Evidence
+6. {cancer_name_title} Cancer Subtype Evidence
    - NOT tabular format - write as narrative paragraphs
-   - Key subtypes: HR+/HER2–, HER2+, TNBC, gBRCA-mutated
    - For each subtype found: 3-4 sentences summarizing overall effect, combining all knowledge
    - Maximum 200 words total - be concise and focused on overall combined effect per subtype
 
@@ -292,8 +291,13 @@ class Configuration:
     """Configuration for the agent."""
     def __init__(self, config: Optional[RunnableConfig] = None):
         configurable = (config.get("configurable", {}) if config else {})
-        
-        self.report_structure = configurable.get("report_structure", DEFAULT_REPORT_STRUCTURE)
+
+        self.cancer_name = configurable.get("cancer_name", "breast").strip().lower() or "breast"
+        self.cancer_name_title = self.cancer_name.title()
+        self.report_structure = configurable.get("report_structure", DEFAULT_REPORT_STRUCTURE).format(
+            cancer_name=self.cancer_name,
+            cancer_name_title=self.cancer_name_title,
+        )
         self.number_of_queries = int(configurable.get("number_of_queries", 3))
         self.max_search_depth = int(configurable.get("max_search_depth", 2))
         self.planner_provider = configurable.get("planner_provider", "openai")
@@ -524,7 +528,7 @@ REPORT_PLANNER_QUERY_WRITER_INSTRUCTIONS = """You are performing deep drug effec
 Your goal is to generate {number_of_queries} web search queries that will help gather comprehensive information for planning the drug effect research report sections.
 
 The queries should:
-1. Focus on the drug "{topic}" in human breast cancer context (Homo sapiens only)
+1. Focus on the drug "{topic}" in human {cancer_name} cancer context (Homo sapiens only)
 2. Cover: mechanism of action, targets, pathways, sensitivity/resistance mechanisms, clinical trials, safety/contraindications
 3. Help satisfy the requirements specified in the report organization
 4. Target authoritative sources: PubMed, ChEMBL, DrugBank, FDA/EMA labels, NCCN/ESMO guidelines, clinical trials
@@ -537,7 +541,7 @@ Your primary consideration should be to fetch info that is richer than the follo
 Just try to make a 100 percent better report than this:
 {primary_report_gpt}
 
-Focus on human breast cancer data only, with proper citations from authoritative sources.
+Focus on human {cancer_name} cancer data only, with proper citations from authoritative sources.
 </Instructions>
  
 <Format>
@@ -563,7 +567,7 @@ Here is context to use to plan the sections of the report:
 </Context>
 
 <Task>
-Generate a list of sections for the drug effect research report on "{topic}" in human breast cancer. Your plan should be comprehensive and focused on precision-oncology research with NO overlapping sections.
+Generate a list of sections for the drug effect research report on "{topic}" in human {cancer_name} cancer. Your plan should be comprehensive and focused on precision-oncology research with NO overlapping sections.
 
 The report must cover (MAXIMUM 7-8 PAGES TOTAL):
 - Drug summary (brief, 100-150 words max)
@@ -571,7 +575,7 @@ The report must cover (MAXIMUM 7-8 PAGES TOTAL):
 - Mechanism of action (brief, 150 words max)
 - Primary human targets (brief table, 100-150 words max)
 - Pathways overview (brief list only, 150-200 words max, NO detailed subsections)
-- Breast cancer subtype evidence (narrative format, 3-4 sentences per subtype, 200 words max)
+- {cancer_name_title} cancer subtype evidence (narrative format, 3-4 sentences per subtype, 200 words max)
 - Contraindications and safety (3-4 paragraphs only, 200 words max)
 - Key clinical trials (brief, 100 words max)
 - Pathway Evidence Table (MAIN FOCUS - ONE SINGLE table, maximum 12 rows/pathways, most important section, NO subsections, NO numbered subsections like 9.1/9.2, NO multiple tables, NO category headings - entire section is one continuous table only)
@@ -585,7 +589,7 @@ Each section should have the fields:
 Integration guidelines:
 - Ensure each section has a distinct purpose with no content overlap
 - Follow the exact order specified in the report organization
-- Sections must focus on human (Homo sapiens) breast cancer data only
+- Sections must focus on human (Homo sapiens) {cancer_name} cancer data only
 - All sections requiring citations should be marked for research
 
 Before submitting, review your structure to ensure it follows the report organization exactly and covers all required drug effect research aspects.
@@ -612,10 +616,10 @@ QUERY_WRITER_INSTRUCTIONS = """You are an expert precision-oncology researcher c
 </Section topic>
 
 <Task>
-Your goal is to generate {number_of_queries} search queries that will help gather comprehensive information for the section topic on the drug "{topic}" in human breast cancer.
+Your goal is to generate {number_of_queries} search queries that will help gather comprehensive information for the section topic on the drug "{topic}" in human {cancer_name} cancer.
 
 The queries should:
-1. Focus on the drug "{topic}" in human (Homo sapiens) breast cancer context
+1. Focus on the drug "{topic}" in human (Homo sapiens) {cancer_name} cancer context
 2. Examine different aspects of the section topic (mechanisms, pathways, clinical evidence, safety, etc.)
 3. Target authoritative sources: PubMed, ChEMBL, DrugBank, FDA/EMA labels, NCCN/ESMO guidelines, clinical trials databases
 4. Include queries for subtype-specific information (TNBC, HR+/HER2-, HER2+, gBRCA-mutated) when relevant
@@ -652,14 +656,14 @@ SECTION_WRITER_INSTRUCTIONS = """Write one section of a drug effect research rep
    - DO NOT invent, guess, or make up any citation information
    - Each citation must trace back to an actual source URL provided
 4. CRITICAL: Total report must be MAXIMUM 7-8 pages. Follow strict word limits per section.
-5. For "Breast Cancer Subtype Evidence" section: Write in narrative paragraph format (NOT tabular). For each subtype found (HR+/HER2–, HER2+, TNBC, gBRCA-mutated), provide 3-4 sentences summarizing the overall combined effect. Maximum 200 words total.
+5. For "{cancer_name_title} Cancer Subtype Evidence" section: Write in narrative paragraph format (NOT tabular). For each clinically relevant subtype found for {cancer_name} cancer, provide 3-4 sentences summarizing the overall combined effect. Maximum 200 words total.
 6. For "Contraindications and Safety" section: Write in short narrative format with 3-4 paragraphs only. Focus on most critical contraindications and safety concerns. Maximum 200 words total.
 7. For "Pathway Evidence Table" section: This is the MAIN FOCUS - create ONE SINGLE table with maximum 12 rows (12 pathways only), NO subsections like 9.1, 9.2, NO multiple tables, NO numbered subsections of any kind). The entire section must contain ONLY one table - no breaks, no subsections, no category groupings. Select the most important/relevant pathways.
 8. For all other sections: Be extremely concise - use tables/lists where possible, maximum word limits apply.
 7. Include only essential findings, mechanisms, and data from the provided authoritative sources.
 8. Use proper scientific terminology and cite with identifiers ONLY if they appear in the actual sources.
 9. Prioritize tables or lists to organize complex information (pathways, targets, contraindications) to save space.
-10. Prioritize human (Homo sapiens) breast cancer data only.
+10. Prioritize human (Homo sapiens) {cancer_name} cancer data only.
 11. Follow these specific instructions: {user_instructions}
 </Task>
 
@@ -671,7 +675,7 @@ SECTION_WRITER_INSTRUCTIONS = """Write one section of a drug effect research rep
 - Use tables wherever possible to save space
 - Cite with PMID, ChEMBL IDs, DrugBank IDs, pathway identifiers (ONLY if found in actual sources)
 - Use ## for section title (Markdown format)
-- Human (Homo sapiens) breast cancer data only
+- Human (Homo sapiens) {cancer_name} cancer data only
 - CRITICAL: Do NOT include ### Sources at the end of sections (except Pathway Evidence Table)
 - All sources will be collected together in the References section at the end
 - MANDATORY: Always create tables in Markdown format when listing multiple items
@@ -748,7 +752,7 @@ SECTION_GRADER_INSTRUCTIONS = """Review a drug effect research report section re
 </section content>
 
 <task>
-1. Evaluate whether the section content adequately addresses the section topic for the drug "{topic}" in human breast cancer.
+1. Evaluate whether the section content adequately addresses the section topic for the drug "{topic}" in human {cancer_name} cancer.
 2. Check if the section content is fulfilling the user instructions: {user_instructions}.
 3. CRITICAL: Verify citation accuracy:
    - All citations must trace back to ACTUAL sources from the provided source material
@@ -758,7 +762,7 @@ SECTION_GRADER_INSTRUCTIONS = """Review a drug effect research report section re
 4. Verify that:
    - All claims are properly cited with sources that exist in the provided source material
    - Human (Homo sapiens) data only is used
-   - Breast cancer subtype context is specified where relevant
+   - {cancer_name} cancer subtype context is specified where relevant
 
 If the section content contains fabricated citations, citations not traceable to sources, or lacks proper citations, generate {number_of_follow_up_queries} follow-up search queries to gather missing information.
 </task>
@@ -839,6 +843,8 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
     
     system_instructions_query = REPORT_PLANNER_QUERY_WRITER_INSTRUCTIONS.format(
         topic=topic,
+        cancer_name=cfg.cancer_name,
+        cancer_name_title=cfg.cancer_name_title,
         report_organization=cfg.report_structure,
         number_of_queries=cfg.number_of_queries,
         primary_report_gpt=primary_report_gpt.content
@@ -876,6 +882,8 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
     # Generate sections
     system_instructions_sections = REPORT_PLANNER_INSTRUCTIONS.format(
         topic=topic,
+        cancer_name=cfg.cancer_name,
+        cancer_name_title=cfg.cancer_name_title,
         report_organization=cfg.report_structure,
         context=source_str,
         feedback=feedback or "None"
@@ -970,6 +978,8 @@ def generate_queries(state: SectionState, config: RunnableConfig):
     
     system_instructions = QUERY_WRITER_INSTRUCTIONS.format(
         topic=topic,
+        cancer_name=cfg.cancer_name,
+        cancer_name_title=cfg.cancer_name_title,
         section_topic=section_description,
         number_of_queries=cfg.number_of_queries
     )
@@ -1084,7 +1094,9 @@ def write_section(state: SectionState, config: RunnableConfig):
     )
     
     section_writer_instructions_formatted = SECTION_WRITER_INSTRUCTIONS.format(
-        user_instructions=cfg.user_instructions
+        user_instructions=cfg.user_instructions,
+        cancer_name=cfg.cancer_name,
+        cancer_name_title=cfg.cancer_name_title,
     )
     
     section_response = writer_model.invoke([
@@ -1103,6 +1115,8 @@ def write_section(state: SectionState, config: RunnableConfig):
     
     section_grader_instructions_formatted = SECTION_GRADER_INSTRUCTIONS.format(
         topic=topic,
+        cancer_name=cfg.cancer_name,
+        cancer_name_title=cfg.cancer_name_title,
         section_topic=section_description,
         section=new_content,
         number_of_follow_up_queries=cfg.number_of_queries,
@@ -1203,6 +1217,8 @@ def write_final_sections(state: SectionState, config: RunnableConfig):
     
     system_instructions = FINAL_SECTION_WRITER_INSTRUCTIONS.format(
         topic=topic,
+        cancer_name=cfg.cancer_name,
+        cancer_name_title=cfg.cancer_name_title,
         section_name=section_name,
         section_topic=section_description,
         context=completed_report_sections
@@ -1302,4 +1318,8 @@ builder.add_edge("compile_final_report", END)
 
 memory = MemorySaver()
 graph = builder.compile(checkpointer=memory)
+
+
+
+
 

@@ -4,6 +4,7 @@ Streamlined FastAPI server for drug effect research
 """
 
 import os
+import argparse
 import uuid
 import time
 import asyncio
@@ -30,7 +31,20 @@ import markdown2
 
 # PDF generation removed - using Markdown download only
 
-from agent import graph, REPORT_PLANNER_INSTRUCTIONS, DEFAULT_REPORT_STRUCTURE
+from agent_JN import graph, REPORT_PLANNER_INSTRUCTIONS, DEFAULT_REPORT_STRUCTURE
+
+
+def parse_cancer_name_from_argv() -> str:
+    """Parse global cancer context from CLI args."""
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("-i", "--input-cancer", default="breast")
+    args, _ = parser.parse_known_args()
+    cancer_name = (args.input_cancer or "breast").strip().lower()
+    return cancer_name or "breast"
+
+
+CANCER_NAME = parse_cancer_name_from_argv()
+CANCER_NAME_TITLE = CANCER_NAME.title()
 
 # Load environment variables
 load_dotenv()
@@ -126,16 +140,16 @@ async def start_research(request: ResearchRequest, background_tasks: BackgroundT
     log_print(f"   Research ID: {research_id}")
     sys.stdout.flush()
     
-    user_instructions = '''Provide an in-depth drug effect research report for breast cancer with:
+    user_instructions = f'''Provide an in-depth drug effect research report for {CANCER_NAME} cancer with:
 - Comprehensive mechanism of action with subtype-specific nuances
 - Extensive pathway analysis covering upregulated/downregulated and sensitivity/resistance pathways
 - Detailed primary human targets with mechanistic annotations
-- Thorough sensitivity and resistance mechanisms stratified by breast cancer subtype
+- Thorough sensitivity and resistance mechanisms stratified by {CANCER_NAME} cancer subtype
 - Comprehensive clinical trial data (Phase II/III) with NCT IDs
 - Detailed contraindications and safety from regulatory sources (FDA/EMA/PMDA)
 - Multiple well-formatted tables for pathways, targets, subtypes, and clinical evidence
 - Extensive references with PMID, ChEMBL IDs, DrugBank IDs, pathway identifiers, NCT IDs
-- Complete breast cancer subtype–stratified evidence
+- Complete {CANCER_NAME} cancer subtype-stratified evidence
 - Pathway evidence table with clear regulation and effect directionality
 - Use structured formatting with clear sections
 - Be concise but comprehensive - prioritize quality over length'''
@@ -151,10 +165,14 @@ async def start_research(request: ResearchRequest, background_tasks: BackgroundT
             "planner_model": planner_model,
             "writer_provider": "openai",
             "writer_model": writer_model,
-            "report_structure": DEFAULT_REPORT_STRUCTURE,
+            "report_structure": DEFAULT_REPORT_STRUCTURE.format(
+                cancer_name=CANCER_NAME,
+                cancer_name_title=CANCER_NAME_TITLE,
+            ),
             "max_search_depth": 2,
             "number_of_queries": 3,
-            "user_instructions": user_instructions
+            "user_instructions": user_instructions,
+            "cancer_name": CANCER_NAME,
         }
     }
     
@@ -550,4 +568,6 @@ async def download_markdown(research_id: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8009)
+
+
 
