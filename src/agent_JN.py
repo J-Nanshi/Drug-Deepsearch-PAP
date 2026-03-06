@@ -7,6 +7,7 @@ import os
 import sys
 import asyncio
 import re
+import threading
 from typing import Literal, Annotated, List, TypedDict, Optional, Dict, Any
 from typing_extensions import TypedDict as ExtTypedDict
 from pydantic import BaseModel, Field
@@ -139,39 +140,49 @@ except (LookupError, OSError):
                 pass
 # Global embedding model for similarity search
 _embedding_model = None
+_embedding_model_lock = threading.Lock()
+_embedding_model_init_failed = False
+_embedding_model_error = None
+_embedding_fallback_logged = False
 
 def get_embedding_model():
-    """Get the global embedding model, initializing it if necessary."""
-    global _embedding_model
-    if _embedding_model is None:
-        log_print("   🤖 Initializing embedding model...")
-        # Force CPU to avoid 'meta tensor' issues with some PyTorch/Transformers versions
-        # Also helps on Windows environments without CUDA
+    """Get the global embedding model once; fail open if initialization fails."""
+    global _embedding_model, _embedding_model_init_failed, _embedding_model_error
+
+    if _embedding_model is not None:
+        return _embedding_model
+    if _embedding_model_init_failed:
+        return None
+
+    with _embedding_model_lock:
+        if _embedding_model is not None:
+            return _embedding_model
+        if _embedding_model_init_failed:
+            return None
+
+        log_print("   Initializing embedding model...")
         try:
-            import torch  # Local import to avoid import at module load
+            import torch
+
             _embedding_model = SentenceTransformer(
                 "all-MiniLM-L6-v2",
                 device="cpu",
                 model_kwargs={
-                    # Disable meta-tensor, load full weights on CPU memory
                     "low_cpu_mem_usage": False,
-                    # Ensure no accelerate device mapping triggers meta tensors
                     "device_map": None,
-                    # Force standard dtype on CPU
                     "torch_dtype": torch.float32,
                 },
             )
-            # Extra safety: ensure model is on CPU
-            try:
-                _embedding_model.to("cpu")
-            except Exception:
-                pass
-        except NotImplementedError as e:
-            # Fallback path if a meta-tensor error still bubbles up
-            log_print("   ⚠️ Meta-tensor init issue detected, retrying with safer settings...", e)
-            _embedding_model = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
-    return _embedding_model
-
+            return _embedding_model
+        except Exception as e:
+            _embedding_model = None
+            _embedding_model_init_failed = True
+            _embedding_model_error = str(e)
+            log_print(
+                "   Embedding model unavailable; continuing without FAISS similarity.",
+                _embedding_model_error,
+            )
+            return None
 # ============ STATE MODELS ============
 
 class Section(BaseModel):
@@ -1024,6 +1035,7 @@ async def search_web(state: SectionState, config: RunnableConfig):
 
 def write_section(state: SectionState, config: RunnableConfig):
     """Write a section of the report and evaluate if more research is needed."""
+    global _embedding_fallback_logged
     topic = state["topic"]
     section = state["section"]
     
@@ -1050,6 +1062,10 @@ def write_section(state: SectionState, config: RunnableConfig):
         context += "="*80 + "\n\n"
     
     model = get_embedding_model()
+    use_similarity = model is not None
+    if not use_similarity and not _embedding_fallback_logged:
+        log_print("   Embedding model unavailable; using deterministic extraction fallback.")
+        _embedding_fallback_logged = True
     
     for url in url_list:
         # Extra safety: skip non-allowed URLs to avoid 403/406/paywalls
@@ -1062,14 +1078,24 @@ def write_section(state: SectionState, config: RunnableConfig):
                 text = extract_text_from_html(url)
             
             if text:
-                chunks = chunk_text(text, chunk_size=10)
-                embeddings = model.encode(chunks, convert_to_numpy=True)
-                index = build_faiss_index(embeddings)
-                
-                if index:
-                    results = search_faiss(section_name + ':' + section_description, model, index, chunks, top_n=5)
-                    for idx, chunk, score in results:
-                        context += f"Content from {url}:\n{chunk}\n\n"
+                if use_similarity:
+                    chunks = chunk_text(text, chunk_size=10)
+                    embeddings = model.encode(chunks, convert_to_numpy=True)
+                    index = build_faiss_index(embeddings)
+
+                    if index:
+                        results = search_faiss(
+                            section_name + ':' + section_description,
+                            model,
+                            index,
+                            chunks,
+                            top_n=5,
+                        )
+                        for idx, chunk, score in results:
+                            context += f"Content from {url}:\n{chunk}\n\n"
+                else:
+                    fallback_text = text[:5000] if len(text) > 5000 else text
+                    context += f"Content from {url}:\n{fallback_text}\n\n"
         except Exception as e:
             log_print(f"Error processing URL {url}: {e}")
             context_fetch_formatted = CONTEXT_FETCH.format(topic=topic, section=section_name, link=url)
@@ -1318,6 +1344,7 @@ builder.add_edge("compile_final_report", END)
 
 memory = MemorySaver()
 graph = builder.compile(checkpointer=memory)
+
 
 
 
