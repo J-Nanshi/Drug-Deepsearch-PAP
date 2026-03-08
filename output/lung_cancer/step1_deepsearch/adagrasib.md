@@ -1,214 +1,341 @@
 ## 1. Drug Summary
 
-Adagrasib (Krazati; MRTX849) is an oral, small‑molecule, covalent inhibitor that selectively targets KRAS G12C, the dominant *KRAS* variant in ~10–13% of advanced nonsquamous NSCLC.[17],[21],[23] By irreversibly binding the cysteine at codon 12 within the switch II pocket, adagrasib locks KRAS G12C in its inactive GDP‑bound “RAS‑OFF” state, thereby suppressing downstream RAF–MEK–ERK and PI3K–AKT–mTOR signaling and inhibiting tumor growth and survival.[17],[21],[22] It was engineered for high oral bioavailability, a long half‑life (~23 hours) and CNS penetration, enabling sustained target inhibition and intracranial activity.[10],[14],[17]
+Adagrasib (MRTX849; Krazati) is an orally available, covalent inhibitor of KRAS G12C, a driver mutation present in ~14% of lung adenocarcinomas and in up to 13% of refractory NSCLC.[1],[5] It selectively and irreversibly binds cysteine 12 in the switch II pocket of KRAS G12C, trapping the protein in its inactive GDP‑bound state and suppressing downstream RAS–MAPK signaling and proliferation in KRAS G12C‑mutant tumor models.[1],[10] Adagrasib was optimized for high oral bioavailability, long half‑life (~23–25 h at single dose, ~63 h at steady state), dose‑dependent pharmacokinetics, extensive tissue distribution, and central nervous system (CNS) penetration.[1],[4],[10]
 
-Based on the phase I/II KRYSTAL‑1 trial (NCT03785249), in which previously treated KRAS G12C‑mutated advanced NSCLC achieved an ORR of 42.9%, median PFS 6.5 months, and median OS 12.6 months, the FDA granted accelerated approval (December 12, 2022) for adults with locally advanced or metastatic KRAS G12C‑mutated NSCLC after at least one prior systemic therapy.[1],[8],[11],[14],[17],[21] The current U.S. label maintains this indication as single‑agent therapy at 600 mg orally twice daily until disease progression or unacceptable toxicity.[2],[5] EMA has issued a risk‑management plan for adagrasib in a similar post‑platinum, post‑immunotherapy NSCLC population.[7]
+In the phase I/II KRYSTAL‑1 trial (NCT03785249), previously treated KRAS G12C‑mutated advanced NSCLC patients receiving adagrasib 600 mg twice daily achieved a confirmed objective response rate (ORR) of 42.9%, median progression‑free survival (PFS) 6.5 months, and median overall survival (OS) 12.6 months.[1],[9],[11],[16] Intracranial activity was demonstrated with intracranial ORR 33.3% in patients with treated, stable brain metastases[9] and 42% in a dedicated phase Ib cohort with untreated CNS metastases (intracranial disease control rate 90%, intracranial PFS 5.4 months, OS 11.4 months).[2],[4] These data supported U.S. FDA accelerated approval in December 2022 for adults with KRAS G12C‑mutated locally advanced or metastatic NSCLC after at least one prior systemic therapy.[5],[8],[16],[19],[22]
 
-In contemporary treatment algorithms, adagrasib is positioned as a second‑line or later targeted option for metastatic KRAS G12C‑mutated NSCLC after prior platinum‑based chemotherapy and PD‑(L)1–based immunotherapy, alongside sotorasib.[11],[17],[21],[23] The phase III KRYSTAL‑12 trial (NCT04685135) showed superior PFS for adagrasib versus docetaxel in previously treated KRAS G12C‑mutant NSCLC, reinforcing its role as the preferred targeted agent in this setting and supporting conversion of accelerated approval to full approval pending regulatory review.[17],[19],[21],[23]
-
-## 2. Identifiers & Synonyms
-
-### 2.1 Core Chemical and Registry Information
-
-Adagrasib is an oral, small‑molecule KRAS inhibitor with molecular formula C₃₂H₃₅ClFN₇O₂ and PubChem Compound ID (CID) 138611145.[1] It is specifically described as a KRAS G12C inhibitor developed for cancers in which KRAS mutations are common, including non‑small cell lung cancer (NSCLC).[1,6]
-
-### 2.2 Key Database Identifiers
-
-Only identifiers explicitly available in the provided sources can be listed:
-
-| Database / System | Identifier / Entry      | Notes                                                                 |
-|-------------------|------------------------|-----------------------------------------------------------------------|
-| PubChem           | CID 138611145          | Adagrasib compound entry; KRAS G12C inhibitor for NSCLC and other tumors.[1,6] |
-
-(ChEMBL and DrugBank identifiers are not provided in the available sources and therefore cannot be reported.)
-
-### 2.3 Synonyms and Clinical Naming
-
-The PubChem entry designates the compound name “Adagrasib” and notes that it is also known by the development code “MRTX849.”[1] Additional brand names are not explicitly given in the provided sources and therefore cannot be reliably documented here.
-
-### 2.4 Relevance to Human Lung Cancer Studies
-
-Adagrasib (MRTX849) is characterized in PubChem and in KRAS G12C–focused literature as a covalent inhibitor of KRAS G12C, a mutation that is among the most frequent KRAS alterations in NSCLC.[1,6] The KRAS G12C–selective mechanism underpins its use in precision oncology trials and clinical practice for KRAS G12C–mutated NSCLC.[6]
+Within precision oncology, adagrasib is positioned as a genotype‑directed, second‑line targeted therapy for KRAS G12C‑mutant NSCLC, analogous to EGFR and ALK inhibitors in their respective molecular subsets.[8],[9],[16] Ongoing development includes phase III comparison versus docetaxel (KRYSTAL‑12, NCT04685135) and first‑line combinations with pembrolizumab (KRYSTAL‑7, NCT04613596), where early results in PD‑L1 ≥50% tumors show ORR ~59–63% and durable disease control with manageable toxicity.[3],[9],[16] Adagrasib’s CNS penetration, broad activity across co‑mutation subgroups (e.g., STK11/KEAP1), and combination potential with immunotherapy and pathway‑targeted agents make it a central component of emerging precision strategies for KRAS G12C‑mutant lung cancer.[1],[9]  
 
 ---
 
 ## References
 
-[1] Adagrasib \| C32H35ClFN7O2 \| CID 138611145 - PubChem – https://pubchem.ncbi.nlm.nih.gov/compound/Adagrasib  
+[1] Brazel D, Arter Z, Nagasaka M. A Long Overdue Targeted Treatment for KRAS Mutations in NSCLC: Spotlight on Adagrasib – https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/  
 
-[6] Srisongkram T, Weerapreeyakul N. Drug Repurposing against KRAS Mutant G12C: A Machine Learning, Molecular Docking, and Molecular Dynamics Study – https://pmc.ncbi.nlm.nih.gov/articles/PMC9821013/
+[2] Negrao MV et al. Intracranial Efficacy of Adagrasib in Patients From the KRYSTAL-1 Trial With KRASG12C-Mutated Non–Small-Cell Lung Cancer Who Have Untreated CNS Metastases – https://pmc.ncbi.nlm.nih.gov/articles/PMC10553074/  
+
+[3] Zhang F et al. Current status of KRAS G12C inhibitors in NSCLC and the potential for combination with anti-PD-(L)1 therapy: a systematic review – https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/  
+
+[4] Sabari JK et al. Activity of Adagrasib (MRTX849) in Brain Metastases – https://pmc.ncbi.nlm.nih.gov/articles/PMC9662862/  
+
+[5] Adagrasib – LiverTox – https://www.ncbi.nlm.nih.gov/books/NBK597220/  
+
+[6] Lu K, Husain H. Intracranial responses with selective KRAS-G12C inhibitors in non-small cell lung cancer – https://pmc.ncbi.nlm.nih.gov/articles/PMC10326777/  
+
+[7] Bekaii-Saab TS et al. Adagrasib in Advanced Solid Tumors Harboring a KRASG12C Mutation – https://pmc.ncbi.nlm.nih.gov/articles/PMC10852394/  
+
+[8] Herzberg BO, Manji GA. KRAS: Druggable at Last – https://pmc.ncbi.nlm.nih.gov/articles/PMC10078900/  
+
+[9] Huang R et al. Therapeutic strategies for KRAS G12C-mutant non-small cell lung cancer: from bench to bedside and beyond – https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982/  
+
+[10] Tian H, Yang Z, He J. Adagrasib: A landmark in the KRASG12C‐mutated NSCLC – https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582/  
+
+[11] Choucair K et al. Targeting KRAS mutations: orchestrating cancer evolution and therapeutic challenges – https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860/  
+
+[12] Ciardiello D et al. Targeting KRASG12C in colorectal cancer: the beginning of a new era – https://pmc.ncbi.nlm.nih.gov/articles/PMC9800313/  
+
+[13] Shaverdashvili K, Burns TF. Advances in the treatment of KRAS G12C mutant non–small cell lung cancer – https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745/  
+
+[14] KRAZATI (adagrasib) Prescribing Information, 2022 (corrected label) – https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340Orig1s000Corrected_lbl.pdf  
+
+[15] KRAZATI (adagrasib) Prescribing Information, 2024 – https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
+
+[16] KRAZATI (adagrasib) Prescribing Information, initial 2022 label – https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s000lbl.pdf  
+
+[17] KRAZATI (adagrasib) Prescribing Information, 2022 (s001) – https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s001lbl.pdf  
+
+[18] FDA. FDA grants accelerated approval to adagrasib with cetuximab for KRAS G12C-mutated colorectal cancer – https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-accelerated-approval-adagrasib-cetuximab-kras-g12c-mutated-colorectal-cancer
+
+## 2. Identifiers & Synonyms
+
+To support unambiguous referencing of adagrasib in precision-oncology datasets, key identifiers and synonyms are summarized below from regulatory and literature sources.
+
+### 2.1 Core Names and Synonyms
+
+- **International nonproprietary / generic name:** adagrasib  
+- **Common research / development codes:** MRTX849; BMS‑986503[2,6,8,17]  
+- **US brand name:** Krazati[4,5,7,8,10]  
+- **Descriptive class name:** oral, small‑molecule, covalent KRAS G12C inhibitor; inhibitor of the RAS GTPase family[4,5,12,13,17]
+
+Adagrasib is consistently referred to as **adagrasib (MRTX849, Krazati)** across oncology reviews and regulatory documents, and as BMS‑986503 in the EU risk‑management plan, reflecting its transition from Mirati to Bristol‑Myers Squibb.[6,8,12,13]
+
+### 2.2 Database, Regulatory, and Trial Identifiers
+
+| Resource / Type                         | Identifier / Name                               | Notes / Evidence |
+|----------------------------------------|-------------------------------------------------|------------------|
+| PubChem Compound                       | CID **138611145** (Adagrasib)                  | Listed as small‑molecule KRAS inhibitor (MRTX849).[1] |
+| NCI (intervention ID)                  | **C157493** (adagrasib)                        | Used by NCI to index clinical trials with adagrasib.[7] |
+| US FDA NDA                             | **NDA 216340**                                  | Krazati (adagrasib) tablets, Mirati Therapeutics; multidiscipline and supplement reviews.[5,8,10] |
+| US FDA approved companion diagnostic   | **Agilent Resolution ctDx FIRST** (PMA **P210040**) | Plasma KRAS G12C test to select NSCLC patients for Krazati (adagrasib).[9] |
+| Key clinical trial (KRYSTAL‑1)         | **NCT03785249**                                 | Phase I/Ib–II study of adagrasib (MRTX849) in KRAS G12C‑mutant solid tumors including NSCLC.[13,16,17] |
+
+### 2.3 Contextual Identifiers in NSCLC and CRC Literature
+
+- Precision-oncology and NSCLC reviews consistently describe adagrasib as **MRTX849 (adagrasib, Krazati)**, a covalent KRAS G12C inhibitor with ~23–24 h half‑life and twice‑daily 600 mg dosing in KRYSTAL‑1.[12–14,17,18]  
+- EU risk‑management documentation refers to the product as **BMS‑986503 (MRTX849) adagrasib**, linking the BMS code to the same active substance.[6]  
+- CRC reviews and FDA supplemental approval documents describe the combination product as **adagrasib (Krazati) plus cetuximab** for KRAS G12C‑mutated metastatic colorectal cancer.[10,12]
+
+These names and identifiers (adagrasib, MRTX849, BMS‑986503, Krazati, CID 138611145, NDA 216340, NCT03785249, C157493) should be used consistently across precision-oncology datasets to ensure unambiguous mapping between the generic molecule, development codes, and marketed product.  
+
+---
+
+## References
+
+[1] Adagrasib \| C32H35ClFN7O2 \| CID 138611145 - PubChem - https://pubchem.ncbi.nlm.nih.gov/compound/Adagrasib  
+
+[2] An Updated Review on Developing Small Molecule Kinase Inhibitors Using Computer-Aided Drug Design Approaches - https://pmc.ncbi.nlm.nih.gov/articles/PMC10530957/  
+
+[4] KRAZATI (adagrasib) tablets, for oral use – US Prescribing Information (2024) - https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
+
+[5] KRAZATI (adagrasib) tablets, for oral use – US Prescribing Information (2022) - https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340Orig1s000Corrected_lbl.pdf  
+
+[6] Krazati (adagrasib) EU Risk Management Plan, Version 2.1 - https://www.ema.europa.eu/en/documents/rmp/krazati-epar-risk-management-plan_en.pdf  
+
+[7] Adagrasib - National Cancer Institute Drug Information - https://www.cancer.gov/about-cancer/treatment/drugs/adagrasib  
+
+[8] KRAZATI (adagrasib) NDA 216340 Multidiscipline Review - https://www.accessdata.fda.gov/drugsatfda_docs/nda/2023/216340Orig1s000MultidisciplineR.pdf  
+
+[9] Agilent Resolution ctDx FIRST – P210040 (Companion Diagnostic for KRAZATI) - https://www.fda.gov/medical-devices/recently-approved-devices/agilent-resolution-ctdx-first-p210040  
+
+[10] KRAZATI (adagrasib) NDA 216340/S-005 Approval Package (CRC indication) - https://www.accessdata.fda.gov/drugsatfda_docs/nda/2024/216340Orig1s005.pdf  
+
+[12] Adagrasib in the treatment of colorectal cancer - https://pmc.ncbi.nlm.nih.gov/articles/PMC12323406/  
+
+[13] Treatment Strategies for KRAS-Mutated Non-Small-Cell Lung Cancer - https://pmc.ncbi.nlm.nih.gov/articles/PMC10046549/  
+
+[14] KRASG12C mutant lung adenocarcinoma: unique biology, novel therapies and new challenges - https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394/  
+
+[16] Adagrasib in Advanced Solid Tumors Harboring a KRAS G12C Mutation - https://pubmed.ncbi.nlm.nih.gov/37099736/  
+
+[17] Selective KRAS G12C inhibitors in non-small cell lung cancer: chemistry, concurrent pathway alterations, and clinical outcomes - https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042/  
+
+[18] Comparative Efficacy of Adagrasib and Sotorasib in KRAS G12C-Mutant NSCLC: Insights from Pivotal Trials - https://pmc.ncbi.nlm.nih.gov/articles/PMC11545475/
 
 ## 3. Mechanism of Action (Lung Cancer Context)
 
-Adagrasib (MRTX849) is an oral, small‑molecule KRAS G12C inhibitor that covalently and irreversibly binds the mutant cysteine at codon 12 within the Switch II pocket (SII‑P) of KRAS, stabilizing the GDP‑bound “OFF” state and preventing activation of downstream signaling in KRAS G12C‑mutant NSCLC.[1],[6],[9],[21],[22] KRAS normally cycles between inactive GDP‑bound and active GTP‑bound conformations under the control of GEFs (e.g., SOS1) and GAPs (e.g., NF1); oncogenic G12 mutations impair GAP‑mediated hydrolysis and favor persistent GTP loading, driving constitutive signaling.[6],[19],[20],[21] The discovery of the SII‑P in KRAS G12C enabled design of covalent inhibitors such as adagrasib that exploit this mutant‑specific pocket to shift nucleotide preference toward GDP, thereby reducing KRAS–effector interactions.[6],[13],[19],[21],[22]
+Adagrasib (MRTX849) is an orally bioavailable, mutant‑selective, covalent inhibitor of KRAS G12C that targets the switch‑II pocket present only in the inactive GDP‑bound conformation of KRAS.[5,7] The G12C substitution introduces a cysteine adjacent to this switch‑II (P2) pocket, enabling small‑molecule binding and covalent modification of Cys12, thereby preventing exchange of GDP for GTP and locking KRAS G12C in its “OFF” state.[5,7] As a direct GDP‑KRAS G12C inhibitor, adagrasib exploits a previously “undruggable” pocket to achieve irreversible engagement of the mutant protein and sustained pathway suppression in KRAS‑addicted NSCLC.[5,8]
 
-In KRAS‑mutant lung adenocarcinoma, activated KRAS engages RAF kinases to propagate signaling through the RAF–MEK–ERK (MAPK) cascade and also stimulates PI3K–AKT–mTOR, RalGEF–Ral, and TIAM1–RAC1 pathways, collectively promoting proliferation, survival, metabolism, and motility.[1],[6],[12],[16],[20],[21],[23] By locking KRAS G12C in its inactive conformation, adagrasib suppresses RAS/ERK signaling and reduces ERK phosphorylation in KRAS G12C‑mutant models, leading to antiproliferative effects in NSCLC and other adenocarcinoma cell lines.[5],[9],[22] Inhibition of KRAS also diminishes PI3K–AKT–mTOR output, although KRAS G12C/V lung cancer cells can exhibit relatively reduced basal AKT activation compared with G12D, underscoring mutation‑specific pathway dependencies in NSCLC.[1],[16],[20]
+In KRAS‑mutant NSCLC, oncogenic KRAS normally cycles between GTP‑bound active and GDP‑bound inactive states, transmitting signals from receptor tyrosine kinases (RTKs) through RAF‑MEK‑ERK and PI3K–AKT–mTOR cascades to drive proliferation, survival, and other cancer hallmarks.[4,7] By trapping KRAS G12C in the GDP‑bound state, adagrasib reduces RAF recruitment and downstream MEK/ERK activation, and can also attenuate PI3K/mTOR signaling in KRAS G12C‑mutant lung cancer models, leading to decreased cell‑cycle progression and tumor growth.[2,4,8] In KRAS G12C‑dependent NSCLC cell lines (e.g., NCI‑H358) and xenografts, adagrasib treatment suppresses phospho‑ERK and induces broad down‑regulation of cell‑cycle and transcriptional programs, consistent with effective blockade of core KRAS effector pathways.[2,4,8]
 
-KRAS‑mutant NSCLC is associated with an immunosuppressive microenvironment characterized by cytokine production and PD‑L1 upregulation via MAPK and PI3K–AKT signaling.[6],[10],[12],[18] By attenuating these pathways, KRAS G12C inhibition with agents such as adagrasib provides a mechanistic rationale for combination with immune checkpoint blockade, aiming to enhance antitumor immunity in KRAS G12C‑mutant lung adenocarcinoma.[6],[10],[16],[18] Adagrasib was optimized for prolonged half‑life and CNS penetration, enabling sustained target inhibition in advanced NSCLC, including patients with brain metastases.[9],[11],[16] Nonetheless, adaptive resistance frequently emerges through on‑target secondary KRAS mutations within the SII‑P (e.g., Y96D/C, R68S, H95D/Q/R) that disrupt drug binding, amplification of KRAS G12C, or bypass activation of upstream RTKs and downstream effectors (e.g., MET amplification; NRAS, BRAF, MAP2K1, PIK3CA alterations), which reactivate MAPK or PI3K–AKT–mTOR signaling despite continued adagrasib exposure.[1],[6],[16],[20],[21],[23] These resistance patterns support development of vertical combinations (KRAS G12C plus MEK/ERK or RAF/MEK “clamp” inhibition) and horizontal strategies targeting RTKs, SHP2, or PI3K/AKT to sustain pathway suppression in KRAS G12C‑mutant NSCLC.[12],[16],[18],[20],[22],[23]
+The covalent binding interface is structurally specific: residues at positions 12, 68, 95, and 96 in KRAS contact adagrasib within the switch‑II pocket, and secondary mutations at these sites (e.g., R68S/L, H95D/R, Y96C/D, Q99 substitutions) disrupt drug–protein interactions and confer resistance in KRAS G12C NSCLC models and in patients progressing on adagrasib.[2,3,4,5] Clinically, acquired resistance in adagrasib‑treated KRAS G12C‑mutant lung cancers frequently converges on reactivation of RAS–MAPK signaling via on‑target KRAS alterations (G12D/R/V/W, G13D, Q61H, R68S, H95D/Q/R, Y96C/D), KRAS G12C amplification, or off‑target events in NRAS, MRAS, BRAF, MAP2K1, MET and other RTK–MAPK nodes, underscoring that the net antitumor effect of adagrasib in NSCLC reflects both potent mutant‑specific OFF‑state trapping and the adaptability of the broader RTK–RAS–MAPK network.[3,4,5,7]
 
 ## 4. Primary Targets (Human)
 
-| Target (gene/protein) | Interaction with adagrasib | Functional role in lung cancer biology | Relevance to KRAS G12C–mutant NSCLC |
-|-----------------------|----------------------------|----------------------------------------|--------------------------------------|
-| KRAS G12C (KRAS p.G12C mutant GTPase) | Potent, irreversible, covalent binding to the cysteine at codon 12 within the switch II pocket; locks KRAS G12C in the inactive GDP‑bound state and prevents downstream signaling through RAS–MAPK.[9,10] | KRAS is a central small GTPase downstream of multiple RTKs, controlling RAS/MAPK signaling and driving proliferation and survival in lung adenocarcinoma; KRAS G12C is the most common KRAS variant in NSCLC and is associated with poor prognosis.[9] | Adagrasib shows >1000‑fold selectivity for KRAS G12C versus other proteins and produces objective responses and disease control in previously treated KRAS G12C–mutant NSCLC in KRYSTAL‑1 and subsequent trials, establishing KRAS G12C as its primary and clinically validated target.[9,10,13,16] |
-| Wild‑type KRAS | Not directly inhibited at clinically relevant concentrations; preclinical data show >1000‑fold selectivity for KRAS G12C over wild‑type KRAS, with minimal effect on non‑G12C models.[9,10] | Wild‑type KRAS mediates physiological RAS signaling in normal tissues and can contribute to adaptive pathway reactivation in KRAS‑mutant tumors when upstream RTKs or parallel RAS isoforms are engaged.[1,8,16] | Sparing of wild‑type KRAS underpins the therapeutic window of adagrasib, limiting on‑target toxicity in normal tissues while allowing selective suppression of KRAS G12C–driven NSCLC; lack of activity in non‑KRAS G12C models confirms dependence on the mutant allele for antitumor effects.[9,10] |
+Adagrasib is a mutation‑ and state‑selective KRAS G12C inhibitor with a very narrow primary target profile in humans; available data emphasize on‑target KRAS G12C engagement with high selectivity over wild‑type KRAS and other proteins, and no consistently validated direct off‑targets implicated in lung cancer biology.[3,5,11,14]
 
-No recurrent human kinase or receptor off‑targets for adagrasib are described in the available clinical, preclinical, or regulatory sources, which consistently emphasize its design and use as a highly selective KRAS G12C inhibitor with negligible activity on other human molecular targets.[9,10,14,15]
+### Primary human molecular targets of adagrasib
+
+| Target / Protein | Gene | Target class / function | Nature of interaction with adagrasib | Lung cancer–relevant consequences | References |
+|------------------|------|-------------------------|--------------------------------------|-----------------------------------|------------|
+| KRAS G12C (GDP‑bound; switch‑II pocket) | KRAS | Small GTPase; central node in RAS–MAPK and PI3K–AKT signaling | Oral covalent small‑molecule that selectively and irreversibly binds the mutant cysteine at codon 12 within the switch‑II pocket, locking KRAS G12C in its inactive GDP‑bound state and preventing nucleotide exchange and effector binding.[3,5,11,14] | Suppresses downstream MAPK/ERK signaling (↓pERK) and KRAS‑dependent proliferation in KRAS G12C‑mutant NSCLC models; produces tumor regression and durable responses in KRAS G12C‑positive lung cancer xenografts and in KRYSTAL‑1/12 NSCLC cohorts; high CNS penetration supports intracranial activity.[3,5,11,14] | [3], [5], [11], [14] |
+| KRAS wild‑type and non‑G12C KRAS mutants | KRAS | Same as above | Minimal direct inhibition at clinically relevant exposures; preclinical work demonstrates >1000‑fold selectivity for KRAS G12C versus wild‑type KRAS, with no antitumor activity in non‑G12C models, indicating absence of meaningful binding.[3,5] | Preserves signaling of wild‑type KRAS in normal tissues, limiting on‑target systemic toxicity; lack of efficacy in KRAS‑WT or non‑G12C NSCLC underscores dependence on the KRAS G12C allele as the actionable driver.[3,5] | [3], [5] |
+| RAS–MAPK pathway effectors (RAF–MEK–ERK) | RAF1, BRAF, MAP2K1/2, MAPK1/3 | Kinases in canonical RAS–MAPK cascade | Indirect functional inhibition via upstream KRAS G12C blockade; no evidence that adagrasib directly binds these kinases.[5,11,14] | Decrease in ERK phosphorylation is a key pharmacodynamic read‑out of target engagement in KRAS G12C‑mutant NSCLC; reactivation of these effectors through upstream RTKs/SHP2 or downstream mutations is a major resistance mechanism but does not reflect primary binding.[5,8,10,11,14] | [5], [8], [10], [11], [14] |
+
+Current clinical, mechanistic, and proteomic reviews do not identify reproducible human off‑target proteins with direct adagrasib binding and clear mechanistic relevance in lung cancer; resistance and combination‑strategy data instead implicate upstream RTKs (e.g., EGFR family), SHP2, PI3K–AKT–mTOR, and cell‑cycle regulators as indirect nodes modulating sensitivity to the primary KRAS G12C target.[5,8,10,11,14]
 
 ## 5. Pathways (Brief Overview)
 
-Adagrasib is a covalent KRAS G12C inhibitor that traps mutant KRAS in its inactive, GDP‑bound state, thereby suppressing key downstream effector pathways that sustain KRAS‑mutant NSCLC growth.[2,7] Although most mechanistic and phosphoproteomic work has been done in KRAS‑mutant PDAC, these studies show that KRAS oncogenic signaling is driven predominantly through the RAF–MEK–ERK (MAPK) cascade, with ERK acting as the central node controlling a broad phosphoproteome and proliferation program, and similar ERK‑driven signatures are detectable in KRAS G12C–mutant NSCLC xenografts treated with adagrasib.[3,4]
-
-KRAS activates parallel PI3K–AKT–mTOR signaling, which regulates cell growth, survival, and metabolism; this axis is a critical effector in KRAS‑mutant lung adenocarcinoma and contributes to resistance when MAPK signaling is suppressed.[2] Direct KRAS inhibition removes negative feedback on upstream RTKs, leading to adaptive reactivation of wild‑type RAS and MAPK signaling via RTK–SOS1–SHP2, and ERBB family upregulation has been implicated as a compensatory route after KRAS blockade.[2,4,8] At the cell‑cycle level, ERK‑dependent phosphorylation integrates with CDK networks and the anaphase‑promoting complex/cyclosome; ERK inhibition causes a coordinated collapse of CDK activity and APC/C function, producing potent cell‑cycle arrest rather than apoptosis in KRAS‑mutant models, a pattern relevant to how adagrasib controls proliferation but is circumvented by ERK reactivation in resistance.[4,6]
+No citable primary-source URLs were provided in the source material, so specific pathway-level evidence for adagrasib in KRAS G12C–mutant NSCLC cannot be referenced here under the required citation rules. As a result, this section cannot reliably summarize MAPK, PI3K–AKT, RTK feedback, autophagy, or other pathway effects with appropriate source-backed detail.
 
 ## 6. Lung Cancer Subtype Evidence
 
-Adagrasib development has focused on advanced *KRAS* G12C–mutated NSCLC, predominantly lung adenocarcinoma. In the phase II KRYSTAL‑1 trial (NCT03785249), adagrasib 600 mg twice daily achieved a systemic objective response rate (ORR) of 42.9% in previously treated *KRAS* G12C‑mutant NSCLC, supporting robust activity in this non‑squamous population and forming the basis for FDA approval.[6,13] Editorial and review data emphasize that this efficacy is comparable to or slightly higher than that of sotorasib in similar cohorts.[12,13]
+In metastatic KRAS G12C–mutant non-squamous NSCLC (predominantly adenocarcinoma), adagrasib monotherapy in KRYSTAL‑1 achieved a systemic objective response rate (ORR) of 42.9%, median progression‑free survival (PFS) 6.5 months, and median overall survival (OS) 12.6 months in heavily pretreated patients, with activity largely independent of PD‑L1 status or common co‑mutations such as STK11, KEAP1, TP53, and CDKN2A.[8,9,12] Exploratory analyses showed confirmed ORR ranging from ~28–58% across these co‑mutated subgroups, suggesting that adverse genomic features attenuate but do not abolish sensitivity to adagrasib.[9,12] Nonetheless, broader clinico‑genomic work indicates that KEAP1 and STK11 co‑mutations and high NRF2 signaling define KRAS G12C NSCLC subsets with shorter PFS and OS on adagrasib, and that KEAP1/STK11‑mutant models show relative resistance that can be partly overcome with mTOR‑based combinations.[16] These data support routine co‑mutation profiling to refine prognostication and to prioritize combination strategies in genomically high‑risk adenocarcinoma.
 
-CNS involvement is common in *KRAS*‑mutant and specifically *KRAS* G12C–mutant NSCLC, with brain metastases reported in ~27–42% at diagnosis and ~40% over the disease course.[5,7,11,15] In the KRYSTAL‑1 phase Ib cohort of 25 patients with *KRAS* G12C‑mutated NSCLC and untreated CNS metastases, adagrasib produced an intracranial (IC) ORR of 42%, IC disease control rate 90%, median IC progression‑free survival (PFS) 5.4 months, and median overall survival (OS) 11.4 months, with high concordance between IC and systemic responses and a manageable CNS‑specific safety profile.[1,7] Earlier translational work and case‑based series similarly demonstrated CSF penetration with Kp,uu ≈0.47 and radiographic regression of untreated brain metastases, reinforcing adagrasib’s role in *KRAS* G12C‑mutant adenocarcinoma with active CNS disease.[3,11,15]
-
-Subtype‑defining co‑mutations such as *CDKN2A/B* loss appear particularly relevant in brain‑metastatic *KRAS* G12C NSCLC. Preclinical brain metastasis models harboring *KRAS* G12C plus homozygous *CDKN2A/B* deletion show that adagrasib monotherapy can be insufficient in resistant clones, whereas combination with the brain‑penetrant CDK4/6 inhibitor abemaciclib restores intracranial efficacy and prolongs survival, highlighting a genomically defined, treatment‑adapted subtype.[10,16] More broadly across *KRAS* G12C inhibitors, KEAP1 mutations have emerged as key negative prognostic biomarkers for early resistance, underscoring that KEAP1‑mutant NSCLC may represent a less responsive molecular subset even when initially sensitive to adagrasib.[2]
+For KRAS G12C–mutant NSCLC with CNS involvement, adagrasib has consistent intracranial activity across trial phases. In a dedicated KRYSTAL‑1 phase Ib cohort of patients with untreated brain metastases, adagrasib 600 mg twice daily produced an intracranial ORR of 42%, disease control rate 90%, median intracranial PFS 5.4 months, and median OS 11.4 months, with CNS failures in only 37% and safety comparable to systemic experience.[1,2] In the broader KRYSTAL‑1 phase II population, baseline brain metastases were common; among radiographically evaluable patients, intracranial ORR was 33.3% and median intracranial duration of response 11.2 months, confirming durable CNS control in pretreated settings.[3,8,9] The randomized KRYSTAL‑12 trial further showed that adagrasib improved systemic PFS versus docetaxel (HR 0.58) and increased intracranial ORR to 40% in the CNS‑evaluable subset, reinforcing its role as a CNS‑active standard in previously treated KRAS G12C‑mutant NSCLC.[8,11,12]
 
 ## 7. Contraindications and Safety
 
-Adagrasib (KRAZATI) has no formal contraindications in the US prescribing information; however, significant warnings and precautions mandate careful patient selection and monitoring, particularly in previously treated KRAS G12C‑mutated NSCLC.[1],[2],[10],[11],[13]
+Adagrasib (KRAZATI) has no formal contraindications in the US label, but use is constrained by clinically important toxicities and interaction risks.[1],[4],[7] Hepatotoxicity is frequent: ALT/AST elevations occur commonly, with ≥5×ULN in a minority and treatment discontinuation for transaminase increases in ~8% of patients.[6] The label recommends baseline liver tests and monitoring monthly for the first 3 months (or at ~3‑week intervals per LiverTox) and then as clinically indicated, with dose reduction, interruption, or permanent discontinuation based on severity, particularly if ALT/AST >3×ULN with bilirubin >2×ULN.[1],[4],[6],[7]
 
-QTc prolongation is a key concern. The label recommends avoiding concomitant use with other QT‑prolonging drugs, monitoring ECG and electrolytes (especially potassium and magnesium) in patients at risk or receiving QT‑prolonging medications, correcting electrolyte abnormalities, and withholding, dose‑reducing, or permanently discontinuing adagrasib based on QTc severity (e.g., QTc >500 ms, increase >60 ms, or torsade de pointes/serious arrhythmia).[1],[2],[10],[11],[13]
+Adagrasib prolongs the QTc interval and has been associated with rare serious arrhythmias; ECG and electrolytes (especially potassium and magnesium) should be monitored in patients with risk factors or on other QT‑prolonging drugs.[1],[2],[4],[7] Concomitant use with products known to prolong QT should be avoided, and KRAZATI should be withheld, dose‑reduced, or permanently discontinued for clinically significant QTc changes.[1],[2],[4],[7] Interstitial lung disease (ILD)/pneumonitis is an uncommon but serious risk; any new or worsening respiratory symptoms warrant immediate interruption and permanent discontinuation if ILD/pneumonitis is confirmed.[1],[4],[7]
 
-Hepatotoxicity is another major risk. Liver tests should be obtained before starting therapy and monthly for the first 3 months, then as clinically indicated. Dose reduction, interruption, or discontinuation is recommended for Grade 2–4 AST/ALT elevations, and permanent discontinuation is advised when AST/ALT >3× ULN with total bilirubin >2× ULN in the absence of alternative causes.[1],[2],[10],[11],[13]
+Gastrointestinal toxicity (nausea, vomiting, diarrhea) is very common and can be severe; proactive antiemetic/antidiarrheal support and dose modifications are recommended for grade ≥3 events.[1],[2],[4],[7] Adagrasib is primarily metabolized by CYP3A4 and can both be affected by and affect CYP3A4, CYP2C9, CYP2D6, and P‑gp substrates.[1],[4],[6],[7] Strong CYP3A4 inducers and inhibitors, sensitive CYP3A4/2C9/2D6 substrates, P‑gp substrates, and other QT‑prolonging drugs should generally be avoided or carefully managed, with close monitoring and dose adjustments where coadministration is unavoidable.[1],[4],[6],[7]  
 
-Interstitial lung disease (ILD)/pneumonitis requires high vigilance: any grade of suspected ILD/pneumonitis warrants immediate treatment interruption and permanent discontinuation if no other cause is identified.[1],[2],[10],[11],[13] The EMA risk‑management plan lists ILD/pneumonitis and hepatotoxicity among important safety concerns, confirming the need for ongoing pharmacovigilance.[5],[9],[12]
+---
 
-Drug–drug interaction risks are substantial. Strong CYP3A4 inducers and inhibitors should be avoided; adagrasib should not be combined with sensitive CYP3A4, CYP2C9, CYP2D6, or P‑gp substrates when small exposure changes may cause serious toxicity, and co‑administration with QT‑prolonging drugs should be avoided.[1],[2],[10],[11],[13] Although no specific dose adjustments are defined for organ impairment in the label excerpts provided, the multidiscipline review and EMA risk‑management plan highlight limited data in some under‑represented populations, supporting cautious use with close monitoring in patients with significant hepatic, renal, or cardiac comorbidity.[5],[6],[9] 
+## References
 
-**References**
+[1] KRAZATI® (adagrasib) tablets, for oral use – Prescribing Information, 2024. https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
 
-[1] KRAZATI (adagrasib) tablets – Original FDA label 2022 (Corrected) – https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340Orig1s000Corrected_lbl.pdf  
-[2] KRAZATI (adagrasib) tablets – FDA label 2024 – https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
-[5] KRAZATI – EU Risk Management Plan (Version 2.1) – https://www.ema.europa.eu/en/documents/rmp/krazati-epar-risk-management-plan_en.pdf  
-[6] KRAZATI (adagrasib) NDA 216340 Multidiscipline Review – https://www.accessdata.fda.gov/drugsatfda_docs/nda/2023/216340Orig1s000MultidisciplineR.pdf  
-[9] KRAZATI – EU Risk Management Plan (duplicate listing) – https://www.ema.europa.eu/en/documents/rmp/krazati-epar-risk-management-plan_en.pdf  
-[10] KRAZATI (adagrasib) tablets – FDA prescribing information 2022 – https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s000lbl.pdf  
-[11] KRAZATI (adagrasib) tablets – FDA prescribing information 2024 – https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
-[12] Krazati (adagrasib) – EMA procedural steps and scientific information after authorisation – https://www.ema.europa.eu/en/documents/procedural-steps-after/krazati-epar-procedural-steps-taken-scientific-information-after-authorisation-archive_en.pdf  
-[13] KRAZATI (adagrasib) tablets – FDA label 2022 (s001) – https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s001lbl.pdf
+[2] KRAZATI™ (adagrasib) tablets – Prescribing Information, 2022 (Original). https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340Orig1s000lbl.pdf  
+
+[4] KRAZATI™ (adagrasib) tablets – Corrected Original Label, 2022. https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340Orig1s000Corrected_lbl.pdf  
+
+[6] LiverTox: Adagrasib. https://www.ncbi.nlm.nih.gov/books/NBK597220/  
+
+[7] KRAZATI™ (adagrasib) tablets – s001 Label, 2022. https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s001lbl.pdf
 
 ## 8. Key Clinical Trials
 
-Adagrasib development in NSCLC is anchored in the KRYSTAL program, spanning first‑in‑human dose‑finding, registrational phase II, and confirmatory phase III studies, as well as first‑line combination strategies.
+Brief summaries of the most clinically relevant adagrasib NSCLC trials are provided below, focusing on design, NCT identifiers, and key outcomes.
 
-KRYSTAL‑1 (NCT03785249) is a multicenter, open‑label phase I/II trial of adagrasib 600 mg twice daily in *KRAS* G12C‑mutated solid tumors. In the phase I/1b NSCLC cohort (n=18), the confirmed ORR was 53.3%, median DOR 16.4 months, and median PFS 11.1 months, establishing the recommended phase II dose and demonstrating substantial activity in heavily pretreated disease.[5] In the pivotal phase II NSCLC cohort (n=116), ORR was 42.9%, median DOR 8.5 months, median PFS 6.5 months, and median OS 12.6 months; among patients with baseline CNS metastases, intracranial ORR reached 33.3%, supporting FDA accelerated approval for previously treated *KRAS* G12C‑mutant advanced NSCLC and highlighting clinically meaningful CNS activity.[5,9]
+- **KRYSTAL‑1 Phase II NSCLC cohort (NCT03785249)** – Multicenter, single‑arm phase I/II trial of adagrasib 600 mg BID in previously treated, unresectable or metastatic *KRAS G12C*‑mutant NSCLC (prior platinum chemotherapy and almost universally prior ICI).[1][2][5][9][10][14] In 116 patients (112 evaluable), confirmed ORR was ~43%, median duration of response 8.5 months, median PFS 6.5 months, and median OS 12.6 months, leading to FDA accelerated approval.[1][5][8][9][10][14] Among patients with CNS metastases, intracranial ORR was 33.3% with median intracranial PFS 5.4 months and intracranial DOR 11.2 months, demonstrating clinically meaningful brain activity.[1][5][9][10][13][14]
 
-An exploratory KRYSTAL‑1 phase Ib cohort specifically enrolled 25 patients with *KRAS* G12C‑mutated NSCLC and untreated, asymptomatic CNS metastases at the same 600‑mg twice‑daily dose. Among 19 radiographically evaluable patients, intracranial ORR was 42%, intracranial disease control rate 90%, median intracranial PFS 5.4 months, and median OS 11.4 months, with safety consistent with prior adagrasib experience and few CNS‑specific toxicities.[1] These data provide the first prospective proof of intracranial efficacy for a *KRAS* G12C inhibitor and support adagrasib use in patients with active brain metastases.
+- **KRYSTAL‑1 CNS metastases cohort (Phase Ib; NCT03785249)** – Prospective cohort of *KRAS G12C*‑mutant NSCLC with untreated CNS metastases receiving adagrasib 600 mg BID.[6][7][9][14] Intracranial ORR was 42% with intracranial DOR 12.7 months, intracranial PFS 5.4 months, and OS 11.4 months, establishing proof‑of‑concept for CNS penetration and activity in untreated brain metastases.[6][7][9][14]
 
-KRYSTAL‑12 (NCT04685135) is a randomized, open‑label phase III trial comparing adagrasib 600 mg twice daily with docetaxel in previously treated unresectable or metastatic *KRAS* G12C‑mutated NSCLC after platinum chemotherapy and immunotherapy. Among 453 patients randomized 2:1, adagrasib improved median PFS to 5.49 versus 3.84 months (HR 0.58; 95% CI 0.45–0.76) and increased ORR to 31.9% versus 9.2%, with a safety profile consistent with earlier phases and no new signals.[3,13] These results reinforce adagrasib as superior to docetaxel in the post‑immunotherapy setting and support its role as a targeted standard of care.
+- **KRYSTAL‑12 (Phase III; NCT04685135)** – Randomized open‑label trial of adagrasib 600 mg BID versus docetaxel in previously treated *KRAS G12C*‑mutant advanced NSCLC after platinum and anti‑PD‑1/PD‑L1 therapy.[9–12,14,15] In 453 patients, adagrasib significantly improved PFS (5.49 vs 3.84 months; HR 0.58) and ORR (31.9% vs 9.2%), with median DOR 8.31 vs 5.36 months and no new safety signals.[9–12,14,15] In patients with baseline CNS metastases, systemic ORR (21% vs 1%) and intracranial ORR (24% overall; 40% in CNS‑evaluable subset) favored adagrasib over docetaxel.[6][9–11,14]
 
-KRYSTAL‑7 (NCT04613596) is a phase II/III trial evaluating first‑line adagrasib in advanced *KRAS* G12C‑mutated NSCLC. The phase II component tests adagrasib monotherapy and adagrasib plus pembrolizumab across PD‑L1 strata, while the phase III portion randomizes patients with PD‑L1 TPS ≥50% to adagrasib plus pembrolizumab versus pembrolizumab alone as first‑line therapy.[15] This design directly addresses whether upfront KRAS G12C inhibition plus checkpoint blockade can outperform PD‑1 monotherapy in biomarker‑selected, PD‑L1‑high disease, with implications for integrating *KRAS* G12C testing into initial treatment algorithms.
+- **KRYSTAL‑7 (Phase II; NCT04613596)** – First‑line study of adagrasib plus pembrolizumab in advanced *KRAS G12C*‑mutant NSCLC.[9] In an evaluable cohort of 53 patients, the combination yielded ORR 59%, DOR 26.3 months, median PFS 27.7 months, and 18‑month OS 62%, with grade ≥3 TRAEs in ~68% but low discontinuation rates, supporting further development of adagrasib–PD‑1 blockade in the frontline setting.[9][10]
 
-Beyond KRYSTAL‑7, additional first‑line combination strategies are being pursued. A phase II trial (NCT05609578; CA239‑0010) evaluates adagrasib plus pembrolizumab with or without chemotherapy in advanced *KRAS* G12C‑mutant NSCLC across PD‑L1 TPS ≥1% and <50% cohorts, including patients transitioning from induction chemo‑immunotherapy.[12] Together, these studies aim to define optimal placement of adagrasib‑based combinations in the first‑line setting, refine PD‑L1‑ and mutation‑directed selection, and address CNS disease—key pillars of precision oncology for *KRAS* G12C‑mutant lung cancer.
+- **Ongoing optimization/first‑line programs** – KRYSTAL‑21 (NCT05853575) is comparing adagrasib 600 mg BID versus 400 mg BID to refine dose–toxicity balance, while KRYSTAL‑4 (NCT06875310) is evaluating first‑line adagrasib plus pembrolizumab and chemotherapy in *KRAS G12C*‑mutant NSCLC, aiming to extend benefits into earlier lines and combination backbones.[9][14]  
+
+---
 
 ## References
 
-[1] Negrao MV et al. Intracranial Efficacy of Adagrasib in Patients From the KRYSTAL‑1 Trial With *KRAS*G12C‑Mutated Non–Small‑Cell Lung Cancer Who Have Untreated CNS Metastases. J Clin Oncol. 2023;41(28):4472–4477. PMCID: PMC10553074. https://pmc.ncbi.nlm.nih.gov/articles/PMC10553074/
+[1] Tian H, Yang Z, He J. Adagrasib: A landmark in the KRASG12C‐mutated NSCLC. MedComm (2020). https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582  
 
-[3] Choucair K et al. Targeting KRAS mutations: orchestrating cancer evolution and therapeutic challenges. Signal Transduct Target Ther. 2025;10:385. PMCID: PMC12660860. https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860/
+[2] Zhang J et al. Practical Guidance for the Management of Adverse Events in Patients with KRASG12C-Mutated Non-Small Cell Lung Cancer Receiving Adagrasib. The Oncologist. https://pmc.ncbi.nlm.nih.gov/articles/PMC10078892/  
 
-[5] Shaverdashvili K, Burns TF. Advances in the treatment of *KRAS* *G12C* mutant non–small cell lung cancer. Cancer. 2025;131(Suppl 1):e35783. PMCID: PMC11963745. https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745/
+[5] Brazel D, Arter Z, Nagasaka M. A Long Overdue Targeted Treatment for KRAS Mutations in NSCLC: Spotlight on Adagrasib. Lung Cancer: Targets and Therapy. https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/  
 
-[9] Tian H et al. Adagrasib: A landmark in the KRASG12C‐mutated NSCLC. MedComm. 2022;3:e190. PMCID: PMC9697582. https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582
+[6] Wang S, Uriel M, Cheng H. Lung Cancer with Brain Metastasis—Treatment Strategies and Molecular Characteristics. J Clin Med. https://pmc.ncbi.nlm.nih.gov/articles/PMC11641837  
 
-[12] National Cancer Institute. Combination Therapies With Adagrasib in Patients With Advanced NSCLC With KRAS G12C Mutation. NCI‑2023‑04789; NCT05609578. https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2023-04789
+[7] Bernstein E et al. Safety and Intracranial Activity of Adagrasib in Patients With KRASG12C-Mutated NSCLC and Untreated CNS Metastases in the KRYSTAL-1 Trial: A Case Series. JCO Precis Oncol. https://pmc.ncbi.nlm.nih.gov/articles/PMC10860949/  
 
-[13] Attieh F, Kourie HR. Breaking barriers: the latest insights into KRAS G12C inhibitors. Future Oncol. 2024. PMCID: PMC11572073. https://pmc.ncbi.nlm.nih.gov/articles/PMC11572073/
+[8] FDA. FDA grants accelerated approval to adagrasib for KRAS G12C-mutated NSCLC. https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-accelerated-approval-adagrasib-kras-g12c-mutated-nsclc  
 
-[15] National Cancer Institute. Phase 2 Trial of Adagrasib Monotherapy and in Combination With Pembrolizumab and a Phase 3 Trial of Adagrasib in Combination in Patients With a KRAS G12C Mutation KRYSTAL‑7. NCI‑2021‑06578. https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2021-06578
+[9] Huang R et al. Therapeutic strategies for KRAS G12C-mutant non-small cell lung cancer: from bench to bedside and beyond. Front Pharmacol. https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982/  
+
+[10] Luo FX, Arter ZL. Adagrasib in KRYSTAL-12 has Broken the KRASG12C Enigma Code in Non-Small Cell Lung Carcinoma. Lung Cancer: Targets and Therapy. https://pmc.ncbi.nlm.nih.gov/articles/PMC11534526/  
+
+[11] Chopra D et al. Matching-Adjusted Indirect Comparison of Sotorasib Versus Adagrasib in Previously Treated Advanced/Metastatic NSCLC Harboring KRAS G12C Mutation. Adv Ther. https://pmc.ncbi.nlm.nih.gov/articles/PMC12394275/  
+
+[12] ClinicalTrials.gov. NCT04685135 – Phase 3 Study of MRTX849 (Adagrasib) vs Docetaxel in Previously Treated NSCLC with KRAS G12C Mutation. https://clinicaltrials.gov/study/NCT04685135  
+
+[13] Cheema PK et al. Canadian Consensus Recommendations on the Management of KRAS G12C-Mutated NSCLC. Curr Oncol. https://pmc.ncbi.nlm.nih.gov/articles/PMC10377814/  
+
+[14] Tian T, Li W. Advances on drug therapy for KRASG12C-mutant non-small-cell lung cancer. Transl Oncol. https://pmc.ncbi.nlm.nih.gov/articles/PMC12828744/  
+
+[15] Mirati Therapeutics. Protocol 849-012 v7.0 – A Randomized Phase 3 Study of MRTX849 versus Docetaxel in NSCLC with KRAS G12C Mutation (NCT04685135). https://cdn.clinicaltrials.gov/large-docs/35/NCT04685135/Prot_SAP_000.pdf
 
 ## 9. Pathway Evidence Table
 
-| Pathway name | Representative pathway ID* | Regulation with adagrasib in KRAS G12C NSCLC | Sensitivity vs resistance role | Mechanistic rationale and key evidence |
+| Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References |
 | --- | --- | --- | --- | --- |
-| RAS–RAF–MEK–ERK (MAPK) signaling | KEGG hsa04010 / Reactome R-HSA-5673001 | Suppressed initially by KRAS G12C blockade; frequently reactivated at progression | Central driver of initial sensitivity; rebound MAPK activity is a dominant resistance mechanism | OFF‑state KRAS G12C inhibitors such as adagrasib trap KRAS in the GDP‑bound state, reducing RAF–MEK–ERK signaling and driving tumor regression in KRAS G12C NSCLC.[3][4] Clinical and preclinical resistance analyses show secondary KRAS mutations, MEK1 alterations, and BRAF mutations or fusions that restore ERK phosphorylation despite continued drug exposure, highlighting MAPK reactivation as a convergent resistance node.[1][6][7][8] |
-| PI3K–AKT–mTOR signaling | KEGG hsa04151 / Reactome R-HSA-109704 | Partially downregulated with effective KRAS inhibition; can be re‑engaged via bypass lesions | Modulates depth of response; PI3K–AKT activation supports survival and resistance | KRAS G12C activates both MAPK and PI3K–AKT–mTOR; OFF‑state inhibition attenuates these survival signals.[1][3] Resistance biopsies from adagrasib/sotorasib‑treated NSCLC show PTEN loss and PIK3CA or other downstream alterations that uncouple AKT signaling from KRAS, maintaining proliferation under KRAS blockade.[1][6][7] |
-| RTK (EGFR/FGFR/ALK/RET/MET) feedback axis | Reactome R-HSA-112409 (EGFR) / R-HSA-6806834 (MET) | Rapidly upregulated after KRAS inhibition via relief of negative feedback | Key adaptive and acquired resistance pathway | Reviews of clinical and translational data in KRAS G12C NSCLC describe RTK‑mediated feedback reactivation of ERK signaling as a major intrinsic and adaptive resistance mechanism.[3][4][5][7] Post‑progression profiling identifies MET amplification, EGFR and FGFR alterations, and oncogenic fusions such as EML4‑ALK and CCDC6‑RET that bypass mutant KRAS and reactivate MAPK and PI3K cascades despite adagrasib exposure.[1][6][7] |
-| KRAS G12C mutant signaling / switch‑II pocket module | – (mutation‑specific module) | Directly inhibited (KRAS G12C‑GDP stabilized); alternative KRAS alleles and switch‑II mutants emerge on resistance | Core determinant of sensitivity; on‑target mutations drive high‑level resistance | Adagrasib covalently binds the switch‑II pocket of KRAS G12C in its inactive state, blocking nucleotide exchange and effector engagement.[3][4] Acquired on‑target resistance includes secondary KRAS mutations at codons 12, 13, 61 and within the switch‑II pocket (e.g., R68S, H95D/Q/R, Y96C) that either prevent drug binding or increase the GTP‑bound fraction, abrogating adagrasib activity in cell models and in resistant patient samples.[1][6][7][8] |
-| RAS isoform switching (NRAS/HRAS) and downstream RAS network | – (RAS isoform network) | Wild‑type RAS isoforms become activated via RTKs under KRAS G12C blockade | Bypass route sustaining MAPK signaling and resistance | Clinical sequencing of adagrasib/sotorasib‑resistant NSCLC has revealed activating NRAS mutations and other RAS‑pathway lesions as off‑target resistance mechanisms.[1][6][7] RTK‑driven activation of wild‑type NRAS/HRAS can restore ERK signaling when KRAS G12C is inhibited, indicating that the broader RAS network can substitute for mutant KRAS to maintain oncogenic signaling.[3][7] |
-| MET–HGF axis | Reactome R-HSA-6806834 | Upregulated or amplified in a subset of resistant tumors | Potent bypass pathway driving resistance; target for combination therapy | Gene‑level MET amplification has been repeatedly observed in NSCLC tumors progressing on KRAS G12C inhibitors, including adagrasib.[1][6][7] MET activation re‑engages both ERK and AKT pathways independently of KRAS G12C, supporting continued growth; these findings underpin ongoing strategies combining KRAS G12C and MET inhibitors to overcome resistance.[6][7] |
-| EMT and lineage plasticity programs | MSigDB HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION | Largely quiescent in sensitive epithelial tumors; activated in drug‑tolerant and resistant states | Mesenchymal/lineage‑switched states confer intrinsic and acquired resistance | EMT and histologic transformations (e.g., adenocarcinoma to squamous cell carcinoma) are described as non‑genetic mechanisms that reduce KRAS dependence and limit responses to adagrasib and other KRAS G12C inhibitors.[1][3][7] Mesenchymal‑like phenotypes and broader lineage plasticity (including mucinous differentiation and AT2→AT1 shifts) have been linked to KRAS‑independent survival and resistance in lung cancer models.[7] |
-| Hippo–YAP signaling | – (Hippo/YAP module) | YAP activity increases following KRAS pathway blockade via protein relocalization | Promotes KRAS‑independent proliferation and resistance | KRAS inhibition disrupts epithelial polarity, causing E‑cadherin/Scribble relocalization and YAP nuclear translocation; nuclear YAP induces MRAS transcription and contributes to MAPK reactivation.[7] YAP activation is highlighted as a central intrinsic resistance mechanism that enables KRAS‑independent survival in KRAS‑mutant lung cancers exposed to KRAS G12C inhibitors.[7] |
-| Cell‑cycle CDK4/6–Cyclin D–RB axis | KEGG hsa04110 (Cell cycle) | Functionally downregulated when MAPK is durably suppressed; remains active where upstream reactivation occurs | Modulates cytostatic vs cytotoxic response; persistent activity supports resistance | KRAS‑MAPK signaling drives cyclin D–CDK4/6 activity and cell‑cycle progression; effective KRAS inhibition should reduce this drive.[1][7] However, downstream reactivation of MAPK or parallel survival pathways (e.g., RSK–mTOR) maintains CDK4/6–RB signaling, contributing to drug‑tolerant persister populations and incomplete responses to adagrasib.[7] |
-| RSK–mTOR survival pathway | – (RSK–mTOR module) | May become preferentially engaged in KRAS‑independent, mesenchymal states | Alternative survival axis in KRAS‑independent cells, fostering resistance | KRAS‑dependent cells primarily rely on RAF–MAPK, whereas KRAS‑independent cells can shift to a p90RSK–mTOR‑driven program.[7] EMT‑associated and YAP‑activated states in KRAS G12C lung cancer are reported to depend on RSK–mTOR signaling, explaining why such states are relatively insensitive to OFF‑state KRAS inhibition and may require vertical pathway or mTOR‑directed combinations.[7] |
-| Polyamine / AMD1 pathway | – (polyamine metabolism) | AMD1 protein levels decrease with adagrasib; further pharmacologic inhibition enhances effect | Co‑targeting augments sensitivity and may mitigate resistance emergence | In KRAS G12C‑mutant NSCLC cell lines, adagrasib reduces S‑adenosylmethionine decarboxylase 1 (AMD1), and the AMD1 inhibitor SAM486A synergistically potentiates adagrasib’s antiproliferative activity, with minimal effect in KRAS‑wild‑type cells.[9] In a metastatic mouse model, adagrasib plus SAM486A produced greater tumor shrinkage and reduced PCNA staining compared with either monotherapy, implicating polyamine metabolism as a modifiable metabolic pathway that can be exploited to deepen responses and potentially delay resistance.[9] |
-| Immune/TME and PD‑1–PD‑L1 axis | KEGG hsa05235 | Indirectly reshaped by KRAS pathway inhibition; KRAS G12C tumors often immunogenic | Immune activation can enhance efficacy; immune evasion contributes to resistance | Reviews of KRAS G12C inhibitors emphasize the importance of tumor immunity and the immune microenvironment in determining response durability.[5][7] KRAS signaling influences PD‑L1 expression and TME composition; combining KRAS G12C inhibitors such as adagrasib with immune checkpoint blockade is proposed to counteract immune‑mediated resistance mechanisms and prolong responses in NSCLC.[5][7] |
+| KEGG: hsa04014 – Ras signaling pathway | Down | Sensitive | Adagrasib covalently binds KRAS G12C in its GDP-bound “OFF” state, suppressing RAS signaling outputs. In KRAS G12C NSCLC xenografts and patients, effective KRAS inhibition is associated with strong modulation of KRAS-ERK–dependent transcriptional signatures, indicating pathway suppression in responders. | [2], [4], [10], [11] |
+| KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway | Down (initial) / Up (reactivated) | Sensitive when down; Resistant when reactivated | RAF–MEK–ERK is the dominant effector cascade for mutant KRAS. KRAS-ERK gene signatures and ERK-regulated phosphoproteome are almost completely KRAS-dependent; their suppression tracks with adagrasib response, while ERK reactivation via MEK or upstream RTKs drives primary and acquired resistance to KRAS G12C inhibitors. | [2], [4], [7], [10], [11], [13] |
+| KEGG: hsa04110 – Cell cycle (E2F, G2/M checkpoints) | Down | Sensitive | KRAS-ERK inhibition by adagrasib decreases expression of Hallmark E2F Targets and G2/M Checkpoint gene sets across KRAS-mutant PDAC, NSCLC and CRC models, reflecting reduced proliferation. In adagrasib-treated KRAS G12C patients, modulation of these cell-cycle signatures correlates with tumor shrinkage. | [2], [4], [10] |
+| KEGG: hsa04151 – PI3K–AKT signaling pathway | Up (bypass/reactivation) | Resistant | Multiple resistance reviews describe RTK-driven activation of PI3K–AKT–mTOR as a key bypass route under KRAS G12C inhibition. MET, HER2 and other RTKs can restore survival signaling via PI3K–AKT despite KRAS G12C blockade, contributing to both intrinsic and acquired resistance to adagrasib. | [5], [7], [9], [11], [13] |
+| KEGG: hsa04015 – Rap1/Ral/FAK–YAP axis (modeled within Ras/focal adhesion) | Up | Resistant | KRAS G12C inhibition induces sustained FAK activation and FAK–YAP signaling, which supports survival, fibrosis, and immune exclusion. Phosphoproteomic and preclinical combination studies show that FAK activation is an adaptive response to KRAS G12C blockade and that FAK inhibition restores sensitivity, implicating this axis as a resistance pathway. | [4], [9] |
+| KEGG: hsa04012 – ErbB signaling (EGFR/ERBB2/ERBB3/ERBB4) | Up | Resistant | Under KRAS G12C inhibition, feedback upregulation of multiple RTKs (EGFR, HER2/ERBB2, ERBB3, ERBB4) promotes SOS1–SHP2–mediated RAS-GTP loading and downstream MAPK/PI3K reactivation. Clinical and preclinical data link high basal ERBB2/3 and RTK amplification or activation to reduced efficacy and acquired resistance to adagrasib. | [5], [8], [9], [11], [13] |
+| KEGG: hsa04022 – cAMP / Rap1 and RHO GTPase signaling | Up (adaptive) | Resistant | ERK-regulated phosphoproteomics show extensive integration of ERK with RHO GTPase and cytoskeletal regulators, and adaptive kinome remodeling after KRAS-ERK inhibition. These adaptive RHO/Rap1 programs can sustain migration and survival signaling when KRAS is pharmacologically suppressed, contributing to incomplete responses. | [4] |
+| KEGG: hsa04310 – Wnt/β‑catenin and EMT-related signaling | Up | Resistant | Epithelial–mesenchymal transition (EMT) is repeatedly associated with primary and acquired resistance to KRAS G12C inhibitors. EMT rewires RTK expression (e.g., ERBB3, FGFR1) and enhances MAPK and PI3K signaling, enabling tumor cells to bypass adagrasib-mediated KRAS blockade. | [9], [11], [13] |
+| KEGG: hsa04068 – FoxO signaling (via NF1/PTEN loss) | Up (via negative regulator loss) | Resistant | Loss-of-function mutations in NF1 and PTEN, negative regulators of RAS–MAPK and PI3K–AKT respectively, are enriched at acquired resistance to KRAS G12C inhibitors. Their loss augments upstream signaling and dampens feedback control, facilitating sustained pathway activation despite continued adagrasib exposure. | [5], [7], [11], [12], [13] |
+| KEGG: hsa04064 – NF-κB signaling (via RAL/NF‑κB arm) | Up | Resistant | KRAS activates RAL–NF‑κB as a parallel effector arm. Reviews of KRAS G12C resistance note that bypass activation of downstream pro-proliferative and anti-apoptotic pathways, including NF‑κB, can maintain survival signaling independently of direct KRAS G12C output, reducing dependence on adagrasib-targeted nodes. | [7], [9], [11], [13] |
+| KEGG: hsa04668 – TNF/Immune checkpoint–PD‑1/PD‑L1 interaction | Mixed (PD‑1/PD‑L1 up) | Resistant (immune escape) | KRAS mutations increase PD‑L1 expression and promote T‑cell exhaustion; KRAS G12C inhibition (e.g., AMG 510) further upregulates PD‑1 on CD8⁺ T cells in preclinical models, contributing to an immunosuppressive microenvironment and secondary resistance. This underpins combination strategies of adagrasib with PD‑(L)1 blockade. | [8], [9], [11] |
+| KEGG: hsa05225 – Lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules) | Down (core KRAS module) / Up (bypass nodes) | Sensitive when KRAS module suppressed; Resistant when co-mutation/bypass driven | The NSCLC “Lung cancer” pathway integrates RTK–RAS–MAPK, PI3K, and tumor-suppressor axes (STK11, KEAP1, TP53). Clinical adagrasib data show responses across co-mutation subsets but lower ORR in STK11-wild type/KEAP1-mutant tumors, consistent with reduced KRAS dependency and activation of alternative metabolic and redox pathways that blunt KRAS G12C inhibitor efficacy. | [10], [11], [13] |
 
-\*Pathway IDs are provided where canonical KEGG/Reactome/MSigDB entries clearly correspond to the named pathways; users should cross‑check numeric identifiers in pathway databases for implementation.
+## Pathway Evidence Table
+
+| Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References |
+| --- | --- | --- | --- | --- |
+| KEGG: hsa04014 – Ras signaling pathway | Down | Sensitive | Adagrasib covalently binds KRAS G12C in its GDP‑bound “OFF” state, suppressing RAS signaling outputs. In KRAS G12C‑mutant NSCLC models and in KRYSTAL‑1 patients, effective KRAS inhibition is associated with marked suppression of RAS‑ERK–dependent transcriptional programs and tumor regression. | [1], [3], [5], [9], [10] |
+| KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway | Down (initial) / Up (reactivated) | Sensitive when down; Resistant when reactivated | RAF–MEK–ERK is the dominant effector cascade for mutant KRAS in NSCLC. Adagrasib reduces ERK phosphorylation and MAPK‑regulated gene expression in sensitive models, whereas resistance is characterized by MAPK reactivation through secondary KRAS mutations, RTK/SHP2 upregulation, or downstream alterations (e.g., BRAF, MAP2K1). | [1], [3], [4], [8], [9], [10], [11] |
+| KEGG: hsa04110 – Cell cycle (E2F, G2/M checkpoints) | Down | Sensitive | In KRAS G12C‑addicted NSCLC cell lines and xenografts, adagrasib‑mediated ERK inhibition leads to reduced expression of E2F target and G2/M checkpoint genes, decreased proliferation, and tumor shrinkage, indicating that suppression of KRAS‑driven cell‑cycle programs underlies clinical responses. | [1], [3], [9], [10] |
+| KEGG: hsa04151 – PI3K–AKT signaling pathway | Mixed; Up as bypass/reactivation | Resistant | Although primarily targeting MAPK output, KRAS G12C inhibition triggers compensatory activation of PI3K–AKT–mTOR via RTKs such as MET and ERBB family members. Reviews of resistance to adagrasib and other KRAS G12C inhibitors highlight PI3K–AKT upregulation and PTEN loss as key mechanisms sustaining survival despite KRAS blockade. | [3], [4], [8], [9], [11], [12] |
+| KEGG: hsa04012 – ErbB signaling (EGFR/ERBB2/ERBB3/ERBB4) | Up (feedback) | Resistant | Under adagrasib treatment, feedback upregulation and activation of EGFR and other ERBB receptors drive SOS1–SHP2‑mediated RAS‑GTP reloading and MAPK/PI3K reactivation. High ERBB2/3 expression or amplification is linked to reduced depth and duration of response, motivating combination strategies with EGFR/ERBB or SHP2 inhibitors. | [3], [4], [8], [9], [11], [13] |
+| KEGG: hsa04068 – FoxO signaling (via NF1/PTEN loss) | Up (via loss of negative regulators) | Resistant | Loss‑of‑function alterations in NF1 (RAS‑GAP) and PTEN (PI3K negative regulator) are recurrent in KRAS‑mutant NSCLC and enriched at acquired resistance to KRAS G12C inhibitors. Their loss amplifies upstream RTK–RAS and PI3K signaling, blunting adagrasib’s ability to maintain MAPK and AKT suppression. | [3], [4], [11], [12], [13] |
+| KEGG: hsa04310 – Wnt/β‑catenin and EMT‑related signaling | Up | Resistant | EMT phenotypes in KRAS G12C NSCLC are associated with upregulated Wnt/β‑catenin and altered RTK profiles, reducing dependence on KRAS‑ERK and favoring bypass signaling. Reviews of clinical and preclinical data note that EMT‑high tumors show attenuated responses and earlier progression on adagrasib and other KRAS G12C inhibitors. | [3], [9], [11], [13] |
+| KEGG: hsa04064 – NF‑κB signaling (via RAL/NF‑κB arm) | Up | Resistant | KRAS can signal through RAL GTPases to activate NF‑κB independently of RAF–MEK–ERK. Resistance reviews describe maintenance or upregulation of pro‑survival NF‑κB signaling as one mechanism by which KRAS G12C‑mutant cells persist under adagrasib, contributing to incomplete apoptosis and residual disease. | [3], [9], [11], [13] |
+| KEGG: hsa04668 – TNF/Immune checkpoint–PD‑1/PD‑L1 interaction | Mixed (PD‑L1 high; adaptive PD‑1/PD‑L1 upregulation) | Resistant (immune escape) | KRAS‑mutant NSCLC often exhibits high PD‑L1 expression and T‑cell exhaustion. KRAS G12C inhibition remodels the tumor microenvironment but can induce adaptive upregulation of PD‑1/PD‑L1, limiting durable control. This provides a mechanistic basis for combining adagrasib with PD‑(L)1 blockade in trials such as KRYSTAL‑7. | [3], [8], [9], [11] |
+| KEGG: hsa05223 – Non‑small cell lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules) | Down in KRAS module; bypass nodes persist | Sensitive when KRAS module dominant; Relative resistance with co‑mutations | The NSCLC pathway integrates RTK–RAS–MAPK and PI3K signaling with tumor suppressors (STK11, KEAP1, TP53). Clinical adagrasib data show responses across co‑mutation subsets but shorter PFS/OS in STK11/KEAP1‑mutant tumors, consistent with reduced KRAS dependency and increased reliance on alternative metabolic and redox pathways. | [1], [8], [9], [12] |
+| KEGG: hsa04140 – Autophagy (macroautophagy) | Up (adaptive) | Resistant | KRAS‑mutant tumors rely on autophagy for metabolic support. Reviews of KRAS G12C inhibitor resistance describe adaptive autophagy induction after pathway blockade; preclinical data suggest that concurrent autophagy inhibition can enhance depth and duration of response to KRAS G12C inhibitors like adagrasib. | [3], [9], [11] |
+| KEGG: hsa04071 – Sphingolipid / apoptosis signaling | Down (apoptotic output dampened) | Resistant when anti‑apoptotic programs prevail | Despite MAPK suppression, many adagrasib‑treated tumors show cytostatic rather than cytotoxic responses. Resistance analyses implicate upregulation of anti‑apoptotic programs (e.g., BCL‑2 family, survival lipids) that counterbalance pro‑apoptotic sphingolipid signaling, limiting adagrasib‑induced cell death. | [3], [9], [11] |
 
 ### Sources
 
-[1] Mechanisms of resistance to KRASG12C inhibitors in KRASG12C-mutated non-small cell lung cancer – https://pmc.ncbi.nlm.nih.gov/articles/PMC11410594/  
-[3] Resistance to KRASG12C Inhibitors in Non-Small Cell Lung Cancer – https://pmc.ncbi.nlm.nih.gov/articles/PMC8739760/  
-[4] Resistance to KRASG12C Inhibitors in Non-Small Cell Lung Cancer – https://pubmed.ncbi.nlm.nih.gov/35004309/  
-[5] Activity and resistance to KRASG12C inhibitors in non-small cell lung cancer and colorectal cancer – https://pubmed.ncbi.nlm.nih.gov/38723697  
-[6] Resistance to KRAS G12C Inhibition in Non-small Cell Lung Cancer – https://pubmed.ncbi.nlm.nih.gov/37378881/  
-[7] Mechanisms of Resistance to KRAS Inhibitors: Cancer Cells' Strategic Use of Normal Cellular Mechanisms to Adapt – https://pmc.ncbi.nlm.nih.gov/articles/PMC11875783/  
-[8] Genetic mechanisms of resistance to targeted KRAS inhibition – https://pmc.ncbi.nlm.nih.gov/articles/PMC12340830/  
-[9] The polyamine inhibitor SAM486A increases the efficacy of adagrasib in non-small cell lung cancer cells harboring KRASG12C mutation – https://pubmed.ncbi.nlm.nih.gov/41715254/
+[1] Brazel D, Arter Z, Nagasaka M. A Long Overdue Targeted Treatment for KRAS Mutations in NSCLC: Spotlight on Adagrasib – https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/  
+[3] Huang R et al. Therapeutic strategies for KRAS G12C-mutant non-small cell lung cancer: from bench to bedside and beyond – https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982/  
+[4] Tian H, Yang Z, He J. Adagrasib: A landmark in the KRASG12C‐mutated NSCLC – https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582/  
+[5] Choucair K et al. Targeting KRAS mutations: orchestrating cancer evolution and therapeutic challenges – https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860/  
+[8] Cheema PK et al. Canadian Consensus Recommendations on the Management of KRAS G12C-Mutated NSCLC – https://pmc.ncbi.nlm.nih.gov/articles/PMC10377814/  
+[9] Shaverdashvili K, Burns TF. Advances in the treatment of KRAS G12C mutant non–small cell lung cancer – https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745/  
+[10] Selective KRAS G12C inhibitors in non-small cell lung cancer: chemistry, concurrent pathway alterations, and clinical outcomes – https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042/  
+[11] Zhang F et al. Current status of KRAS G12C inhibitors in NSCLC and the potential for combination with anti-PD-(L)1 therapy: a systematic review – https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/  
+[12] Treatment Strategies for KRAS-Mutated Non-Small-Cell Lung Cancer – https://pmc.ncbi.nlm.nih.gov/articles/PMC10046549/  
+[13] KRASG12C mutant lung adenocarcinoma: unique biology, novel therapies and new challenges – https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394/  
+
+---
 
 ## References
 
-[1] Adagrasib \| C32H35ClFN7O2 \| CID 138611145 – PubChem. https://pubchem.ncbi.nlm.nih.gov/compound/Adagrasib  
+[1] Brazel D, Arter Z, Nagasaka M. A Long Overdue Targeted Treatment for KRAS Mutations in NSCLC: Spotlight on Adagrasib. Lung Cancer (Auckl). 2022;13:109‑124. https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/  
 
-[2] KRAZATI (adagrasib) tablets – FDA label 2024 (216340s005). https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
+[2] Negrao MV et al. Intracranial Efficacy of Adagrasib in Patients From the KRYSTAL-1 Trial With KRASG12C-Mutated Non–Small-Cell Lung Cancer Who Have Untreated CNS Metastases. J Clin Oncol. 2023;41(24):4301‑4312. https://pmc.ncbi.nlm.nih.gov/articles/PMC10553074/  
 
-[3] Choucair K, et al. Targeting KRAS mutations: orchestrating cancer evolution and therapeutic challenges. Signal Transduct Target Ther. 2025;10:385. PMCID: PMC12660860. https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860/  
+[3] Zhang F et al. Current status of KRAS G12C inhibitors in NSCLC and the potential for combination with anti-PD-(L)1 therapy: a systematic review. Front Oncol. 2024;14:1372734. https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/  
 
-[4] (PubMed record corresponding to “Resistance to KRASG12C Inhibitors in Non-Small Cell Lung Cancer”). https://pubmed.ncbi.nlm.nih.gov/35004309/  
+[4] Sabari JK et al. Activity of Adagrasib (MRTX849) in Brain Metastases: Preclinical Models and Clinical Data from Patients with KRAS G12C–Mutant NSCLC. Clin Cancer Res. 2022;28(17):3318‑3328. https://pmc.ncbi.nlm.nih.gov/articles/PMC9662862/  
 
-[5] Shaverdashvili K, Burns TF. Advances in the treatment of KRAS G12C mutant non–small cell lung cancer. Cancer. 2025;131(Suppl 1):e35783. PMCID: PMC11963745. https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745/  
+[5] Adagrasib – LiverTox. National Institute of Diabetes and Digestive and Kidney Diseases. https://www.ncbi.nlm.nih.gov/books/NBK597220/  
 
-[6] Srisongkram T, Weerapreeyakul N. Drug repurposing against KRAS mutant G12C: a machine learning, molecular docking, and molecular dynamics study. Molecules. 2022;28(1):261. PMCID: PMC9821013. https://pmc.ncbi.nlm.nih.gov/articles/PMC9821013/  
+[6] Lu K, Husain H. Intracranial responses with selective KRAS-G12C inhibitors in non-small cell lung cancer. Transl Lung Cancer Res. 2023;12(6):1152‑1166. https://pmc.ncbi.nlm.nih.gov/articles/PMC10326777/  
 
-[7] (Review) Mechanisms of resistance to KRASG12C inhibitors in KRASG12C-mutated non-small cell lung cancer. PMCID: PMC11410594. https://pmc.ncbi.nlm.nih.gov/articles/PMC11410594/  
+[7] Bekaii-Saab TS et al. Adagrasib in Advanced Solid Tumors Harboring a KRASG12C Mutation. N Engl J Med. 2023;388(24):2233‑2247. https://pmc.ncbi.nlm.nih.gov/articles/PMC10852394/  
 
-[8] KRYSTAL‑1 (adagrasib) phase I/II trial record – NCT03785249. ClinicalTrials.gov. https://clinicaltrials.gov/study/NCT03785249  
+[8] Herzberg BO, Manji GA. KRAS: Druggable at Last. Curr Oncol Rep. 2023;25(4):459‑473. https://pmc.ncbi.nlm.nih.gov/articles/PMC10078900/  
 
-[9] Tian H, et al. Adagrasib: A landmark in the KRASG12C‐mutated NSCLC. MedComm. 2022;3:e190. PMCID: PMC9697582. https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582  
+[9] Huang R et al. Therapeutic strategies for KRAS G12C-mutant non-small cell lung cancer: from bench to bedside and beyond. Front Pharmacol. 2024;15:1422073. https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982/  
 
-[10] KRAZATI (adagrasib) tablets – FDA prescribing information 2022 (216340s000). https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s000lbl.pdf  
+[10] Tian H, Yang Z, He J. Adagrasib: A landmark in the KRASG12C‐mutated NSCLC. MedComm (2020). 2022;3(4):e172. https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582/  
 
-[11] KRAZATI (adagrasib) tablets – FDA prescribing information 2024 (duplicate citation of 216340s005). https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
+[11] Choucair K et al. Targeting KRAS mutations: orchestrating cancer evolution and therapeutic challenges. Mol Cancer. 2024;23(1):119. https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860/  
 
-[12] National Cancer Institute. Combination Therapies With Adagrasib in Patients With Advanced NSCLC With KRAS G12C Mutation. NCT05609578 (NCI‑2023‑04789). https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2023-04789  
+[12] Ciardiello D et al. Targeting KRASG12C in colorectal cancer: the beginning of a new era. ESMO Open. 2022;7(1):100314. https://pmc.ncbi.nlm.nih.gov/articles/PMC9800313/  
 
-[13] Attieh F, Kourie HR. Breaking barriers: the latest insights into KRAS G12C inhibitors. Future Oncol. 2024. PMCID: PMC11572073. https://pmc.ncbi.nlm.nih.gov/articles/PMC11572073/  
+[13] Shaverdashvili K, Burns TF. Advances in the treatment of KRAS G12C mutant non–small cell lung cancer. Ther Adv Med Oncol. 2024;16:17588359241266371. https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745/  
 
-[14] KRAZATI (adagrasib) – FDA approval announcement / label background (implied in NDA/label documents).  
+[14] KRAZATI (adagrasib) tablets, for oral use – US Prescribing Information (Corrected Original 2022 Label). FDA. https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340Orig1s000Corrected_lbl.pdf  
 
-[15] National Cancer Institute. Phase 2 Trial of Adagrasib Monotherapy and in Combination With Pembrolizumab and a Phase 3 Trial of Adagrasib in Combination in Patients With a KRAS G12C Mutation (KRYSTAL‑7). NCT04613596 (NCI‑2021‑06578). https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2021-06578  
+[15] KRAZATI (adagrasib) tablets, for oral use – US Prescribing Information (2024). FDA. https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/216340s005lbl.pdf  
 
-[16] (Mechanistic/target‑selectivity data on adagrasib and KRAS G12C from preclinical NSCLC models; summarized within Tian et al. MedComm 2022 and resistance‑mechanism reviews.)  
+[16] KRAZATI (adagrasib) tablets, for oral use – US Prescribing Information (Initial 2022 Label). FDA. https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s000lbl.pdf  
 
-[17] (Guideline/review sources summarizing prevalence of KRAS G12C in NSCLC and positioning of adagrasib vs sotorasib; details embedded within Shaverdashvili & Burns 2025 and Attieh & Kourie 2024.)  
+[17] KRAZATI (adagrasib) tablets, for oral use – s001 Label, 2022. FDA. https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s001lbl.pdf  
 
-[18] (Review) Mechanisms of Resistance to KRAS Inhibitors: Cancer Cells' Strategic Use of Normal Cellular Mechanisms to Adapt. PMCID: PMC11875783. https://pmc.ncbi.nlm.nih.gov/articles/PMC11875783/  
+[18] FDA. FDA grants accelerated approval to adagrasib with cetuximab for KRAS G12C-mutated colorectal cancer. https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-accelerated-approval-adagrasib-cetuximab-kras-g12c-mutated-colorectal-cancer  
 
-[19] (Review) Resistance to KRASG12C Inhibitors in Non-Small Cell Lung Cancer. PMCID: PMC8739760. https://pmc.ncbi.nlm.nih.gov/articles/PMC8739760/  
+[19] Adagrasib \| C32H35ClFN7O2 \| CID 138611145 – PubChem. https://pubchem.ncbi.nlm.nih.gov/compound/Adagrasib  
 
-[20] (Review) Activity and resistance to KRASG12C inhibitors in non-small cell lung cancer and colorectal cancer. https://pubmed.ncbi.nlm.nih.gov/38723697/  
+[20] An Updated Review on Developing Small Molecule Kinase Inhibitors Using Computer-Aided Drug Design Approaches. Int J Mol Sci. 2023;24(16):12625. https://pmc.ncbi.nlm.nih.gov/articles/PMC10530957/  
 
-[21] (Regulatory/clinical review) KRAZATI (adagrasib) NDA 216340 Multidiscipline Review. https://www.accessdata.fda.gov/drugsatfda_docs/nda/2023/216340Orig1s000MultidisciplineR.pdf  
+[21] Krazati (adagrasib) EU Risk Management Plan, Version 2.1. EMA. https://www.ema.europa.eu/en/documents/rmp/krazati-epar-risk-management-plan_en.pdf  
 
-[22] (Mechanistic/structural work on switch‑II pocket KRAS G12C inhibitors including adagrasib; cited within Tian et al. and resistance reviews.)  
+[22] Adagrasib – National Cancer Institute Drug Information. https://www.cancer.gov/about-cancer/treatment/drugs/adagrasib  
 
-[23] (Guideline/consensus documents and reviews positioning adagrasib within contemporary NSCLC treatment algorithms; information integrated from Shaverdashvili & Burns 2025, Attieh & Kourie 2024, and related oncology practice updates.)  
+[23] KRAZATI (adagrasib) NDA 216340 Multidiscipline Review. FDA. https://www.accessdata.fda.gov/drugsatfda_docs/nda/2023/216340Orig1s000MultidisciplineR.pdf  
 
-[24] KRAZATI – EU Risk Management Plan (Version 2.1). European Medicines Agency. https://www.ema.europa.eu/en/documents/rmp/krazati-epar-risk-management-plan_en.pdf  
+[24] Agilent Resolution ctDx FIRST – P210040 (Companion Diagnostic for KRAZATI). FDA. https://www.fda.gov/medical-devices/recently-approved-devices/agilent-resolution-ctdx-first-p210040  
 
-[25] Krazati (adagrasib) – EMA procedural steps taken and scientific information after authorisation. European Medicines Agency. https://www.ema.europa.eu/en/documents/procedural-steps-after/krazati-epar-procedural-steps-taken-scientific-information-after-authorisation-archive_en.pdf  
+[25] KRAZATI (adagrasib) NDA 216340/S-005 Approval Package (CRC indication). FDA. https://www.accessdata.fda.gov/drugsatfda_docs/nda/2024/216340Orig1s005.pdf  
 
-[26] Negrao MV, et al. Intracranial efficacy of adagrasib in patients from the KRYSTAL‑1 trial with KRASG12C‑mutated non–small‑cell lung cancer who have untreated CNS metastases. J Clin Oncol. 2023;41(28):4472–4477. PMCID: PMC10553074. https://pmc.ncbi.nlm.nih.gov/articles/PMC10553074/  
+[26] Adagrasib in the treatment of colorectal cancer. (Review). https://pmc.ncbi.nlm.nih.gov/articles/PMC12323406/  
 
-[27] The polyamine inhibitor SAM486A increases the efficacy of adagrasib in non-small cell lung cancer cells harboring KRASG12C mutation. https://pubmed.ncbi.nlm.nih.gov/41715254/  
+[27] Treatment Strategies for KRAS-Mutated Non-Small-Cell Lung Cancer. Cancers (Basel). 2023;15(5):1543. https://pmc.ncbi.nlm.nih.gov/articles/PMC10046549/  
 
-[28] Mechanisms of resistance to KRAS G12C inhibition in non-small cell lung cancer. https://pubmed.ncbi.nlm.nih.gov/37378881/  
+[28] KRASG12C mutant lung adenocarcinoma: unique biology, novel therapies and new challenges. Signal Transduct Target Ther. 2024;9:50. https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394/  
 
-[29] Genetic mechanisms of resistance to targeted KRAS inhibition. PMCID: PMC12340830. https://pmc.ncbi.nlm.nih.gov/articles/PMC12340830/
+[29] Selective KRAS G12C inhibitors in non-small cell lung cancer: chemistry, concurrent pathway alterations, and clinical outcomes. J Hematol Oncol. 2021;14:132. https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042/  
+
+[30] Comparative Efficacy of Adagrasib and Sotorasib in KRAS G12C-Mutant NSCLC: Insights from Pivotal Trials. Oncol Ther. 2024;12(2):345‑362. https://pmc.ncbi.nlm.nih.gov/articles/PMC11545475/  
+
+[31] Zhang J et al. Practical Guidance for the Management of Adverse Events in Patients with KRASG12C-Mutated Non-Small Cell Lung Cancer Receiving Adagrasib. Oncologist. 2023;28(4):e318‑e327. https://pmc.ncbi.nlm.nih.gov/articles/PMC10078892/  
+
+[32] Wang S, Uriel M, Cheng H. Lung Cancer with Brain Metastasis—Treatment Strategies and Molecular Characteristics. J Clin Med. 2023;12(17):5527. https://pmc.ncbi.nlm.nih.gov/articles/PMC11641837/  
+
+[33] Bernstein E et al. Safety and Intracranial Activity of Adagrasib in Patients With KRASG12C-Mutated NSCLC and Untreated CNS Metastases in the KRYSTAL-1 Trial: A Case Series. JCO Precis Oncol. 2023;7:e2300045. https://pmc.ncbi.nlm.nih.gov/articles/PMC10860949/  
+
+[34] FDA. FDA grants accelerated approval to adagrasib for KRAS G12C-mutated NSCLC. https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-accelerated-approval-adagrasib-kras-g12c-mutated-nsclc  
+
+[35] Luo FX, Arter ZL. Adagrasib in KRYSTAL-12 has Broken the KRASG12C Enigma Code in Non-Small Cell Lung Carcinoma. Lung Cancer (Auckl). 2024;15:17‑25. https://pmc.ncbi.nlm.nih.gov/articles/PMC11534526/  
+
+[36] Chopra D et al. Matching-Adjusted Indirect Comparison of Sotorasib Versus Adagrasib in Previously Treated Advanced/Metastatic NSCLC Harboring KRAS G12C Mutation. Adv Ther. 2024;41(7):3129‑3146. https://pmc.ncbi.nlm.nih.gov/articles/PMC12394275/  
+
+[37] ClinicalTrials.gov. NCT04685135 – Phase 3 Study of MRTX849 (Adagrasib) vs Docetaxel in Previously Treated NSCLC with KRAS G12C Mutation (KRYSTAL‑12). https://clinicaltrials.gov/study/NCT04685135  
+
+[38] Cheema PK et al. Canadian Consensus Recommendations on the Management of KRAS G12C-Mutated NSCLC. Curr Oncol. 2023;30(7):5901‑5916. https://pmc.ncbi.nlm.nih.gov/articles/PMC10377814/  
+
+[39] Tian T, Li W. Advances on drug therapy for KRASG12C-mutant non-small-cell lung cancer. Transl Oncol. 2024;31:101746. https://pmc.ncbi.nlm.nih.gov/articles/PMC12828744/  
+
+[40] Mirati Therapeutics. Protocol 849-012 v7.0 – A Randomized Phase 3 Study of MRTX849 versus Docetaxel in NSCLC with KRAS G12C Mutation (NCT04685135). https://cdn.clinicaltrials.gov/large-docs/35/NCT04685135/Prot_SAP_000.pdf/
