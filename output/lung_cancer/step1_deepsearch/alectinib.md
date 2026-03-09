@@ -145,7 +145,7 @@ Alectinib’s clinical utility in ALK‑positive NSCLC is defined by one pivotal
 
 **Crizotinib‑resistant setting and transition to second‑generation ALK TKIs** – Earlier phase I/II and randomized trials with crizotinib showed median PFS ~10–11 months and highlighted frequent CNS failure and on‑target resistance mutations, prompting development of more potent, CNS‑penetrant agents.[2,4,6,7] Second‑generation ALK TKIs including alectinib were initially evaluated in crizotinib‑resistant patients and “were successful in overcoming many of the common resistance mechanisms” with improved CNS activity,[2] providing the efficacy and safety rationale for the subsequent ALEX trial design and for sequencing strategies in precision oncology.
 
-## Pathway Evidence Table
+## 9. Pathway Evidence Table
 
 Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References
 ---|---|---|---|---
@@ -162,7 +162,7 @@ SRC/PTK2 (FAK) signaling | Up (co‑activation) | Resistant (as bypass) | In kin
 AXL signaling | Up (in acquired resistance contexts) | Resistant | INKA kinase‑centric analysis highlights AXL upregulation in EGFR‑inhibitor‑resistant NSCLC cells, where it functions as a resistance hub; given similar patterns of bypass signaling to RTKs in kinase‑addicted tumors, AXL upregulation represents a plausible resistance pathway to ALK inhibition.[2,3]
 Global protein kinase pathways (PI3K/AKT/mTOR, Ras/BRAF/MEK/ERK) | Down (with effective oncogenic kinase inhibition) | Sensitive | Systematic analysis of targeted therapies in glioma underscores that PI3K/AKT/mTOR and Ras/BRAF/MEK/ERK are dominant survival and proliferation cascades downstream of RTKs such as ALK and EGFR; their sustained activation drives progression, while effective inhibition correlates with improved therapeutic responses to kinase inhibitors.[3]
 
-### References
+### Sources
 
 [1] Frumento D, et al. Small Molecule Tyrosine Kinase Inhibitors (TKIs) for Glioblastoma Treatment. International Journal of Molecular Sciences. 2024;25(13):1398. https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061/  
 

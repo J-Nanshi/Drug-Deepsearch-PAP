@@ -172,6 +172,25 @@ For *NTRK* fusion‑positive solid tumors, including NSCLC, an integrated analys
 | Multi‑target RTK network (ROS1/ALK/NTRK/others) | Down (primary targets) / Up (alternative RTKs) | Sensitive / Resistant | Entrectinib’s multi‑kinase profile enables potent inhibition of ROS1, NTRK1/2/3 and ALK, producing high response rates in fusion‑positive NSCLC; however, broader precision‑oncology experience shows that activation of alternative RTKs can emerge as bypass tracks, reducing durability of response. | [1],[4],[5],[6],[9] |
 | Basket‑trial biomarker‑driven pathway selection | Down (matched driver) | Sensitive | Basket and umbrella trial designs using NGS to identify actionable drivers (e.g., ROS1, NTRK) and assign entrectinib or other matched TKIs demonstrate that suppression of the specific genomic driver pathway is central to achieving meaningful responses in heterogeneous advanced NSCLC. | [4],[7],[9] |
 
+## Sources
+[1] Entrectinib \| C31H34F2N6O2 \| CID 25141092 – PubChem. https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib  
+
+[2] Browse Substances – precisionFDA (GINAS entrectinib entry). https://precision.fda.gov/ginas/app/ui/browse-substance?search=root_codes_comments:%22Treatment%20of%20TrkA-positive,%20TrkB-positive,%20TrkC-positive,%20ROS1-positive,%20or%20ALK-positive%20colorectal%20cancer%22  
+
+[3] Ortega MA et al. From Classical to Emerging Biomarkers of Brain and Central Nervous System Tumors. Cell Mol Neurobiol. 2026. https://pmc.ncbi.nlm.nih.gov/articles/PMC12891329/  
+
+[4] European Medicines Agency. Rozlytrek: EPAR – Product Information / Assessment Report. (Conditional marketing authorisation for ROS1-positive NSCLC and NTRK fusion-positive solid tumours). https://www.ema.europa.eu/en/medicines/human/EPAR/rozlytrek  
+
+[5] Russo A et al. Overcoming TKI resistance in fusion-driven NSCLC. Transl Lung Cancer Res. 2020;9(6):2581–2598. https://pmc.ncbi.nlm.nih.gov/articles/PMC7815353/  
+
+[6] Ekman S. How selecting best therapy for metastatic NTRK fusion-positive non-small cell lung cancer? Transl Lung Cancer Res. 2020;9(6):2209–2223. https://pmc.ncbi.nlm.nih.gov/articles/PMC7815373/  
+
+[7] U.S. Food and Drug Administration. FDA approves entrectinib for NTRK solid tumors and ROS-1 NSCLC. 2019. https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-entrectinib-ntrk-solid-tumors-and-ros-1-nsclc  
+
+[8] Sharma GG et al. Tumor Resistance against ALK Targeted Therapy—Where It Comes From and Where It Goes. Cancers (Basel). 2018;10(3):62. https://pmc.ncbi.nlm.nih.gov/articles/PMC5876637/  
+
+[9] Liu D et al. Entrectinib: an orally available, selective tyrosine kinase inhibitor for the treatment of NTRK, ROS1, and ALK fusion-positive solid tumors. Ther Clin Risk Manag. 2018;14:1247–1252. https://pmc.ncbi.nlm.nih.gov/articles/PMC6055893  
+
 ## 10. References
 
 [1] Entrectinib \| C31H34F2N6O2 \| CID 25141092 – PubChem. https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib  

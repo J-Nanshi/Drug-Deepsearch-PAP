@@ -142,7 +142,7 @@ The phase I CHRYSALIS trial (NCT02609776) in EGFR exon 20 insertion–mutated NS
 | Alternative RTK networks (HER2, AXL, other MET‑independent RTKs) | Up | Resistant | Activation or amplification of parallel RTKs (e.g., HER2, AXL) is a frequent bypass to EGFR or MET inhibition; such network reprogramming can restore downstream PI3K/MAPK signaling despite EGFR/MET blockade, representing a plausible resistance pathway under selective pressure from amivantamab.[9],[11],[13] | [9],[11],[13] |
 | Tumor immune microenvironment and macrophage polarization | Up (M1 polarization) / Down (M2/TAM‑driven EMT) | Sensitive | In vivo, amivantamab‑containing regimens can polarize macrophages toward an M1 phenotype and remodel the immune microenvironment, counteracting TAM‑ and EMT‑driven immunosuppression; these changes are consistent with broader data linking M1 polarization and reduced M2‑TAM density to improved control of lung cancer.[8],[10],[13] | [8],[10],[13] |
 
-## 10. References
+### Sources
 
 [1] Amivantamab: a monoclonal EGFR-MET bispecific antibody for EGFR exon 20 insertion in non-small cell lung cancer - https://pubmed.ncbi.nlm.nih.gov/35983925/  
 [2] Amivantamab for the treatment of EGFR exon 20 insertion mutant non-small cell lung cancer - https://www.ncbi.nlm.nih.gov/pubmed/34913823  
@@ -158,15 +158,11 @@ The phase I CHRYSALIS trial (NCT02609776) in EGFR exon 20 insertion–mutated NS
 [12] Rybrevant (amivantamab-vmjw) injection – sBLA approval letter - https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/761210Orig1s002ltr.pdf  
 [13] FDA approves amivantamab-vmjw for EGFR exon 20 insertion-mutated non-small cell lung cancer indications - https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-amivantamab-vmjw-egfr-exon-20-insertion-mutated-non-small-cell-lung-cancer-indications  
 [14] New advances in the treatment of EGFR exon20ins mutant advanced NSCLC - https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093/  
-[16] (Cited in Targets section; specific source details not provided in available content.)  
-[18] (Cited in Targets section; specific source details not provided in available content.)  
-[20] (Cited in Targets section; specific source details not provided in available content.)  
-[21] (Cited in Targets section; specific source details not provided in available content.)  
-[23] (Cited in Targets section; specific source details not provided in available content.)  
 
 [1] Lazertinib \| C30H34N8O3 \| CID 121269225 - PubChem - https://pubchem.ncbi.nlm.nih.gov/compound/Lazertinib  
 [4] Amivantamab-vmjw - PubChem - https://pubchem.ncbi.nlm.nih.gov/compound/Amivantamab-vmjw  
 
+## 10. References
 [1] Khosla AA et al. Bispecific Antibodies in Lung Cancer: A State-of-the-Art Review. Pharmaceuticals. 2023 - https://pmc.ncbi.nlm.nih.gov/articles/PMC10609957/  
 [2] Liu H et al. Targeting EGFR Exon 20 Insertion Mutations in Non-small-Cell Lung Cancer. 2024 - https://pmc.ncbi.nlm.nih.gov/articles/PMC11489933/  
 [4] Miyamura BV et al. Current paradigm of EGFRins20 in Non-Small Cell Lung Cancer. Med. 2025 - https://pmc.ncbi.nlm.nih.gov/articles/PMC12452814/  

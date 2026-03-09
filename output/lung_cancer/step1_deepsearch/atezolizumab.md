@@ -127,11 +127,6 @@ Across phase III programs (OAK, IMpower110, IMpower130), atezolizumab consistent
 
 | Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References |
 | --- | --- | --- | --- | --- |
-
-## Pathway Evidence Table
-
-| Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References |
-| --- | --- | --- | --- | --- |
 | PD‑1/PD‑L1 inhibitory signaling (concept-level) | Down | Sensitive | Atezolizumab blocks PD‑L1, preventing its engagement with PD‑1 and B7.1, reversing SHP‑mediated dephosphorylation of TCR/CD28 signaling components and restoring CD8⁺ T‑cell effector function in NSCLC and SCLC. | [1],[7],[8],[9],[11],[12] |
 | TCR/CD28 co‑stimulation (concept-level) | Up | Sensitive | Effective PD‑L1 blockade requires intact TCR recognition and CD28 co‑stimulation; when these are functional, released PD‑1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC‑I subtypes. | [4],[6],[8],[9],[12] |
 | IFN‑γ–JAK/STAT signaling | Up when intact; functionally Down in resistant tumors | Sensitive when intact; Resistant when disrupted | CD8⁺ T cells activated by PD‑L1 blockade secrete IFN‑γ, which via JAK1/2–STAT1 upregulates PD‑L1 and MHC‑I; loss‑of‑function in IFNGR/JAK/STAT components abrogates this feedback, contributing to primary/acquired resistance to PD‑(L)1 inhibitors in lung cancer. | [4],[6],[8],[9] |

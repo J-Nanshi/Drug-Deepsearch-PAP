@@ -151,7 +151,7 @@ The phase III EMPOWER-Lung 1 trial (NCT03088540) randomized patients with advanc
 | B‑cell and antibody‑mediated modulation of antitumor immunity | Up (supportive humoral and antigen‑presentation roles) | Sensitive | Workshop content on B‑cell responses and antibody production indicates that B cells can contribute to antigen presentation and tertiary lymphoid structure formation; PD‑1 inhibition may augment these processes, indirectly supporting T‑cell–mediated control of NSCLC. | [1] |
 | Systems‑immunology–defined immune‑network integration | Up (coordinated multicell immune response) | Sensitive | Systems‑immunology sessions emphasize that effective immunotherapy reflects coordinated changes across T, B, myeloid, and stromal compartments; cemiplimab’s PD‑1 blockade acts as a nodal perturbation that re‑wires these networks toward an inflamed, tumor‑rejecting state. | [1] |
 
-### Sources for Pathway Evidence Table
+### Sources
 
 [1] NIH/FDA Immunology Interest Group 2025 Workshop – Program & Abstract Booklet - https://ncifrederick.cancer.gov/events/conferences/sites/default/files/inline-files/Compressed%20Booklet___Immunology_Interest_Group_Workshop_2025.pdf
 

@@ -159,7 +159,7 @@ In crizotinib-pretreated *ALK*-rearranged NSCLC, brigatinib demonstrated respons
 | Apoptosis and survival balance (KEGG: hsa04210 Apoptosis) | Up in pro‑apoptotic signaling (via ALK blockade) | Sensitive | Durable responses and favorable progression‑free survival in ALK‑inhibitor‑naive and crizotinib‑pretreated ALK+ NSCLC treated with brigatinib suggest restoration of apoptotic signaling after inhibition of ALK‑dependent survival pathways such as PI3K–AKT–mTOR.[6,7] | [6],[7] |
 | Early pulmonary toxicity/ILD‑related inflammatory pathways (no specific ID; safety signal) | Up (acute inflammatory injury) | Resistant (toxicity‑limited exposure) | Early pulmonary events and interstitial lung disease‑like toxicity were observed with higher brigatinib doses, leading to adoption of a 7‑day 90‑mg lead‑in before 180 mg daily; activation of lung injury and inflammatory pathways can limit dosing intensity and thereby reduce effective ALK pathway suppression in susceptible patients.[7] | [7] |
 
-### Sources for Pathway Evidence Table
+### Sources
 
 [1] Study Details | NCT02737501 | ClinicalTrials.gov - https://clinicaltrials.gov/study/NCT02737501  
 [2] A Phase 3 Multicenter Open-label Study of Brigatinib (AP26113) versus Crizotinib in Patients with ALK-positive Advanced Lung Cancer (Protocol AP26113-13-301) - https://cdn.clinicaltrials.gov/large-docs/01/NCT02737501/Prot_000.pdf  

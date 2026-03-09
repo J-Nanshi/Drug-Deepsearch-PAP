@@ -101,7 +101,7 @@ Peripheral edema is the most common adverse reaction (≥20%) and a MET‑TKI cl
 
 The pivotal phase II GEOMETRY mono‑1 trial (NCT02414139) evaluated capmatinib 400 mg BID in advanced NSCLC with MET exon 14 skipping (METex14) or high‑level MET amplification (gene copy number ≥10).[3],[10],[16] In METex14‑positive disease, treatment‑naïve patients achieved an ORR of 68% with median PFS 9.7–12.4 months, while previously treated patients had ORR ~40–41% and median PFS ~5.2–5.4 months.[3],[5],[10],[15],[16] In MET‑amplified NSCLC with gene copy number ≥10, ORR was 40% in treatment‑naïve and 29% in pretreated cohorts, with shorter PFS around 4.2 months.[1],[10],[16] GEOMETRY mono‑1 also demonstrated intracranial activity, with intracranial responses in most patients with brain metastases.[16]
 
-## Pathway Evidence Table
+## 9. Pathway Evidence Table
 
 | Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References |
 | --- | --- | --- | --- | --- |
@@ -117,15 +117,6 @@ The pivotal phase II GEOMETRY mono‑1 trial (NCT02414139) evaluated capmatinib 
 | Bypass RTK networks (EGFR, AXL, HER3, FGFR1) | Up (in resistance) | Resistant | Activation or amplification of parallel receptor tyrosine kinases, including EGFR, AXL, HER3 and FGFR1, can restore downstream signaling pathways such as MAPK and PI3K–AKT despite MET inhibition, functioning as bypass tracks that limit the durability of capmatinib responses. | [1] |
 | Co‑occurring oncogenic signaling (e.g., KRAS/MAPK, MDM2–p53) | Up (non‑MET drivers) | Resistant | In MET‑altered NSCLC with additional oncogenic drivers, such as KRAS mutations or MDM2 amplification, tumor cells may rely on these alternative pathways for proliferation; MET inhibition alone may not sufficiently suppress MAPK or p53‑related signaling, resulting in primary or intrinsic resistance to capmatinib. | [1] |
 | SERPINE1/PAI‑1–MAPK axis | Up (in acquired resistance) | Resistant | Overexpression of SERPINE1/PAI‑1 can enhance MAPK signaling and promote survival under MET inhibition; this adaptive activation of a PAI‑1–MAPK axis can reduce dependence on MET and contribute to acquired resistance to capmatinib in MET‑driven NSCLC. | [1] |
-
-### Sources
-
-[1] (No URL available in provided source material; pathway relationships and capmatinib effects summarized from the supplied text snippet.)
-
-## Pathway Evidence Table
-
-| Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References |
-| --- | --- | --- | --- | --- |
 | HGF/MET signaling | Down | Sensitive | Capmatinib is a highly selective type Ib MET TKI that binds the ATP‑binding site of MET and inhibits autophosphorylation, shutting down ligand‑dependent and ligand‑independent HGF/MET signaling in MET‑addicted NSCLC and driving tumor regression. | [3],[8],[10],[11],[12],[13],[15],[16] |
 | PI3K–AKT–mTOR pathway | Down (on‑target); can be maintained via bypass RTKs | Sensitive when suppressed; Resistant when maintained | Activated MET recruits PI3K and activates AKT/mTOR, promoting survival; capmatinib reduces AKT phosphorylation in MET‑dependent models, but alternative activation via EGFR or other RTKs can sustain PI3K–AKT signaling and blunt response. | [3],[8],[11],[12],[13],[15] |
 | RAS–RAF–MEK–ERK (MAPK) cascade | Down (with effective MET blockade); Up (via KRAS/RTK bypass) | Sensitive when suppressed; Resistant when reactivated | MET drives RAS–MAPK signaling to support proliferation and invasion; capmatinib decreases ERK phosphorylation in METex14 or MET‑amplified NSCLC, whereas KRAS mutations or activation of bypass RTKs (EGFR, FGFR, AXL) restore MAPK output and mediate intrinsic or acquired resistance. | [3],[6],[8],[11],[12],[13],[15],[16] |
@@ -141,6 +132,7 @@ The pivotal phase II GEOMETRY mono‑1 trial (NCT02414139) evaluated capmatinib 
 
 ### Sources
 
+[1] Capmatinib \| C23H17FN6O \| CID 25145656 - https://pubchem.ncbi.nlm.nih.gov/compound/Capmatinib 
 [3] TABRECTA (capmatinib) Prescribing Information, 2024 - https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/213591s011lbl.pdf  
 [6] Spagnolo CC et al. Targeting MET in Non-Small Cell Lung Cancer (NSCLC): A New Old Story? - https://pmc.ncbi.nlm.nih.gov/articles/PMC10299133/  
 [8] FDA grants accelerated approval to capmatinib for metastatic non-small cell lung cancer - https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-accelerated-approval-capmatinib-metastatic-non-small-cell-lung-cancer  

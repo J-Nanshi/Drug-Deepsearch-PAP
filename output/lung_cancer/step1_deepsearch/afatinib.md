@@ -163,8 +163,53 @@ In squamous NSCLC, LUX‑Lung 8 compared afatinib with erlotinib as second‑lin
 
 ### Sources
 
-(See numbered list in References section for full source details.)
+[1] An update on clinical oncology for the non-oncologist - https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365/  
 
+[2] Wu J, Lin Z. Non-Small Cell Lung Cancer Targeted Therapy: Drugs and Mechanisms of Drug Resistance. Int J Mol Sci. 2022;23(23):15056. https://pmc.ncbi.nlm.nih.gov/articles/PMC9738331/  
+
+[3] Tomuleasa C et al. Therapeutic advances of targeting receptor tyrosine kinases in cancer. Signal Transduct Target Ther. 2024;9:201. https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831/  
+
+[4] Developments in targeted therapy & immunotherapy—how non-small cell lung cancer management will change in the next decade: a narrative review - https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626/  
+
+[5] Torres-Jiménez J et al. Novel Tyrosine Kinase Targets in Urothelial Carcinoma. Int J Mol Sci. 2021;22(3):747. https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553/  
+
+[6] Overcoming resistance to targeted therapies in NSCLC: current approaches and clinical application - https://pmc.ncbi.nlm.nih.gov/articles/PMC4543855/  
+
+[7] Oncogenic alterations in advanced NSCLC: a molecular super-highway - https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183/  
+
+[8] Takeda M, Nakagawa K. Toxicity profile of epidermal growth factor receptor tyrosine kinase inhibitors in patients with epidermal growth factor receptor gene mutation-positive lung cancer. Mol Clin Oncol. 2017;7(1):3–9. https://pmc.ncbi.nlm.nih.gov/articles/PMC5244907/  
+
+[9] Afatinib for the Treatment of NSCLC with Uncommon EGFR Mutations: A Narrative Review - https://pmc.ncbi.nlm.nih.gov/articles/PMC10297373/  
+
+[10] Afatinib for the Treatment of NSCLC Harboring Uncommon EGFR Mutations: A Database of 693 Cases - https://pubmed.ncbi.nlm.nih.gov/31931137/  
+
+[11] Real-World Evidence for First-Line afatinib in Advanced Non-Small Cell Lung Cancer With Uncommon Epidermal Growth Factor Receptor Mutations Other than G719X/L861Q/S768I - https://pmc.ncbi.nlm.nih.gov/articles/PMC12553936/  
+
+[12] Chen JA, Riess JW. Advances in targeting acquired resistance mechanisms to epidermal growth factor receptor tyrosine kinase inhibitors. J Thorac Dis. 2020;12(5):2851–2872. https://pmc.ncbi.nlm.nih.gov/articles/PMC7330402/  
+
+[13] Liu G-H et al. Small molecule inhibitors targeting the cancers. MedComm (2020). 2022;3(4):e181. https://pmc.ncbi.nlm.nih.gov/articles/PMC9560750/  
+
+[14] Afatinib for the Treatment of NSCLC Harboring Uncommon EGFR Mutations: A Database of 693 Cases - https://pubmed.ncbi.nlm.nih.gov/31931137/  
+
+[15] Efficacy and potential resistance mechanisms of afatinib in advanced non-small cell lung cancer patients with EGFR G719X/L861Q/S768I - https://pubmed.ncbi.nlm.nih.gov/36069292/  
+
+[16] Inconsistent clinical outcomes following afatinib treatment in NSCLC patients harboring uncommon epidermal growth factor receptor mutation - https://pmc.ncbi.nlm.nih.gov/articles/PMC9680984/  
+
+[17] GILOTRIF (afatinib) label 2019 - https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/201292s015lbl.pdf  
+
+[18] GILOTRIF (afatinib) original label 2013 - https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf  
+
+[19] GILOTRIF (afatinib) label and approval history (2013, 2019) - https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf  
+
+[20] Efficacy and Safety Results of the Afatinib Expanded Access Program - https://pmc.ncbi.nlm.nih.gov/articles/PMC5488108/  
+
+[21] EGFR epidermal growth factor receptor [Homo sapiens (human)] – Gene ID: 1956. NCBI Gene - https://www.ncbi.nlm.nih.gov/gene/1956  
+
+[22] Edwards SJ et al. Practical Management of Adverse Events Associated with Afatinib - https://pmc.ncbi.nlm.nih.gov/articles/PMC9116182/  
+
+[23] Morin-Ben Abdallah M, Hirsh V. Irreversible tyrosine kinase inhibition of EGFR with afatinib - https://pmc.ncbi.nlm.nih.gov/articles/PMC6001770/  
+
+[24] Joshi M et al. Afatinib for the treatment of metastatic non-small cell lung cancer - https://pmc.ncbi.nlm.nih.gov/articles/PMC4340466/  
 ## References
 
 [1] An update on clinical oncology for the non-oncologist - https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365/  

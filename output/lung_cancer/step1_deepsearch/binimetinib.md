@@ -122,7 +122,7 @@ The phase II PHAROS trial (NCT03915951) evaluated encorafenib 450 mg QD plus bin
 | PHLPP‑regulated PI3K–AKT and MAPK–ERK | Down (PHLPP) / Up (AKT & ERK) | Resistant | In EGFR‑mutant NSCLC, loss or downregulation of the phosphatase PHLPP blunts EGFR‑TKI–mediated suppression of both AKT and ERK, leading to reduced apoptosis and clinical resistance; because MEK inhibitors act within the same ERK arm, low PHLPP creates a context where dual AKT/ERK activation can diminish the impact of MEK blockade by binimetinib.[17] | [17] |
 | RTK bypass (MET, HER2, others) into MAPK | Up | Resistant | Clinical and translational NSCLC data show that resistance to targeted therapies frequently arises via bypass RTK activation (e.g., MET, HER2, AXL), which re‑engages PI3K/AKT and MEK/ERK despite upstream inhibition; such bypass can similarly restore downstream signaling under MEK inhibition, indicating that RTK‑bypass MAPK reactivation is a generic resistance route for binimetinib‑containing strategies.[6],[8],[9] | [6],[8],[9] |
 
-### Sources (for this section)
+### Sources
 
 [1] Enhancing the Therapeutic Efficacy of KRASG12C Inhibitors in Lung Adenocarcinoma Cell Models by Cotargeting the MAPK Pathway or HSP90 – https://pmc.ncbi.nlm.nih.gov/articles/PMC8632397/  
 [4] The Role of Wild-Type RAS in Oncogenic RAS Transformation – https://pmc.ncbi.nlm.nih.gov/articles/PMC8146411/  

@@ -137,7 +137,7 @@ In this setting, bevacizumab use is therefore constrained by protocol‑specific
 
 ### Sources
 
-[1] No specific external URLs or database identifiers were provided in the source material; pathway names and relationships are described at a conceptual level based on the constrained source summary.
+[1] Bevacizumab in non-small-cell lung cancer: a review - https://pubmed.ncbi.nlm.nih.gov/21916570/ (PMID: 21916570)  
 
 ## 10. References
 
