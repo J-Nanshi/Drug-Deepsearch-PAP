@@ -190,7 +190,7 @@ In PRRT‑oriented series, long‑acting octreotide is routinely used before and
 | SSTR4‑linked GPCR signaling in LUAD | Down (SSTR4 transcriptionally reduced) | Resistant (limited octreotide targeting) | LUAD analyses show significant SSTR4 downregulation versus normal lung, with low SSTR4 associated with advanced stage, immune microenvironment remodeling, and worse survival. Because octreotide has minimal affinity for SSTR4 and this receptor is suppressed in LUAD, somatostatin‑analog strategies have little direct impact via this pathway. | [3][4] |
 | mTOR–AKT axis convergence with SSA therapy | Indirect Down (via combination strategies) | Sensitive when co‑targeted (e.g., with everolimus) | mTOR–AKT is a central proliferative pathway in NETs and is druggable with everolimus. Octreotide is frequently combined with mTOR inhibitors or PRRT, providing complementary growth control through SSTR‑mediated cytostasis and mTOR blockade; this combination is standard in advanced NETs and extrapolated to lung NETs. | [2][3][4][5][6][11] |
 
-## Sources
+### Sources
 
 [1] Li SC et al. The Somatostatin Analogue Octreotide Inhibits Growth of Small Intestine Neuroendocrine Tumour Cells. https://pmc.ncbi.nlm.nih.gov/articles/PMC3485222/  
 

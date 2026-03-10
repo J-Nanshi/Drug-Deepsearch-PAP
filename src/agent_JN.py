@@ -8,6 +8,7 @@ import sys
 import asyncio
 import re
 import threading
+import time
 from typing import Literal, Annotated, List, TypedDict, Optional, Dict, Any
 from typing_extensions import TypedDict as ExtTypedDict
 from pydantic import BaseModel, Field
@@ -47,6 +48,32 @@ ensure_nltk()
 def log_print(*args, **kwargs):
     print(*args, **kwargs)
     sys.stdout.flush()
+
+
+_llm_throttle_lock = threading.Lock()
+_llm_last_call_ts = 0.0
+
+
+def invoke_with_global_llm_throttle(model, messages, min_interval_sec: float = 0.3, label: str = "llm"):
+    """Invoke an LLM with a global process-wide minimum spacing between calls."""
+    global _llm_last_call_ts
+
+    if min_interval_sec < 0:
+        min_interval_sec = 0.0
+
+    sleep_for = 0.0
+    with _llm_throttle_lock:
+        now = time.monotonic()
+        next_allowed_at = _llm_last_call_ts + min_interval_sec
+        if now < next_allowed_at:
+            sleep_for = next_allowed_at - now
+            time.sleep(sleep_for)
+        _llm_last_call_ts = time.monotonic()
+
+    if sleep_for > 0:
+        log_print(f"   ⏱️ LLM throttle slept {sleep_for:.3f}s before {label} invoke")
+
+    return model.invoke(messages)
 
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -316,6 +343,7 @@ class Configuration:
         self.writer_provider = configurable.get("writer_provider", "openai")
         self.writer_model = configurable.get("writer_model", "gpt-4o")
         self.user_instructions = configurable.get("user_instructions", "")
+        self.llm_min_interval_sec = max(0.0, float(configurable.get("llm_min_interval_sec", 0.3)))
 
 # ============ UTILITY FUNCTIONS ============
 
@@ -701,182 +729,6 @@ Content:
 """
     return formatted_str
 
-def _clean_url(url: str) -> str:
-    """Normalize URL strings captured from model output."""
-    if not url:
-        return ""
-    cleaned = url.strip().rstrip(".,;)]}>\"'")
-    if cleaned.startswith("www."):
-        cleaned = "https://" + cleaned
-    return cleaned
-
-def _extract_urls_in_order(text: str) -> List[str]:
-    """Extract unique URLs preserving first-seen order."""
-    seen = set()
-    ordered: List[str] = []
-    for raw in re.findall(r"https?://[^\s\]\)>\"]+|www\.[^\s\]\)>\"]+", text or ""):
-        url = _clean_url(raw)
-        if url and url not in seen:
-            seen.add(url)
-            ordered.append(url)
-    return ordered
-
-def _extract_section_local_sources(content: str) -> Dict[int, Dict[str, str]]:
-    """
-    Build local citation-id -> source metadata map for a section.
-    Supports:
-    - [1] Title - URL
-    - Source [1]: URL
-    - [1] URL
-    - 1. URL
-    - Title: ... / URL: ...
-    """
-    local_sources: Dict[int, Dict[str, str]] = {}
-    content = content or ""
-
-    def put(local_id: int, url: str, title: str = ""):
-        if local_id <= 0:
-            return
-        normalized = _clean_url(url)
-        if not normalized:
-            return
-        existing = local_sources.get(local_id)
-        if not existing:
-            local_sources[local_id] = {"url": normalized, "title": (title or "").strip()}
-            return
-        if not existing.get("title") and title:
-            existing["title"] = title.strip()
-
-    # Pattern: [n] Title - URL
-    for m in re.finditer(r"(?im)^\s*[\-\*\d\.\)]*\s*\[(\d+)\]\s*(.*?)\s*-\s*(https?://[^\s\]\)>\"]+|www\.[^\s\]\)>\"]+)\s*$", content):
-        put(int(m.group(1)), m.group(3), m.group(2))
-
-    # Pattern: Source [n]: URL
-    for m in re.finditer(r"(?im)\bSource\s*\[(\d+)\]\s*:\s*(https?://[^\s\]\)>\"]+|www\.[^\s\]\)>\"]+)", content):
-        put(int(m.group(1)), m.group(2), "")
-
-    # Pattern: [n] URL
-    for m in re.finditer(r"(?im)\[(\d+)\]\s*(https?://[^\s\]\)>\"]+|www\.[^\s\]\)>\"]+)", content):
-        put(int(m.group(1)), m.group(2), "")
-
-    # Pattern: n. URL
-    for m in re.finditer(r"(?im)^\s*(\d+)[\.\)]\s*(https?://[^\s\]\)>\"]+|www\.[^\s\]\)>\"]+)\s*$", content):
-        put(int(m.group(1)), m.group(2), "")
-
-    # Pattern: Title + URL blocks
-    for m in re.finditer(r"(?is)Title:\s*(.+?)\s*\n\s*URL:\s*(https?://[^\s\]\)>\"]+|www\.[^\s\]\)>\"]+)", content):
-        title = " ".join(m.group(1).split())
-        url = m.group(2)
-        # Use next free local id for title/url pairs without explicit [n]
-        local_id = len(local_sources) + 1
-        while local_id in local_sources:
-            local_id += 1
-        put(local_id, url, title)
-
-    # Fallback: if we still have sparse map, index remaining URLs in appearance order.
-    ordered_urls = _extract_urls_in_order(content)
-    if ordered_urls and (not local_sources or len(local_sources) < len(ordered_urls)):
-        next_id = 1
-        for url in ordered_urls:
-            while next_id in local_sources:
-                next_id += 1
-            # Skip if URL already present under some id.
-            if any(meta.get("url") == url for meta in local_sources.values()):
-                continue
-            local_sources[next_id] = {"url": url, "title": ""}
-            next_id += 1
-
-    return local_sources
-
-def _split_sources_block(content: str) -> tuple[str, str]:
-    """Split section content into body and trailing ### Sources block (if present)."""
-    match = re.search(r"(?is)\n###\s*Sources\b.*$", content or "")
-    if not match:
-        return (content or "").rstrip(), ""
-    body = (content or "")[:match.start()].rstrip()
-    sources = match.group(0).strip()
-    return body, sources
-
-def _remap_section_citations(
-    section_name: str,
-    content: str,
-    global_url_to_id: Dict[str, int],
-    global_sources: List[Dict[str, str]],
-) -> str:
-    """Remap local [n] citations in a section to deterministic global IDs."""
-    body, sources_block = _split_sources_block(content or "")
-    local_sources = _extract_section_local_sources((content or ""))
-    ordered_urls = _extract_urls_in_order((content or ""))
-
-    used_global_ids: List[int] = []
-    unresolved_local_ids = set()
-
-    def ensure_global(url: str, title: str = "") -> int:
-        if url in global_url_to_id:
-            gid = global_url_to_id[url]
-            if title and not global_sources[gid - 1].get("title"):
-                global_sources[gid - 1]["title"] = title
-            return gid
-        gid = len(global_sources) + 1
-        global_url_to_id[url] = gid
-        global_sources.append({"id": str(gid), "url": url, "title": (title or "").strip()})
-        return gid
-
-    def replace_citation(match: re.Match) -> str:
-        local_id = int(match.group(1))
-        meta = local_sources.get(local_id)
-
-        if not meta and 1 <= local_id <= len(ordered_urls):
-            meta = {"url": ordered_urls[local_id - 1], "title": ""}
-
-        if not meta or not meta.get("url"):
-            unresolved_local_ids.add(local_id)
-            return match.group(0)
-
-        gid = ensure_global(meta["url"], meta.get("title", ""))
-        if gid not in used_global_ids:
-            used_global_ids.append(gid)
-        return f"[{gid}]"
-
-    remapped_body = re.sub(r"\[(\d+)\]", replace_citation, body)
-
-    if unresolved_local_ids:
-        preview = ", ".join(str(x) for x in sorted(unresolved_local_ids))
-        log_print(f"      ⚠️  Unresolved local citations in section '{section_name}': [{preview}]")
-
-    # Rebuild section-level ### Sources only when original section had one.
-    if sources_block:
-        source_lines = ["### Sources"]
-        for gid in sorted(used_global_ids):
-            entry = global_sources[gid - 1]
-            title = (entry.get("title") or "").strip()
-            url = entry.get("url", "")
-            if title:
-                source_lines.append(f"- [{gid}] {title} - {url}")
-            else:
-                source_lines.append(f"- [{gid}] {url}")
-        remapped_sources = "\n".join(source_lines)
-        return (remapped_body + "\n\n" + remapped_sources).strip()
-
-    return remapped_body.strip()
-
-def _build_references_section(global_sources: List[Dict[str, str]]) -> str:
-    """Generate canonical references section from deterministic citation map."""
-    lines = ["## References"]
-    if not global_sources:
-        lines.append("- No resolvable cited sources found.")
-        return "\n".join(lines)
-
-    for entry in global_sources:
-        gid = entry.get("id", "")
-        url = entry.get("url", "")
-        title = (entry.get("title") or "").strip()
-        if title:
-            lines.append(f"[{gid}] {title} - {url}")
-        else:
-            lines.append(f"[{gid}] Source {gid} - {url}")
-    return "\n".join(lines)
-
 # ============ PROMPTS ============
 
 REPORT_PLANNER_QUERY_WRITER_INSTRUCTIONS = """You are performing deep drug effect research for a precision-oncology report.
@@ -1186,8 +1038,12 @@ For Pathway Evidence Table section:
 
 For References section:
 - Use ## for section title (Markdown format): "## References"
-- IMPORTANT: This section is provisional only; final citation numbering and canonical References will be rebuilt deterministically by the system after generation.
-- Keep this section concise, and avoid introducing new citations or renumbering assumptions.
+- CRITICAL: Extract ALL citation numbers [1], [2], [3], etc. from the ENTIRE report content above
+- Include sources from Pathway Evidence Table section (which has its own ### Sources subsection)
+- Also include any sources cited in other sections (even if they don't have ### Sources subsections)
+- List ONLY the sources that correspond to citation numbers actually used anywhere in the report
+- Format: [1] Source Title - https://actual-url.com (PMID: 12345678 if available)
+- Collect ALL sources from all sections together in this References section
 
 For all other sections:
 - Use ## for section title (Markdown format)
@@ -1214,10 +1070,15 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
     writer_model = init_chat_model(model=cfg.writer_model, model_provider=cfg.writer_provider)
     structured_llm = writer_model.with_structured_output(Queries)
     
-    primary_report_gpt = writer_model.invoke([
+    primary_report_gpt = invoke_with_global_llm_throttle(
+        writer_model,
+        [
         SystemMessage(content='You are an assistant research report writer.'),
         HumanMessage(content=f"Write a report on {topic}")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label="generate_report_plan.primary_report",
+    )
     
     system_instructions_query = REPORT_PLANNER_QUERY_WRITER_INSTRUCTIONS.format(
         topic=topic,
@@ -1228,10 +1089,15 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
         primary_report_gpt=primary_report_gpt.content
     )
     
-    results = structured_llm.invoke([
+    results = invoke_with_global_llm_throttle(
+        structured_llm,
+        [
         SystemMessage(content=system_instructions_query),
         HumanMessage(content="Generate search queries for planning the report sections.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label="generate_report_plan.plan_queries",
+    )
     
     # Handle both Queries object and dict (from state serialization)
     if isinstance(results, dict):
@@ -1285,10 +1151,15 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
         planner_llm = init_chat_model(model=cfg.planner_model, model_provider=cfg.planner_provider)
     
     structured_llm_sections = planner_llm.with_structured_output(Sections)
-    report_sections = structured_llm_sections.invoke([
+    report_sections = invoke_with_global_llm_throttle(
+        structured_llm_sections,
+        [
         SystemMessage(content=system_instructions_sections),
         HumanMessage(content="Generate the sections of the report.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label="generate_report_plan.section_plan",
+    )
     
     # Handle both dict and Pydantic Sections object (from state serialization or API response)
     if isinstance(report_sections, dict):
@@ -1362,10 +1233,15 @@ def generate_queries(state: SectionState, config: RunnableConfig):
         number_of_queries=cfg.number_of_queries
     )
     
-    queries = structured_llm.invoke([
+    queries = invoke_with_global_llm_throttle(
+        structured_llm,
+        [
         SystemMessage(content=system_instructions),
         HumanMessage(content="Generate search queries on the provided topic.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"generate_queries.{section_name}",
+    )
     
     # Handle both Queries object and dict (from state serialization)
     if isinstance(queries, dict):
@@ -1466,7 +1342,12 @@ def write_section(state: SectionState, config: RunnableConfig):
         except Exception as e:
             log_print(f"Error processing URL {url}: {e}")
             context_fetch_formatted = CONTEXT_FETCH.format(topic=topic, section=section_name, link=url)
-            context_url = writer_model.invoke([HumanMessage(content=context_fetch_formatted)])
+            context_url = invoke_with_global_llm_throttle(
+                writer_model,
+                [HumanMessage(content=context_fetch_formatted)],
+                min_interval_sec=cfg.llm_min_interval_sec,
+                label=f"write_section.context_fetch.{section_name}",
+            )
             context += f"Content from {url}:\n{context_url.content}\n\n"
     
     if url_list:
@@ -1492,10 +1373,15 @@ def write_section(state: SectionState, config: RunnableConfig):
         cancer_name_title=cfg.cancer_name_title,
     )
     
-    section_response = writer_model.invoke([
+    section_response = invoke_with_global_llm_throttle(
+        writer_model,
+        [
         SystemMessage(content=section_writer_instructions_formatted),
         HumanMessage(content=section_writer_inputs_formatted)
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"write_section.compose.{section_name}",
+    )
     
     # Update section content (handle both dict and Pydantic object)
     new_content = section_response.content
@@ -1542,10 +1428,15 @@ def write_section(state: SectionState, config: RunnableConfig):
             model_provider=cfg.planner_provider
         ).with_structured_output(Feedback)
     
-    feedback = reflection_model.invoke([
+    feedback = invoke_with_global_llm_throttle(
+        reflection_model,
+        [
         SystemMessage(content=section_grader_instructions_formatted),
         HumanMessage(content=section_grader_message)
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"write_section.grade.{section_name}",
+    )
     
     # Handle both Feedback object and dict (from state serialization)
     if isinstance(feedback, dict):
@@ -1637,10 +1528,15 @@ def write_final_sections(state: SectionState, config: RunnableConfig):
     )
     
     writer_model = init_chat_model(model=cfg.writer_model, model_provider=cfg.writer_provider)
-    section_response = writer_model.invoke([
+    section_response = invoke_with_global_llm_throttle(
+        writer_model,
+        [
         SystemMessage(content=system_instructions),
         HumanMessage(content="Generate a report section based on the provided sources.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"write_final_sections.{section_name}",
+    )
     
     # Ensure we return a proper Section object
     completed_section = ensure_section(section)
@@ -1664,28 +1560,15 @@ def compile_final_report(state: ReportState):
         content = get_section_attr(s, 'content', '')
         completed_sections[name] = content
     
-    # Compile final report with deterministic global citation remapping.
+    # Compile final report
     all_content = []
-    global_url_to_id: Dict[str, int] = {}
-    global_sources: List[Dict[str, str]] = []
-
     for section in sections:
         section_name = get_section_attr(section, 'name', '')
         content = completed_sections.get(section_name, '')
         if content:
-            # Drop model-authored References section; we rebuild canonically below.
-            if "reference" in (section_name or "").strip().lower():
-                continue
-            remapped = _remap_section_citations(
-                section_name=section_name,
-                content=content,
-                global_url_to_id=global_url_to_id,
-                global_sources=global_sources,
-            )
-            all_content.append(remapped)
-
-    all_content.append(_build_references_section(global_sources))
-    return {"final_report": "\n\n".join(c for c in all_content if c and c.strip())}
+            all_content.append(content)
+    
+    return {"final_report": "\n\n".join(all_content)}
 
 def initiate_final_section_writing(state: ReportState):
     """Create parallel tasks for writing non-research sections."""

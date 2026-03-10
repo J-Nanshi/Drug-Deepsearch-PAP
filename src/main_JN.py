@@ -157,6 +157,10 @@ async def start_research(request: ResearchRequest, background_tasks: BackgroundT
     # Use best OpenAI models
     planner_model = os.getenv("PLANNER_MODEL", "gpt-4o")
     writer_model = os.getenv("WRITER_MODEL", "gpt-4o")
+    try:
+        llm_min_interval_sec = max(0.0, float(os.getenv("LLM_MIN_INTERVAL_SEC", "0.3")))
+    except ValueError:
+        llm_min_interval_sec = 0.3
     
     thread_config = {
         "configurable": {
@@ -173,6 +177,7 @@ async def start_research(request: ResearchRequest, background_tasks: BackgroundT
             "number_of_queries": 3,
             "user_instructions": user_instructions,
             "cancer_name": CANCER_NAME,
+            "llm_min_interval_sec": llm_min_interval_sec,
         }
     }
     

@@ -125,7 +125,7 @@ The phase I/II ARROW trial (NCT03037385) evaluated pralsetinib 400 mg once daily
 | PKC / PLCγ and PKA-related signaling (KEGG hsa04010 component) | Down | Sensitive | RET Y1015 recruits PLCγ leading to PKC activation, while other docking sites can engage PKA signaling pathways that enhance migration and survival. Pralsetinib suppresses these RET-dependent signaling inputs. | [14,16] |
 | Cell cycle regulation (CDK–RB–E2F modules; KEGG hsa04110) | Down | Sensitive | RET-driven MAPK and PI3K signaling promotes cyclin/CDK activation and RB–E2F mediated G1–S transition. Inhibition of RET by pralsetinib reduces mitogenic signaling, enforcing cell-cycle arrest in RET fusion tumors. | [9,10,16] |
 
-## Sources
+### Sources
 
 [1] Pralsetinib: A Review in Advanced RET Fusion-Positive NSCLC - https://pubmed.ncbi.nlm.nih.gov/35587858/ (PMID: 35587858)  
 [2] Efficacy and safety of pralsetinib in patients with advanced RET fusion-positive non-small cell lung cancer - https://pubmed.ncbi.nlm.nih.gov/37282666/ (PMID: 37282666)  

@@ -172,7 +172,7 @@ For *NTRK* fusion‑positive solid tumors, including NSCLC, an integrated analys
 | Multi‑target RTK network (ROS1/ALK/NTRK/others) | Down (primary targets) / Up (alternative RTKs) | Sensitive / Resistant | Entrectinib’s multi‑kinase profile enables potent inhibition of ROS1, NTRK1/2/3 and ALK, producing high response rates in fusion‑positive NSCLC; however, broader precision‑oncology experience shows that activation of alternative RTKs can emerge as bypass tracks, reducing durability of response. | [1],[4],[5],[6],[9] |
 | Basket‑trial biomarker‑driven pathway selection | Down (matched driver) | Sensitive | Basket and umbrella trial designs using NGS to identify actionable drivers (e.g., ROS1, NTRK) and assign entrectinib or other matched TKIs demonstrate that suppression of the specific genomic driver pathway is central to achieving meaningful responses in heterogeneous advanced NSCLC. | [4],[7],[9] |
 
-## Sources
+### Sources
 [1] Entrectinib \| C31H34F2N6O2 \| CID 25141092 – PubChem. https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib  
 
 [2] Browse Substances – precisionFDA (GINAS entrectinib entry). https://precision.fda.gov/ginas/app/ui/browse-substance?search=root_codes_comments:%22Treatment%20of%20TrkA-positive,%20TrkB-positive,%20TrkC-positive,%20ROS1-positive,%20or%20ALK-positive%20colorectal%20cancer%22  
