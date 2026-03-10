@@ -8,6 +8,7 @@ import sys
 import asyncio
 import re
 import threading
+import time
 from typing import Literal, Annotated, List, TypedDict, Optional, Dict, Any
 from typing_extensions import TypedDict as ExtTypedDict
 from pydantic import BaseModel, Field
@@ -47,6 +48,32 @@ ensure_nltk()
 def log_print(*args, **kwargs):
     print(*args, **kwargs)
     sys.stdout.flush()
+
+
+_llm_throttle_lock = threading.Lock()
+_llm_last_call_ts = 0.0
+
+
+def invoke_with_global_llm_throttle(model, messages, min_interval_sec: float = 0.3, label: str = "llm"):
+    """Invoke an LLM with a global process-wide minimum spacing between calls."""
+    global _llm_last_call_ts
+
+    if min_interval_sec < 0:
+        min_interval_sec = 0.0
+
+    sleep_for = 0.0
+    with _llm_throttle_lock:
+        now = time.monotonic()
+        next_allowed_at = _llm_last_call_ts + min_interval_sec
+        if now < next_allowed_at:
+            sleep_for = next_allowed_at - now
+            time.sleep(sleep_for)
+        _llm_last_call_ts = time.monotonic()
+
+    if sleep_for > 0:
+        log_print(f"   ⏱️ LLM throttle slept {sleep_for:.3f}s before {label} invoke")
+
+    return model.invoke(messages)
 
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -316,6 +343,7 @@ class Configuration:
         self.writer_provider = configurable.get("writer_provider", "openai")
         self.writer_model = configurable.get("writer_model", "gpt-4o")
         self.user_instructions = configurable.get("user_instructions", "")
+        self.llm_min_interval_sec = max(0.0, float(configurable.get("llm_min_interval_sec", 0.3)))
 
 # ============ UTILITY FUNCTIONS ============
 
@@ -1214,10 +1242,15 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
     writer_model = init_chat_model(model=cfg.writer_model, model_provider=cfg.writer_provider)
     structured_llm = writer_model.with_structured_output(Queries)
     
-    primary_report_gpt = writer_model.invoke([
+    primary_report_gpt = invoke_with_global_llm_throttle(
+        writer_model,
+        [
         SystemMessage(content='You are an assistant research report writer.'),
         HumanMessage(content=f"Write a report on {topic}")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label="generate_report_plan.primary_report",
+    )
     
     system_instructions_query = REPORT_PLANNER_QUERY_WRITER_INSTRUCTIONS.format(
         topic=topic,
@@ -1228,10 +1261,15 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
         primary_report_gpt=primary_report_gpt.content
     )
     
-    results = structured_llm.invoke([
+    results = invoke_with_global_llm_throttle(
+        structured_llm,
+        [
         SystemMessage(content=system_instructions_query),
         HumanMessage(content="Generate search queries for planning the report sections.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label="generate_report_plan.plan_queries",
+    )
     
     # Handle both Queries object and dict (from state serialization)
     if isinstance(results, dict):
@@ -1285,10 +1323,15 @@ async def generate_report_plan(state: ReportState, config: RunnableConfig):
         planner_llm = init_chat_model(model=cfg.planner_model, model_provider=cfg.planner_provider)
     
     structured_llm_sections = planner_llm.with_structured_output(Sections)
-    report_sections = structured_llm_sections.invoke([
+    report_sections = invoke_with_global_llm_throttle(
+        structured_llm_sections,
+        [
         SystemMessage(content=system_instructions_sections),
         HumanMessage(content="Generate the sections of the report.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label="generate_report_plan.section_plan",
+    )
     
     # Handle both dict and Pydantic Sections object (from state serialization or API response)
     if isinstance(report_sections, dict):
@@ -1362,10 +1405,15 @@ def generate_queries(state: SectionState, config: RunnableConfig):
         number_of_queries=cfg.number_of_queries
     )
     
-    queries = structured_llm.invoke([
+    queries = invoke_with_global_llm_throttle(
+        structured_llm,
+        [
         SystemMessage(content=system_instructions),
         HumanMessage(content="Generate search queries on the provided topic.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"generate_queries.{section_name}",
+    )
     
     # Handle both Queries object and dict (from state serialization)
     if isinstance(queries, dict):
@@ -1466,7 +1514,12 @@ def write_section(state: SectionState, config: RunnableConfig):
         except Exception as e:
             log_print(f"Error processing URL {url}: {e}")
             context_fetch_formatted = CONTEXT_FETCH.format(topic=topic, section=section_name, link=url)
-            context_url = writer_model.invoke([HumanMessage(content=context_fetch_formatted)])
+            context_url = invoke_with_global_llm_throttle(
+                writer_model,
+                [HumanMessage(content=context_fetch_formatted)],
+                min_interval_sec=cfg.llm_min_interval_sec,
+                label=f"write_section.context_fetch.{section_name}",
+            )
             context += f"Content from {url}:\n{context_url.content}\n\n"
     
     if url_list:
@@ -1492,10 +1545,15 @@ def write_section(state: SectionState, config: RunnableConfig):
         cancer_name_title=cfg.cancer_name_title,
     )
     
-    section_response = writer_model.invoke([
+    section_response = invoke_with_global_llm_throttle(
+        writer_model,
+        [
         SystemMessage(content=section_writer_instructions_formatted),
         HumanMessage(content=section_writer_inputs_formatted)
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"write_section.compose.{section_name}",
+    )
     
     # Update section content (handle both dict and Pydantic object)
     new_content = section_response.content
@@ -1542,10 +1600,15 @@ def write_section(state: SectionState, config: RunnableConfig):
             model_provider=cfg.planner_provider
         ).with_structured_output(Feedback)
     
-    feedback = reflection_model.invoke([
+    feedback = invoke_with_global_llm_throttle(
+        reflection_model,
+        [
         SystemMessage(content=section_grader_instructions_formatted),
         HumanMessage(content=section_grader_message)
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"write_section.grade.{section_name}",
+    )
     
     # Handle both Feedback object and dict (from state serialization)
     if isinstance(feedback, dict):
@@ -1637,10 +1700,15 @@ def write_final_sections(state: SectionState, config: RunnableConfig):
     )
     
     writer_model = init_chat_model(model=cfg.writer_model, model_provider=cfg.writer_provider)
-    section_response = writer_model.invoke([
+    section_response = invoke_with_global_llm_throttle(
+        writer_model,
+        [
         SystemMessage(content=system_instructions),
         HumanMessage(content="Generate a report section based on the provided sources.")
-    ])
+        ],
+        min_interval_sec=cfg.llm_min_interval_sec,
+        label=f"write_final_sections.{section_name}",
+    )
     
     # Ensure we return a proper Section object
     completed_section = ensure_section(section)
