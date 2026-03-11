@@ -1,0 +1,203 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "VEGFA–VEGFR2 (KDR) signaling modules (e.g., VEGFA_0–7)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In EGFR‑TKI‑resistant NSCLC, VEGFA modules are enriched in ABCP responders and drive tumor‑cell proliferation; dual inhibition of VEGFA/VEGFC or blockade of VEGFR2 (KDR) markedly suppresses tumor growth, and bevacizumab plus ramucirumab further reduces xenograft volume and CD31+ vasculature, indicating strong dependence on VEGF‑A/KDR signaling for angiogenesis and growth.[1,2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://precision.fda.gov/ginas/app/ui/browse-substance?search=root_codes_comments:%22Vascular%20Endothelial%20Growth%20Factor%20Receptor%202%20Antagonist%20%5BEPC%5D%22",
+      "https://pubmed.ncbi.nlm.nih.gov/40843133"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "VEGFC–KDR/NRP2 signaling (VEGFC_0–7)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Single‑cell and meta‑transcriptomic analyses show VEGFC upregulation in ABCP non‑responders with high expression of KDR and NRP2; VEGFC modules preferentially cooperate with drug‑resistance programs and TME‑interacting stromal signatures, and VEGFC expression is the strongest adverse prognostic marker (HR≈1.8), suggesting VEGFC‑high/KDR‑high tumors are less dependent on VEGF‑A–VEGFR2 alone.[1,2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://precision.fda.gov/ginas/app/ui/browse-substance?search=root_codes_comments:%22Vascular%20Endothelial%20Growth%20Factor%20Receptor%202%20Antagonist%20%5BEPC%5D%22",
+      "https://pubmed.ncbi.nlm.nih.gov/40843133"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "FGF/FGFR signaling (angiogenic and survival program)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In EGFR‑TKI‑resistant NSCLC, non‑responders with high VEGFC display increased FGF pathway scores; VEGFC/KDR/NRP2 knockdown lowers FGF1/FGF2 expression in resistant lines and reduces FGF‑linked angiogenic signatures in xenografts, indicating that FGF signaling provides a bypass angiogenic and pro‑survival route when VEGFR2 is inhibited.[2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/40843133"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "YAP–TAZ–AXL (Hippo effector/drug‑resistance program)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Meta‑transcriptome and functional assays show strong correlation between VEGFC/KDR/NRP2 expression and YAP1/TAZ/AXL; combined knockdown of VEGFC with KDR or NRP2 decreases YAP/TAZ/AXL and enhances anti‑proliferative and anti‑angiogenic effects of VEGF‑pathway inhibition, supporting YAP–TAZ–AXL as a key adaptive pathway that maintains growth despite VEGFR2 blockade.[2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/40843133"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "EMT (epithelial–mesenchymal transition) program",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EMT and YAP–TAZ scores are highest in ABCP non‑responders and correlate strongly with VEGFC expression (R≈0.69); VEGFC‑driven EMT is linked to invasive, drug‑tolerant states and cooperates with FGF/YAP–TAZ modules, enabling tumor cells and stromal compartments to bypass VEGFR2‑targeted angiogenesis inhibition.[2,6]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/40843133",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12848553"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "Immunosuppressive VEGF‑driven TME (Tregs/MDSCs, low TILs)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR‑mutant NSCLC exhibits a “cold” TME with low CD8+ T‑cell infiltration and abundant immunosuppressive elements; VEGF signaling from tumor and stromal cells promotes Treg/MDSC recruitment and immune evasion. Anti‑VEGF therapy can normalize vasculature, enhance T‑cell trafficking, and improve ICI efficacy, as seen in IMpower150‑like regimens where adding bevacizumab to ICI+chemotherapy improves PFS/OS.[2,5–8,12]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/40843133",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11187085",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12848553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11337070",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11608596",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11102195/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "PD‑1/PD‑L1 checkpoint signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "PD‑L1 is frequently upregulated in lung cancer and contributes to T‑cell exhaustion; EGFR signaling can induce PD‑L1, and VEGF/VEGFR inhibition increases PD‑L1 expression and CTL activity, rendering tumors more susceptible to PD‑1/PD‑L1 blockade. Clinical data in EGFR‑mutant NSCLC show that adding anti‑VEGF to PD‑(L)1 plus chemotherapy (e.g., ORIENT‑31, IMpower150) improves PFS versus PD‑(L)1+chemotherapy alone.[5–8,12]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11187085",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12848553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11337070",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11608596",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11102195/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "EGFR–VEGF axis (EGFR‑driven VEGF production)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR activation upregulates VEGF expression in NSCLC, linking oncogenic EGFR to pro‑angiogenic signaling and immune suppression; EGFR‑TKI resistance leaves VEGF‑driven stromal programs intact. Trials of EGFR‑mutant, TKI‑resistant NSCLC show that regimens including anti‑VEGF antibodies (bevacizumab or bispecific PD‑1/VEGF agents) with chemotherapy and/or ICI achieve longer PFS than chemotherapy or ICI‑chemotherapy alone, underscoring continued VEGF dependence.[2,3,5–8]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/40843133",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11545703/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11187085",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12848553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11337070",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11608596"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "Alternative RTK bypass pathways (MERTK/TAM family)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In EGFR‑TKI‑resistant NSCLC lacking T790M, activation of bypass RTKs such as MERTK and AXL restores PI3K/Akt and MAPK signaling despite EGFR blockade; MERTK supports angiogenic and survival programs and is required for EGFR surface accumulation. Although not directly targeted by ramucirumab, MERTK‑mediated bypass can sustain downstream pathways shared with VEGFR2, potentially diminishing the impact of VEGFR2 inhibition unless co‑targeted.[4]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7915726"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "PI3K–Akt/MAPK cascades downstream of VEGF and bypass RTKs",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "VEGF‑A/VEGFC engagement of VEGFR2/KDR activates PI3K–Akt and MAPK pathways in tumor and endothelial cells; dual VEGFA/VEGFC or KDR targeting reduces these signals and suppresses proliferation, whereas activation of alternative RTKs (MERTK, AXL, FGFR) can reactivate the same cascades, leading to resistance to VEGFR2‑directed agents like ramucirumab.[2,4,10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/40843133",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7915726",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12905585/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "TGF‑β/SMAD and fibrotic‑angiogenic axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In fibrotic lung and lung cancer, persistent TGF‑β signaling promotes myofibroblast activation, ECM stiffening, and immunosuppressive cell infiltration; tyrosine kinase ligands including VEGF and FGF are aberrantly expressed and cooperate with PI3K/Akt and ERK to drive tumor growth and PF‑associated angiogenesis, creating a stiff, VEGF‑rich niche that can limit the durability of VEGFR2 blockade unless upstream TGF‑β and matrix pathways are also addressed.[10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12905585/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "VEGF‑driven angiogenic switch in precancer and metastasis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Precancerous and early malignant lesions upregulate VEGF‑A and activate VEGFR2‑dependent PLC–PKC–ERK signaling to establish neovasculature, while macrophage‑derived MMP‑9 remodels ECM; anti‑angiogenic agents targeting VEGF/VEGFR2 show strongest impact when this switch is dominant, whereas advanced lesions with extensive ECM cross‑linking and alternative pro‑angiogenic factors (PDGF, FGF, LOX/LOXL‑YAP/TAZ) may show attenuated responses to VEGFR2‑only inhibition.[10,11,13]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12905585/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775469/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11842613/"
+    ]
+  }
+}

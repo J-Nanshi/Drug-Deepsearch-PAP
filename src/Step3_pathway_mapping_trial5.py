@@ -1,4 +1,4 @@
-#%% [markdown]
+# [markdown]
 # MSigDB Pathway Mapper - LLM Verification (Trial 5)
 # ------------------------------------------------------------------------------------------------
 # This script takes the output from trial3 (final_mapped_trial3.json) and verifies each
@@ -16,7 +16,7 @@
 #    a) <drug>_final_trial5.json  -> enriched rows with verdicts
 #    b) <drug>_trace_trial5.json  -> summary stats + all verification details
 
-#%% Imports
+#Imports
 import json
 import os
 import re
@@ -33,7 +33,7 @@ try:
 except ImportError:
     pass
 
-#%% Config (EDIT)
+#Config (EDIT)
 MSIGDB_SQLITE_PATH = r"msigdb_v2025.1.Hs.db/msigdb_v2025.1.Hs.db"
 
 # OpenAI Configuration
@@ -100,7 +100,7 @@ PATHWAY_PRIORITY = [
 PRINT_SUMMARY = True
 PRINT_VERIFICATION_PROGRESS = True
 
-#%% Helpers (from trial3)
+# Helpers (from trial3)
 def load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -144,7 +144,7 @@ def short(s: str, n: int = 110) -> str:
     s = norm_text(s)
     return s if len(s) <= n else s[: n - 1] + "…"
 
-#%% MSigDB loader (from trial3)
+#MSigDB loader (from trial3)
 @dataclass
 class MSigDBRow:
     msigdb_name: str
@@ -208,7 +208,7 @@ def load_msigdb_metadata(db_path: str) -> List[MSigDBRow]:
     finally:
         conn.close()
 
-#%% MSigDB Lookup Helpers
+# MSigDB Lookup Helpers
 def build_msigdb_lookup(msig_rows: List[MSigDBRow]) -> Dict[str, MSigDBRow]:
     """Build a dictionary for O(1) lookup of MSigDB rows by name."""
     return {row.msigdb_name: row for row in msig_rows}
@@ -264,7 +264,7 @@ def filter_msigdb_by_collection(
     
     return filtered
 
-#%% Similarity Model for Semantic Search (from trial3)
+# Similarity Model for Semantic Search (from trial3)
 class SimilarityModel:
     """Semantic similarity model using sentence-transformers or TF-IDF fallback."""
     
@@ -308,7 +308,7 @@ class SimilarityModel:
         idx = scores.argsort()[::-1][:k]
         return [(int(i), float(scores[i])) for i in idx]
 
-#%% Top Candidates Helper - Semantic Search Version
+# Top Candidates Helper - Semantic Search Version
 def get_top_msigdb_candidates_semantic(
     pathway_name: str,
     rationale: str,
@@ -357,7 +357,7 @@ def get_pathway_priority(msigdb_name: str) -> int:
             return i
     return len(PATHWAY_PRIORITY)  # Lowest priority for unknown
 
-#%% LLM Helper Functions (from trial4)
+# LLM Helper Functions (from trial4)
 def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3) -> str:
     """Call OpenAI API with retry logic."""
     for attempt in range(max_retries):
@@ -390,7 +390,7 @@ def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3)
                 raise
     return ""
 
-#%% LLM Verification Function
+#LLM Verification Function
 def llm_verify_single_mapping(
     row_key: str,
     entry: Dict[str, Any],
@@ -549,7 +549,7 @@ Return ONLY valid JSON (no markdown, no explanation outside JSON):
             "verification_error": True,
         }
 
-#%% Main Verification Pipeline
+#Main Verification Pipeline
 def run_verification_pipeline(
     input_file: Path,
     msig_rows: List[MSigDBRow],
@@ -680,7 +680,7 @@ def run_verification_pipeline(
     
     return final_path, trace_path
 
-#%% Main execution
+# Main execution
 if __name__ == "__main__":
     # Load MSigDB once
     print("Loading MSigDB database...")
@@ -730,4 +730,3 @@ if __name__ == "__main__":
     print(f"Total files processed: {len(outputs)}")
     print("All outputs saved to:", OUTPUT_DIR)
 
-# %%

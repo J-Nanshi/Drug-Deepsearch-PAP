@@ -1,0 +1,362 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "BRAF–MEK–ERK (MAPK core cascade)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Encorafenib is a highly selective ATP‑competitive BRAF inhibitor that potently suppresses BRAF V600E kinase activity and downstream MEK/ERK signaling; in BRAF‑mutant NSCLC, constitutive MAPK activation is the main oncogenic driver, so pathway suppression underlies tumor responses to encorafenib plus binimetinib in PHAROS.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/210496s017lbl.pdf"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "EGFR–RAS–RAF feedback axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF inhibition releases ERK‑dependent negative feedback on EGFR–RAS, leading to increased RAS activity, RAF dimerization, and MEK/ERK reactivation; this feedback is a well‑described resistance mechanism to group‑1 BRAF inhibitors including encorafenib and explains the need for MEK and/or EGFR co‑inhibition.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5127364"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "RAF dimerization (BRAF/CRAF)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In BRAF‑mutant cells, encorafenib binding to one protomer within a RAF dimer can activate the partner (negative cooperativity), driving MEK/ERK reactivation and limiting durability of monotherapy; MEK inhibition with binimetinib helps blunt downstream signaling from such dimers.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3588168"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Reactivation or upregulation of PI3K–AKT–mTOR signaling (via PI3K activation or PTEN loss) provides a parallel survival route when MAPK is inhibited; in BRAF‑mutant tumors this axis contributes to intrinsic and acquired resistance to BRAF/MEK blockade, supporting triplet strategies (e.g., adding PI3K or mTOR inhibitors) in refractory disease.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4671849"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "KEAP1–NRF2 oxidative‑stress pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "CRISPR screens in BRAF‑ and MEK‑inhibited lung cancer cells show KEAP1 loss stabilizes NRF2, enhances antioxidant programs, prevents ROS accumulation induced by RTK/MAPK inhibitors, and allows proliferation despite MAPK blockade, suggesting KEAP1/NRF2 alterations can blunt encorafenib/binimetinib efficacy in NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9109474/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "BRAF V600E oncogenic signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF V600E drives strong, RAS‑independent MAPK signaling in ~50% of BRAF‑mutant NSCLC; encorafenib directly targets this class I mutant, and clinical data in BRAF V600E‑mutant metastatic NSCLC demonstrate high response rates and prolonged PFS when combined with binimetinib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8471192"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "Non‑V600 BRAF (class II/III dimer‑driven)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Class II/III BRAF mutants signal as dimers and are poorly inhibited by current BRAF inhibitors due to paradoxical activation; encorafenib plus binimetinib is not expected to effectively suppress these dimer‑dependent MAPK signals, leaving a major unmet need in non‑V600 BRAF‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9823055/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "EGFR–BRAF co‑mutant MAPK signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In EGFR‑mutant NSCLC that acquires BRAF V600E as an osimertinib resistance mechanism, MAPK signaling becomes driven by both EGFR and BRAF; preclinical data show that adding a BRAF inhibitor such as encorafenib to EGFR and MEK inhibition more completely suppresses MEK/ERK phosphorylation and cell growth.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8471192"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "BRAF fusion–driven MAPK",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF fusions (e.g., AGK/BRAF, PJA2/BRAF) form constitutively active RAF dimers that activate MEK/ERK and confer resistance to EGFR TKIs; these rearrangements are generally not inhibited by selective BRAF inhibitors like encorafenib, requiring pan‑RAF or MEK inhibition in combination with upstream blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8471192"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "Autophagy–MAPK crosstalk",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Autophagy is induced as an adaptive survival mechanism under RAF inhibition, contributing to RAFi resistance; reviews of RAF‑targeted therapy highlight autophagy as a key mediator of resistance to MAPK‑directed drugs, suggesting that combining encorafenib/binimetinib with autophagy modulators may enhance cytotoxicity.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/210498s011lbl.pdf"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Immune checkpoint/PD‑L1 axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF‑mutant NSCLC often shows elevated PD‑L1 and high TMB; while encorafenib/binimetinib targets the oncogenic MAPK driver, persistent PD‑L1‑mediated immunosuppression can limit immune‑mediated clearance, providing a rationale for sequencing or combining BRAF/MEK inhibitors with immune checkpoint blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/210496s017lbl.pdf"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "RTK (MET/FGFR/ERBB3) bypass of MAPK",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Under MAPK inhibition, NSCLC cells can activate alternative RTKs (MET, FGFR, ERBB3) that signal through RAS–RAF–MEK–ERK or PI3K–AKT, restoring downstream pathway activity despite BRAF/MEK blockade; such bypass tracks are documented in lung cancer resistance to EGFR, BRAF and MEK inhibitors and are likely relevant to encorafenib‑based regimens.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6889286"
+    ]
+  },
+  "Row13": {
+    "Pathway ID/Name": "BRAF–MEK–ERK (MAPK core cascade)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Encorafenib is a selective ATP‑competitive BRAF inhibitor that potently suppresses BRAF V600E kinase activity and downstream MEK/ERK signaling; in BRAF‑mutant NSCLC, constitutive MAPK activation is the dominant oncogenic driver, and its inhibition underlies the high response rates and durable PFS observed with encorafenib plus binimetinib in PHAROS.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8471192"
+    ]
+  },
+  "Row14": {
+    "Pathway ID/Name": "EGFR/RTK–RAS–RAF feedback axis (KEGG hsa04010/hsa04012)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF/MEK inhibition relieves ERK‑mediated negative feedback on EGFR and other RTKs, leading to RAS reactivation, RAF dimerization, and ERK rebound; this adaptive EGFR/RTK upregulation is a well‑described resistance mechanism to BRAF inhibitors in CRC and NSCLC and provides the rationale for combinations such as encorafenib + cetuximab in mCRC and for exploring RTK co‑inhibition in lung cancer.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6889286"
+    ]
+  },
+  "Row15": {
+    "Pathway ID/Name": "RAF dimerization (BRAF/CRAF; pan‑RAF node)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In RAS‑active contexts, encorafenib and other group‑1 RAF inhibitors can promote RAF dimer formation; binding to one protomer may transactivate the partner, restoring MEK/ERK signaling and causing paradoxical pathway activation, which limits efficacy in BRAF‑wild‑type or non‑V600, dimer‑dependent tumors and supports development of dimer‑breaking or pan‑RAF inhibitors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8471192"
+    ]
+  },
+  "Row16": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling (KEGG hsa04151)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Activation of PI3K–AKT–mTOR (via PTEN loss, PIK3CA/AKT alterations or RTK crosstalk) provides a parallel survival route when MAPK is inhibited; preclinical and clinical data in BRAF‑mutant tumors, including NSCLC, implicate this pathway in intrinsic and acquired resistance to BRAF/MEK blockade and motivate trials of MAPK plus PI3K/mTOR co‑targeting.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6889286"
+    ]
+  },
+  "Row17": {
+    "Pathway ID/Name": "KEAP1–NRF2 oxidative‑stress response",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In lung cancer models exposed to RTK/MAPK inhibitors, loss of KEAP1 stabilizes NRF2, enhances antioxidant defenses, limits ROS accumulation, and permits continued proliferation despite pathway blockade; KEAP1/NRF2 alterations, common in NSCLC, are therefore predicted to blunt the cytotoxic effects of encorafenib/binimetinib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9109474/"
+    ]
+  },
+  "Row18": {
+    "Pathway ID/Name": "Cell‑cycle (Cyclin D–CDK4/6–E2F; KEGG hsa04110)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAFV600E‑driven ERK signaling induces CCND1 and E2F‑dependent transcription; encorafenib plus binimetinib reduces ERK output, leading to decreased G1–S progression and proliferation in BRAF‑mutant NSCLC, and cell‑cycle gene downregulation is a key pharmacodynamic marker of response, with CDK4/6 inhibition proposed to deepen and prolong MAPK‑directed effects.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8471192"
+    ]
+  },
+  "Row19": {
+    "Pathway ID/Name": "Wnt/β‑catenin signaling (KEGG hsa04310)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF inhibition can trigger compensatory activation of FAK and Wnt/β‑catenin signaling, providing alternative proliferative and survival cues; Wnt pathway upregulation has been implicated in resistance to RAF/MEK inhibitors across solid tumors and is a candidate bypass route in BRAF‑mutant NSCLC under encorafenib‑based therapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6889286"
+    ]
+  },
+  "Row20": {
+    "Pathway ID/Name": "NF‑κB/TBK1 survival axis (KEGG hsa04064)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "KRAS/RAF‑driven lung cancers rely on NF‑κB and TBK1 for survival; experimental data demonstrate synthetic lethality between KRAS/RAF signaling and NF‑κB/TBK1 inhibition, suggesting that NF‑κB activation can buffer the pro‑apoptotic impact of MAPK blockade and contribute to encorafenib resistance, while co‑targeting this axis may enhance efficacy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5127364"
+    ]
+  },
+  "Row21": {
+    "Pathway ID/Name": "Hippo/YAP signaling (KEGG hsa04390)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "YAP activation following suppression of KRAS–MAPK signaling enables MAPK‑independent growth; reviews of BRAF‑mutant NSCLC highlight Hippo/YAP as a recurrent bypass pathway after BRAF/MEK inhibition, indicating that YAP‑driven transcriptional programs can sustain proliferation despite encorafenib‑mediated ERK inhibition.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9109474/"
+    ]
+  },
+  "Row22": {
+    "Pathway ID/Name": "Autophagy–MAPK crosstalk",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "RAF and MEK inhibition induce autophagy as an adaptive survival mechanism; in BRAF‑mutant models, increased autophagic flux mitigates the cytotoxic effects of MAPK blockade, and pharmacologic or genetic autophagy inhibition sensitizes tumors to RAF/MEK inhibitors, suggesting a similar role in encorafenib‑treated BRAF‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5127364"
+    ]
+  },
+  "Row23": {
+    "Pathway ID/Name": "Immune checkpoint / PD‑1–PD‑L1 axis (KEGG hsa04660)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF‑mutant NSCLC often exhibits elevated PD‑L1 and immunosuppressive microenvironmental features; while encorafenib/binimetinib effectively targets the oncogenic driver, persistent PD‑1–PD‑L1 signaling can limit immune‑mediated tumor clearance, providing the rationale for combining or sequencing BRAF/MEK inhibition with PD‑1/PD‑L1 blockade (e.g., Landscape 1011 triplet).",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9109474/"
+    ]
+  },
+  "Row24": {
+    "Pathway ID/Name": "BRAF V600E oncogenic signaling vs non‑V600 BRAF (class II/III)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Class I BRAF V600E mutations signal as active monomers and are highly sensitive to encorafenib plus binimetinib, as shown by high ORR and durable PFS/OS in PHAROS; in contrast, class II/III non‑V600 BRAF mutants and BRAF fusions signal as RAS‑dependent dimers that are poorly inhibited and can be paradoxically activated by encorafenib, explaining the lack of benefit and current recommendation against using BRAF/MEK doublets in these genotypes outside trials.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8471192"
+    ]
+  }
+}

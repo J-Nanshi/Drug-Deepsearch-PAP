@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "KEGG: ErbB signaling pathway (EGFR/HER2)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lapatinib is a dual EGFR/HER2 TKI that should suppress ErbB signaling, yet serial tumor biopsies in a phase I study showed increased HER2 Y1248 phosphorylation on treatment, suggesting incomplete target inhibition or feedback upregulation that may undermine efficacy in solid tumors, including lung cancer when ErbB is not fully blocked.[2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11256690/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "KEGG: Ras–Raf–MEK–ERK (MAPK) signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ErbB receptors signal via Ras–Raf–MAPK; lapatinib reduces ERK1/2 phosphorylation in ErbB‑addicted cells, but adaptive reprogramming of RTKs (e.g., IGF1R, MET, FGFR2, SRC family) and CRKL‑driven Ras/Rap1 modules can reactivate MAPK, sustaining proliferation despite upstream blockade—mechanisms described for EGFR‑TKI resistance in NSCLC and for lapatinib resistance in ErbB2‑positive models.[3,9]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9454740"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "KEGG: PI3K–Akt–mTOR signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ErbB inhibition by lapatinib is expected to attenuate PI3K–Akt; however, IGF1R pathway activation and glucose‑deprivation response rewiring restore PI3K–Akt survival signaling in lapatinib‑resistant cells, and IGF1R‑driven PI3K–Akt is a well‑documented bypass for EGFR‑TKI resistance in lung cancer, supporting co‑targeting of EGFR/IGF1R or PI3K–Akt.[3,9]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9454740"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "KEGG: Cell cycle (CDK2/p27 axis)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In patients receiving lapatinib, on‑treatment biopsies showed increased p27, a CDK2/cyclin E inhibitor that enforces G0/G1 arrest; lapatinib upregulates p27 transcriptionally and post‑translationally, reducing CDK2 activity and proliferation, a key pharmacodynamic marker of effective ErbB blockade that is likely relevant in EGFR/HER2‑driven lung tumors.[2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11256690/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "KEGG: Apoptosis / NF‑κB signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lapatinib can induce constitutive NF‑κB activation, which promotes survival; proteasome inhibition with bortezomib additively inactivates NF‑κB and downstream survival genes, providing a mechanistic basis for combining lapatinib with NF‑κB–modulating agents to enhance apoptosis in ErbB‑dependent cancers, including subsets of NSCLC.[2,8]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11256690/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "KEGG: Proteasome / Ubiquitin–proteasome system",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The 26S proteasome is extensively regulated by reversible phosphorylation, integrating growth‑factor and stress signals; bortezomib blocks proteasome activity, which can stabilize negative regulators of the cell cycle (e.g., p27) and modulate NF‑κB, thereby enhancing the antitumor effects of EGFR/HER2 antagonists such as lapatinib in proteasome‑dependent tumors.[2,8]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11256690/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "KEGG/Reactome: IGF1R → PI3K–Akt signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Integrative Bayesian modeling of lapatinib‑resistant breast cells and lung‑cancer resistance literature show IGF1R pathway activation as a recurrent bypass that down‑stream re‑engages PI3K–Akt despite EGFR/HER2 inhibition; co‑inhibition of EGFR and IGF1R reduces Akt signaling and tumor growth, highlighting IGF1R–PI3K–Akt as a central resistance pathway also implicated in EGFR‑TKI–resistant NSCLC.[3,9]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9454740"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "KEGG/Reactome: Notch signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Notch signaling cross‑talks with EGFR pathways and maintains MAPK and PI3K–Akt outputs in breast cancer; modeling of lapatinib resistance and zebrafish phosphoproteomics indicate that Notch pathway components become differentially engaged after lapatinib, and Notch inhibition can enhance lapatinib‑induced phenotypes, suggesting Notch‑driven bypass survival that may analogously sustain EGFR‑addicted lung cancers under dual EGFR/HER2 inhibition.[4,9]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/28687923"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "KEGG/Reactome: Wnt/β‑catenin–CCND2 axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In lapatinib‑resistant conditions, Wnt pathway genes and LEF1–CCND2 transcriptional modules are upregulated, restoring cyclin D‑dependent proliferation independent of ErbB; LEF1‑CCND2 dysregulation has been linked to acquired resistance to EGFR‑TKIs, providing a paradigm for Wnt‑mediated cell‑cycle re‑engagement that can blunt lapatinib efficacy in tumors with active Wnt signaling, including some NSCLC.[9]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://precision.fda.gov/ginas/app/ui/browse-substance?search=root_codes_comments:%22lapatinib%22"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "KEGG: Glucose deprivation / metabolic stress response",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ErbB2‑positive cells rely on EGFR/ErbB2 signaling for glucose uptake; lapatinib down‑regulates cell‑cycle machinery and induces glucose starvation–mediated death in sensitive cells, but resistant cells upregulate glucose‑deprivation and hypoglycemic response networks, maintaining glycolytic flux independently of ErbB signaling and providing a robust metabolic escape from ErbB TKIs.[9]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://precision.fda.gov/ginas/app/ui/browse-substance?search=root_codes_comments:%22lapatinib%22"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "KEGG: CK2–HMGA1–DNA repair / rRNA metabolic network",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Phosphoproteomics in gefitinib‑resistant NSCLC identified a CK2‑centric module with elevated phosphorylation of HMGA1 S102; HMGA1 knockdown or S102 mutation resensitized resistant cells by restoring downstream EGFR signaling control, implicating CK2–HMGA1–linked DNA repair and rRNA biogenesis networks as resistance nodes that may similarly modulate response to other ErbB TKIs such as lapatinib.[3]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9454740"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "KEGG: p38 MAPK signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Whole‑organism phosphoproteomics in zebrafish showed that lapatinib, unlike gefitinib, increases dual phosphorylation of activating residues in p38 MAPKs; p38 integrates stress, inflammatory, and apoptotic cues, so lapatinib‑driven p38 activation may contribute both to toxicity (e.g., cardiac/neurological phenotypes) and to context‑dependent survival signaling that could influence sensitivity of lung tumors to ErbB inhibition.[4]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/28687923"
+    ]
+  }
+}

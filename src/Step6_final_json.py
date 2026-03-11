@@ -1,4 +1,4 @@
-#%% [markdown]
+# [markdown]
 # Step 6: Final JSON Merging
 # ------------------------------------------------------------------------------------------------
 # This script merges data from multiple sources:
@@ -11,12 +11,12 @@
 #     - pathway classification keys (sensitive/resistant × upregulation/downregulation)
 #     - before_administration and after_administration under each pathway annotation
 
-#%% Imports
+# Imports
 import json
 from pathlib import Path
 from typing import Any, Dict, List
 
-#%% Config
+# Config
 # --- Input/Output Paths ---
 STRUCTURED_OUTPUT_PATH = r"D:\GS\pathway-enrichment-pipeline\my_project\mapped_pathway_json\Ribociclib_structured_output.json"
 ADMINISTRATION_JSON_PATH = r"D:\GS\pathway-enrichment-pipeline\my_project\mapped_pathway_json\ribociclib_step2_trial2_out_administration_combinations.json"
@@ -26,7 +26,7 @@ OUTPUT_DIR = r"D:\GS\pathway-enrichment-pipeline\my_project\mapped_pathway_json"
 # Ensure output directory exists
 Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-#%% Helpers
+# Helpers
 def load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -35,7 +35,7 @@ def save_json(obj: Any, path: str) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
-#%% Main Functions
+# Main Functions
 def extract_pathway_classifications(trial5_data: Dict[str, Any]) -> Dict[str, List[str]]:
     """
     Extract pathway classifications based on Regulation and Baseline effect from trial5 data.
@@ -169,7 +169,7 @@ def merge_final_json(
     return result
 
 
-#%% Main Pipeline
+# Main Pipeline
 def run_final_merge_pipeline(
     structured_output_path: str,
     administration_path: str,
@@ -249,7 +249,7 @@ def run_final_merge_pipeline(
     return output_path
 
 
-#%% Main execution
+# Main execution
 if __name__ == "__main__":
     print("=" * 70)
     print("Step 6: Final JSON Merge Pipeline")
@@ -277,4 +277,4 @@ if __name__ == "__main__":
         import traceback
         traceback.print_exc()
 
-# %%
+

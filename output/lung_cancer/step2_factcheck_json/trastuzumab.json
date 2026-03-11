@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "HER2–HER3–PI3K/AKT survival signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "HER2–HER3 heterodimers are the most active HER signaling units and are the dominant upstream drivers of PI3K/AKT in HER2‑addicted tumors, including HER2‑altered lung cancers; effective HER2 blockade (e.g., by trastuzumab‑based strategies) requires suppression of HER3‑dependent PI3K/AKT signaling to induce growth arrest and apoptosis.[1][3][5][6]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11816067/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "HER2–RAS/RAF/MEK/ERK (MAPK) cascade",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Activated HER2 transduces mitogenic signals via RAS/RAF/MEK/ERK; inhibition of HER2 reduces ERK activity and proliferation, and ERK reactivation (e.g., MAPK1 amplification, BRAF mutation) is a recognized resistance mechanism to HER‑family inhibitors in NSCLC, implying that durable trastuzumab benefit depends on sustained MAPK suppression.[2][6][8]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "HER2–HER3–Src–PI3K/AKT axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "HER3 partners with HER2 to activate PI3K/AKT and Src, promoting survival and motility; preclinical data show that blocking HER2/HER3 signaling or Src reduces PI3K/AKT activity and can resensitize HER2‑driven tumors to HER2‑directed therapy, indicating that efficient down‑modulation of this axis favors trastuzumab responsiveness.[2][4][5][10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "HER2 internalization/degradation (HSP90‑dependent)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "HER2 stability depends on HSP90; HSP90 inhibition induces HER2 downregulation that can be visualized with ⁸⁹Zr‑trastuzumab PET, correlating with treatment response, highlighting that enhanced HER2 internalization/degradation diminishes downstream signaling and increases susceptibility to HER2‑targeted regimens.[6][10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4369854/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "HER2–HER3–IGF‑1R heterotrimer → PI3K/AKT & Src",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In trastuzumab‑resistant HER2‑overexpressing cells, HER2 forms a heterotrimer with HER3 and IGF‑1R that drives PI3K/AKT via HER3 and Src via IGF‑1R, maintaining survival signaling despite HER2 blockade; disruption of HER3 or IGF‑1R restores sensitivity, making this cross‑talk complex a key resistance pathway also relevant to HER2‑altered NSCLC.[2][4][5][10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "MET–HER3–PI3K/AKT bypass signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET amplification or activation can phosphorylate HER3 and recruit PI3K independently of HER2/EGFR, sustaining PI3K/AKT signaling and mediating resistance to EGFR/HER2 inhibitors; this MET–HER3–PI3K axis has been demonstrated in NSCLC and is a plausible trastuzumab resistance route in HER2‑driven lung tumors.[1][2][5][10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11816067/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "IGF‑1R–HER2 cross‑talk → PI3K/AKT & Src",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Overexpression or activation of IGF‑1R maintains RAS/RAF/MEK and PI3K/AKT signaling when HER2 is inhibited; clinical and preclinical data link increased IGF‑1R expression and AKT dysregulation with poor trastuzumab outcomes, and IGF‑1R‑mediated bypass signaling is also implicated in resistance to HER‑family TKIs in lung cancer.[2][3][10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "Alternative RTKs (AXL, FGFR, EphA2) → PI3K/AKT & MAPK",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Crosstalk from non‑HER RTKs such as MET, AXL, FGFR and EphA2 can reactivate PI3K/AKT and RAS/RAF/MEK/ERK despite HER2 blockade, leading to persistent proliferation; simultaneous inhibition of EGFR/HER2 and these bypass RTKs restores sensitivity in resistant models and analogous bypass activation is well described in NSCLC.[2][3][10]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "PI3K/AKT/mTOR pathway (PIK3CA mutation, PTEN loss)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Hyperactivation of PI3K/AKT through PIK3CA mutation or PTEN loss uncouples survival signaling from HER2/HER3 inhibition; in HER2‑positive breast cancer, low PTEN or PIK3CA mutation correlates with trastuzumab resistance, and PI3K pathway alterations are frequent in lung cancer, supporting this as a central resistance node.[2][3][8][9]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "RAS/RAF/MEK/ERK reactivation (MAPK1/BRAF alterations)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Amplification of MAPK1 or activating BRAF mutations restore ERK signaling downstream of HER receptors and have been linked to TKI resistance in EGFR‑mutant NSCLC; similar MAPK pathway reactivation can blunt the anti‑proliferative effect of HER2 inhibition, reducing trastuzumab efficacy in HER2‑altered lung tumors.[2][6]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Wnt/β‑catenin cross‑talk with EGFR/HER2",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Wnt/β‑catenin signaling interacts bidirectionally with EGFR/HER2 pathways; EGFR activation can enhance β‑catenin‑dependent transcription, and context‑dependent Wnt activation has been implicated in attenuating responses to EGFR/HER2 inhibitors, suggesting that Wnt pathway upregulation may contribute to trastuzumab resistance in HER2‑driven lung cancer.[2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "NF‑κB (TNFR/IKK) survival signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The canonical IKK/NF‑κB pathway promotes survival and inflammation; cross‑talk between TNF/IKK/NF‑κB and EGFR/HER2 signaling can support cell survival when HER2 is inhibited, and NF‑κB activation has been proposed as a mediator of resistance to HER‑family–targeted therapies, including in lung cancer contexts.[2]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10835834/"
+    ]
+  }
+}

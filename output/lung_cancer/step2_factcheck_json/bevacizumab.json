@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "KEGG_VEGF_SIGNALING_PATHWAY",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Bevacizumab binds VEGFA and prevents activation of VEGFR2‑driven angiogenic signaling; lung tumors with high VEGF pathway activity are more dependent on VEGF‑mediated neovascularization and thus more susceptible to VEGF sequestration, leading to reduced vascular permeability and tumor growth.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "KEGG_HIF_1_SIGNALING_PATHWAY",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Hypoxia in lung tumors stabilizes HIF‑1α, which transcriptionally upregulates VEGFA and other pro‑angiogenic genes; bevacizumab disrupts this HIF‑1–VEGFA axis by neutralizing VEGFA, impairing hypoxia‑driven angiogenesis and improving control of highly vascular NSCLC lesions.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "KEGG_PI3K_AKT_SIGNALING_PATHWAY",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "PI3K–AKT signaling promotes survival and proliferation in lung cancer cells and endothelial cells; when VEGF is blocked by bevacizumab, compensatory PI3K–AKT activation via alternative growth factor receptors can maintain angiogenesis and tumor viability, contributing to intrinsic or acquired resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "KEGG_MAPK_SIGNALING_PATHWAY",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "VEGF normally activates RAF–MEK–ERK in endothelium, but MAPK can also be driven by other receptor tyrosine kinases; in bevacizumab‑treated NSCLC, persistent MAPK activity through non‑VEGF inputs sustains proliferation and migration, limiting the impact of VEGF neutralization.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "KEGG_TGF_BETA_SIGNALING_PATHWAY",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "TGF‑β signaling induces epithelial–mesenchymal transition (EMT), extracellular matrix remodeling, and immunosuppression; upregulation of TGF‑β pathway activity in lung cancer under anti‑angiogenic pressure fosters invasive, pro‑fibrotic phenotypes that escape bevacizumab‑mediated vascular pruning.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "Hallmark_EPITHELIAL_MESENCHYMAL_TRANSITION",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EMT programs increase motility, invasion, and resistance to therapy; bevacizumab‑induced hypoxia and stromal activation can enhance EMT signatures in NSCLC, enabling tumor cells to disseminate and thrive despite reduced angiogenesis.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "KEGG_FGF_SIGNALING_PATHWAY",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "FGF/FGFR signaling is a key alternative pro‑angiogenic axis; in lung tumors, upregulation of FGF ligands or FGFRs can bypass VEGF dependency, maintaining endothelial proliferation and neovessel formation even when VEGFA is neutralized by bevacizumab.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "KEGG_ANGIOGENESIS (VEGF/FGF/PDGF composite)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Overall angiogenic gene signatures reflect dependency on neovascularization; high VEGF‑dominant angiogenesis favors bevacizumab sensitivity, whereas a shift toward FGF/PDGF‑driven angiogenesis under treatment pressure supports resistance and disease progression.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "Reactome: VEGF ligand–receptor interactions (R-HSA-194138)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Bevacizumab directly reduces effective VEGFA available to bind VEGFR1/VEGFR2 on endothelial cells; disruption of this Reactome‑defined interaction network diminishes downstream survival and permeability signaling, particularly in VEGF‑addicted NSCLC vasculature.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "Reactome: Signaling by VEGFR2 (R-HSA-4420097)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "VEGFR2 mediates the principal mitogenic and permeability effects of VEGFA; bevacizumab lowers VEGFA–VEGFR2 activation, attenuating this pathway’s contribution to vessel sprouting and tumor perfusion in lung cancer.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Hallmark_HYPOXIA",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Anti‑angiogenic therapy can exacerbate intratumoral hypoxia; in NSCLC, increased hypoxia signature activity after bevacizumab may select for more aggressive, glycolytic, and invasive clones and induce additional pro‑angiogenic factors, undermining durable responses.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Hallmark_TNFA_SIGNALING_VIA_NFKB",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "TNFα/NF‑κB signaling in the tumor microenvironment promotes inflammatory angiogenesis and survival; compensatory upregulation of this pathway in lung tumors may sustain vascular support and immune evasion despite VEGF blockade by bevacizumab.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/21916570/"
+    ]
+  }
+}

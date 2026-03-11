@@ -1,29 +1,58 @@
-# %% [markdown]
-# # Ribociclib Pathway Evidence Table — Extract + Baseline Fact-check + Normalize + Include/Exclude (Cell-based .py)
-#
-# Adds an LLM decision on whether each pathway row **should be included** in the final output
-# (based on baseline breast cancer + ribociclib relevance + internal consistency).
-#
-# Output is a dict matching the strict schema per row, including:
-# - Verdict (correct/corrected)
-# - Normalized Regulation & Baseline effect
-# - Classification + reasoning
-# - Include decision + reasoning
-# - References resolved to URLs from Sources section
-
-# %%
-# -------------------------
-# Imports
-# -------------------------
+﻿import argparse
+import hashlib
 import json
 import os
 import re
-import hashlib
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-# %%
+
+PROMPT_VERSION = "v3_include_decision"
+DEFAULT_MODEL = "gpt-4o"
+DEFAULT_TEMPERATURE = 0.2
+DEFAULT_CACHE = ".cache_step2_llm.json"
+
+
+@dataclass
+class TableRow:
+    idx: int
+    pathway: str
+    regulation: str
+    effect: str
+    rationale: str
+    key_refs_raw: str
+
+    def to_compact_dict(self) -> Dict[str, str]:
+        return {
+            "Pathway ID/Name": self.pathway,
+            "Regulation (raw)": self.regulation,
+            "Effect (raw)": self.effect,
+            "Rationale (raw)": self.rationale,
+            "Key references (raw)": self.key_refs_raw,
+        }
+
+
+DASH_CHARS = "\u2010\u2011\u2012\u2013\u2014\u2212"
+DASH_RE = re.compile(f"[{DASH_CHARS}]")
+URL_RE = re.compile(r"(https?://[^\s)>\]]+)", re.IGNORECASE)
+
+ALLOWED_VERDICTS = {"correct", "corrected"}
+ALLOWED_INCORRECT = {"regulation", "effect"}
+ALLOWED_REG = {"upregulation", "downregulation"}
+ALLOWED_EFF = {"sensitive", "resistant"}
+ALLOWED_CLASS = {
+    "mechanistically accurate",
+    "clinically validated",
+    "inferred from mechanistic evidence",
+    "experimental (clinical trials)",
+    "possibly related",
+    "not needed",
+}
+ALLOWED_INCLUDE = {"include", "exclude"}
+
+
 # -------------------------
 # Minimal .env loader (no dependency)
 # -------------------------
@@ -67,53 +96,13 @@ def load_dotenv_if_exists() -> None:
                     os.environ[k] = v
             break
 
-# %%
-# -------------------------
-# Config (EDIT THIS CELL)
-# -------------------------
-INPUT_MD = "Ribociclib_Report.md"
-DRUG_NAME = "Ribociclib"
-MODEL = "gpt-5.1"
-TEMPERATURE = 0.2
-OUT_JSON = "ribociclib_step2_trial2_out.json"   # "" disables save
-CACHE_PATH = ".cache_ribociclib_llm.json" # "" disables cache
-API_BASE = ""                             # optional OpenAI-compatible base URL
-NO_LLM = False                            # True = extract + resolve refs only
 
-PROMPT_VERSION = "v3_include_decision"    # bump to invalidate cache after prompt/schema edits
-
-# %%
-# -------------------------
-# Data structures
-# -------------------------
-@dataclass
-class TableRow:
-    idx: int
-    pathway: str
-    regulation: str
-    effect: str
-    rationale: str
-    key_refs_raw: str
-
-    def to_compact_dict(self) -> Dict[str, str]:
-        return {
-            "Pathway ID/Name": self.pathway,
-            "Regulation (raw)": self.regulation,
-            "Effect (raw)": self.effect,
-            "Rationale (raw)": self.rationale,
-            "Key references (raw)": self.key_refs_raw,
-        }
-
-# %%
 # -------------------------
 # Markdown parsing + reference helpers
 # -------------------------
-DASH_CHARS = "\u2010\u2011\u2012\u2013\u2014\u2212"
-DASH_RE = re.compile(f"[{DASH_CHARS}]")
-URL_RE = re.compile(r"(https?://[^\s)>\]]+)", re.IGNORECASE)
-
 def _normalize_dashes(s: str) -> str:
     return DASH_RE.sub("-", s or "")
+
 
 def _strip_md(s: str) -> str:
     s = (s or "").strip()
@@ -123,6 +112,7 @@ def _strip_md(s: str) -> str:
     s = re.sub(r"<br\s*/?>", " ", s, flags=re.IGNORECASE)
     s = re.sub(r"\s+", " ", s).strip()
     return s
+
 
 def parse_reference_numbers(ref_cell: str) -> List[int]:
     if not ref_cell:
@@ -147,9 +137,8 @@ def parse_reference_numbers(ref_cell: str) -> List[int]:
                     nums.extend(range(start, end + 1))
                 else:
                     nums.extend([start, end])
-        else:
-            if part.isdigit():
-                nums.append(int(part))
+        elif part.isdigit():
+            nums.append(int(part))
 
     seen = set()
     out: List[int] = []
@@ -158,6 +147,7 @@ def parse_reference_numbers(ref_cell: str) -> List[int]:
             out.append(n)
             seen.add(n)
     return out
+
 
 def parse_sources_map(md_text: str) -> Dict[int, List[str]]:
     sources: Dict[int, List[str]] = {}
@@ -188,17 +178,19 @@ def parse_sources_map(md_text: str) -> Dict[int, List[str]]:
             sources[n] = uniq
     return sources
 
-def _find_section_block(md_text: str, heading: str) -> str:
-    pat = re.compile(rf"^(?P<hashes>#+)\s+{re.escape(heading)}\s*$", re.MULTILINE)
-    m = pat.search(md_text)
+
+def _find_section_block(md_text: str, heading_pattern: re.Pattern) -> str:
+    m = heading_pattern.search(md_text)
     if not m:
         return ""
+
     level = len(m.group("hashes"))
     start = m.end()
     next_pat = re.compile(rf"^#{{1,{level}}}\s+\S.*$", re.MULTILINE)
     m2 = next_pat.search(md_text, pos=start)
     end = m2.start() if m2 else len(md_text)
     return md_text[start:end].strip("\n")
+
 
 def extract_markdown_table_from_section(section_text: str) -> Tuple[List[str], List[List[str]]]:
     lines = section_text.splitlines()
@@ -248,6 +240,7 @@ def extract_markdown_table_from_section(section_text: str) -> Tuple[List[str], L
         return ([], [])
     return (headers, rows)
 
+
 def _pick_column(headers: List[str], keywords: List[str]) -> Optional[int]:
     hnorm = [h.lower() for h in headers]
     for k in keywords:
@@ -257,21 +250,29 @@ def _pick_column(headers: List[str], keywords: List[str]) -> Optional[int]:
                 return i
     return None
 
+
 def extract_pathway_evidence_table(md_text: str) -> List[TableRow]:
-    section = _find_section_block(md_text, "Pathway Evidence Table (Main Focus)") or md_text
+    heading_pattern = re.compile(
+        r"^(?P<hashes>#+)\s*9\.\s*Pathway Evidence Table\s*$",
+        flags=re.IGNORECASE | re.MULTILINE,
+    )
+    section = _find_section_block(md_text, heading_pattern)
+    if not section:
+        raise ValueError('Could not locate section heading "## 9. Pathway Evidence Table".')
+
     headers, rows = extract_markdown_table_from_section(section)
     if not headers or not rows:
-        raise ValueError('Could not locate markdown table under "Pathway Evidence Table (Main Focus)".')
+        raise ValueError('Could not locate markdown table under section "9. Pathway Evidence Table".')
 
     col_path = _pick_column(headers, ["pathway"])
-    col_reg  = _pick_column(headers, ["regulation"])
-    col_eff  = _pick_column(headers, ["effect"])
-    col_rat  = _pick_column(headers, ["rationale"])
-    col_ref  = _pick_column(headers, ["key ref", "reference", "ref"])
-    col_idx  = _pick_column(headers, ["#", "no."])
+    col_reg = _pick_column(headers, ["regulation"])
+    col_eff = _pick_column(headers, ["effect"])
+    col_rat = _pick_column(headers, ["rationale", "biological rationale"])
+    col_ref = _pick_column(headers, ["key ref", "reference", "ref"])
+    col_idx = _pick_column(headers, ["#", "no."])
 
     if col_path is None or col_reg is None or col_eff is None or col_rat is None:
-        raise ValueError(f"Missing expected columns. Headers found: {headers}")
+        raise ValueError(f"Missing expected columns in pathway table. Headers found: {headers}")
 
     out: List[TableRow] = []
     for r in rows:
@@ -298,6 +299,7 @@ def extract_pathway_evidence_table(md_text: str) -> List[TableRow]:
         )
     return out
 
+
 def resolve_refs_to_urls(ref_nums: List[int], sources_map: Dict[int, List[str]]) -> List[str]:
     out: List[str] = []
     seen = set()
@@ -308,62 +310,40 @@ def resolve_refs_to_urls(ref_nums: List[int], sources_map: Dict[int, List[str]])
                 seen.add(u)
     return out
 
+
 def _sha1(s: str) -> str:
     return hashlib.sha1(s.encode("utf-8")).hexdigest()
 
-# %%
-# -------------------------
-# LLM: validate + normalize + include/exclude decision
-# -------------------------
-ALLOWED_VERDICTS = {"correct", "corrected"}
-ALLOWED_INCORRECT = {"regulation", "effect"}
-ALLOWED_REG = {"upregulation", "downregulation"}
-ALLOWED_EFF = {"sensitive", "resistant"}
-ALLOWED_CLASS = {
-    "mechanistically accurate",
-    "clinically validated",
-    "inferred from mechanistic evidence",
-    "experimental (clinical trials)",
-    "possibly related",
-    "not needed",
-}
-ALLOWED_INCLUDE = {"include", "exclude"}
 
+# -------------------------
+# LLM
+# -------------------------
 def llm_validate_normalize_and_include(
     *,
     row: TableRow,
     drug_name: str,
+    cancer_name: str,
     model: str,
     temperature: float,
-    api_base: Optional[str] = None,
-    max_retries: int = 1,
+    api_base: Optional[str],
+    max_retries: int,
+    request_sleep_seconds: float,
 ) -> Dict:
-    """
-    LLM must return JSON with keys:
-      - Verdict: correct|corrected
-      - Incorrect_entries: [] or ["regulation"] or ["effect"] or ["regulation","effect"]
-      - Regulation: upregulation|downregulation
-      - Baseline effect: sensitive|resistant
-      - Rationale
-      - Pathway–drug relationship classification (allowed)
-      - Classification reasoning (1–2 sentences)
-      - Include decision: include|exclude
-      - Inclusion reasoning (1–2 sentences)
-    """
     from openai import OpenAI
+
     client = OpenAI(base_url=api_base) if api_base else OpenAI()
 
     system = (
         "SYSTEM ROLE:\n"
-        "You are an expert in breast cancer molecular biology, CDK4/6 inhibitor pharmacology, "
-        "and clinical translational oncology. You are strictly evidence-driven and baseline-aware.\n\n"
+        "You are an expert in molecular biology, cancer pharmacology, and clinical translational oncology. "
+        "You are strictly evidence-driven and baseline-aware.\n\n"
         "STRICT ASSUMPTIONS:\n"
-        "• Disease context: Human breast cancer ONLY\n"
-        f"• Drug context: {drug_name} (CDK4/6 inhibitor)\n"
-        "• Temporal context: BASELINE pathway biology (pre-treatment)\n"
-        "• Evidence hierarchy: clinical > translational > mechanistic > inferential\n\n"
+        f"- Disease context: Human {cancer_name} ONLY\n"
+        f"- Drug context: {drug_name}\n"
+        "- Temporal context: BASELINE pathway biology (pre-treatment)\n"
+        "- Evidence hierarchy: clinical > translational > mechanistic > inferential\n\n"
         "NON-NEGOTIABLE RULES:\n"
-        "- Baseline means BEFORE ribociclib is administered.\n"
+        f"- Baseline means BEFORE {drug_name} is administered.\n"
         "- Do NOT treat post-treatment/adaptive changes as baseline unless explicitly stated.\n"
         "- Normalize to SINGLE-WORD values:\n"
         "  Regulation: upregulation|downregulation\n"
@@ -373,7 +353,7 @@ def llm_validate_normalize_and_include(
         "  corrected: regulation and/or effect needed correction\n"
         "- If Verdict=corrected -> Incorrect_entries MUST be non-empty.\n"
         "- Decide whether the pathway row should be INCLUDED in final output:\n"
-        "  include: relevant/needed for baseline ribociclib response in breast cancer\n"
+        f"  include: relevant/needed for baseline {drug_name} response in {cancer_name}\n"
         "  exclude: not needed, not relevant, speculative, or post-treatment framed\n"
         "- Output JSON only.\n"
     )
@@ -382,12 +362,12 @@ def llm_validate_normalize_and_include(
     allowed_inc_list = sorted(ALLOWED_INCLUDE)
 
     base_prompt = (
-        "Given one extracted row, do ALL of the following under baseline breast cancer + ribociclib:\n"
+        f"Given one extracted row, do ALL of the following under baseline {cancer_name} + {drug_name}:\n"
         "1) Fact-check regulation/effect/rationale.\n"
         "2) Assign Verdict (correct|corrected).\n"
         "3) If corrected, set Incorrect_entries to list which were wrong: regulation/effect.\n"
         "4) Normalize Regulation and Baseline effect to allowed single-word values.\n"
-        "5) Classify pathway–drug relationship using ONE allowed category.\n"
+        "5) Classify pathway-drug relationship using ONE allowed category.\n"
         "6) Decide Include decision (include|exclude) for whether this row should appear in final report.\n\n"
         f"Allowed classifications: {allowed_class_list}\n"
         f"Allowed include decisions: {allowed_inc_list}\n\n"
@@ -398,16 +378,18 @@ def llm_validate_normalize_and_include(
         '  "Regulation": "upregulation" | "downregulation",\n'
         '  "Baseline effect": "sensitive" | "resistant",\n'
         '  "Rationale": "<final baseline-accurate rationale>",\n'
-        '  "Pathway–drug relationship classification": "<one allowed category>",\n'
-        '  "Classification reasoning": "<1–2 sentences>",\n'
+        '  "Pathway-drug relationship classification": "<one allowed category>",\n'
+        '  "Classification reasoning": "<1-2 sentences>",\n'
         '  "Include decision": "include" | "exclude",\n'
-        '  "Inclusion reasoning": "<1–2 sentences>"\n'
+        '  "Inclusion reasoning": "<1-2 sentences>"\n'
         "}\n\n"
         "Row:\n"
         f"{json.dumps(row.to_compact_dict(), ensure_ascii=False)}"
     )
 
     def _call_llm(user_prompt: str) -> Dict:
+        if request_sleep_seconds > 0:
+            time.sleep(request_sleep_seconds)
         resp = client.chat.completions.create(
             model=model,
             temperature=temperature,
@@ -427,12 +409,12 @@ def llm_validate_normalize_and_include(
         ie = data.get("Incorrect_entries")
         if not isinstance(ie, list):
             raise ValueError(f"Incorrect_entries must be list (row {row.idx}).")
+
         ie_norm: List[str] = []
         alias_map = {
             "reg": "regulation",
             "regulation": "regulation",
             "pathway regulation": "regulation",
-
             "effect": "effect",
             "baseline effect": "effect",
             "baseline_effect": "effect",
@@ -440,7 +422,8 @@ def llm_validate_normalize_and_include(
             "baselineeffect": "effect",
             "drug effect": "effect",
             "effect on drug": "effect",
-            "effect on ribociclib response": "effect",
+            "effect on response": "effect",
+            f"effect on {drug_name.lower()} response": "effect",
             "baseline effect on drug": "effect",
         }
 
@@ -451,15 +434,16 @@ def llm_validate_normalize_and_include(
             s = alias_map.get(s, s)
 
             if s not in ALLOWED_INCORRECT:
-                raise ValueError(f"Invalid Incorrect_entries item '{x}' (row {row.idx}). Allowed: {sorted(ALLOWED_INCORRECT)}")
+                raise ValueError(
+                    f"Invalid Incorrect_entries item '{x}' (row {row.idx}). Allowed: {sorted(ALLOWED_INCORRECT)}"
+                )
             if s not in ie_norm:
                 ie_norm.append(s)
 
         if verdict == "correct":
             ie_norm = []
-        else:
-            if len(ie_norm) == 0:
-                raise ValueError(f"Verdict=corrected but Incorrect_entries empty (row {row.idx}).")
+        elif not ie_norm:
+            raise ValueError(f"Verdict=corrected but Incorrect_entries empty (row {row.idx}).")
 
         reg = str(data.get("Regulation", "")).strip().lower()
         eff = str(data.get("Baseline effect", "")).strip().lower()
@@ -472,7 +456,7 @@ def llm_validate_normalize_and_include(
         if not isinstance(rat, str) or not rat.strip():
             raise ValueError(f"Invalid Rationale (row {row.idx}).")
 
-        cls = str(data.get("Pathway–drug relationship classification", "")).strip()
+        cls = str(data.get("Pathway-drug relationship classification", "")).strip()
         if cls not in ALLOWED_CLASS:
             raise ValueError(f"Invalid classification '{cls}' (row {row.idx}).")
 
@@ -494,7 +478,7 @@ def llm_validate_normalize_and_include(
             "Regulation": reg,
             "Baseline effect": eff,
             "Rationale": rat.strip(),
-            "Pathway–drug relationship classification": cls,
+            "Pathway-drug relationship classification": cls,
             "Classification reasoning": cls_reason.strip(),
             "Include decision": inc,
             "Inclusion reasoning": inc_reason.strip(),
@@ -523,7 +507,7 @@ def llm_validate_normalize_and_include(
         data2 = _call_llm(fix_prompt)
         return _validate(data2)
 
-# %%
+
 # -------------------------
 # Cache helpers
 # -------------------------
@@ -538,6 +522,7 @@ def load_cache(cache_file: str) -> Dict[str, Dict]:
     except Exception:
         return {}
 
+
 def save_cache(cache_file: str, cache: Dict[str, Dict]) -> None:
     if not cache_file:
         return
@@ -545,30 +530,27 @@ def save_cache(cache_file: str, cache: Dict[str, Dict]) -> None:
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
 
-# %%
-# -------------------------
-# Pipeline runner (final STRICT schema per row)
-# -------------------------
-def run_pipeline_cellbased(
-    input_md: str,
+
+def run_pipeline_for_md(
+    *,
+    md_path: Path,
     drug_name: str,
+    cancer_name: str,
     model: str,
     temperature: float,
-    out_json: str = "",
-    cache_file: str = "",
-    api_base: str = "",
-    no_llm: bool = False,
+    api_base: Optional[str],
+    no_llm: bool,
+    cache: Dict[str, Dict],
+    cache_file: str,
+    max_retries: int,
+    request_sleep_seconds: float,
 ) -> Dict[str, Dict]:
-    md_path = Path(input_md)
     if not md_path.exists():
         raise FileNotFoundError(f"Input file not found: {md_path}")
 
     md_text = md_path.read_text(encoding="utf-8")
     sources_map = parse_sources_map(md_text)
     rows = extract_pathway_evidence_table(md_text)
-
-    api_base = api_base.strip() or None
-    cache = load_cache(cache_file) if cache_file else {}
 
     result: Dict[str, Dict] = {}
 
@@ -584,33 +566,37 @@ def run_pipeline_cellbased(
                 "Regulation": "",
                 "Baseline effect": "",
                 "Rationale": r.rationale,
-                "Pathway–drug relationship classification": "possibly related",
+                "Pathway-drug relationship classification": "possibly related",
                 "Classification reasoning": "NO_LLM mode: not validated.",
                 "Include decision": "include",
                 "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
                 "References": resolved_urls,
             }
         else:
-            cache_key = _sha1(json.dumps(
-                {
-                    "prompt_version": PROMPT_VERSION,
-                    "drug": drug_name,
-                    "model": model,
-                    "row": r.to_compact_dict(),
-                },
-                ensure_ascii=False,
-                sort_keys=True,
-            ))
+            cache_key = _sha1(
+                json.dumps(
+                    {
+                        "prompt_version": PROMPT_VERSION,
+                        "drug": drug_name,
+                        "model": model,
+                        "row": r.to_compact_dict(),
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                )
+            )
 
             llm_out = cache.get(cache_key)
             if llm_out is None:
                 llm_out = llm_validate_normalize_and_include(
                     row=r,
                     drug_name=drug_name,
+                    cancer_name=cancer_name,
                     model=model,
                     temperature=temperature,
                     api_base=api_base,
-                    max_retries=1,
+                    max_retries=max_retries,
+                    request_sleep_seconds=request_sleep_seconds,
                 )
                 if cache_file:
                     cache[cache_key] = llm_out
@@ -623,90 +609,116 @@ def run_pipeline_cellbased(
                 "Regulation": llm_out["Regulation"],
                 "Baseline effect": llm_out["Baseline effect"],
                 "Rationale": llm_out["Rationale"],
-                "Pathway–drug relationship classification": llm_out["Pathway–drug relationship classification"],
+                "Pathway-drug relationship classification": llm_out["Pathway-drug relationship classification"],
                 "Classification reasoning": llm_out["Classification reasoning"],
                 "Include decision": llm_out["Include decision"],
                 "Inclusion reasoning": llm_out["Inclusion reasoning"],
-                "References": resolved_urls,  # URLs resolved ONLY from Sources section
+                "References": resolved_urls,
             }
 
         result[f"Row{i}"] = row_out
 
-    if out_json:
-        outp = Path(out_json)
-        outp.parent.mkdir(parents=True, exist_ok=True)
-        outp.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-
     return result
 
-# %%
-# -------------------------
-# RUN (execute this cell)
-# -------------------------
-load_dotenv_if_exists()
-if not NO_LLM and not os.getenv("OPENAI_API_KEY"):
-    raise RuntimeError("OPENAI_API_KEY is not set. Set it or set NO_LLM=True.")
 
-result = run_pipeline_cellbased(
-    input_md=INPUT_MD,
-    drug_name=DRUG_NAME,
-    model=MODEL,
-    temperature=TEMPERATURE,
-    out_json=OUT_JSON,
-    cache_file=CACHE_PATH,
-    api_base=API_BASE,
-    no_llm=NO_LLM,
-)
+def derive_drug_name_from_file(md_path: Path) -> str:
+    return md_path.stem
 
-result
 
-# %%
-# %%
-# -------------------------
-# Convert result JSON -> DataFrame + save CSV
-# -------------------------
-import pandas as pd
+def run_batch(args: argparse.Namespace) -> Dict[str, object]:
+    input_dir = Path(args.input_dir)
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-def result_to_dataframe(result: Dict[str, Dict]) -> pd.DataFrame:
-    """
-    Flattens the per-row JSON into a table.
-    Lists (Incorrect_entries, References) are joined with '; '.
-    """
-    rows = []
-    for row_key, row_obj in result.items():
-        flat = {"Row": row_key}
-        for k, v in row_obj.items():
-            if isinstance(v, list):
-                flat[k] = "; ".join(str(x) for x in v)
-            else:
-                flat[k] = v
-        rows.append(flat)
+    if not input_dir.exists() or not input_dir.is_dir():
+        raise FileNotFoundError(f"Input directory not found: {input_dir}")
 
-    df = pd.DataFrame(rows)
+    md_files = sorted(input_dir.glob("*.md"))
+    if not md_files:
+        raise FileNotFoundError(f"No .md files found in input directory: {input_dir}")
 
-    # Keep a stable column order if present
-    preferred = [
-        "Row",
-        "Pathway ID/Name",
-        "Verdict",
-        "Include decision",
-        "Incorrect_entries",
-        "Regulation",
-        "Baseline effect",
-        "Pathway–drug relationship classification",
-        "Classification reasoning",
-        "Inclusion reasoning",
-        "Rationale",
-        "References",
-    ]
-    cols = [c for c in preferred if c in df.columns] + [c for c in df.columns if c not in preferred]
-    return df[cols]
+    api_base = args.api_base.strip() or None
+    cache = load_cache(args.cache_file) if args.cache_file else {}
 
-df_result = result_to_dataframe(result)
-df_result
+    failures: List[Dict[str, str]] = []
+    success_count = 0
 
-# Save CSV
-OUT_CSV = "ribociclib_step2_trial2_out.csv"
-df_result.to_csv(OUT_CSV, index=False, encoding="utf-8")
-OUT_CSV
-# %%
+    for md_file in md_files:
+        drug_name = derive_drug_name_from_file(md_file)
+        out_json_path = output_dir / f"{drug_name}.json"
+
+        try:
+            result = run_pipeline_for_md(
+                md_path=md_file,
+                drug_name=drug_name,
+                cancer_name=args.cancer,
+                model=args.model,
+                temperature=args.temperature,
+                api_base=api_base,
+                no_llm=args.no_llm,
+                cache=cache,
+                cache_file=args.cache_file,
+                max_retries=args.max_retries,
+                request_sleep_seconds=args.sleep_seconds,
+            )
+            out_json_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+            success_count += 1
+            print(f"OK: {md_file.name} -> {out_json_path.name} ({len(result)} rows)")
+        except Exception as e:
+            failures.append({"file": str(md_file), "error": f"{type(e).__name__}: {e}"})
+            print(f"FAILED: {md_file.name} -> {type(e).__name__}: {e}")
+
+    summary = {
+        "input_dir": str(input_dir),
+        "output_dir": str(output_dir),
+        "total_files": len(md_files),
+        "success_count": success_count,
+        "failure_count": len(failures),
+        "failures": failures,
+    }
+
+    print("\nBatch summary:")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    return summary
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Batch pathway fact-check extraction over drug markdown files."
+    )
+    parser.add_argument("-i", "--input-dir", required=True, help="Input directory containing drug .md files")
+    parser.add_argument("-o", "--output-dir", required=True, help="Output directory for per-drug JSON files")
+    parser.add_argument("--cancer", required=True, help="Cancer name used in LLM prompt context")
+
+    parser.add_argument("--model", default=DEFAULT_MODEL, help=f"LLM model (default: {DEFAULT_MODEL})")
+    parser.add_argument("--temperature", type=float, default=DEFAULT_TEMPERATURE, help="LLM temperature")
+    parser.add_argument("--api-base", default="", help="Optional OpenAI-compatible API base URL")
+    parser.add_argument("--no-llm", action="store_true", help="Skip LLM validation and output extracted rows only")
+    parser.add_argument("--cache-file", default=DEFAULT_CACHE, help="Shared cache JSON file path (empty to disable)")
+    parser.add_argument("--max-retries", type=int, default=1, help="LLM schema-fix retries")
+    parser.add_argument(
+        "--sleep-seconds",
+        type=float,
+        default=0.2,
+        help="Sleep before each LLM request. Set 0 to disable.",
+    )
+
+    return parser.parse_args()
+
+
+def main() -> None:
+    load_dotenv_if_exists()
+    args = parse_args()
+
+    if not args.no_llm and not os.getenv("OPENAI_API_KEY"):
+        raise RuntimeError("OPENAI_API_KEY is not set. Set it or use --no-llm.")
+
+    summary = run_batch(args)
+    if summary["failure_count"] > 0:
+        raise RuntimeError(
+            f"Batch completed with failures: {summary['failure_count']} of {summary['total_files']} files failed."
+        )
+
+
+if __name__ == "__main__":
+    main()

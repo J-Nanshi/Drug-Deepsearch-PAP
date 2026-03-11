@@ -1,0 +1,414 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "KEGG: hsa04014 – Ras signaling pathway",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In baseline lung cancer, the Ras signaling pathway is typically upregulated due to mutations like KRAS G12C, making cells sensitive to KRAS inhibitors like adagrasib.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "KRAS G12C mutations are a known target for adagrasib, and its efficacy has been demonstrated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of the Ras signaling pathway is crucial for interpreting the sensitivity of lung cancer to adagrasib.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10553074/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The MAPK (RAF–MEK–ERK) signaling pathway is a dominant effector cascade for mutant KRAS, and its reactivation is associated with resistance to KRAS G12C inhibitors like adagrasib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The pathway's role in resistance is inferred from mechanistic studies showing reactivation leads to resistance.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the MAPK pathway's role in resistance is crucial for baseline response assessment to adagrasib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10553074/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "KEGG: hsa04110 – Cell cycle (E2F, G2/M checkpoints)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, KRAS mutations in lung cancer lead to upregulation of cell cycle pathways, contributing to resistance. Adagrasib targets KRAS G12C, potentially altering these pathways post-treatment.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The baseline upregulation of cell cycle pathways in KRAS-mutant lung cancer suggests resistance, inferred from mechanistic understanding of KRAS-driven proliferation.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding baseline cell cycle regulation is crucial for assessing adagrasib's impact on KRAS-mutant lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10553074/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "KEGG: hsa04151 – PI3K–AKT signaling pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "RTK-driven activation of PI3K–AKT–mTOR is a key bypass route under KRAS G12C inhibition, contributing to resistance to adagrasib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of PI3K–AKT signaling in resistance to KRAS G12C inhibitors like adagrasib is supported by mechanistic studies.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to adagrasib in lung cancer.",
+    "References": [
+      "https://www.ncbi.nlm.nih.gov/books/NBK597220/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "KEGG: hsa04015 – Rap1/Ral/FAK–YAP axis (modeled within Ras/focal adhesion)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The Rap1/Ral/FAK–YAP axis is upregulated as an adaptive response to KRAS G12C blockade, indicating that at baseline, before adagrasib treatment, this pathway does not confer resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway is implicated in resistance post-treatment, but at baseline, it does not confer resistance to adagrasib.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway's role is primarily in adaptive resistance post-treatment, not at baseline, thus it is not needed for baseline response analysis.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662862/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "KEGG: hsa04012 – ErbB signaling (EGFR/ERBB2/ERBB3/ERBB4)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, before adagrasib treatment, the ErbB signaling pathway is not upregulated due to KRAS G12C inhibition. The pathway is typically downregulated, and lung cancer cells are sensitive to adagrasib targeting KRAS G12C mutations.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred based on mechanistic evidence of KRAS G12C inhibition leading to initial pathway downregulation and sensitivity.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline regulation and sensitivity of the ErbB signaling pathway is crucial for evaluating the initial response to adagrasib in lung cancer.",
+    "References": [
+      "https://www.ncbi.nlm.nih.gov/books/NBK597220/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "KEGG: hsa04022 – cAMP / Rap1 and RHO GTPase signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Baseline cAMP/Rap1 and RHO GTPase signaling is involved in ERK-regulated pathways, which can contribute to resistance mechanisms in lung cancer by sustaining migration and survival signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway is involved in resistance mechanisms, but the evidence is more adaptive than baseline.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The rationale is based on adaptive changes post-treatment, not baseline characteristics relevant to adagrasib response.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662862/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "KEGG: hsa04310 – Wnt/β‑catenin and EMT-related signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Epithelial–mesenchymal transition (EMT) is repeatedly associated with primary and acquired resistance to KRAS G12C inhibitors. EMT rewires RTK expression (e.g., ERBB3, FGFR1) and enhances MAPK and PI3K signaling, enabling tumor cells to bypass adagrasib-mediated KRAS blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The Wnt/β-catenin and EMT-related signaling pathway is implicated in resistance mechanisms to KRAS G12C inhibitors, including adagrasib, in lung cancer.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant to understanding baseline resistance mechanisms to adagrasib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "KEGG: hsa04068 – FoxO signaling (via NF1/PTEN loss)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, loss-of-function mutations in NF1 and PTEN, which are negative regulators of RAS–MAPK and PI3K–AKT pathways, can lead to downregulation of feedback inhibition, making cells more sensitive to KRAS G12C inhibitors like adagrasib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from mechanistic evidence regarding the role of NF1 and PTEN in regulating pathways relevant to KRAS G12C inhibition.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline sensitivity to adagrasib in lung cancer due to its mechanistic role in regulating key signaling pathways.",
+    "References": [
+      "https://www.ncbi.nlm.nih.gov/books/NBK597220/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "KEGG: hsa04064 – NF-κB signaling (via RAL/NF‑κB arm)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS activates RAL–NF‑κB as a parallel effector arm. Reviews of KRAS G12C resistance note that bypass activation of downstream pro-proliferative and anti-apoptotic pathways, including NF‑κB, can maintain survival signaling independently of direct KRAS G12C output, reducing dependence on adagrasib-targeted nodes.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from mechanistic evidence showing NF-κB pathway activation can contribute to resistance in KRAS G12C contexts.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The NF-κB signaling pathway is relevant for understanding potential resistance mechanisms to adagrasib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10852394/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "KEGG: hsa04668 – TNF/Immune checkpoint–PD‑1/PD‑L1 interaction",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS mutations in lung cancer are associated with upregulation of PD-L1, which can lead to immune escape. However, at baseline, this upregulation makes the cancer potentially sensitive to PD-(L)1 blockade, which is a rationale for combining adagrasib with immune checkpoint inhibitors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway involves immune checkpoint interactions, which are relevant to the mechanism of action of PD-(L)1 blockade, a potential combination with adagrasib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding potential combination strategies with adagrasib in lung cancer, particularly involving immune checkpoint inhibitors.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10078900/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "KEGG: hsa05225 – Lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline lung cancer, the KRAS module is typically upregulated, and tumors with co-mutations or bypass pathway activation (e.g., KEAP1 mutations) are resistant to KRAS G12C inhibitors like adagrasib.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "Adagrasib is being evaluated in clinical trials for lung cancer, and its efficacy is influenced by specific genetic contexts such as KRAS mutations and co-mutations.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to adagrasib in lung cancer, particularly in the context of co-mutations and bypass pathway activations.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582/"
+    ]
+  },
+  "Row13": {
+    "Pathway ID/Name": "KEGG: hsa04014 – Ras signaling pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Adagrasib covalently binds KRAS G12C in its GDP‑bound “OFF” state, suppressing RAS signaling outputs. In KRAS G12C‑mutant NSCLC models and in KRYSTAL‑1 patients, effective KRAS inhibition is associated with marked suppression of RAS‑ERK–dependent transcriptional programs and tumor regression.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The pathway's downregulation and sensitivity to adagrasib in KRAS G12C-mutant NSCLC is supported by clinical data.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is directly relevant to the baseline response of lung cancer to adagrasib, supported by clinical evidence.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/"
+    ]
+  },
+  "Row14": {
+    "Pathway ID/Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "RAF–MEK–ERK is the dominant effector cascade for mutant KRAS in NSCLC. At baseline, this pathway is typically upregulated in KRAS-mutant lung cancer, contributing to resistance to therapies targeting KRAS.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway's role in KRAS-mutant lung cancer is well-established, and its regulation is crucial for understanding baseline resistance to KRAS inhibitors like adagrasib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of the MAPK pathway is essential for interpreting the initial resistance to adagrasib in KRAS-mutant lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/"
+    ]
+  },
+  "Row15": {
+    "Pathway ID/Name": "KEGG: hsa04110 – Cell cycle (E2F, G2/M checkpoints)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In KRAS G12C-addicted NSCLC cell lines and xenografts, adagrasib-mediated ERK inhibition leads to reduced expression of E2F target and G2/M checkpoint genes, decreased proliferation, and tumor shrinkage, indicating that suppression of KRAS-driven cell-cycle programs underlies clinical responses.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "The pathway's involvement in response to adagrasib is supported by preclinical models and early clinical trial data.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline sensitivity to adagrasib in KRAS G12C-mutant lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/"
+    ]
+  },
+  "Row16": {
+    "Pathway ID/Name": "KEGG: hsa04151 – PI3K–AKT signaling pathway",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, the PI3K–AKT signaling pathway is not upregulated as a bypass mechanism; this occurs post-treatment. Baseline sensitivity to KRAS G12C inhibitors like adagrasib is not due to PI3K–AKT pathway activation, which is a resistance mechanism that emerges after treatment.",
+    "Pathway-drug relationship classification": "not needed",
+    "Classification reasoning": "The PI3K–AKT pathway's role as a resistance mechanism is post-treatment and not relevant to baseline sensitivity to adagrasib.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway's involvement is post-treatment and not relevant to baseline response to adagrasib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  },
+  "Row17": {
+    "Pathway ID/Name": "KEGG: hsa04012 – ErbB signaling (EGFR/ERBB2/ERBB3/ERBB4)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, before adagrasib treatment, the ErbB signaling pathway is not upregulated by feedback mechanisms. The pathway's baseline state does not inherently confer resistance to adagrasib, as the drug targets KRAS G12C mutations, which are downstream of ErbB signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The ErbB signaling pathway may influence adagrasib response due to its role in upstream signaling, but its baseline state does not directly confer resistance.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The row describes post-treatment feedback mechanisms rather than baseline pathway activity relevant to adagrasib response in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  },
+  "Row18": {
+    "Pathway ID/Name": "KEGG: hsa04068 – FoxO signaling (via NF1/PTEN loss)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In baseline KRAS-mutant NSCLC, loss-of-function alterations in NF1 and PTEN can lead to enhanced RTK-RAS and PI3K signaling. However, these alterations are more associated with acquired resistance post-treatment rather than baseline resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway alterations are relevant to KRAS-mutant NSCLC but are more indicative of post-treatment resistance mechanisms rather than baseline sensitivity or resistance.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway is more relevant to acquired resistance mechanisms and not directly applicable to baseline sensitivity or resistance to adagrasib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  },
+  "Row19": {
+    "Pathway ID/Name": "KEGG: hsa04310 – Wnt/β‑catenin and EMT‑related signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EMT phenotypes in KRAS G12C NSCLC are associated with upregulation of Wnt/β‑catenin signaling, which reduces dependence on KRAS‑ERK and favors bypass signaling, leading to resistance to adagrasib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The association between EMT phenotypes and resistance to KRAS G12C inhibitors like adagrasib is supported by mechanistic insights and reviews of clinical and preclinical data.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The Wnt/β‑catenin pathway's role in EMT and resistance to adagrasib is relevant for understanding baseline resistance mechanisms in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  },
+  "Row20": {
+    "Pathway ID/Name": "KEGG: hsa04064 – NF‑κB signaling (via RAL/NF‑κB arm)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In baseline lung cancer, KRAS signaling through RAL/NF-κB is typically not upregulated, and NF-κB signaling is not inherently resistant to KRAS G12C inhibitors like adagrasib. The pathway's upregulation and resistance are more relevant to adaptive resistance mechanisms post-treatment.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The NF-κB pathway may play a role in resistance mechanisms, but this is more relevant post-treatment rather than at baseline.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway's role is more pertinent to adaptive resistance rather than baseline sensitivity to adagrasib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  },
+  "Row21": {
+    "Pathway ID/Name": "KEGG: hsa04668 – TNF/Immune checkpoint–PD‑1/PD‑L1 interaction",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS-mutant NSCLC often exhibits high PD-L1 expression, which is associated with immune escape. However, the baseline state before adagrasib treatment is characterized by high PD-L1 expression, suggesting sensitivity to immune checkpoint blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway is relevant due to its role in immune escape in KRAS-mutant NSCLC, but the adaptive upregulation post-treatment is not baseline.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline immune escape mechanisms in KRAS-mutant NSCLC, which is important for considering combination strategies with adagrasib.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  },
+  "Row22": {
+    "Pathway ID/Name": "KEGG: hsa05223 – Non‑small cell lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline non-small cell lung cancer, the KRAS module is often upregulated, and tumors with STK11/KEAP1 co-mutations show resistance due to reduced KRAS dependency and increased reliance on alternative pathways.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "Adagrasib is being tested in clinical trials for NSCLC, and responses vary based on co-mutation status, indicating an experimental context.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms in lung cancer treated with adagrasib, especially in the context of co-mutations.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012/"
+    ]
+  },
+  "Row23": {
+    "Pathway ID/Name": "KEGG: hsa04140 – Autophagy (macroautophagy)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS‑mutant tumors rely on autophagy for metabolic support. Preclinical data suggest that concurrent autophagy inhibition can enhance response to KRAS G12C inhibitors like adagrasib, indicating sensitivity at baseline.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from preclinical mechanistic evidence showing that autophagy supports KRAS-mutant tumor survival, suggesting sensitivity to inhibition.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding autophagy's role is relevant for baseline response to adagrasib in KRAS-mutant lung cancer, as it informs potential combination strategies.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  },
+  "Row24": {
+    "Pathway ID/Name": "KEGG: hsa04071 – Sphingolipid / apoptosis signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Baseline resistance to adagrasib in lung cancer is associated with upregulation of anti-apoptotic programs, which counterbalance pro-apoptotic sphingolipid signaling, limiting cell death.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway involves apoptosis regulation, which is relevant to adagrasib's mechanism, but the specific role of sphingolipid signaling in baseline resistance is not fully established.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the balance between pro- and anti-apoptotic signaling is relevant for baseline resistance to adagrasib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499/"
+    ]
+  }
+}

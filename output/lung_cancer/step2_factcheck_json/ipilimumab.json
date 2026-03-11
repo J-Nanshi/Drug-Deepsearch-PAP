@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "CTLA‑4–PD‑1 dual checkpoint axis in NSCLC (nivolumab + ipilimumab)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In CheckMate‑227, first‑line nivolumab plus ipilimumab improved overall survival versus chemotherapy in non‑squamous NSCLC both in patients with and without KRAS, STK11 or KEAP1 mutations, indicating that combined CTLA‑4/PD‑1 blockade can generate durable benefit even in genomically high‑risk groups.[7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11736579/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "KRAS–STK11 “KL” phenotype / cold TME program",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "KRAS/STK11 co‑mutant tumors show low PD‑L1, sparse effector T‑cell infiltration and enrichment of immunosuppressive myeloid cells, leading to poor responsiveness to ICIs.[1,3,7] In advanced KRAS‑mutant NSCLC, STK11 co‑mutation is linked to primary resistance to PD‑1 inhibitors and worse survival, yet CheckMate‑227 suggests nivolumab plus ipilimumab can still reduce risk of death versus chemotherapy, supporting partial reversal of this pathway.[1,3,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12337074"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "KEAP1–NRF2 oxidative‑stress / immune‑evasion axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "KEAP1 mutations hyperactivate NRF2, protecting tumor cells from oxidative stress, impairing antigen presentation and suppressing CD103⁺ dendritic cells and CD8⁺ T‑cell effector function, driving resistance to PD‑(L)1 blockade.[1,3,4] Clinically, KEAP1‑mutant NSCLC shows reduced benefit from PD‑(L)1 monotherapy and inferior OS after ICIs; in CheckMate‑227, nivolumab plus ipilimumab still improves OS vs chemotherapy but outcomes remain worse for KEAP1‑mutant than wild‑type disease.[1,4,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12337074"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "KRAS‑mutant / high TMB inflammatory program",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "KRAS‑mutant NSCLC is enriched for smokers, high TMB, TILs and high PD‑L1 expression, features associated with better response to ICIs.[3,4] Real‑world and genomic‑database analyses show KRAS‑mutant tumors, particularly without STK11/KEAP1 co‑mutations, derive substantial benefit from frontline ICI‑based therapy, supporting high‑TMB/KRAS‑driven immunogenicity as a sensitizing pathway for nivolumab–ipilimumab.[3,4,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11194721/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "Triple KRAS/STK11/KEAP1 co‑mutation cluster",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Clinicogenomic analyses show that KRAS/STK11/KEAP1 triple‑mutant, PD‑L1‑negative NSCLC has the worst outcomes with frontline ICI or chemo‑immunotherapy, reflecting multiple convergent resistance mechanisms (cold TME, low PD‑L1, oxidative‑stress tolerance).[3] This cluster likely limits the capacity of ipilimumab‑driven T‑cell priming to translate into durable tumor control.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11194721/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "STK11–KEAP1 mutations as prognostic TME modulators",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Large real‑world cohorts show STK11 or KEAP1 mutations are associated with poor progression‑free and overall survival across multiple first‑line regimens, with no significant interaction with anti‑PD‑1/PD‑L1 therapy, indicating primarily prognostic impact.[6] These mutations define an aggressive biology and immunosuppressive TME that reduces benefit from ipilimumab‑containing combinations but does not abolish relative advantage over chemotherapy.[1,6,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12337074"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "PD‑L1 expression axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "KRAS‑mutant NSCLC is enriched in PD‑L1‑high tumors, which show better survival with ICIs, whereas STK11 and KEAP1 co‑mutations are enriched in PD‑L1‑negative disease and drive poor outcomes despite ICI therapy.[3] Anti‑PD‑(L)1 plus anti‑CTLA‑4 regimens (including nivolumab–ipilimumab) appear to retain benefit across PD‑L1 strata but with diminished absolute efficacy in PD‑L1‑negative, co‑mutated tumors.[3,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11194721/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "CD8⁺ T‑cell infiltration / “inflamed vs cold” TME program",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "STK11‑mutant and KEAP1‑mutant lung adenocarcinomas display low CD8⁺ T‑cell infiltration and immunosuppressive myeloid enrichment, contributing to immune escape and poor ICI response.[1,3] Conversely, KRAS‑mutant/TP53‑co‑mutant tumors show a more inflamed TME and higher ORR to PD‑1 blockade, suggesting that ipilimumab‑mediated priming is more effective where baseline CD8⁺ TILs are present.[1,4,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12337074"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "TP53‑associated inflammatory / checkpoint program",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "TP53 mutations in KRAS‑mutant NSCLC are linked to an inflammatory TME and higher TMB, correlating with improved response rates to PD‑1 inhibitors compared with KRAS/STK11 tumors.[4,7] However, in broader lung adenocarcinoma cohorts, TP53 and KEAP1 mutations are independently associated with inferior OS after ICIs, indicating that while TP53 may enhance initial sensitivity, co‑occurring adverse pathways can dominate long‑term outcomes.[4,5,8]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11262633"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "Oxidative‑stress / ferroptosis‑protection pathway in STK11/KEAP1 co‑mutants",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Preclinical and translational data summarized in clinicogenomic studies indicate that concurrent STK11 and KEAP1 mutations drive aggressive tumor growth and treatment resistance via ferroptosis protection and broad oxidative‑stress adaptation.[3,7] These mechanisms reduce susceptibility to both chemotherapy and immune‑mediated killing, contributing to poor outcomes with ipilimumab‑containing regimens in this genotype.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11194721/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "VEGF–immune‑suppression / vasculature normalization axis (relevant to CTLA‑4/PD‑1 combinations plus anti‑VEGF)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "IMpower150 shows that adding atezolizumab and bevacizumab to chemotherapy (ABCP) improves OS and PFS in KRAS‑mutant NSCLC, including subgroups with STK11 and/or KEAP1 co‑mutations, whereas PD‑(L)1 blockade without anti‑VEGF is less effective.[8] VEGF inhibition normalizes vasculature and reprograms the TME from suppressive to permissive, suggesting that similar triplet strategies with CTLA‑4/PD‑1 blockade may better overcome resistant genomic backgrounds.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12337074"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Gene‑panel–defined high TMB axis (C‑CAT / FoundationOne)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In C‑CAT and other datasets, STK11, KEAP1 and TP53 mutations are strongly associated with higher TMB, yet KEAP1 and TP53 mutations independently predict worse OS after ICIs, and STK11/KEAP1 co‑mutations confer poor outcomes despite elevated TMB.[4,5] These data indicate that while high TMB can favor response to nivolumab–ipilimumab, concurrent adverse pathways (STK11/KEAP1/TP53) can override TMB‑associated sensitivity.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11262633"
+    ]
+  }
+}

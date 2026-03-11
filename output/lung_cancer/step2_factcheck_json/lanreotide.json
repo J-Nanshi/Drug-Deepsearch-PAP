@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "Somatostatin receptor (SSTR2/SSTR5) signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lanreotide is a somatostatin analogue whose antiproliferative effect depends on SSTR expression; NETs with strong SSTR expression on functional imaging achieve durable disease stabilization with SSAs, and clinical practice sequences PRRT after SSA in SSTR‑positive, well‑differentiated tumors. Lung NETs with preserved SSTR expression are therefore the most likely to benefit from lanreotide.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8699000/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "SSTR heterogeneity/low SSTR in lung NETs",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lung neuroendocrine tumors are under‑represented in SSA trials and often show heterogeneous or absent SSTR uptake on functional imaging, which restricts PRRT eligibility and “potentially attenuates antiproliferative SSA activity” in this subtype, implying reduced lanreotide sensitivity when SSTR signaling is weak.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338796/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "SSTR2–Gi/cAMP/PKA signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lanreotide activation of Gi‑coupled SSTR2 inhibits adenylate cyclase, lowers cAMP, and decreases PKA activity, leading to reduced hormone secretion and growth support; this pathway underlies symptom control and cytostatic effects in well‑differentiated, SSTR‑positive lung NETs.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8699000/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Somatostatin signaling can inhibit PI3K–AKT–mTOR, reducing proliferation; however, strong mTOR‑driven biology in some NETs favors mTOR inhibition (e.g., everolimus, with randomized PFS benefit in lung NETs) and may limit the efficacy of lanreotide monotherapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6371583/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "MAPK/ERK signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "SSA activation of SSTRs attenuates MAPK/ERK phosphorylation, decreasing proliferation; lanreotide and related analogues reduce ERK activity in NET models, consistent with a cytostatic effect in SSTR‑positive pulmonary carcinoids.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6371583/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "Hormone/neuropeptide secretion (e.g., serotonin, CgA)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "By inhibiting cAMP‑dependent secretory pathways, lanreotide reduces secretion of serotonin and markers such as chromogranin A, producing clinical improvement in carcinoid‑syndrome symptoms and reflecting effective SSTR pathway engagement in functioning lung NETs.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6371583/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "Angiogenic growth factor pathways (VEGF/PDGF/IGF/EGF)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Somatostatin signaling can counteract angiogenic growth factors and neovascularization; in NET treatment algorithms, SSAs are often combined or sequenced with VEGF‑targeted TKIs or mTOR inhibitors, indicating that lanreotide contributes anti‑angiogenic pressure but may be insufficient alone in highly angiogenic lung NETs.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6371583/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "SSTR2 survival signaling in SCLC",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In small cell lung cancer, high SSTR2 expression can promote tumor survival via AKT/MAPK and metabolic adaptations; SSTR2 agonists show limited antiproliferative efficacy, suggesting that in this high‑grade context SSTR2 signaling may be prosurvival and lanreotide is unlikely to be beneficial.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7084228/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "Grading/proliferation (Ki‑67‑driven cell‑cycle activity)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "CLARINET showed maximal benefit of lanreotide in low‑grade (Ki‑67 <10%), low‑burden NETs; reviews of lung carcinoids and sequencing strategies note that higher Ki‑67 and atypical histology correlate with shorter PFS on SSAs and earlier need for PRRT, everolimus, or chemotherapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338796/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "NETest transcriptional activity signature",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The NETest integrates expression of multiple NEN‑related genes into a disease‑activity score; low scores (<40) correlate with stable disease and reductions track response to SSAs and PRRT, indicating that biologically indolent, low‑activity tumors are more amenable to lanreotide‑mediated stabilization.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6371583/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "NETest high‑activity profile",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "High NETest scores (80–100) reflect biologically active, progressive NETs and distinguish progressive from stable disease; persistent high scores despite SSA exposure suggest intrinsic resistance to lanreotide’s cytostatic effects and the need for alternative systemic therapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6371583/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Lung NET subtype biology and SSTR‑directed therapies",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lung NETs are biologically distinct and under‑represented in SSA/PRRT trials; everolimus has proven PFS benefit in nonfunctional lung NETs, whereas antiproliferative SSAs are not formally approved. The underpowered SPINET trial of lanreotide in SSTR‑positive bronchopulmonary NETs showed only numerically longer PFS, underscoring subtype‑specific limitations of lanreotide.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338796/"
+    ]
+  }
+}

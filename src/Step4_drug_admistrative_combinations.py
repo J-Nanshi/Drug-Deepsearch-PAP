@@ -1,4 +1,4 @@
-#%% [markdown]
+# [markdown]
 # Step 4: Drug Administration Pathway Combinations
 # ------------------------------------------------------------------------------------------------
 # This script takes the final_trial5.json output and generates pathway-drug interaction
@@ -15,7 +15,7 @@
 # Output:
 #   - <drug>_administration_combinations.json
 
-#%% Imports
+#Imports
 import json
 import os
 import re
@@ -30,7 +30,7 @@ try:
 except ImportError:
     raise ImportError("python-docx is required. Install with: pip install python-docx")
 
-#%% Config
+#Config
 MSIGDB_SQLITE_PATH = r"msigdb_v2025.1.Hs.db/msigdb_v2025.1.Hs.db"
 
 # OpenAI Configuration
@@ -69,7 +69,7 @@ TRIAL5_FILES = list(Path(INPUT_DIR).glob("*_final_trial5.json"))
 # Display controls
 PRINT_PROGRESS = True
 
-#%% Helpers
+#Helpers
 def load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -104,7 +104,7 @@ def extract_pathway_list(trial5_data: Dict[str, Any]) -> List[str]:
             pathways.append(pathway_name)
     return pathways
 
-#%% LLM Helper
+# LLM Helper
 def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3) -> str:
     """Call OpenAI API with retry logic."""
     for attempt in range(max_retries):
@@ -145,7 +145,7 @@ VALIDATION_TAGS = [
     "mechanistically not possible"
 ]
 
-#%% Generate Combinations for a Single Pathway
+# Generate Combinations for a Single Pathway
 def generate_pathway_combinations(
     drug_name: str,
     pathway_name: str,
@@ -323,7 +323,7 @@ def create_error_placeholder(error_msg: str) -> Dict[str, Dict[str, str]]:
         "resistant_downregulation": placeholder.copy()
     }
 
-#%% Main Pipeline
+# Main Pipeline
 def run_administration_pipeline(
     input_file: Path,
     base_prompt: str,
@@ -414,7 +414,7 @@ def run_administration_pipeline(
     
     return output_path
 
-#%% Main execution
+# Main execution
 if __name__ == "__main__":
     # Read base prompt from docx
     print("Loading prompt template...")
@@ -452,4 +452,3 @@ if __name__ == "__main__":
     print(f"Total files processed: {len(outputs)}")
     print("All outputs saved to:", OUTPUT_DIR)
 
-# %%

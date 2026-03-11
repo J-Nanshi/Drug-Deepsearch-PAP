@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "HER2/ERBB2 receptor tyrosine kinase signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Activating HER2 mutations drive oncogenic signaling via PI3K–AKT and MEK–ERK in ~2–4% of nonsquamous NSCLC; T‑DXd uses HER2 as an entry receptor to deliver a high‑DAR DXd payload, with ORR ~55% and PFS ~8–10 months in HER2‑mutant NSCLC, indicating that HER2‑addicted tumors are particularly sensitive to HER2‑directed ADC delivery.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12916699/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "PI3K–AKT survival pathway downstream of HER2",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Aberrant HER2 signaling activates PI3K–AKT, supporting proliferation and anti‑apoptosis in ERBB2‑altered NSCLC; by binding HER2 and delivering DXd, T‑DXd functionally disrupts upstream activation while imposing lethal DNA damage, so tumors that remain PI3K–AKT–dependent are more vulnerable to ADC‑mediated killing.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9066448"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK) pathway downstream of HER2",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "HER2 belongs to the EGFR family and its activation drives MAPK signaling that controls epithelial growth and survival; HER2‑mutant lung adenocarcinomas with high MAPK flux and efficient receptor trafficking show robust responses to T‑DXd in DESTINY‑Lung01/02, consistent with HER2–MAPK pathway addiction enabling efficient ADC uptake and cytotoxicity.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9066448"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "HER2 receptor internalization and trafficking",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Activating HER2 mutations enhance receptor internalization and intracellular trafficking; preclinical and clinical data summarized in NSCLC ADC reviews and DESTINY‑Lung02 indicate that HER2‑mutant cells internalize HER2‑ADCs more efficiently than HER2‑wild‑type cells, increasing lysosomal DXd release and contributing to high response rates across mutation subtypes.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9066448"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "Topoisomerase I–mediated DNA damage response",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "T‑DXd couples trastuzumab to a membrane‑permeable topoisomerase I inhibitor (DXd) via a cleavable linker with DAR ~7–8; after HER2‑mediated internalization and lysosomal cleavage, DXd traps TOP1–DNA complexes, inducing replication‑associated DNA breaks, apoptosis and immunogenic cell death, which underlies the durable responses and median PFS ~8–11 months seen in HER2‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12916699/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "Bystander killing and HER2‑heterogeneity pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "DXd is membrane‑permeable, so once released it diffuses out of HER2‑positive cells to kill neighboring HER2‑low/negative tumor cells; lung‑cancer ADC reviews note that this bystander effect allows T‑DXd to overcome spatial HER2 heterogeneity and explains activity in tumors with modest or heterogeneous HER2 expression, broadening effective target coverage in HER2‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12916699/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "cGAS–STING and type I interferon immune‑activation pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Preclinical work with T‑DXd demonstrates that DXd‑induced DNA damage activates cGAS–STING signaling, leading to type I interferon production, dendritic‑cell activation and enhanced antigen presentation; this cancer‑cell–intrinsic and ‑extrinsic immune activation contributes to antitumor efficacy and provides a mechanistic basis for combining or sequencing T‑DXd with immune checkpoint inhibitors in HER2‑altered NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11394064/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "Tumor microenvironment immune‑infiltration axis (DCs/CD8 T cells, PD‑L1)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "T‑DXd‑triggered DNA damage and cGAS–STING activation remodel the tumor microenvironment toward an inflamed state with increased dendritic‑cell and CD8+ T‑cell infiltration and upregulation of PD‑L1 and MHC‑I on tumor cells, potentially augmenting immune‑mediated clearance while also inducing adaptive PD‑L1 expression that could be exploited by rational ICI combinations in HER2‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11394064/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "HER2 expression level and antigen‑density pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Modeling and clinical resistance analyses indicate that downregulation or loss of HER2 markedly reduces T‑DXd internalization and intracellular DXd delivery; post‑progression biopsies from HER2‑targeted ADC–treated tumors often show decreased or absent HER2 expression, identifying reduced antigen density as a key on‑target resistance mechanism that limits further benefit from T‑DXd.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9066448"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "Trastuzumab–HER2 extracellular domain binding interface",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Clinicogenomic studies have identified ERBB2 extracellular‑domain mutations within the trastuzumab binding epitope emerging at progression on T‑DXd; structural analyses show that such mutations decrease trastuzumab–HER2 binding affinity and impair ADC binding and internalization despite preserved HER2 protein, driving on‑target resistance in HER2‑driven tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9066448"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Alternative RTK payload‑delivery pathway (e.g., TROP2‑DXd ADCs)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Even when HER2 is lost or its binding site is mutated, tumor cells often remain intrinsically sensitive to TOP1 inhibition; preclinical work with DXd‑based ADCs (e.g., DS‑7300a) shows that redirecting the same payload through alternative antigens such as TROP2 can overcome HER2‑mediated resistance, supporting multi‑target ADC or sequential strategies in resistant HER2‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12916699/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "ILD/pneumonitis and lung‑injury inflammatory pathways",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Across DESTINY‑Lung01/02 and pooled T‑DXd data, adjudicated ILD/pneumonitis occurs in ~10–26% of NSCLC patients, with fatal events; activation of lung‑injury and inflammatory pathways necessitates dose interruption, reduction or permanent discontinuation, limiting cumulative exposure and thereby constraining the duration of benefit despite ongoing tumor dependence on HER2‑DXd–mediated cytotoxicity.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12916699/"
+    ]
+  }
+}

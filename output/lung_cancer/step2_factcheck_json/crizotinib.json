@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "MET exon 14 skipping (METΔex14) signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "METΔex14 removes the CBL-binding Y1003 site, impairing receptor degradation and prolonging MET-driven PI3K/AKT and RAS/MAPK signaling; crizotinib, a type Ia MET TKI, inhibits MET autophosphorylation and reduces proliferation in METΔex14-driven models and patients, producing clinical benefit but generally suboptimal durability compared with more selective MET TKIs.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12551656/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "MET TKD activation loop (D1228, Y1230)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Acquired MET D1228N/V/H/E and Y1230C/H/S/D/N mutations in METex14 NSCLC alter the ATP-binding pocket and activation loop, weaken interactions with type I MET TKIs including crizotinib, and are repeatedly observed at progression, restoring MET signaling despite drug exposure; these mutants remain more sensitive to type II MET inhibitors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "MET solvent-front (G1163R)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The G1163R solvent-front mutation disrupts the key contact used by type Ia MET inhibitors; in METex14 tumors it selectively mediates resistance to crizotinib while sparing type Ib and type II MET TKIs, enabling continued MET-driven downstream signaling under crizotinib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5635262/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK) pathway in METΔex14 NSCLC",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "METΔex14 tumors show preferential KRAS/MAPK activation, and co-occurring KRAS mutations or amplification, as well as NF1 loss, drive constitutive ERK signaling that bypasses MET blockade; in Ba/F3 and patient-derived models, KRAS activation shifts crizotinib IC50 upward and maintains pERK, while adding MEK inhibitor trametinib to crizotinib restores apoptosis and drug sensitivity.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5635262/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "PI3K–AKT survival signaling in METΔex14",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "METΔex14 enhances PI3K/AKT signaling via prolonged receptor activation; crizotinib suppresses MET phosphorylation and reduces pAKT in MET-driven models, contributing to tumor regression, but PI3K/AKT can be reactivated via KRAS/MAPK or RTK bypass, limiting depth and duration of response.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5635262/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "ERBB family (EGFR/HER2/HER3) bypass in MET-driven disease",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In METex14-positive NSCLC, off-target resistance to type I MET TKIs arises via amplification or activation of EGFR, ERBB2, and ERBB3, which can heterodimerize and reactivate MAPK and PI3K/AKT signaling independently of MET; combined MET plus EGFR/ERBB inhibition is required to fully suppress downstream pathways in preclinical models.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5635262/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "MET amplification (METamp) with METΔex14",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Selective amplification of the METΔex14 allele increases receptor density and signaling output, which can outstrip achievable crizotinib exposure; METamp is enriched at acquired resistance and can coexist with METΔex14, supporting persistent MET addiction despite TKI therapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5635262/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "MET–STAT3 transcriptional axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET activation recruits STAT3, promoting transcription of survival genes; in METΔex14 models, prolonged receptor signaling sustains STAT3 activation, which may contribute to cell persistence under MET inhibition and interact with MAPK/PI3K pathways to blunt crizotinib-induced apoptosis.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5635262/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "ROS1 fusion–SHP2–RAS–MAPK cascade",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ROS1 fusions constitutively activate SHP2–RAS–RAF–MEK–ERK and PI3K/AKT/mTOR pathways; crizotinib potently inhibits ROS1 kinase, producing high response rates and median PFS ~19 months in ROS1-rearranged NSCLC, with marked tumor shrinkage until secondary resistance develops.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://cdn.clinicaltrials.gov/large-docs/40/NCT02075840/Prot_001.pdf"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "ROS1 kinase domain solvent-front/gatekeeper (G2032R, D2033N, L2026M)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Solvent-front mutations G2032R and D2033N and gatekeeper L2026M remodel the ATP pocket, creating steric hindrance or altered hydrophobicity that markedly reduces crizotinib affinity while preserving ROS1 signaling; G2032R accounts for ~35–40% of post-crizotinib ROS1 resistance and confers high-level cross-resistance to several first/second-generation ROS1 TKIs.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10380455/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "EGFR/HER2-driven bypass in ROS1+ NSCLC",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In ROS1-rearranged lung cancer progressing on crizotinib, activation of EGFR or HER2 establishes alternative RTK inputs that reactivate JAK/STAT3, PI3K/AKT/mTOR, and MAPK signaling, reducing dependence on ROS1; HER2-mediated bypass and EGFR activation are documented off-target resistance mechanisms necessitating combined RTK or downstream pathway blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://cdn.clinicaltrials.gov/large-docs/40/NCT02075840/Prot_001.pdf"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "KRAS/MAPK-driven bypass in ROS1+ NSCLC",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In ROS1 fusion-positive patients relapsing on crizotinib or lorlatinib, acquired KRAS G12C mutations, KRAS amplification, NRAS mutation, and MAP2K1 mutation are detected and correlate with ROS1-independent MAPK reactivation; these lesions sustain ERK signaling despite ROS1 inhibition, suggesting that combining ROS1 TKIs with MEK/ERK pathway inhibitors may overcome resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10380455/"
+    ]
+  }
+}

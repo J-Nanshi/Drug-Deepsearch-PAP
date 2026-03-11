@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "RTK–RAS–RAF–MEK–ERK (MAPK) core cascade",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAFV600E constitutively activates RAF–MEK–ERK; dabrafenib selectively inhibits mutant BRAF and, especially when combined with trametinib, reduces MEK/ERK phosphorylation, leading to high response rates and prolonged PFS/OS in BRAF V600E–mutant NSCLC, demonstrating pathway addiction.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12875826/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "MAPK pathway reactivation (ERK re‑phosphorylation)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Most patients treated with BRAF±MEK inhibitors ultimately progress with ERK reactivation through BRAF amplification or splice variants, MEK/ERK alterations, or upstream RAS/RTK changes, restoring MAPK output despite continued dabrafenib exposure.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "BRAF amplification and splice‑variant signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Acquired BRAF copy‑number gain and expression of truncated BRAF splice isoforms increase BRAF signaling capacity and can signal as constitutively active dimers, driving ERK phosphorylation and clinical resistance to dabrafenib–trametinib in BRAF‑mutant tumors, including NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "EGFR / broader RTK‑driven bypass signaling (EGFR, HER2, FGFR, MET)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "RTKs such as EGFR, HER2, FGFR, and MET can reactivate downstream RAS–MAPK and PI3K–AKT signaling under BRAF/MEK inhibition, providing parallel input to ERK and supporting survival and proliferation of BRAF V600E NSCLC cells despite dabrafenib therapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12875826/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "KRAS/NRAS‑mediated MAPK reactivation & CRAF‑dependent signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Activating RAS mutations or RAS upregulation promote RAF dimerization and preferential signaling through CRAF; in the presence of type I RAF inhibitors like dabrafenib, this can sustain or paradoxically enhance MEK/ERK signaling, undermining BRAF‑directed therapy and contributing to resistance or secondary malignancies.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "Paradoxical MAPK activation in BRAF‑WT cells",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In BRAF‑wild‑type, RAS‑active cells, dabrafenib and other first‑generation RAF inhibitors can promote RAF dimerization and transactivate CRAF, causing paradoxical ERK hyperactivation, which is linked to cutaneous squamous‑cell carcinomas and theoretical risk of promoting growth in BRAF‑WT NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12875826/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling (including PTEN loss)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "PI3K–AKT–mTOR is a major parallel survival pathway in NSCLC; PTEN loss or RTK‑driven PI3K activation can compensate for MAPK blockade, allowing tumor cells to evade apoptosis and maintain proliferation during dabrafenib–trametinib treatment.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "Autophagy network downstream of MAPK/ER stress",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF/MEK inhibition induces ER stress and can trigger a cytoprotective autophagy program via GRP78–PERK–ATF4 and ERK reactivation; this adaptive autophagy limits the depth and durability of response to dabrafenib‑based regimens in BRAF‑mutant tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "Cell‑cycle CDK4–cyclin D–RB axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Effective MAPK inhibition reduces cyclin D expression and CDK4/6 activity, inducing G1 arrest and contributing to tumor regression; restoration of downstream cell‑cycle signaling through CDK4/6 or other checkpoints is implicated in resistance, motivating combination strategies of dabrafenib–trametinib with CDK4/6 or WEE1 inhibitors in MAPK‑driven NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "DNA damage response and replication‑stress pathways (ATR/CHK, WEE1)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Oncogenic BRAF signaling and its inhibition both generate replication stress; tumor cells can upregulate ATR/CHK and related DDR pathways to tolerate this stress under MAPK blockade, and preclinical/early clinical work in lung cancer explores combining RAF/MEK inhibitors with ATR or WEE1 blockade to overcome resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Immune response / PD‑1–PD‑L1 and tumor microenvironment",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MAPK and PI3K activity influence PD‑L1 expression, T‑cell infiltration, and cytokine milieu; dabrafenib–trametinib can transiently enhance tumor immunogenicity, and combination with PD‑1/PD‑L1 blockade is being explored in BRAF‑mutant NSCLC, with immune‑checkpoint pathways shaping sensitivity and acquired resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12875826/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Hippo–YAP and pro‑survival transcriptional programs",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Reviews of BRAF‑mutant NSCLC highlight activation of Hippo–YAP and other downstream transcriptional programs as part of adaptive remodeling under MAPK inhibition, supporting proliferation and survival despite dabrafenib–trametinib and representing potential future co‑targeting opportunities.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6984433/"
+    ]
+  }
+}

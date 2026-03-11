@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK) core cascade",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF V600E constitutively activates MAPK signaling in ~2–8% of lung adenocarcinomas; vemurafenib selectively targets BRAF V600E, and clinical data show it is effective in BRAF‑V600–mutant NSCLC but ineffective in non‑V600 variants, indicating that robust MAPK suppression in V600E tumors is the key determinant of sensitivity.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7446432/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "MAPK reactivation via BRAF amplification/splice variants/NRAS/MEK",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In BRAF‑mutant tumors, acquired resistance to BRAF inhibitors frequently arises through MAPK‑dependent mechanisms including BRAF amplification, alternative BRAF splicing, NRAS or MEK mutations, or loss of NF1, all of which restore ERK signaling despite upstream BRAF blockade and are expected to drive secondary resistance in BRAF‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://cdn.clinicaltrials.gov/large-docs/89/NCT02291289/Prot_000.pdf"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "RTK (EGFR/PDGFR/ERBB3/c‑MET)–driven bypass MAPK",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Melanoma resistance data show adaptive upregulation of RTKs (EGFR, PDGFR, ERBB3, c‑MET) and increased sensitivity to growth factors within 24–48 h of BRAF inhibition, leading to MAPK reactivation; similar RTK‑rich signaling architectures in NSCLC suggest that RTK‑RAS–CRAF signaling can bypass vemurafenib‑blocked BRAF and sustain proliferation.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://cdn.clinicaltrials.gov/large-docs/89/NCT02291289/Prot_000.pdf"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR survival axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Loss of PTEN and hyperactivation of PI3K/AKT/mTOR blunt BRAF‑inhibitor–induced apoptosis and are linked to intrinsic and acquired resistance to vemurafenib; co‑targeting PI3K/mTOR with BRAF/MEK inhibition enhances cytotoxicity and can reverse resistance, indicating that PI3K‑AKT upregulation provides a parallel survival pathway in BRAF‑mutant tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.cancer.gov/publications/dictionaries/cancer-drug/def/vemurafenib"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "PTEN loss–driven PI3K signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "PTEN loss (10–30% of melanomas) prevents negative regulation of PI3K, increases AKT activation, and is associated with reduced response and shorter PFS on BRAF inhibitors; PTEN‑deficient cells are less sensitive to vemurafenib, and resistance can be overcome by adding PI3K/AKT/mTOR inhibitors, making PTEN status a key resistance determinant.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.cancer.gov/publications/dictionaries/cancer-drug/def/vemurafenib"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "BIM‑mediated mitochondrial apoptosis (BCL2L11)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Effective MAPK inhibition induces pro‑apoptotic BIM; PTEN loss and AKT activation limit BIM‑dependent apoptosis, reducing the depth and durability of BRAF‑inhibitor responses, so impaired BIM upregulation downstream of MAPK blockade contributes to intrinsic resistance in BRAF‑mutant tumors, including lung cancer.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.cancer.gov/publications/dictionaries/cancer-drug/def/vemurafenib"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "Cell‑cycle CDK4/cyclin D1 axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MAPK signaling promotes cyclin D1 and CDK4/6 activity; amplification of cyclin D1 and CDK4 has been implicated in primary resistance to BRAF inhibitors, enabling G1–S progression despite upstream MAPK blockade and suggesting that CDK4/6 upregulation can maintain proliferation under vemurafenib in BRAF‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://cdn.clinicaltrials.gov/large-docs/89/NCT02291289/Prot_000.pdf"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "Class II/III BRAF and RAF dimer signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Non‑V600 BRAF mutations (class II/III) signal as RAS‑dependent or RAS‑independent dimers and are poorly inhibited or paradoxically activated by first‑generation BRAF inhibitors; approximately half of BRAF mutations in lung cancer are non‑V600, explaining the lack of vemurafenib activity in this subgroup and highlighting RAF‑dimer–driven resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7446432/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "Paradoxical ERK activation in RAS‑activated / BRAF‑WT cells",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In RAS‑mutant or BRAF‑wild‑type cells, vemurafenib promotes BRAF–CRAF dimerization, leading to paradoxical MEK/ERK activation and tumor proliferation; this mechanism underlies secondary skin cancers and would be expected to drive resistance or progression in NSCLC clones with upstream RAS activation exposed to vemurafenib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://cdn.clinicaltrials.gov/large-docs/89/NCT02291289/Prot_000.pdf"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "PD‑1/PD‑L1 immune checkpoint axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "BRAF/MEK inhibition in melanoma increases intratumoral CD8 T cells but also upregulates PD‑1/PD‑L1 and other exhaustion markers; PD‑L1 is further induced in BRAF‑inhibitor–resistant lines, implying that immune‑checkpoint activation becomes a compensatory resistance pathway that is only addressable by adding PD‑1/PD‑L1 blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://cdn.clinicaltrials.gov/large-docs/89/NCT02291289/Prot_000.pdf"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Combined BRAF–MEK vertical MAPK blockade",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Dual BRAF+MEK inhibition produces deeper and more durable MAPK suppression than BRAF inhibition alone, delays MAPK reactivation, and improves PFS and OS in BRAF‑mutant melanoma; these data underpin the clinical preference for BRAF–MEK combinations over vemurafenib monotherapy in BRAF V600–mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7446432/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "BRAF–MEK inhibition plus PI3K/mTOR or PD‑1 blockade",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Preclinical and early clinical studies show that adding PI3K/mTOR inhibitors or PD‑1/PD‑L1 antibodies to BRAF±MEK inhibition enhances T‑cell infiltration, decreases PD‑L1 and JAK/STAT signaling, and can overcome PTEN/PI3K‑mediated and immune‑mediated resistance, though toxicity has limited routine use; analogous strategies are mechanistically attractive for BRAF‑mutant NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.cancer.gov/publications/dictionaries/cancer-drug/def/vemurafenib"
+    ]
+  }
+}

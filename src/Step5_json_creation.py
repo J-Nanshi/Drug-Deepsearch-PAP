@@ -1,4 +1,4 @@
-#%% [markdown]
+# [markdown]
 # Step 5: JSON Creation from Drug Report
 # ------------------------------------------------------------------------------------------------
 # This script reads a prompt template (docx), a drug report (markdown), and a
@@ -12,7 +12,7 @@
 # Output:
 #   - <drug>_structured_output.json
 
-#%% Imports
+# Imports
 import json
 import os
 import re
@@ -27,7 +27,7 @@ try:
 except ImportError:
     raise ImportError("python-docx is required. Install with: pip install python-docx")
 
-#%% Config
+# Config
 # OpenAI Configuration
 try:
     from dotenv import load_dotenv
@@ -62,7 +62,7 @@ OUTPUT_DIR = r"mapped_pathway_json"
 # Ensure output directory exists
 Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-#%% Helpers
+# Helpers
 def load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -126,7 +126,7 @@ def extract_pathway_names(pathway_json_path: str) -> List[str]:
     
     return pathway_names
 
-#%% LLM Helper
+# LLM Helper
 def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3) -> str:
     """Call OpenAI API with retry logic."""
     for attempt in range(max_retries):
@@ -178,7 +178,7 @@ def parse_json_response(response: str) -> Dict[str, Any]:
     
     return json.loads(response)
 
-#%% Main Generation Function
+# Main Generation Function
 def generate_structured_json(
     prompt_template: str,
     drug_report: str,
@@ -261,7 +261,7 @@ Return ONLY valid JSON without any markdown formatting."""
             "error": str(e)
         }
 
-#%% Main Pipeline
+# Main Pipeline
 def run_json_creation_pipeline(
     prompt_path: str,
     report_path: str,
@@ -334,7 +334,7 @@ def run_json_creation_pipeline(
     
     return output_path
 
-#%% Main execution
+# Main execution
 if __name__ == "__main__":
     print("=" * 70)
     print("Step 5: JSON Creation Pipeline")
@@ -362,5 +362,3 @@ if __name__ == "__main__":
         print(f"\nERROR: Pipeline failed - {e}")
         import traceback
         traceback.print_exc()
-
-# %%

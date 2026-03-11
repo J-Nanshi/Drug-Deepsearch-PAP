@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "EGFR signaling pathway (KEGG hsa04012; Reactome R-HSA-177929)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Necitumumab binds the extracellular domain of EGFR, blocking ligand binding, dimerization, and phosphorylation, thereby attenuating EGFR signaling outputs that drive proliferation and survival in EGFR‑overexpressing NSCLC, particularly squamous tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://clinicaltrials.gov/study/NCT00981058"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK/MAPK cascade (KEGG hsa04010; Reactome R-HSA-5673001)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR activates the MAPK cascade; necitumumab reduces this signaling, but activating alterations in KRAS/BRAF or downstream MAPK components maintain pathway activity independent of EGFR, limiting benefit from EGFR‑directed antibodies.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling (KEGG hsa04151; Reactome R-HSA-109704)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR signals through PI3K–AKT–mTOR to promote growth and survival; necitumumab decreases pathway activation, but PIK3CA mutation/amplification or PTEN loss uncouple PI3K–AKT from EGFR, sustaining survival despite receptor inhibition.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "JAK–STAT3 signaling (KEGG hsa04630; Reactome R-HSA-6785807)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR and IL‑6R–JAK activate STAT3, which supports survival and early adaptive resistance; transient STAT3 activation after EGFR inhibition can blunt responses, and combined STAT3 blockade enhances EGFR‑targeted therapy in lung cancer models.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "NF‑κB signaling (KEGG hsa04064; Reactome R-HSA-9020702)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR‑driven and TNF‑mediated NF‑κB activation induces pro‑survival transcriptional programs; persistent NF‑κB activity under EGFR blockade provides an alternative survival route, contributing to intrinsic or acquired resistance to necitumumab.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "EGFR overexpression / amplification program (MSigDB EGFR_UP‑like)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR protein is overexpressed in a majority of NSCLCs and is particularly frequent in squamous histology; necitumumab’s clinical benefit in SQUIRE is confined to this EGFR‑expressing squamous population, supporting a dependence of drug sensitivity on elevated EGFR signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://clinicaltrials.gov/study/NCT00981058"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "EGFR‑TKI / anti‑EGFR antibody resistance network (KEGG hsa01521)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Resistance mechanisms to EGFR‑directed agents include KRAS/NRAS/BRAF and PIK3CA mutations, PTEN loss, MET/HER2 amplification, ligand overexpression, and EMT; these alterations restore downstream signaling or bypass EGFR, and are expected to similarly constrain necitumumab efficacy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "MET / bypass RTK signaling (Reactome R-HSA-6806834; KEGG hsa04010 MET module)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET and other RTKs (HER2, AXL, FGFR1) can activate MAPK and PI3K–AKT independently of EGFR; amplification or overactivation of these receptors mediates escape from EGFR antibodies, sustaining growth despite necitumumab treatment.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://clinicaltrials.gov/study/NCT00981058"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "EMT (epithelial–mesenchymal transition) program (MSigDB Hallmark EMT)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EMT reduces epithelial EGFR dependence and is cited as a resistance mechanism to EGFR mAbs; EMT‑associated AXL/FGFR1 upregulation and invasive phenotypes allow NSCLC cells to proliferate and migrate despite EGFR blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "ADCC / FcγR‑mediated effector pathway (MSigDB NK cell / FcγR signaling)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Necitumumab is an IgG1 antibody capable of engaging Fcγ receptors on NK and myeloid cells to mediate ADCC and phagocytosis; effective FcγR engagement and robust innate effector function can augment direct EGFR blockade, enhancing tumor clearance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "HLA‑G/ILT2/ILT4 immunosuppressive axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The HLA‑G–ILT2/ILT4 pathway suppresses NK‑cell ADCC and myeloid ADCP, key mechanisms for IgG1 antibodies; upregulation of ILT4+ myeloid and ILT2+ lymphoid cells in NSCLC can dampen necitumumab‑mediated effector functions, reducing clinical activity.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11240640/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Hypomagnesemia / electrolyte‑disturbance pathway (EGFR–renal tubular axis)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EGFR signaling in renal tubules regulates magnesium reabsorption; necitumumab‑induced EGFR blockade causes hypomagnesemia and related electrolyte abnormalities, which can necessitate dose interruption or discontinuation, indirectly constraining dose intensity and therapeutic benefit.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+    ]
+  }
+}

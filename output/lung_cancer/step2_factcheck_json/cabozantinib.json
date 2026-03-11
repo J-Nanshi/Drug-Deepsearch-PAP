@@ -1,0 +1,362 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "MET/HGF signaling in METex14‑altered NSCLC",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Cabozantinib is listed among MET TKIs for MET exon 14 skipping and MET amplification in NSCLC; METex14 leads to impaired receptor degradation and persistent activation of downstream RAS/MAPK and PI3K/AKT pathways, so type II MET inhibition by cabozantinib is expected to suppress MET‑driven proliferation and survival in MET‑addicted tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9632963/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "MET‑driven resistance to EGFR TKIs (MET amplification)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET amplification is a frequent bypass mechanism of acquired resistance to EGFR TKIs; MET‑directed TKIs, including multikinase agents such as cabozantinib, are being explored to restore pathway control when EGFR signaling is blocked but MET remains hyperactivated.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9632963/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "RET fusion signaling (e.g., KIF5B‑RET, CCDC6‑RET)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Cabozantinib is a multikinase RET inhibitor; in a phase II trial in RET‑rearranged NSCLC, cabozantinib achieved an ORR of 28% with median PFS ~5.5 months, and registry data show modest but real activity, indicating that direct RET kinase inhibition can reduce downstream MAPK and PI3K/AKT signaling in RET‑fusion lung adenocarcinoma.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9498097/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "RET fusion signaling under multikinase vs selective inhibition",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Multikinase RET TKIs (cabozantinib, vandetanib, lenvatinib) show only modest efficacy and high off‑target toxicity in RET‑fusion NSCLC, likely due to incomplete RET suppression at tolerable doses; this functional limitation underlies the shift toward highly selective RET TKIs, but demonstrates that RET pathway downregulation by cabozantinib can still confer some clinical benefit.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9498097/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "ROS1 fusion signaling (CD74‑ROS1 and kinase‑domain mutants)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Cabozantinib potently inhibits ROS1; it produced a rapid, near‑complete response in a CD74‑ROS1‑rearranged lung adenocarcinoma with a crizotinib‑resistant D2033N solvent‑front mutation, and controlled disease for 1.5 years in a CD74‑ROS1‑positive NSCLC case, indicating that suppression of ROS1‑driven MAPK/PI3K/STAT3 signaling mediates sensitivity, including in some solvent‑front and gatekeeper mutants.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5403837/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "ROS1 solvent‑front resistance mutations (e.g., D2033N, G2032R)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Structural and cellular data show that D2033N disrupts crizotinib binding but not cabozantinib binding; cabozantinib inhibits CD74‑ROS1 D2033N with low‑nanomolar IC₅₀ and induces apoptosis, and preclinical work indicates activity against G2032R and other solvent‑front mutations, making downregulation of this altered ROS1 pathway a key mechanism to overcome type I TKI resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5403837/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "ROS1 L2086F and compound ROS1 resistance mutations",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ROS1 L2086F is refractory to all available ROS1 TKIs except cabozantinib; preclinical studies show cabozantinib retains strong potency against L2086F and L2086F‑containing compound mutants, and combined lorlatinib–cabozantinib therapy achieved meaningful clinical responses, supporting cabozantinib‑mediated suppression of L2086F‑mutant ROS1 signaling as a salvage pathway.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5403837/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "VEGFR2‑mediated angiogenesis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Cabozantinib targets VEGFR2 in addition to MET, RET and ROS1; anti‑angiogenic effects via VEGFR2 blockade are recognized contributors to efficacy of multikinase inhibitors in thoracic malignancies, and are likely to augment direct oncogene pathway inhibition in NSCLC by reducing tumor vascular supply and altering the microenvironment.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11821758/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "AXL‑driven bypass and microenvironmental signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Cabozantinib inhibits AXL, a kinase implicated as a bypass driver and resistance mediator in multiple oncogene‑addicted NSCLCs; by targeting AXL alongside MET/RET/ROS1, cabozantinib can theoretically suppress alternative survival routes engaged after selective TKI therapy, contributing to resensitization or prolonged disease control.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11821758/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "RET pathway with co‑occurring MET/KRAS alterations",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "RET‑fusion NSCLC can acquire resistance to selective RET inhibitors through MET amplification or KRAS activation; multikinase agents such as cabozantinib, which inhibit both RET and MET and have broader RTK coverage, may more effectively downregulate these convergent signaling axes than RET‑selective agents alone in such co‑altered tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9498097/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "mTOR pathway activation in ROS1‑positive NSCLC",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In a CD74‑ROS1‑positive NSCLC treated with cabozantinib, acquired resistance was associated with emergence of an mTOR L1433F mutation and increased mTOR mutation abundance, suggesting that upregulated PI3K/AKT/mTOR signaling can bypass upstream RTK inhibition and sustain proliferation despite continued MET/ROS1/RET/VEGFR2 blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5777491/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "TP53 mutation–associated genomic instability",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The same cabozantinib‑resistant CD74‑ROS1 case acquired a TP53 G245S mutation, a known loss‑of‑function alteration; defective TP53 can diminish apoptosis in response to RTK pathway inhibition and facilitate clonal evolution under cabozantinib pressure, contributing to resistance despite continued suppression of the primary ROS1 signaling pathway.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5777491/"
+    ]
+  },
+  "Row13": {
+    "Pathway ID/Name": "MET/HGF signaling in METex14‑altered NSCLC",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET exon 14 skipping impairs receptor degradation, causing sustained MET activation and downstream RAS/MAPK and PI3K/AKT signaling; cabozantinib, a type II MET TKI, suppresses this pathway and produced objective responses and disease control in METex14‑altered NSCLC, including after prior MET TKIs.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9632963/"
+    ]
+  },
+  "Row14": {
+    "Pathway ID/Name": "MET‑driven resistance to EGFR TKIs (MET amplification)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET amplification is a common bypass mechanism of acquired resistance to EGFR TKIs in NSCLC; by directly inhibiting MET, cabozantinib can attenuate MET‑dependent PI3K/AKT and MAPK signaling that persists despite EGFR blockade, providing a rational strategy in EGFR‑mutant, MET‑amplified resistance settings.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7356188/"
+    ]
+  },
+  "Row15": {
+    "Pathway ID/Name": "RET fusion signaling (e.g., KIF5B‑RET, CCDC6‑RET)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "RET fusions drive oncogenic signaling via MAPK and PI3K/AKT in a subset of NSCLC; cabozantinib inhibits RET and achieved ~28% ORR and ~6‑month PFS in RET‑rearranged NSCLC, and has induced responses in EGFR‑mutant tumors with acquired RET fusions, demonstrating clinically meaningful RET pathway suppression.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7961559/"
+    ]
+  },
+  "Row16": {
+    "Pathway ID/Name": "ROS1 fusion signaling (CD74‑ROS1 and kinase‑domain mutants)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ROS1 fusions activate MAPK, PI3K/AKT and STAT3; cabozantinib potently inhibits ROS1 and produced durable disease control (up to ~20 months) in CD74‑ROS1‑positive NSCLC, including cases with resistance to prior ROS1 TKIs, indicating effective downregulation of ROS1‑driven oncogenic signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7356188/"
+    ]
+  },
+  "Row17": {
+    "Pathway ID/Name": "ROS1 solvent‑front and L2086F resistance mutations",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Solvent‑front (e.g., D2033N, G2032R) and L2086F ROS1 mutations disrupt binding of type I ROS1 TKIs; structural and cellular data show cabozantinib retains low‑nanomolar potency against these mutants, and clinical reports describe prolonged benefit in lorlatinib‑resistant L2086F‑mutant disease, implicating cabozantinib‑mediated suppression of mutant ROS1 signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5403837/"
+    ]
+  },
+  "Row18": {
+    "Pathway ID/Name": "VEGF–VEGFR2‑mediated angiogenesis (VEGFA/VEGFC–KDR/NRP2)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Cabozantinib targets VEGFR2/KDR and exhibits strong anti‑angiogenic activity; in NSCLC and endothelial models, VEGFA/VEGFR2 signaling drives proliferation and neovascularization, whereas VEGFC–KDR–NRP2 and co‑activated FGF/YAP–TAZ pathways are linked to relative resistance, with combined VEGF/VEGFC axis blockade enhancing cabozantinib’s antiproliferative and anti‑angiogenic effects.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Cabozantinib"
+    ]
+  },
+  "Row19": {
+    "Pathway ID/Name": "AXL/TAM (GAS6–AXL) axis and EMT",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "AXL is frequently upregulated in NSCLC, promotes EMT, invasion and immune evasion, and mediates resistance to EGFR, ALK and other TKIs; cabozantinib inhibits AXL and reduces GAS6‑induced migration and invasion, suggesting that downregulation of AXL/TAM signaling can suppress EMT‑linked drug‑tolerant states and enhance sensitivity to targeted therapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7356188/"
+    ]
+  },
+  "Row20": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET, ROS1, RET, AXL and VEGFR converge on PI3K–AKT–mTOR; cabozantinib downregulates this axis by inhibiting upstream RTKs, but an mTOR L1433F mutation emerging in a cabozantinib‑treated CD74‑ROS1 case was associated with resistance, indicating that downstream mTOR activation can bypass RTK inhibition.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9632963/"
+    ]
+  },
+  "Row21": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Oncogenic RTKs targeted by cabozantinib (MET, RET, ROS1, AXL, VEGFR2) signal through RAS–RAF–MEK–ERK to drive proliferation and survival; cabozantinib’s multikinase inhibition therefore convergently reduces ERK activity, limiting compensatory MAPK upregulation that underlies resistance to more selective TKIs.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11821758/"
+    ]
+  },
+  "Row22": {
+    "Pathway ID/Name": "Hippo–YAP/TAZ oncogenic program",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In NSCLC models, VEGFC upregulates YAP and TAZ, promoting survival and therapy resistance; knockdown of VEGFC/KDR/NRP2 decreases YAP/TAZ and, together with cabozantinib, more strongly inhibits proliferation, implicating a VEGF–Hippo axis that modulates cabozantinib responsiveness.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11821758/"
+    ]
+  },
+  "Row23": {
+    "Pathway ID/Name": "EMT and invasion program (TGF‑β/Smad, Wnt/β‑catenin, RTK‑driven EMT)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EMT, driven by TGF‑β, Wnt/β‑catenin and RTKs such as MET and AXL, underlies metastasis and broad TKI resistance in NSCLC; by inhibiting MET, AXL and pro‑angiogenic cues, cabozantinib can reduce EMT and invasive behavior, although strongly EMT‑high tumors may remain relatively resistant.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9632963/"
+    ]
+  },
+  "Row24": {
+    "Pathway ID/Name": "TP53 mutation–associated genomic instability",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In a cabozantinib‑treated CD74‑ROS1‑positive NSCLC, acquired TP53 G245S (loss‑of‑function) coincided with resistance; defective TP53 impairs apoptosis and facilitates clonal evolution under RTK inhibition, allowing tumor cells to persist despite continued suppression of MET/ROS1/RET/VEGFR2 signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5777491/"
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "ALK oncogenic signaling (EML4–ALK → RAS–MAPK / PI3K–AKT / JAK–STAT)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lorlatinib is a brain‑penetrant third‑generation ALK/ROS1 TKI with potent activity against wild‑type ALK and most single resistance mutations, including G1202R; inhibition of ALK signaling underlies the high systemic and intracranial response rates and prolonged PFS seen in ALK‑positive NSCLC, particularly when used first line in CROWN.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5777233/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "ALK kinase domain single mutations (e.g., L1196M, G1269A, F1174X, D1203N)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Many secondary ALK point mutations that confer resistance to first‑/second‑generation TKIs remain sensitive to lorlatinib; phase II data show substantial response rates in post‑crizotinib and post‑2G ALK‑TKI cohorts, and CROWN ctDNA analyses indicate broad coverage of single ALK kinase‑domain mutants.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5777233/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "ALK compound mutation network (e.g., G1202R/L1196M, G1202R/F1174C, L1196M/D1203N, C1156Y/G1269A)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Sequential exposure to 1G/2G TKIs then lorlatinib selects for double/triple ALK kinase mutations; in vitro and clinical series show G1202R‑based and L1196M/D1203N compound mutants are highly refractory to all approved ALK TKIs including lorlatinib, whereas a subset (e.g., C1156Y/L1198F, I1171N/L1198F) paradoxically re‑sensitize tumors to earlier‑generation inhibitors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9020874/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Off‑target resistance frequently converges on PI3K/AKT/mTOR signaling: NF2 loss and other alterations activate this pathway in ALK‑rearranged NSCLC, and in first‑line lorlatinib‑treated patients from CROWN, ctDNA at progression showed enrichment of PI3K/MTOR/PTEN pathway alterations without new ALK mutations, indicating ALK‑independent survival signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9020874/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK) pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ALK fusions drive MAPK signaling, and multiple reviews and clinicogenomic studies highlight MAPK‑pathway alterations (e.g., KRAS, MAPK components) as common in advanced and brain‑metastatic NSCLC; under lorlatinib pressure, bypass RTKs and downstream MAPK reactivation provide an ALK‑independent proliferation route.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9020874/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "RTK bypass signaling (EGFR / MET and other RTKs)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Activation or amplification of alternative RTKs such as EGFR and MET has been repeatedly described as ALK‑independent resistance to ALK TKIs; lorlatinib‑resistant models and clinical series show EGFR‑pathway activation and other RTK alterations that maintain MAPK and PI3K signaling despite ALK blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9020874/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "Hippo–YAP1 pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Activation of YAP, the key Hippo effector encoded by YAP1, has been implicated as an ALK‑independent resistance mechanism; overexpression of YAP reduces sensitivity to ALK TKIs in preclinical ALK‑rearranged models, and gene‑level data support YAP1 as a transcriptional co‑activator capable of driving survival programs when ALK is inhibited.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11149099/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "EMT and lineage plasticity programs",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Reviews and case reports of lorlatinib resistance note roles for epithelial‑to‑mesenchymal transition (EMT) and histologic transformation (e.g., to small‑cell phenotype) as ALK‑independent escape routes; these programs decouple tumor survival from ALK signaling and are associated with poor chemotherapy responsiveness after lorlatinib failure.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9020874/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "Cell‑cycle checkpoint pathways (TP53/RB1/STK11 and CDKN2A axis)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Co‑alterations in TP53, RB1, STK11 and CDKN2A are frequent in NSCLC and brain metastases and correlate with worse outcomes and TKI resistance; loss of these tumor suppressors promotes proliferation, genomic instability, and lineage plasticity, reducing dependence on single‑driver ALK signaling under lorlatinib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11352911/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "DNA‑damage and chromatin‑remodeling pathways",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Multi‑omics studies show recurrent alterations in genes such as ATM, KEAP1, SETD2, ARID1A and SMARCA4 in advanced and brain‑metastatic NSCLC; these changes enhance adaptability and may facilitate acquisition of complex ALK mutations and off‑target resistance pathways during prolonged lorlatinib exposure.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.ncbi.nlm.nih.gov/books/NBK603632/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "CNS metastasis–associated pathways (TP53/MAPK/PI3K and YAP1 networks)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Lorlatinib provides deep intracranial control, yet brain‑metastasis specimens from NSCLC are enriched for alterations in TP53, MAPK, PI3K/mTOR, cell‑cycle genes and YAP1; these networks may underlie CNS tropism and influence the biology of residual or emergent brain disease despite effective ALK inhibition.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9020874/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Immune‑microenvironment and TKI‑tolerant cell programs",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Liquid‑biopsy and multi‑omics reviews emphasize that drug‑tolerant persister cells, immune‑evasive microenvironments, and macrophage‑driven immunosuppression enable survival under targeted therapies; such non‑genomic and immunologic adaptations likely contribute to lorlatinib resistance when no ALK or clear bypass alterations are detected.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/substance/252300240"
+    ]
+  }
+}

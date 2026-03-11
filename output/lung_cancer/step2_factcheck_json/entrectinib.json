@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "ROS1 fusion signaling (ROS1–AKT/ERK axis)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In SLC34A2–ROS1–rearranged HCC78 NSCLC cells, entrectinib inhibits phosphorylation of ROS1 and downstream AKT and ERK, induces p‑H2AX, p‑p53 and cleaved PARP, and reduces proliferation and viability, indicating ROS1‑addicted cells are highly sensitive to ROS1 pathway suppression.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK) pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Entrectinib‑resistant HCC78ER clones acquire KRAS G12C plus KRAS amplification, showing sustained ERK activation despite continued ROS1 inhibition; co‑treatment with the MEK inhibitor selumetinib re‑sensitizes cells, implicating MAPK reactivation as a key bypass mechanism.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "KRAS oncogenic signaling (KRAS G12C, amplification)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "NGS of HCC78ER cells reveals de novo KRAS G12C in all resistant clones and KRAS amplification in a subset, alterations absent in parental cells; these changes drive downstream MAPK signaling and mediate acquired resistance to entrectinib without secondary ROS1 mutations.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "FGF/FGFR signaling (FGF3 amplification)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "HCC78ER subclones harbor FGF3 amplification alongside KRAS alterations; FGF3 can activate FGFR and feed into RAS–MAPK cascades, providing additional upstream input to maintain proliferation under ROS1 blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "JAK/STAT3 pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ROS1 fusions constitutively activate multiple pathways including JAK/STAT3; persistent STAT3 activation is noted as part of the adaptive signaling network in ROS1‑rearranged NSCLC and may support survival when ROS1 is pharmacologically inhibited by entrectinib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Acute entrectinib exposure suppresses AKT phosphorylation downstream of ROS1 in HCC78 cells, contributing to apoptosis, whereas broader NSCLC reviews highlight PI3K–AKT–mTOR as a recurrent survival axis and potential resistance route in oncogene‑driven tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "NTRK (TRKA/B/C) fusion signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Entrectinib is a pan‑TRK/ROS1/ALK inhibitor; in NTRK‑fusion–positive advanced cancers including NSCLC, it achieves ~57–70% response rates and PFS ~11–15 months, indicating that suppression of TRK‑driven MAPK/PI3K pathways confers strong sensitivity in NTRK‑addicted lung tumors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/rozlytrek"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "CNS penetration and intracranial response pathways",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Entrectinib was designed for high CNS penetration; in NTRK‑fusion cancers and NSCLC, it produces substantial intracranial responses, supporting effective inhibition of oncogenic TRK/ROS1 signaling within the brain microenvironment of lung cancer patients.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/rozlytrek"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "On‑target ROS1 kinase domain (G2032R, F2004C/I, D2033N, L2026M)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Clinical and translational data in ROS1‑positive NSCLC identify ROS1 resistance mutations (e.g., G2032R, L2026M, D2033N, F2004C/I) that impair binding of first‑generation ROS1 TKIs including entrectinib while maintaining kinase signaling, driving on‑target resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5876637/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "Immune checkpoint/oncogene‑addicted microenvironment",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Oncogene‑addicted NSCLC subtypes (including ROS1 and NTRK fusions) typically exhibit immune‑poor microenvironments and limited benefit from immune checkpoint inhibitors, reinforcing dependence on targeted inhibition of driver pathways such as those blocked by entrectinib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12891329/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Multi‑target RTK network (ROS1/ALK/NTRK/others)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Entrectinib’s multi‑kinase profile enables potent inhibition of ROS1, NTRK1/2/3 and ALK, producing high response rates in fusion‑positive NSCLC; however, broader precision‑oncology experience shows that activation of alternative RTKs can emerge as bypass tracks, reducing durability of response.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pubchem.ncbi.nlm.nih.gov/compound/Entrectinib"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Basket‑trial biomarker‑driven pathway selection",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Basket and umbrella trial designs using NGS to identify actionable drivers (e.g., ROS1, NTRK) and assign entrectinib or other matched TKIs demonstrate that suppression of the specific genomic driver pathway is central to achieving meaningful responses in heterogeneous advanced NSCLC.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://www.ema.europa.eu/en/medicines/human/EPAR/rozlytrek"
+    ]
+  }
+}

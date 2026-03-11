@@ -1,0 +1,272 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "EML4‑ALK oncogenic signaling (RTK–RAS–PI3K hub)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Ceritinib is a potent ATP‑competitive ALK TKI; ALK‑rearranged NSCLC is oncogene‑addicted to EML4‑ALK, and ceritinib induces tumor regression even after crizotinib, including in L1196M gatekeeper and other ALK kinase–domain mutants, but resistance emerges via ALK overexpression or additional mutations such as G1202R and F1174C that reduce drug binding and restore signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10273149"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EML4‑ALK activates RAS–MEK–ERK; functional genomics and patient‑derived models show that MEK reactivation (e.g., MAP2K1 K57N or broader RAS–MAPK upregulation) restores ERK signaling and drives resistance to ceritinib and other ALK TKIs, while combined ALK+MEK inhibition deepens responses and delays resistance in ALK‑positive models.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709813/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ALK signaling feeds into PI3K–AKT–mTOR; ceritinib reduces AKT phosphorylation in sensitive cells, but resistance is associated with persistent AKT signaling driven by alternative RTKs (EGFR, HER3, IGF‑1R, MET) or PIK3CA mutations, maintaining survival despite ALK blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5952030/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "NRG1–HER3–EGFR (ERBB family) axis",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In ceritinib‑ and alectinib‑resistant EML4‑ALK NSCLC, NRG1 is upregulated and drives HER3 and EGFR phosphorylation, sustaining ERK/AKT signaling independent of ALK; pan‑HER inhibition with afatinib or other HER‑family blockers restores ceritinib sensitivity in vitro and prevents or reverses ALK‑TKI tolerance in ALK‑rearranged lung cancer.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6886236/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "EGFR signaling (non‑NRG1 components)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Phospho‑RTK profiling of ALK‑TKI‑resistant NSCLC shows increased EGFR activation without EGFR mutation or amplification, implying ligand/receptor upregulation; EGFR maintains downstream ERK/AKT signaling when ALK is inhibited, and dual ALK–EGFR/HER2 targeting can overcome resistance in preclinical models.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6886236/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "IGF‑1R signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In ceritinib‑ and crizotinib‑resistant ALK‑positive NSCLC, IGF‑1R is activated in most cases evaluated; IGF‑1R provides alternative input to PI3K–AKT and MAPK pathways, supporting survival and contributing to ALK‑independent resistance that can be reversed by co‑targeting IGF‑1R in models.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6886236/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "MET (HGF–MET) signaling and MET amplification",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MET amplification or activation emerges in ~15–20% of biopsies from patients relapsing on second‑generation ALK TKIs including ceritinib; MET bypass signaling restores PI3K–AKT and MAPK downstream of ALK, and dual ALK/MET inhibition (e.g., ceritinib or lorlatinib plus a MET TKI) resensitizes MET‑amplified ALK‑positive cell lines and patients.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4900831"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "SRC family kinase signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Phospho‑proteomic analyses of ALK‑TKI‑resistant models identify SRC activation as a bypass node; SRC supports proliferation and survival independent of ALK and can cooperate with RTKs, so its upregulation under ceritinib pressure contributes to resistance that is mitigated by SRC‑directed agents in preclinical systems.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709813/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "P‑glycoprotein (ABCB1) drug efflux",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Ceritinib is a P‑gp substrate; overexpression of P‑gp in patient‑derived ceritinib‑resistant ALK‑rearranged NSCLC cells reduces intracellular ceritinib, conferring resistance to both ceritinib and crizotinib but not to alectinib or PF‑06463922; P‑gp also limits brain penetration of ceritinib, and genetic or pharmacologic P‑gp inhibition restores ceritinib sensitivity in vitro and in vivo.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5952030/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "EMT / mesenchymal–epithelial plasticity programs",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EMT and related plasticity, driven by transcription factors such as ZEB1, are enriched in ALK‑TKI‑resistant NSCLC; EMT can coexist with ALK mutations and is linked to shortened benefit from ceritinib, while HER3‑driven mesenchymal features promote ALK‑TKI‑tolerant cells that can be eradicated by combining ALK TKIs with pan‑HER inhibitors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5952030/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Cell‑cycle and DNA‑damage response (DDR) nodes (e.g., TP53, CDK, DDR genes)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Targeted‑therapy‑resistant NSCLC, including ALK‑positive disease, is enriched for co‑occurring alterations in TP53, CDKs and DNA‑repair genes; these changes enhance proliferation, genomic instability and tolerance to ALK inhibition, facilitating emergence of ceritinib resistance and supporting rationale for combinations with CDK or DDR inhibitors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5952030/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Immune‑evasion and tumor microenvironment–linked pathways (e.g., STAT3/PD‑L1, HGF/MET axis)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ALK‑rearranged tumors often exhibit immune‑cold phenotypes and can upregulate pathways such as STAT3/PD‑L1 and HGF/MET under TKI pressure, reducing responsiveness to immunotherapy while fostering microenvironmental support (via HGF) for MET‑driven bypass and ceritinib resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4900831"
+    ]
+  },
+  "Row13": {
+    "Pathway ID/Name": "ERK/MAPK signaling (e.g., KEGG hsa04010)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Targeted phosphoproteomics in EML4‑ALK NSCLC shows broad downregulation of ERK/MAPK nodes after ceritinib, but ERBB‑, MET‑ or MAP2K1‑driven ERK reactivation underlies acquired resistance and supports continued proliferation despite ALK inhibition.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4931127/"
+    ]
+  },
+  "Row14": {
+    "Pathway ID/Name": "NRG1–HER3–EGFR (ERBB family) axis (e.g., KEGG hsa04012)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "In ceritinib‑ and alectinib‑resistant EML4‑ALK NSCLC, NRG1 is upregulated and drives HER3 and EGFR phosphorylation, sustaining ERK/AKT signaling independent of ALK; pan‑HER blockade restores ceritinib sensitivity and prevents or reverses ALK‑TKI tolerance in preclinical models.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6886236/"
+    ]
+  },
+  "Row15": {
+    "Pathway ID/Name": "PTPN11 (SHP2)/Gab1‑mediated RAS–MAPK signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Ceritinib reduces activating phosphosites on PTPN11 (SHP2) and Gab1, dampening propagation of ERK/MAPK signaling; in resistance, upstream RTKs (ERBBs, MET, IGF‑1R) can re‑engage SHP2/Gab1, restoring RAS–MAPK activity despite ALK blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4931127/"
+    ]
+  },
+  "Row16": {
+    "Pathway ID/Name": "Autophagy (e.g., KEGG hsa04140)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "MS‑based proteomic fingerprinting in lung cancer models identified autophagy pathway changes as part of ceritinib’s broader biochemical impact; altered autophagy may help cells adapt to ALK blockade or, when excessive, contribute to cell death, suggesting a potential resistance and combination‑therapy target.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6125456"
+    ]
+  },
+  "Row17": {
+    "Pathway ID/Name": "P‑glycoprotein (ABCB1) drug‑efflux pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Ceritinib is a P‑gp substrate; overexpression of P‑gp in ceritinib‑resistant ALK‑rearranged NSCLC reduces intracellular drug levels and limits CNS penetration, conferring resistance to ceritinib and crizotinib but not to some newer ALK TKIs; P‑gp inhibition restores sensitivity in preclinical models.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5952030/"
+    ]
+  },
+  "Row18": {
+    "Pathway ID/Name": "EMT / mesenchymal–epithelial plasticity programs",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "EMT and related plasticity, driven by transcription factors such as ZEB1 and supported by HER3‑driven signaling, are enriched in ALK‑TKI‑resistant NSCLC; these programs promote survival, invasiveness and drug tolerance to ceritinib, and can be mitigated by combinations that target ERBB family signaling alongside ALK.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5952030/"
+    ]
+  }
+}

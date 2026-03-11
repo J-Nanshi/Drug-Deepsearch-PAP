@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "ALK signaling (KEGG: hsa05220 NSCLC – ALK branch)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Brigatinib is a next‑generation ALK tyrosine kinase inhibitor with high activity against ALK and multiple resistance‑associated ALK kinase domain mutations (e.g., L1196M, E1210K, G1202R); inhibition of ALK fusion signaling in ALK‑rearranged NSCLC drives tumor regression and underpins the high objective response rates and prolonged PFS seen in Phase I/II and ALTA trials and in ALTA‑1L versus crizotinib.[6,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10217667/"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "EGFR–RAS–MAPK signaling (KEGG: hsa04010 / hsa05223)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Brigatinib blocks upstream ALK oncogenic signaling that feeds into canonical RAS–RAF–MEK–ERK cascades; in ALK‑rearranged NSCLC cohorts of the Phase I/II and ALTA studies, effective pathway suppression translated into high response rates and durable disease control, indicating continued dependence on this proliferative axis.[7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6044318/"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling (KEGG: hsa04151 / hsa05220)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "ALK fusion signaling activates PI3K–AKT–mTOR survival pathways; across ALK‑rearranged NSCLC cohorts, brigatinib produced substantial and durable systemic and intracranial responses, consistent with effective suppression of this prosurvival signaling arm and induction of apoptosis and growth arrest.[7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6044318/"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "ALK resistance mutation pathway (EML4‑ALK L1196M/E1210K/G1202R)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Brigatinib retains in‑vitro activity against multiple ALK kinase domain mutations (including L1196M, E1210K, G1202R) that mediate acquired resistance to crizotinib and some other ALK inhibitors; clinical benefit in crizotinib‑refractory and alectinib/ceritinib‑refractory ALK+ NSCLC (ALTA, ALTA‑2) reflects restored inhibition of these mutant ALK signaling pathways.[4,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5388194/"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "CNS metastasis / blood–brain barrier ALK signaling (no specific ID; CNS disease subset in ALK+ NSCLC)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Brigatinib demonstrates substantial intracranial objective response rates and CNS disease control in ALK‑rearranged NSCLC with active brain metastases, indicating effective inhibition of ALK‑driven signaling within the CNS compartment and improved CNS penetration compared with earlier ALK TKIs.[6,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10217667/"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "EML4‑ALK oncogenic fusion pathway (MSigDB: EML4_ALK_FUSION_UP)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The EML4‑ALK fusion defines a distinct NSCLC subset; brigatinib’s potent inhibition of this chimeric oncoprotein underlies high response rates in ALK‑inhibitor‑naive patients (e.g., ALTA‑1L) and in crizotinib‑pretreated cohorts, confirming oncogene addiction to the EML4‑ALK pathway.[6,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10217667/"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "ROS1/other brigatinib target kinases (KEGG: hsa04014 Ras signaling – ROS1 arm)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Brigatinib also targets other kinases such as ROS1; in the Phase I/II study, objective responses were observed in a cohort of patients with cancers harboring alterations in brigatinib targets like ALK or ROS1, supporting sensitivity when these kinases are dominant drivers.[7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6044318/"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "Crizotinib‑resistant ALK pathway (post‑first‑generation ALK TKI)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Patients with ALK‑rearranged NSCLC who progressed on crizotinib achieved high objective response rates and a median PFS of 13.2 months with brigatinib, indicating effective suppression of crizotinib‑resistant ALK signaling and associated downstream pathways.[7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6044318/"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "Alectinib/ceritinib‑refractory ALK pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "The ALTA‑2 Phase II trial is designed for patients with ALK+ NSCLC and documented progression on alectinib or ceritinib; its rationale is that brigatinib may inhibit ALK resistance mechanisms emerging under these second‑generation TKIs, restoring control of ALK‑dependent signaling.[4]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5388194/"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "Cell‑cycle progression and proliferation (KEGG: hsa04110 Cell cycle)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Across multiple brigatinib studies, high systemic and intracranial objective response rates and prolonged PFS in ALK‑rearranged NSCLC imply effective suppression of ALK‑driven proliferative programs and cell‑cycle progression downstream of oncogenic kinase signaling.[6,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10217667/"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "Apoptosis and survival balance (KEGG: hsa04210 Apoptosis)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Durable responses and favorable progression‑free survival in ALK‑inhibitor‑naive and crizotinib‑pretreated ALK+ NSCLC treated with brigatinib suggest restoration of apoptotic signaling after inhibition of ALK‑dependent survival pathways such as PI3K–AKT–mTOR.[6,7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10217667/"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Early pulmonary toxicity/ILD‑related inflammatory pathways (no specific ID; safety signal)",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "",
+    "Baseline effect": "",
+    "Rationale": "Early pulmonary events and interstitial lung disease‑like toxicity were observed with higher brigatinib doses, leading to adoption of a 7‑day 90‑mg lead‑in before 180 mg daily; activation of lung injury and inflammatory pathways can limit dosing intensity and thereby reduce effective ALK pathway suppression in susceptible patients.[7]",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6044318/"
+    ]
+  }
+}
