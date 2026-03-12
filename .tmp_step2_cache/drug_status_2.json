@@ -1,0 +1,10 @@
+{
+  "successful_drugs": {
+    "necitumumab": {
+      "md_file": ".tmp_step2_test_in\\necitumumab.md",
+      "output_json": ".tmp_step2_test_out\\necitumumab.json",
+      "row_count": 12,
+      "completed_unix": 1773315526
+    }
+  }
+}

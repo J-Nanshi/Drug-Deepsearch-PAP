@@ -1,0 +1,34 @@
+{
+  "successful_drugs": {
+    "adagrasib": {
+      "md_file": ".tmp_step2_first5\\adagrasib.md",
+      "output_json": "output\\lung_cancer\\step2_factcheck_json\\adagrasib.json",
+      "row_count": 24,
+      "completed_unix": 1773315960
+    },
+    "afatinib": {
+      "md_file": ".tmp_step2_first5\\afatinib.md",
+      "output_json": "output\\lung_cancer\\step2_factcheck_json\\afatinib.json",
+      "row_count": 12,
+      "completed_unix": 1773315994
+    },
+    "alectinib": {
+      "md_file": ".tmp_step2_first5\\alectinib.md",
+      "output_json": "output\\lung_cancer\\step2_factcheck_json\\alectinib.json",
+      "row_count": 12,
+      "completed_unix": 1773316024
+    },
+    "amivantamab": {
+      "md_file": ".tmp_step2_first5\\amivantamab.md",
+      "output_json": "output\\lung_cancer\\step2_factcheck_json\\amivantamab.json",
+      "row_count": 12,
+      "completed_unix": 1773316058
+    },
+    "atezolizumab": {
+      "md_file": ".tmp_step2_first5\\atezolizumab.md",
+      "output_json": "output\\lung_cancer\\step2_factcheck_json\\atezolizumab.json",
+      "row_count": 12,
+      "completed_unix": 1773316092
+    }
+  }
+}

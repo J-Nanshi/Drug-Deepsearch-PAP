@@ -11,7 +11,9 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://clinicaltrials.gov/study/NCT00981058"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5013862",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5012835"
     ]
   },
   "Row2": {
@@ -26,7 +28,11 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11240640",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5385461",
+      "https://pubmed.ncbi.nlm.nih.gov/27913776"
     ]
   },
   "Row3": {
@@ -41,7 +47,11 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5385461",
+      "https://pubmed.ncbi.nlm.nih.gov/27913776",
+      "https://pubmed.ncbi.nlm.nih.gov/30501503"
     ]
   },
   "Row4": {
@@ -56,7 +66,8 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388",
+      "https://pubmed.ncbi.nlm.nih.gov/27913776"
     ]
   },
   "Row5": {
@@ -71,7 +82,8 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pubmed.ncbi.nlm.nih.gov/27913776"
     ]
   },
   "Row6": {
@@ -86,7 +98,10 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://clinicaltrials.gov/study/NCT00981058"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5013862",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5012835",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5385461"
     ]
   },
   "Row7": {
@@ -101,7 +116,10 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5012835",
+      "https://pubmed.ncbi.nlm.nih.gov/30501503"
     ]
   },
   "Row8": {
@@ -116,7 +134,11 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://clinicaltrials.gov/study/NCT00981058"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5013862",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5012835",
+      "https://pubmed.ncbi.nlm.nih.gov/30501503"
     ]
   },
   "Row9": {
@@ -131,7 +153,12 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5012835",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5385461",
+      "https://pubmed.ncbi.nlm.nih.gov/27913776",
+      "https://pubmed.ncbi.nlm.nih.gov/30501503"
     ]
   },
   "Row10": {
@@ -146,7 +173,10 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11240640",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5012835",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5013862"
     ]
   },
   "Row11": {
@@ -161,7 +191,7 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11240640/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11240640"
     ]
   },
   "Row12": {
@@ -176,7 +206,9 @@
     "Include decision": "include",
     "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3038014",
+      "https://pubmed.ncbi.nlm.nih.gov/27913776",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11829289"
     ]
   }
 }

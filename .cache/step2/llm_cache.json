@@ -1,0 +1,933 @@
+{
+  "9283ef7915bf3cc9772f3b50a774b64df6372977": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Adagrasib targets KRAS G12C mutations, which are typically upregulated in lung cancer, leading to sensitivity when the pathway is inhibited.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The relationship between KRAS G12C mutations and sensitivity to adagrasib is supported by clinical data.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The Ras signaling pathway is directly relevant to the mechanism of action of adagrasib in KRAS G12C mutant lung cancer."
+  },
+  "f2ba2643572baf8d8106dc418cc3221cc26d1ff0": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The MAPK (RAF–MEK–ERK) signaling pathway is upregulated in baseline lung cancer with KRAS mutations, leading to resistance to KRAS G12C inhibitors like adagrasib. Reactivation of ERK signaling is associated with resistance.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway's role in KRAS-driven lung cancer and its impact on drug response is well-documented mechanistically.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline regulation of the MAPK pathway is crucial for predicting adagrasib response in lung cancer."
+  },
+  "e94d55aa1432e0820b66a1cd527bb27086b90b6b": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, KRAS mutations in lung cancer lead to upregulation of cell cycle pathways, contributing to resistance. Adagrasib targets KRAS G12C, which can modulate these pathways post-treatment.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from mechanistic studies showing KRAS pathway involvement in cell cycle regulation, but baseline data specific to adagrasib is lacking.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding baseline cell cycle regulation is crucial for interpreting adagrasib's mechanism of action in KRAS-mutant lung cancer."
+  },
+  "12287419b2c1b043f136995c53fec1a45c6dc5a3": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "RTK-driven activation of PI3K–AKT–mTOR is a key bypass route under KRAS G12C inhibition. MET, HER2, and other RTKs can restore survival signaling via PI3K–AKT despite KRAS G12C blockade, contributing to both intrinsic and acquired resistance to adagrasib.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The PI3K–AKT pathway is known to be upregulated as a bypass mechanism in KRAS G12C inhibition, leading to resistance.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The PI3K–AKT pathway is relevant for understanding baseline resistance mechanisms to adagrasib in lung cancer."
+  },
+  "82eb88950529b701fff661af521f537cafeb3245": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The Rap1/Ral/FAK–YAP axis is not upregulated at baseline in lung cancer; rather, its activation is an adaptive response to KRAS G12C inhibition. Baseline, this pathway does not confer resistance to adagrasib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The pathway's role as a resistance mechanism is inferred from mechanistic studies showing adaptive activation post-KRAS G12C inhibition.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway is not relevant at baseline for adagrasib response in lung cancer, as its activation is an adaptive response to treatment."
+  },
+  "d8354e1f5c3b8258c2ca35004b05b969e3eb3adf": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline ErbB signaling in lung cancer is not upregulated by default; it is often downregulated or normal unless specific mutations or amplifications are present. Baseline sensitivity to adagrasib is expected in KRAS G12C mutant lung cancer, as it targets this mutation directly.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "Adagrasib is in clinical trials for KRAS G12C mutant lung cancer, and baseline ErbB signaling is relevant to its mechanism of action.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding baseline ErbB signaling is crucial for interpreting adagrasib's efficacy in lung cancer, especially in the context of KRAS G12C mutations."
+  },
+  "c3137dbfad323d0e0c8e4718eea03448f81472ba": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The cAMP/Rap1 and RHO GTPase signaling pathways are involved in adaptive responses post-KRAS inhibition, contributing to resistance by sustaining survival signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway is involved in adaptive resistance mechanisms, which may influence baseline sensitivity to KRAS inhibitors like adagrasib.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The described regulation and effect pertain to adaptive changes post-treatment, not baseline characteristics relevant to initial adagrasib response."
+  },
+  "3b2c7f8223e7185e0f701adf33df64b601c258ac": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Epithelial–mesenchymal transition (EMT) is associated with resistance to KRAS G12C inhibitors, including adagrasib, by rewiring RTK expression and enhancing MAPK and PI3K signaling, allowing tumor cells to bypass KRAS blockade.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The association between EMT and resistance to KRAS G12C inhibitors is based on mechanistic evidence linking EMT to pathway rewiring.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The role of EMT in resistance to KRAS G12C inhibitors like adagrasib is relevant for understanding baseline resistance mechanisms in lung cancer."
+  },
+  "39894b6df809f9730a305e22714bde85c7e52f42": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, NF1 and PTEN are typically intact, providing negative regulation of RAS–MAPK and PI3K–AKT pathways, which contributes to sensitivity to KRAS G12C inhibitors like adagrasib. Loss of these regulators is associated with acquired resistance, not baseline.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of NF1 and PTEN loss is inferred from mechanistic studies showing their involvement in resistance, but not directly validated in baseline lung cancer.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway description pertains to acquired resistance mechanisms, not baseline pathway activity relevant to initial adagrasib response."
+  },
+  "85afae04222979e19125e75413dc3d66506c2120": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS activates RAL–NF‑κB as a parallel effector arm. Reviews of KRAS G12C resistance note that bypass activation of downstream pro-proliferative and anti-apoptotic pathways, including NF‑κB, can maintain survival signaling independently of direct KRAS G12C output, reducing dependence on adagrasib-targeted nodes.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The NF-κB signaling pathway is known to be involved in resistance mechanisms to KRAS G12C inhibitors like adagrasib, suggesting a possible relationship.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding potential resistance mechanisms to adagrasib in lung cancer, which is important for baseline characterization."
+  },
+  "d5286c12d58899026ef571aae66e66ddb772154f": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS mutations in lung cancer can lead to upregulation of PD‑L1, which may contribute to immune evasion. However, at baseline, before adagrasib treatment, the presence of KRAS G12C mutations does not inherently confer resistance to adagrasib; rather, it suggests potential sensitivity to KRAS G12C inhibitors.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway is possibly related as KRAS mutations can influence PD‑L1 expression, but the direct baseline effect on adagrasib sensitivity is not well-established.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding potential immune interactions and combination strategies with adagrasib in lung cancer."
+  },
+  "b3d9a146de403476d2fd386282c34323ada289a4": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline lung cancer, the RTK–RAS–MAPK pathway is often upregulated, and tumors with co-mutations like KEAP1 mutations are resistant to KRAS G12C inhibitors like adagrasib due to bypass signaling.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "Adagrasib is being evaluated in clinical trials for its efficacy in KRAS G12C-mutant lung cancer, with variable responses based on co-mutation status.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline pathway regulation and co-mutation impact is crucial for interpreting adagrasib's clinical trial outcomes in lung cancer."
+  },
+  "0170c5337dcea4da6a356011cde68cba6e692055": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS G12C mutations lead to upregulation of the Ras signaling pathway, making tumors sensitive to adagrasib, which inhibits KRAS G12C.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The sensitivity of KRAS G12C-mutant NSCLC to adagrasib is supported by clinical evidence from trials like KRYSTAL-1.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The Ras signaling pathway is directly relevant to the baseline response of lung cancer to adagrasib due to its role in KRAS G12C mutations."
+  },
+  "9ae224bfd44c540c07dc98f4d0a5ab7cb8de6a9a": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The MAPK pathway is a key effector of mutant KRAS in NSCLC. At baseline, before adagrasib treatment, the pathway is typically upregulated due to KRAS mutations, making the cancer sensitive to adagrasib, which targets KRAS and reduces ERK phosphorylation.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway's role in KRAS-driven NSCLC and its modulation by adagrasib is well-supported by mechanistic evidence.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of the MAPK pathway in KRAS-mutant NSCLC is crucial for interpreting the sensitivity to adagrasib."
+  },
+  "3d1b8d7e75176576057f519883e3d42a0f9870c6": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In KRAS G12C‑addicted NSCLC, the cell cycle pathway is upregulated at baseline, contributing to cancer cell proliferation. Adagrasib targets this pathway, leading to sensitivity due to its inhibition of KRAS-driven cell-cycle programs.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The relationship is based on mechanistic evidence showing that adagrasib inhibits KRAS-driven pathways, affecting cell cycle regulation.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of the cell cycle pathway is crucial for explaining the sensitivity of lung cancer cells to adagrasib."
+  },
+  "b3e3f0bdc7b2b9e9ac9df5af3d5508d97d152d53": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Baseline PI3K–AKT signaling is upregulated in lung cancer, contributing to resistance to KRAS G12C inhibitors like adagrasib through compensatory activation mechanisms.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The PI3K–AKT pathway is implicated in resistance mechanisms to KRAS G12C inhibitors, suggesting a possible relationship.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of PI3K–AKT is important for addressing resistance in lung cancer treatment with adagrasib."
+  },
+  "16e2076d52322b753dbf9695bc3a88c1b87a3b04": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, prior to adagrasib treatment, the ErbB signaling pathway is not upregulated by feedback mechanisms. Instead, the pathway is typically downregulated or not activated in the absence of specific stimuli. Lung cancers with KRAS mutations, which adagrasib targets, are often sensitive to KRAS inhibition due to dependency on this pathway.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship between ErbB signaling and KRAS inhibition by adagrasib is inferred from mechanistic studies showing pathway interactions, but not directly validated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline status of ErbB signaling is crucial for interpreting potential resistance mechanisms and planning combination therapies with adagrasib."
+  },
+  "4ea28d0e7c0eb8b20c8b5feca7e4f6c51ba6e779": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Loss-of-function alterations in NF1 and PTEN lead to upregulation of RTK-RAS and PI3K signaling pathways, which are involved in KRAS-mutant NSCLC. However, these alterations are associated with acquired resistance, not baseline resistance, to KRAS G12C inhibitors like adagrasib.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway is relevant due to its role in KRAS-mutant NSCLC, but the resistance described is post-treatment, not baseline.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway is not needed for baseline response to adagrasib as it pertains to acquired resistance, not initial sensitivity."
+  },
+  "aa741a26514e5bd5cf5f680f6534c4124bfa4a96": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EMT phenotypes in KRAS G12C NSCLC are associated with upregulated Wnt/β‑catenin and altered RTK profiles, reducing dependence on KRAS‑ERK and favoring bypass signaling. Reviews of clinical and preclinical data note that EMT‑high tumors show attenuated responses and earlier progression on adagrasib and other KRAS G12C inhibitors.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "The association between EMT phenotypes and resistance to adagrasib is supported by clinical and preclinical data, indicating an experimental basis.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to adagrasib in lung cancer."
+  },
+  "f3c9544fc52a0d8f4c1f02c509d82dd2b1466508": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, KRAS G12C-mutant lung cancer cells are sensitive to adagrasib, which inhibits KRAS signaling pathways, including NF-κB. NF-κB signaling is typically downregulated in response to effective KRAS inhibition, leading to apoptosis.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from mechanistic understanding of KRAS signaling and NF-κB's role in cell survival, but not directly validated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline regulation of NF-κB is crucial for interpreting adagrasib's mechanism of action and potential resistance pathways."
+  },
+  "f6cd6419d9a2cede32530b70c63cb70ca086a3b8": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS-mutant NSCLC often shows high baseline PD-L1 expression, contributing to immune escape. Although KRAS G12C inhibition can lead to adaptive PD-1/PD-L1 upregulation, this is not baseline.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway is relevant due to PD-L1's role in immune escape in KRAS-mutant NSCLC, but the adaptive changes are not baseline.",
+    "Include decision": "include",
+    "Inclusion reasoning": "PD-L1 expression is a baseline factor in KRAS-mutant NSCLC, relevant for understanding adagrasib's potential efficacy."
+  },
+  "f7c05b0a28c7619bb9042b22857ace497f7bb170": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline lung cancer, the RTK–RAS–MAPK and PI3K pathways are often upregulated, especially in KRAS-mutant tumors. STK11/KEAP1 mutations can confer resistance due to reduced KRAS dependency and increased reliance on alternative pathways.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "Adagrasib has shown clinical activity in KRAS-mutant NSCLC, but resistance is noted in STK11/KEAP1 co-mutant tumors, indicating ongoing clinical evaluation.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms in lung cancer treated with adagrasib, particularly in the context of co-mutations."
+  },
+  "cad0b58ea3e34018aa492cf51510f706f515bf2d": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS-mutant tumors rely on autophagy for metabolic support. Baseline autophagy is essential for tumor survival, and its inhibition can sensitize tumors to KRAS G12C inhibitors like adagrasib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of autophagy in KRAS-mutant lung cancer is supported by mechanistic studies, but not yet clinically validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding autophagy's role is crucial for predicting baseline sensitivity to adagrasib in KRAS-mutant lung cancer."
+  },
+  "16d49e49f96bfb3e4bcef5cf3d8ce3f8ea02ba9e": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Baseline resistance to adagrasib in lung cancer is linked to upregulation of anti-apoptotic programs, which counterbalance pro-apoptotic sphingolipid signaling, limiting cell death.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The relationship is possibly related as anti-apoptotic signaling can affect response to adagrasib, but it is not directly validated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding anti-apoptotic signaling is relevant to baseline resistance mechanisms in lung cancer treatment with adagrasib."
+  },
+  "c425c69253faab54be06c785a9f14533a7971c28": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Activating EGFR mutations lead to upregulation of EGFR signaling, making tumors sensitive to afatinib, which inhibits this pathway effectively.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The relationship between EGFR mutations and sensitivity to afatinib is well-established in clinical settings, particularly in EGFR-mutant NSCLC.",
+    "Include decision": "include",
+    "Inclusion reasoning": "This pathway is directly relevant to the baseline response to afatinib in lung cancer, as it is a primary target of the drug in EGFR-mutant NSCLC."
+  },
+  "f6787a9cbf94b5eb41c1b33f79a0e0e5314b23ff": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In EGFR-mutant NSCLC, baseline upregulation of the JAK/STAT3 axis is associated with resistance to afatinib due to persistent STAT3 activation, which is linked to poor prognosis and EGFR-TKI resistance.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from mechanistic evidence showing that STAT3 activation contributes to resistance, but it is not directly validated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The JAK/STAT3 axis is relevant to baseline afatinib resistance in lung cancer, providing insight into potential mechanisms of resistance and therapeutic targets."
+  },
+  "01caf2cd2ffe4b8c3c5fd7279e918e8db6444325": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "PI3K–AKT–mTOR signaling is upregulated in lung cancer with PI3K/PTEN alterations, leading to resistance to afatinib as these alterations maintain signaling independent of EGFR.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship between PI3K–AKT–mTOR signaling and afatinib resistance is inferred from mechanistic evidence of pathway activation independent of EGFR.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding PI3K–AKT–mTOR signaling is crucial for predicting afatinib resistance in lung cancer with PI3K/PTEN alterations."
+  },
+  "6d85424e284e3236e282f63934a50744cd82ae26": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR mutations signal through the RAS–RAF–MEK–ERK pathway; afatinib reduces ERK phosphorylation in EGFR-driven cells, but KRAS/BRAF mutations or activation of alternative RTKs reactivate ERK, conferring resistance.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway's role in afatinib response is well-documented mechanistically, particularly in the context of EGFR mutations and resistance mechanisms.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline afatinib response and resistance mechanisms in lung cancer."
+  },
+  "ed7d9464c6cc678b71249162139501b830abffdf": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR-TKI-resistant NSCLC and is highlighted as a key high-priority resistance node in multi-omics analyses, undermining afatinib efficacy unless co-targeted.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The MET/HGF pathway is a known mechanism of resistance in EGFR-TKI therapies, including afatinib, in NSCLC.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The MET/HGF pathway is relevant for understanding baseline resistance mechanisms to afatinib in lung cancer."
+  },
+  "f74d2c7e3477bad5fe5425c9f646df26fc7401f6": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Upregulation of HER2 and AXL is associated with epithelial-mesenchymal transition and can sustain signaling pathways like AKT/MAPK and NF-κB despite EGFR inhibition. However, the baseline effect of HER2 and AXL upregulation in untreated EGFR-mutant NSCLC is more aligned with sensitivity to EGFR-TKIs, as resistance typically develops as an adaptive response.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from mechanistic studies showing HER2 and AXL's role in bypass signaling, but baseline sensitivity is not directly clinically validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline role of HER2 and AXL in signaling pathways is important for predicting initial afatinib response in lung cancer."
+  },
+  "f4442b3701f009c55203777ca766c09a0fea73f3": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline Wnt/β-catenin signaling is typically downregulated in EGFR-mutant lung cancers sensitive to afatinib, and its activation is associated with resistance post-treatment.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of Wnt/β-catenin signaling in resistance is inferred from mechanistic studies, not baseline clinical evidence.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway's role is post-treatment and not relevant to baseline sensitivity to afatinib."
+  },
+  "b049e929be28e01ed69c01046273f5ae5df8ba77": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, chromatin/epigenetic remodeling is not upregulated; resistance mechanisms like promoter methylation changes occur post-treatment. Baseline EGFR signaling is sensitive to afatinib.",
+    "Pathway-drug relationship classification": "not needed",
+    "Classification reasoning": "The described epigenetic changes are adaptive and occur after treatment, not at baseline.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway changes described are post-treatment adaptations and not relevant to baseline afatinib response in lung cancer."
+  },
+  "279f45cbed67d94c72d4a789c878a8e33debd634": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion, which are sensitive to afatinib treatment due to its EGFR inhibition.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway involves EGFR-driven upregulation of VEGF and PD-L1, which are known to be sensitive to EGFR inhibition by afatinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant to understanding baseline sensitivity to afatinib in lung cancer due to its mechanistic role in EGFR signaling."
+  },
+  "636d4b6969185b3f353d19e67734126d6a72e60b": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Tumor and stromal IL-6 production activates JAK/STAT3, promoting survival, angiogenesis, and chemoradioresistance. High IL-6 and pSTAT3 correlate with poor outcomes, and IL-6R/JAK/STAT3 signaling is implicated as a resistance mechanism to EGFR-TKIs and afatinib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The IL-6/IL-6R–JAK–STAT3 pathway is mechanistically linked to resistance against EGFR-TKIs, including afatinib, based on its role in promoting survival and angiogenesis.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to afatinib in lung cancer, providing insights into potential combination therapies."
+  },
+  "fedb558a5507b1f24528a9944e2f8a228c3d0025": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline FGFR2/3 signaling is not upregulated in untreated lung cancer; upregulation occurs post-EGFR-TKI exposure as an adaptive resistance mechanism.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of FGFR2/3 signaling in afatinib resistance is inferred from mechanistic studies showing its upregulation post-treatment.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway is relevant post-treatment as a resistance mechanism, not at baseline before afatinib administration."
+  },
+  "5af6af3323a9ed3b0370954a7351a272e71a05b9": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib's inhibition of this pathway leads to decreased phosphorylation and activity, promoting apoptosis.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway is mechanistically linked to afatinib's action in lung cancer, as it describes a downstream effect of afatinib treatment.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of this pathway is crucial for explaining afatinib's mechanism of action in promoting apoptosis in lung cancer."
+  },
+  "a7fb83110df3f48bac822587b6d51272b4b3de9d": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "ALK signaling is upregulated in ALK-positive lung cancer, making it sensitive to alectinib, which inhibits ALK kinase activity and suppresses downstream signaling.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "Alectinib is clinically validated as an effective treatment for ALK-positive lung cancer due to its ability to inhibit ALK signaling.",
+    "Include decision": "include",
+    "Inclusion reasoning": "ALK signaling is directly relevant to the baseline response of lung cancer to alectinib, making it necessary for the report."
+  },
+  "e729fda6d7b5209b1149dac192395aa8409745cf": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Baseline upregulation of the Ras/MAPK (ERK1/2) pathway is associated with resistance to alectinib in lung cancer, as compensatory ERK signaling can bypass ALK blockade.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The association between Ras/MAPK pathway upregulation and alectinib resistance is inferred from mechanistic studies, not directly validated in clinical lung cancer settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline role of the Ras/MAPK pathway in alectinib resistance is relevant for potential combination strategies in lung cancer treatment."
+  },
+  "68061be1e6b4dd6eaa418b76f4149678e5c5af71": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The PI3K/AKT pathway is typically upregulated in ALK-positive lung cancer, contributing to cell survival and proliferation. Alectinib targets ALK, leading to downstream effects including potential PI3K/AKT pathway modulation.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The PI3K/AKT pathway is a known downstream effector of ALK signaling, and its modulation is relevant to the mechanism of action of alectinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the PI3K/AKT pathway's role in ALK-positive lung cancer is crucial for interpreting alectinib's baseline mechanism of action."
+  },
+  "0ca58ab30107c987082a648978df5ed453c221ed": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, STAT3 signaling is often upregulated in ALK-positive lung cancer, contributing to cancer cell survival and resistance. Alectinib's inhibition of ALK can lead to downregulation of STAT3, which is associated with increased sensitivity.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of STAT3 in ALK-positive lung cancer and its modulation by alectinib is supported by mechanistic studies, but not directly validated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding STAT3's baseline role is relevant for interpreting alectinib's mechanism of action in ALK-positive lung cancer."
+  },
+  "4ff987ed0334bf0062a02b2378dc13aa5e50b887": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In lung cancer, c-Myc upregulation is associated with sensitivity to alectinib as it is not a primary resistance mechanism at baseline.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of c-Myc in alectinib response is inferred from mechanistic studies, but not directly validated in clinical settings for lung cancer.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding c-Myc's role is relevant for baseline alectinib response, as it may influence sensitivity in lung cancer."
+  },
+  "934c502542fce667081a9e38379249686628d9ec": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Alectinib alone induces G0/G1 arrest, indicating sensitivity due to ALK blockade perturbing cell-cycle progression.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The described G0/G1 arrest is a known mechanism of action for alectinib in ALK-positive lung cancer, aligning with mechanistic evidence.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The G0/G1 arrest mechanism is relevant for understanding baseline sensitivity to alectinib in lung cancer."
+  },
+  "e29a5ccfb582e5f925a0c207b331a4ccb5b2379a": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Alectinib targets ALK, leading to downregulation of ALK signaling, which primes ALK-expressing lung cancer cells for apoptosis and enhances sensitivity to DNA-damage-induced cell death.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The relationship is based on mechanistic evidence showing ALK inhibition by alectinib enhances apoptosis in ALK-positive lung cancer cells.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline sensitivity of ALK-positive lung cancer to alectinib."
+  },
+  "503b34a9c41f0a4096183f5ae7831c80804d1629": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR signaling is upregulated in ALK-driven lung cancer cells, leading to resistance to ALK inhibitors like alectinib due to bypass activation.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The resistance mechanism is inferred from mechanistic studies showing EGFR's role in bypass activation in ALK-driven cells.",
+    "Include decision": "include",
+    "Inclusion reasoning": "EGFR signaling's role in resistance to alectinib is relevant for understanding baseline resistance mechanisms in lung cancer."
+  },
+  "ac3527a6bbb6816e1697e97ec4c5c90984282b0c": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "High MET activity can mediate resistance to ALK-targeted therapy like alectinib due to bypass signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The rationale suggests a potential mechanism of resistance through MET upregulation, which is plausible but not definitively proven for alectinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The MET signaling pathway is relevant for understanding potential resistance mechanisms to alectinib in lung cancer."
+  },
+  "f6dc36c6e1811d58124defa594db717d5834cec0": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "SRC and PTK2 are hyperactive kinases that serve as alternative signaling hubs, maintaining survival and motility when ALK is inhibited.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of SRC/PTK2 as bypass pathways is inferred from mechanistic studies showing their hyperactivity in the context of ALK inhibition.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to alectinib in lung cancer."
+  },
+  "74958bc4401e5369864479e3720cc1d41e6682ba": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "AXL signaling is not upregulated at baseline in lung cancer cells sensitive to alectinib; upregulation is observed in acquired resistance contexts.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "AXL signaling may become relevant in acquired resistance, but it is not a baseline determinant of alectinib sensitivity.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway is relevant in acquired resistance contexts, not at baseline, thus not needed for baseline alectinib response analysis."
+  },
+  "0567c92e7379b31fd1b7631b9e7be85db302155f": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "PI3K/AKT/mTOR and Ras/BRAF/MEK/ERK pathways are upregulated in lung cancer, contributing to oncogenic signaling. Their inhibition by alectinib, an ALK inhibitor, is associated with sensitivity in ALK-positive lung cancer.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathways are known to be upregulated in lung cancer, and their inhibition is mechanistically linked to sensitivity to ALK inhibitors like alectinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of these pathways is crucial for predicting the response to alectinib in lung cancer."
+  },
+  "fd08624517e94b5d6a58eaf92d0aac9627d03707": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Amivantamab targets and inhibits EGFR signaling, which is often upregulated in EGFR-driven NSCLC, making tumors sensitive to its suppression.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "EGFR signaling is a well-established target in lung cancer, and amivantamab's mechanism of action involves inhibiting this pathway, which is clinically validated.",
+    "Include decision": "include",
+    "Inclusion reasoning": "EGFR signaling is a critical pathway in lung cancer, and understanding its baseline regulation is essential for assessing amivantamab's therapeutic potential."
+  },
+  "18630110e7c92e1265296c0126cbe1645f0a4580": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "MET amplification or high MET expression in NSCLC is associated with sensitivity to amivantamab, indicating that MET pathway upregulation is a key determinant of response.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "Clinical evidence supports that MET-amplified or high-MET NSCLC cases are sensitive to amivantamab.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The MET signaling pathway is clinically validated as relevant for baseline sensitivity to amivantamab in lung cancer."
+  },
+  "9a69cad43d53b2311228bac03dc26937001f2ca5": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR–MET co-activation leads to resistance to EGFR TKIs due to MET-mediated maintenance of downstream signaling pathways. Amivantamab's bispecific action targets both EGFR and MET, overcoming this resistance mechanism.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The role of EGFR–MET co-activation in resistance to EGFR TKIs and the efficacy of amivantamab in overcoming this resistance is supported by clinical evidence.",
+    "Include decision": "include",
+    "Inclusion reasoning": "This pathway is directly relevant to understanding the baseline resistance mechanism in lung cancer that amivantamab targets."
+  },
+  "851d3287aa944e91211d89f7a83bddc719f1e000": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "EGFR and MET activate PI3K–AKT–mTOR via adaptor proteins such as Gab1 and direct PI3K recruitment; dual receptor blockade by amivantamab reduces survival signaling, while MET‑ or PI3K‑pathway reactivation is linked to resistance to upstream RTK inhibition, highlighting PI3K–AKT–mTOR attenuation as a major effector of sensitivity.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from the mechanistic understanding of EGFR and MET signaling pathways and their role in lung cancer sensitivity to amivantamab.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The PI3K–AKT–mTOR pathway is relevant for understanding baseline sensitivity to amivantamab in lung cancer."
+  },
+  "40bf3cbbd9183f516b71d66c3eb1882943ab3c8b": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR and MET feed into RAS–RAF–MEK–ERK through Grb2/SOS; inhibition of ligand‑driven EGFR/MET activation by amivantamab decreases proliferative MAPK signaling, while MAPK‑driven escape (e.g., BRAF/KRAS activation) is a recognized resistance route to EGFR/MET‑directed therapies.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The MAPK pathway is involved in resistance mechanisms to EGFR/MET-directed therapies, suggesting a potential role in baseline resistance.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the MAPK pathway's role in resistance is relevant for baseline assessment of amivantamab response in lung cancer."
+  },
+  "8a493d136c172515435cb6c63563f0e1261a6b97": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In EGFR-wild-type NSCLC, amphiregulin is highly expressed and drives EGFR-dependent growth; amivantamab blocks ligand binding and suppresses AREG-induced signaling and proliferation, with efficacy correlating with AREG RNA levels and being largely independent of Fc effector function in these models.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "The relationship is based on clinical trial data showing efficacy of amivantamab in AREG-high EGFR-WT tumors.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline sensitivity to amivantamab in lung cancer."
+  },
+  "bdd918c52121636be706628d9a7e8b7bdc32bebf": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Low-fucose IgG1 engineering enhances FcγR engagement; amivantamab elicits NK- and mononuclear-cell–mediated ADCC and macrophage trogocytosis, and MET co-expression augments EGFR binding and ADCC at low antibody concentrations, providing an EGFR/MET-density–dependent immune effector pathway of tumor clearance.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "The described immune effector mechanisms are supported by clinical trial data indicating amivantamab's activity in lung cancer.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant to understanding the baseline immune effector mechanisms of amivantamab in lung cancer."
+  },
+  "a0224885a7b7348cebb86b7a97d25a17bd42ff22": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Antibody binding to EGFR promotes receptor internalization and routing to lysosomes; amivantamab‑bound EGFR/MET complexes are internalized and degraded, aligning with EGFR trafficking models where ubiquitin‑ and ESCRT‑dependent endocytosis limits signaling duration and contributes to sustained pathway shutdown.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The rationale accurately describes the mechanism by which amivantamab affects EGFR trafficking and degradation, leading to downregulation and sensitivity.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding the baseline mechanism of action of amivantamab in lung cancer."
+  },
+  "59c2f5052074238ddd6e9f3750a1210c8200e6d0": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR commonly heterodimerizes with HER3 to drive PI3K signaling; amivantamab inhibits EGFR phosphorylation, and adaptive HER3 upregulation may mediate resistance.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway involves EGFR and HER3, relevant to amivantamab's mechanism, but the adaptive changes are not baseline.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The focus on adaptive HER3 upregulation post-treatment is not relevant for baseline response to amivantamab."
+  },
+  "7fae6238ff5ce90c5775c37d36b2945fe8621e5b": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EMT and EGFR-independent survival programs are upregulated in some lung cancers, leading to resistance to EGFR/MET blockade by amivantamab.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "EMT is a known mechanism of resistance to EGFR-targeted therapies, suggesting a possible relationship with amivantamab resistance.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The role of EMT in resistance to EGFR/MET blockade is relevant for understanding baseline resistance mechanisms in lung cancer."
+  },
+  "b3d2dbc4579da76bc61b027fad2e26c4e145b9aa": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Activation or amplification of parallel RTKs (e.g., HER2, AXL) is a frequent bypass to EGFR or MET inhibition; such network reprogramming can restore downstream PI3K/MAPK signaling despite EGFR/MET blockade, representing a plausible resistance pathway under selective pressure from amivantamab.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The rationale suggests a potential resistance mechanism through alternative RTK networks, which could be relevant to baseline resistance to amivantamab.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant as it describes a potential baseline resistance mechanism to amivantamab in lung cancer."
+  },
+  "3a0d83deb6ec88c022cb9e6d63d00a5c0b6c081e": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, the tumor immune microenvironment in lung cancer is often characterized by M2 macrophage polarization, which is associated with immunosuppression and resistance to therapies. Amivantamab's potential to induce M1 polarization is a post-treatment effect.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The relationship is possibly related as macrophage polarization can influence immune response, but the described effects are post-treatment.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The row is excluded because it describes post-treatment effects rather than baseline characteristics relevant to amivantamab response."
+  },
+  "ef7b223d91a0a6ae83d309029d1c5b9e6e33b1bf": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Atezolizumab blocks PD‑L1, preventing its engagement with PD‑1 and B7.1, reversing SHP‑mediated dephosphorylation of TCR/CD28 signaling components and restoring CD8⁺ T‑cell effector function in NSCLC and SCLC.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The PD-1/PD-L1 pathway is a clinically validated target for atezolizumab in lung cancer, as it is a known immune checkpoint inhibitor.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is directly relevant to the baseline response to atezolizumab in lung cancer, as it is the primary target of the drug."
+  },
+  "728c769b805dff4e35a28af1bddff9c7cffff617": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Effective PD-L1 blockade requires intact TCR recognition and CD28 co-stimulation; when these are functional, released PD-1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC-I subtypes.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The TCR/CD28 co-stimulation pathway is mechanistically linked to the efficacy of PD-L1 blockade by atezolizumab in lung cancer.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant to the baseline response to atezolizumab in lung cancer, providing mechanistic insight into its efficacy."
+  },
+  "bcdd2ae25dabbc77d79054551b399297e73b124c": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Loss-of-function in IFNGR/JAK/STAT components leads to downregulation of the pathway, contributing to resistance to PD-(L)1 inhibitors like atezolizumab in lung cancer.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is based on mechanistic evidence showing pathway disruption leads to resistance.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant to understanding baseline resistance mechanisms to atezolizumab in lung cancer."
+  },
+  "7c3945b86e633ceefba1c2b1eaa5f73cfe952ddd": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "High expression of HLA‑I and antigen‑processing genes enables presentation of neoantigens to CD8⁺ T cells; pan‑cancer and NSCLC data show that stronger MHC‑I pathway activity and CD8 infiltration correlate with higher response rates to PD‑1/PD‑L1 blockade including atezolizumab.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The relationship between MHC-I pathway activity and response to PD-1/PD-L1 blockade, including atezolizumab, is supported by clinical data.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline response to atezolizumab in lung cancer."
+  },
+  "f2ab2e2949404296c8fffd19a1a1ef6b1406b509": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Elevated nonsynonymous mutation load increases neoantigen repertoire; in NSCLC, higher TMB associates with improved outcomes to atezolizumab-based regimens, particularly when coupled to preserved MHC-I and inflamed microenvironments.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "High tumor mutational burden is clinically validated to correlate with better responses to atezolizumab in lung cancer.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The relationship between high tumor mutational burden and atezolizumab efficacy is relevant and necessary for understanding baseline response in lung cancer."
+  },
+  "b8949fe87a792e8644874ac5b2b03e93e31ca075": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, VEGF/TGF-β-driven immunosuppressive stroma is upregulated, leading to resistance to atezolizumab due to macrophage/TGF-β-CAF–rich stroma and VEGF-mediated exclusion of CD8⁺ T cells.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The pathway's role in resistance is inferred from mechanistic understanding of stromal interactions and immune exclusion, not directly validated in baseline lung cancer.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of this pathway is crucial for interpreting resistance mechanisms to atezolizumab in lung cancer."
+  },
+  "f5f90b245913f3f65c636603cfc9b7eeef6cedf1": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, alternative immune checkpoints like TIM-3 and LAG-3 are not upregulated in response to atezolizumab, indicating sensitivity to initial PD-L1 blockade.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The role of alternative checkpoints is speculative at baseline but may become relevant post-treatment.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway's role is speculative and not directly relevant to baseline atezolizumab response in lung cancer."
+  },
+  "24087042e1090ae14419f2fd0a940ba8d69dc973": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Enrichment of MDSCs, Tregs, and cytokines such as TGF‑β and certain chemokines in the NSCLC TME dampens effector T‑cell activity; these features are prominent in resistant transcriptomic subtypes (e.g., NMF2) with poor benefit from atezolizumab despite PD‑L1 expression.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The presence of immunosuppressive cells and cytokines is known to correlate with resistance to atezolizumab in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "This pathway is relevant for understanding baseline resistance mechanisms to atezolizumab in lung cancer."
+  },
+  "8e43314357b393e421c1a9ee3ff724cfb534e7a1": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In SCLC, overexpression of LSD1 and related epigenetic modifiers silences MHC-I and interferon-response genes, creating an 'immune-cold' state with limited benefit from PD-L1 blockade; LSD1 inhibition can restore antigen presentation and sensitize tumors to anti-PD-L1 therapy.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The pathway suggests a mechanism by which tumors may be resistant to atezolizumab, but it is not directly validated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding epigenetic repression mechanisms is relevant for baseline resistance to atezolizumab in lung cancer."
+  },
+  "4d2b20d184c5ba88edcccfcdf52a80ca26c8023b": {
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS-mutant NSCLC generally shows higher TMB/PD-L1 and better ICI outcomes, but co-mutations in STK11/KEAP1 lead to metabolic reprogramming, low CD8 infiltration, and poor atezolizumab benefit.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The impact of KRAS, STK11, and KEAP1 mutations on atezolizumab response in lung cancer is supported by clinical data.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is clinically relevant for understanding baseline atezolizumab response in lung cancer, especially with specific mutations."
+  },
+  "d19147206d493b4acd72de3816b4a3cb44617d17": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The NMF4 subtype, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, shows marked PFS/OS benefit from ABCP including atezolizumab, indicating pre‑existing adaptive immune activation predicts sensitivity.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The IMpower150 study provides clinical evidence that the NMF4 subtype benefits from atezolizumab, validating the pathway's role in predicting sensitivity.",
+    "Include decision": "include",
+    "Inclusion reasoning": "This pathway is clinically validated to predict sensitivity to atezolizumab in lung cancer, making it relevant for baseline response assessment."
+  },
+  "4d8133213c5e3e396425a43e3785afed5a47c2a2": {
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In ES-SCLC, a transcriptionally defined SCLC-I subtype with higher CD8A/B and immune-activation genes experiences greater survival benefit from EP-atezolizumab in IMpower133, whereas non-inflamed SCLC subtypes remain largely refractory.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The SCLC-I inflamed subtype has been shown to correlate with improved survival in clinical trials with atezolizumab.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is clinically validated to affect atezolizumab response in lung cancer, specifically ES-SCLC."
+  }
+}

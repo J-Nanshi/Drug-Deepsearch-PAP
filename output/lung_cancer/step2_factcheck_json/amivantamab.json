@@ -7,13 +7,17 @@
     ],
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "Amivantamab targets EGFR, which is often upregulated in lung cancer, leading to sensitivity due to its role in driving tumor growth.",
+    "Rationale": "Amivantamab targets and inhibits EGFR signaling, which is often upregulated in EGFR-driven NSCLC, making tumors sensitive to its suppression.",
     "Pathway-drug relationship classification": "clinically validated",
-    "Classification reasoning": "EGFR signaling is a well-established target in lung cancer, and amivantamab's efficacy in targeting this pathway is supported by clinical evidence.",
+    "Classification reasoning": "EGFR signaling is a well-established target in lung cancer, and amivantamab's mechanism of action involves inhibiting this pathway, which is clinically validated.",
     "Include decision": "include",
-    "Inclusion reasoning": "EGFR signaling is crucial for understanding baseline sensitivity to amivantamab in lung cancer, making it relevant for the report.",
+    "Inclusion reasoning": "EGFR signaling is a critical pathway in lung cancer, and understanding its baseline regulation is essential for assessing amivantamab's therapeutic potential.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10609957/"
+      "https://pubmed.ncbi.nlm.nih.gov/35983925",
+      "https://pubmed.ncbi.nlm.nih.gov/34913823",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pubmed.ncbi.nlm.nih.gov/32747419",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
     ]
   },
   "Row2": {
@@ -24,13 +28,16 @@
     ],
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "MET amplification or high MET expression in NSCLC is associated with sensitivity to amivantamab due to its ability to inhibit MET signaling.",
+    "Rationale": "MET amplification or high MET expression in NSCLC is associated with sensitivity to amivantamab, indicating that MET pathway upregulation is a key determinant of response.",
     "Pathway-drug relationship classification": "clinically validated",
-    "Classification reasoning": "The role of MET signaling in determining sensitivity to amivantamab in MET-amplified or high-MET NSCLC has been clinically validated.",
+    "Classification reasoning": "Clinical evidence supports that MET-amplified or high-MET NSCLC cases are sensitive to amivantamab.",
     "Include decision": "include",
-    "Inclusion reasoning": "The MET signaling pathway is relevant for baseline sensitivity to amivantamab in lung cancer, making it necessary for the final report.",
+    "Inclusion reasoning": "The MET signaling pathway is clinically validated as relevant for baseline sensitivity to amivantamab in lung cancer.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10609957/"
+      "https://pubmed.ncbi.nlm.nih.gov/35983925",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pubmed.ncbi.nlm.nih.gov/41206690",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
     ]
   },
   "Row3": {
@@ -41,13 +48,17 @@
     ],
     "Regulation": "upregulation",
     "Baseline effect": "resistant",
-    "Rationale": "EGFR–MET co-activation leads to resistance in baseline lung cancer due to bypass signaling pathways that maintain downstream PI3K and MAPK signaling, which amivantamab targets.",
+    "Rationale": "EGFR–MET co-activation leads to resistance to EGFR TKIs due to MET-mediated maintenance of downstream signaling pathways. Amivantamab's bispecific action targets both EGFR and MET, overcoming this resistance mechanism.",
     "Pathway-drug relationship classification": "clinically validated",
-    "Classification reasoning": "The role of EGFR–MET co-activation in resistance is well-documented in clinical settings, and amivantamab's mechanism of action involves targeting this pathway.",
+    "Classification reasoning": "The role of EGFR–MET co-activation in resistance to EGFR TKIs and the efficacy of amivantamab in overcoming this resistance is supported by clinical evidence.",
     "Include decision": "include",
-    "Inclusion reasoning": "Understanding EGFR–MET co-activation is crucial for baseline assessment of amivantamab's efficacy in lung cancer.",
+    "Inclusion reasoning": "This pathway is directly relevant to understanding the baseline resistance mechanism in lung cancer that amivantamab targets.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10609957/"
+      "https://pubmed.ncbi.nlm.nih.gov/35983925",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pubmed.ncbi.nlm.nih.gov/41206690",
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
     ]
   },
   "Row4": {
@@ -59,12 +70,14 @@
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
     "Rationale": "EGFR and MET activate PI3K–AKT–mTOR via adaptor proteins such as Gab1 and direct PI3K recruitment; dual receptor blockade by amivantamab reduces survival signaling, while MET‑ or PI3K‑pathway reactivation is linked to resistance to upstream RTK inhibition, highlighting PI3K–AKT–mTOR attenuation as a major effector of sensitivity.",
-    "Pathway-drug relationship classification": "experimental (clinical trials)",
-    "Classification reasoning": "The PI3K–AKT–mTOR pathway is implicated in lung cancer sensitivity to amivantamab, supported by clinical trial data indicating its role in mediating response.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from the mechanistic understanding of EGFR and MET signaling pathways and their role in lung cancer sensitivity to amivantamab.",
     "Include decision": "include",
-    "Inclusion reasoning": "The pathway is relevant to understanding baseline sensitivity to amivantamab in lung cancer, as it is a key signaling route affected by the drug.",
+    "Inclusion reasoning": "The PI3K–AKT–mTOR pathway is relevant for understanding baseline sensitivity to amivantamab in lung cancer.",
     "References": [
-      "https://www.ema.europa.eu/en/documents/product-information/rybrevant-epar-product-information_en.pdf"
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
     ]
   },
   "Row5": {
@@ -76,30 +89,31 @@
     ],
     "Regulation": "upregulation",
     "Baseline effect": "resistant",
-    "Rationale": "The RAS–RAF–MEK–ERK (MAPK) pathway is often upregulated in baseline lung cancer due to EGFR and MET signaling. This pathway is associated with resistance to EGFR/MET-directed therapies, including amivantamab, as MAPK-driven escape mechanisms like BRAF/KRAS activation are known resistance routes.",
-    "Pathway-drug relationship classification": "mechanistically accurate",
-    "Classification reasoning": "The pathway's role in resistance is supported by mechanistic evidence showing its activation as a resistance mechanism to EGFR/MET inhibition.",
+    "Rationale": "EGFR and MET feed into RAS–RAF–MEK–ERK through Grb2/SOS; inhibition of ligand‑driven EGFR/MET activation by amivantamab decreases proliferative MAPK signaling, while MAPK‑driven escape (e.g., BRAF/KRAS activation) is a recognized resistance route to EGFR/MET‑directed therapies.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The MAPK pathway is involved in resistance mechanisms to EGFR/MET-directed therapies, suggesting a potential role in baseline resistance.",
     "Include decision": "include",
-    "Inclusion reasoning": "Understanding the MAPK pathway's role in resistance is crucial for baseline assessment of amivantamab response in lung cancer.",
+    "Inclusion reasoning": "Understanding the MAPK pathway's role in resistance is relevant for baseline assessment of amivantamab response in lung cancer.",
     "References": [
-      "https://www.ema.europa.eu/en/documents/product-information/rybrevant-epar-product-information_en.pdf"
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
     ]
   },
   "Row6": {
     "Pathway ID/Name": "EGFR ligand–dependent signaling (AREG‑high EGFR‑WT tumors)",
-    "Verdict": "corrected",
-    "Incorrect_entries": [
-      "regulation"
-    ],
-    "Regulation": "upregulation",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "downregulation",
     "Baseline effect": "sensitive",
     "Rationale": "In EGFR-wild-type NSCLC, amphiregulin is highly expressed and drives EGFR-dependent growth; amivantamab blocks ligand binding and suppresses AREG-induced signaling and proliferation, with efficacy correlating with AREG RNA levels and being largely independent of Fc effector function in these models.",
     "Pathway-drug relationship classification": "experimental (clinical trials)",
-    "Classification reasoning": "The relationship is based on clinical trial observations correlating AREG expression with amivantamab efficacy in EGFR-wild-type NSCLC.",
+    "Classification reasoning": "The relationship is based on clinical trial data showing efficacy of amivantamab in AREG-high EGFR-WT tumors.",
     "Include decision": "include",
-    "Inclusion reasoning": "The pathway is relevant for understanding baseline sensitivity to amivantamab in EGFR-wild-type lung cancer, supported by clinical trial data.",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline sensitivity to amivantamab in lung cancer.",
     "References": [
-      "https://pubmed.ncbi.nlm.nih.gov/32747419/"
+      "https://pubmed.ncbi.nlm.nih.gov/32747419",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
     ]
   },
   "Row7": {
@@ -109,29 +123,31 @@
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
     "Rationale": "Low-fucose IgG1 engineering enhances FcγR engagement; amivantamab elicits NK- and mononuclear-cell–mediated ADCC and macrophage trogocytosis, and MET co-expression augments EGFR binding and ADCC at low antibody concentrations, providing an EGFR/MET-density–dependent immune effector pathway of tumor clearance.",
-    "Pathway-drug relationship classification": "mechanistically accurate",
-    "Classification reasoning": "The pathway describes the mechanism by which amivantamab enhances immune effector functions, consistent with its known action in lung cancer.",
+    "Pathway-drug relationship classification": "experimental (clinical trials)",
+    "Classification reasoning": "The described immune effector mechanisms are supported by clinical trial data indicating amivantamab's activity in lung cancer.",
     "Include decision": "include",
-    "Inclusion reasoning": "The pathway is relevant to understanding the baseline mechanism of action of amivantamab in lung cancer.",
+    "Inclusion reasoning": "The pathway is relevant to understanding the baseline immune effector mechanisms of amivantamab in lung cancer.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388/"
+      "https://pubmed.ncbi.nlm.nih.gov/34913823",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11614048",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842"
     ]
   },
   "Row8": {
     "Pathway ID/Name": "EGFR trafficking and lysosomal degradation (endocytosis/ESCRT)",
-    "Verdict": "corrected",
-    "Incorrect_entries": [
-      "regulation"
-    ],
-    "Regulation": "upregulation",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "downregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "EGFR trafficking and lysosomal degradation involve endocytosis and ESCRT pathways that regulate EGFR signaling. In baseline lung cancer, EGFR signaling is often upregulated, contributing to cancer cell proliferation and survival.",
+    "Rationale": "Antibody binding to EGFR promotes receptor internalization and routing to lysosomes; amivantamab‑bound EGFR/MET complexes are internalized and degraded, aligning with EGFR trafficking models where ubiquitin‑ and ESCRT‑dependent endocytosis limits signaling duration and contributes to sustained pathway shutdown.",
     "Pathway-drug relationship classification": "mechanistically accurate",
-    "Classification reasoning": "The pathway is mechanistically accurate as it describes the biological processes involved in EGFR regulation, which are relevant to amivantamab's mechanism of action.",
+    "Classification reasoning": "The rationale accurately describes the mechanism by which amivantamab affects EGFR trafficking and degradation, leading to downregulation and sensitivity.",
     "Include decision": "include",
-    "Inclusion reasoning": "The pathway is relevant for understanding the baseline mechanism of EGFR regulation, which is crucial for assessing amivantamab's potential efficacy in lung cancer.",
+    "Inclusion reasoning": "The pathway is relevant for understanding the baseline mechanism of action of amivantamab in lung cancer.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167388/"
+      "https://pubmed.ncbi.nlm.nih.gov/34913823",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
     ]
   },
   "Row9": {
@@ -143,13 +159,14 @@
     ],
     "Regulation": "upregulation",
     "Baseline effect": "resistant",
-    "Rationale": "EGFR commonly heterodimerizes with HER3 to drive PI3K signaling; amivantamab inhibits EGFR phosphorylation, but compensatory upregulation of HER3 expression may mediate resistance.",
+    "Rationale": "EGFR commonly heterodimerizes with HER3 to drive PI3K signaling; amivantamab inhibits EGFR phosphorylation, and adaptive HER3 upregulation may mediate resistance.",
     "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "The pathway involves EGFR and HER3, which are relevant to amivantamab's mechanism, but the compensatory HER3 upregulation suggests potential resistance.",
-    "Include decision": "include",
-    "Inclusion reasoning": "The HER3/ErbB family dimerization network is relevant for understanding baseline resistance mechanisms to amivantamab in lung cancer.",
+    "Classification reasoning": "The pathway involves EGFR and HER3, relevant to amivantamab's mechanism, but the adaptive changes are not baseline.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The focus on adaptive HER3 upregulation post-treatment is not relevant for baseline response to amivantamab.",
     "References": [
-      "https://pubmed.ncbi.nlm.nih.gov/36652175"
+      "https://pubmed.ncbi.nlm.nih.gov/36652175",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
     ]
   },
   "Row10": {
@@ -158,13 +175,14 @@
     "Incorrect_entries": [],
     "Regulation": "upregulation",
     "Baseline effect": "resistant",
-    "Rationale": "EMT and EGFR-independent survival programs are upregulated in some lung cancers, leading to resistance to EGFR/MET blockade by amivantamab due to reliance on alternative survival pathways.",
-    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
-    "Classification reasoning": "The relationship is inferred from mechanistic evidence showing EMT's role in resistance to EGFR/MET inhibitors.",
+    "Rationale": "EMT and EGFR-independent survival programs are upregulated in some lung cancers, leading to resistance to EGFR/MET blockade by amivantamab.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "EMT is a known mechanism of resistance to EGFR-targeted therapies, suggesting a possible relationship with amivantamab resistance.",
     "Include decision": "include",
-    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to amivantamab in lung cancer.",
+    "Inclusion reasoning": "The role of EMT in resistance to EGFR/MET blockade is relevant for understanding baseline resistance mechanisms in lung cancer.",
     "References": [
-      "https://www.ema.europa.eu/en/documents/product-information/rybrevant-epar-product-information_en.pdf"
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-amivantamab-vmjw-egfr-exon-20-insertion-mutated-non-small-cell-lung-cancer-indications"
     ]
   },
   "Row11": {
@@ -175,11 +193,13 @@
     "Baseline effect": "resistant",
     "Rationale": "Activation or amplification of parallel RTKs (e.g., HER2, AXL) is a frequent bypass to EGFR or MET inhibition; such network reprogramming can restore downstream PI3K/MAPK signaling despite EGFR/MET blockade, representing a plausible resistance pathway under selective pressure from amivantamab.",
     "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "The upregulation of alternative RTKs like HER2 and AXL can confer resistance to EGFR/MET inhibitors, which is relevant to amivantamab's mechanism of action.",
+    "Classification reasoning": "The rationale suggests a potential resistance mechanism through alternative RTK networks, which could be relevant to baseline resistance to amivantamab.",
     "Include decision": "include",
-    "Inclusion reasoning": "Understanding alternative RTK networks is important for predicting resistance mechanisms to amivantamab in lung cancer.",
+    "Inclusion reasoning": "The pathway is relevant as it describes a potential baseline resistance mechanism to amivantamab in lung cancer.",
     "References": [
-      "https://www.ema.europa.eu/en/documents/product-information/rybrevant-epar-product-information_en.pdf"
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605",
+      "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-amivantamab-vmjw-egfr-exon-20-insertion-mutated-non-small-cell-lung-cancer-indications"
     ]
   },
   "Row12": {
@@ -191,13 +211,15 @@
     ],
     "Regulation": "downregulation",
     "Baseline effect": "resistant",
-    "Rationale": "Baseline macrophage polarization and immune microenvironment status are not directly altered by amivantamab before treatment. M2/TAM-driven EMT is associated with resistance, and baseline M1 polarization is typically low in lung cancer.",
+    "Rationale": "At baseline, the tumor immune microenvironment in lung cancer is often characterized by M2 macrophage polarization, which is associated with immunosuppression and resistance to therapies. Amivantamab's potential to induce M1 polarization is a post-treatment effect.",
     "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "The pathway is relevant to immune response modulation, which could influence amivantamab efficacy, but direct baseline effects are not established.",
+    "Classification reasoning": "The relationship is possibly related as macrophage polarization can influence immune response, but the described effects are post-treatment.",
     "Include decision": "exclude",
-    "Inclusion reasoning": "The pathway's baseline state does not directly inform amivantamab sensitivity in lung cancer, as the described effects occur post-treatment.",
+    "Inclusion reasoning": "The row is excluded because it describes post-treatment effects rather than baseline characteristics relevant to amivantamab response.",
     "References": [
-      "https://pubmed.ncbi.nlm.nih.gov/36652175"
+      "https://pubmed.ncbi.nlm.nih.gov/36652175",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761210s000lbl.pdf",
+      "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-amivantamab-vmjw-egfr-exon-20-insertion-mutated-non-small-cell-lung-cancer-indications"
     ]
   }
 }

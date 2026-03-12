@@ -1,0 +1,208 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "ALK signaling (Ras/MAPK, mTOR/PI3K/Akt, PLCγ; ALK receptor represents a starting signal able to stimulate various pathways)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "ALK signaling is upregulated in ALK-positive lung cancer, making it sensitive to alectinib, which inhibits ALK kinase activity and suppresses downstream signaling.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "Alectinib is clinically validated as an effective treatment for ALK-positive lung cancer due to its ability to inhibit ALK signaling.",
+    "Include decision": "include",
+    "Inclusion reasoning": "ALK signaling is directly relevant to the baseline response of lung cancer to alectinib, making it necessary for the report.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "Ras/MAPK (ERK1/2) pathway",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Baseline upregulation of the Ras/MAPK (ERK1/2) pathway is associated with resistance to alectinib in lung cancer, as compensatory ERK signaling can bypass ALK blockade.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The association between Ras/MAPK pathway upregulation and alectinib resistance is inferred from mechanistic studies, not directly validated in clinical lung cancer settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline role of the Ras/MAPK pathway in alectinib resistance is relevant for potential combination strategies in lung cancer treatment.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "PI3K/AKT pathway",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The PI3K/AKT pathway is typically upregulated in ALK-positive lung cancer, contributing to cell survival and proliferation. Alectinib targets ALK, leading to downstream effects including potential PI3K/AKT pathway modulation.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The PI3K/AKT pathway is a known downstream effector of ALK signaling, and its modulation is relevant to the mechanism of action of alectinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the PI3K/AKT pathway's role in ALK-positive lung cancer is crucial for interpreting alectinib's baseline mechanism of action.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10341773"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "STAT3 signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, STAT3 signaling is often upregulated in ALK-positive lung cancer, contributing to cancer cell survival and resistance. Alectinib's inhibition of ALK can lead to downregulation of STAT3, which is associated with increased sensitivity.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of STAT3 in ALK-positive lung cancer and its modulation by alectinib is supported by mechanistic studies, but not directly validated in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding STAT3's baseline role is relevant for interpreting alectinib's mechanism of action in ALK-positive lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10341773"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "c‑Myc–driven transcriptional program",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In lung cancer, c-Myc upregulation is associated with sensitivity to alectinib as it is not a primary resistance mechanism at baseline.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of c-Myc in alectinib response is inferred from mechanistic studies, but not directly validated in clinical settings for lung cancer.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding c-Myc's role is relevant for baseline alectinib response, as it may influence sensitivity in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "Cell‑cycle control (G0/G1 vs S‑phase)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Alectinib alone induces G0/G1 arrest, indicating sensitivity due to ALK blockade perturbing cell-cycle progression.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The described G0/G1 arrest is a known mechanism of action for alectinib in ALK-positive lung cancer, aligning with mechanistic evidence.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The G0/G1 arrest mechanism is relevant for understanding baseline sensitivity to alectinib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "DNA damage response / Apoptosis",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Alectinib targets ALK, leading to downregulation of ALK signaling, which primes ALK-expressing lung cancer cells for apoptosis and enhances sensitivity to DNA-damage-induced cell death.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The relationship is based on mechanistic evidence showing ALK inhibition by alectinib enhances apoptosis in ALK-positive lung cancer cells.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline sensitivity of ALK-positive lung cancer to alectinib.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6461034"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "EGFR signaling network",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR signaling is upregulated in ALK-driven lung cancer cells, leading to resistance to ALK inhibitors like alectinib due to bypass activation.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The resistance mechanism is inferred from mechanistic studies showing EGFR's role in bypass activation in ALK-driven cells.",
+    "Include decision": "include",
+    "Inclusion reasoning": "EGFR signaling's role in resistance to alectinib is relevant for understanding baseline resistance mechanisms in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6461034"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "MET signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "High MET activity can mediate resistance to ALK-targeted therapy like alectinib due to bypass signaling.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "The rationale suggests a potential mechanism of resistance through MET upregulation, which is plausible but not definitively proven for alectinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The MET signaling pathway is relevant for understanding potential resistance mechanisms to alectinib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6461034"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "SRC/PTK2 (FAK) signaling",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "SRC and PTK2 are hyperactive kinases that serve as alternative signaling hubs, maintaining survival and motility when ALK is inhibited.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of SRC/PTK2 as bypass pathways is inferred from mechanistic studies showing their hyperactivity in the context of ALK inhibition.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to alectinib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6461034"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "AXL signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "AXL signaling is not upregulated at baseline in lung cancer cells sensitive to alectinib; upregulation is observed in acquired resistance contexts.",
+    "Pathway-drug relationship classification": "possibly related",
+    "Classification reasoning": "AXL signaling may become relevant in acquired resistance, but it is not a baseline determinant of alectinib sensitivity.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway is relevant in acquired resistance contexts, not at baseline, thus not needed for baseline alectinib response analysis.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6461034",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10341773"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "Global protein kinase pathways (PI3K/AKT/mTOR, Ras/BRAF/MEK/ERK)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "PI3K/AKT/mTOR and Ras/BRAF/MEK/ERK pathways are upregulated in lung cancer, contributing to oncogenic signaling. Their inhibition by alectinib, an ALK inhibitor, is associated with sensitivity in ALK-positive lung cancer.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathways are known to be upregulated in lung cancer, and their inhibition is mechanistically linked to sensitivity to ALK inhibitors like alectinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the baseline upregulation of these pathways is crucial for predicting the response to alectinib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10341773"
+    ]
+  }
+}

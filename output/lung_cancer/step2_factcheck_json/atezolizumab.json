@@ -1,182 +1,220 @@
 {
   "Row1": {
     "Pathway ID/Name": "PD‑1/PD‑L1 inhibitory signaling (concept-level)",
-    "Verdict": "correct",
-    "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
     "Rationale": "Atezolizumab blocks PD‑L1, preventing its engagement with PD‑1 and B7.1, reversing SHP‑mediated dephosphorylation of TCR/CD28 signaling components and restoring CD8⁺ T‑cell effector function in NSCLC and SCLC.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The PD-1/PD-L1 pathway is a clinically validated target for atezolizumab in lung cancer, as it is a known immune checkpoint inhibitor.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "The pathway is directly relevant to the baseline response to atezolizumab in lung cancer, as it is the primary target of the drug.",
     "References": [
-      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12847340",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
     ]
   },
   "Row2": {
     "Pathway ID/Name": "TCR/CD28 co‑stimulation (concept-level)",
     "Verdict": "correct",
     "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "Effective PD‑L1 blockade requires intact TCR recognition and CD28 co‑stimulation; when these are functional, released PD‑1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC‑I subtypes.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Effective PD-L1 blockade requires intact TCR recognition and CD28 co-stimulation; when these are functional, released PD-1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC-I subtypes.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The TCR/CD28 co-stimulation pathway is mechanistically linked to the efficacy of PD-L1 blockade by atezolizumab in lung cancer.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "The pathway is relevant to the baseline response to atezolizumab in lung cancer, providing mechanistic insight into its efficacy.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
     ]
   },
   "Row3": {
     "Pathway ID/Name": "IFN‑γ–JAK/STAT signaling",
-    "Verdict": "correct",
-    "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "CD8⁺ T cells activated by PD‑L1 blockade secrete IFN‑γ, which via JAK1/2–STAT1 upregulates PD‑L1 and MHC‑I; loss‑of‑function in IFNGR/JAK/STAT components abrogates this feedback, contributing to primary/acquired resistance to PD‑(L)1 inhibitors in lung cancer.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Loss-of-function in IFNGR/JAK/STAT components leads to downregulation of the pathway, contributing to resistance to PD-(L)1 inhibitors like atezolizumab in lung cancer.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is based on mechanistic evidence showing pathway disruption leads to resistance.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "The pathway is relevant to understanding baseline resistance mechanisms to atezolizumab in lung cancer.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
     ]
   },
   "Row4": {
     "Pathway ID/Name": "MHC‑I antigen processing and presentation",
     "Verdict": "correct",
     "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
     "Rationale": "High expression of HLA‑I and antigen‑processing genes enables presentation of neoantigens to CD8⁺ T cells; pan‑cancer and NSCLC data show that stronger MHC‑I pathway activity and CD8 infiltration correlate with higher response rates to PD‑1/PD‑L1 blockade including atezolizumab.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The relationship between MHC-I pathway activity and response to PD-1/PD-L1 blockade, including atezolizumab, is supported by clinical data.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline response to atezolizumab in lung cancer.",
     "References": [
-      "https://cdn.clinicaltrials.gov/large-docs/21/NCT03498521/Prot_SAP_000.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
     ]
   },
   "Row5": {
     "Pathway ID/Name": "Tumor mutational burden / neoantigen load",
     "Verdict": "correct",
     "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "Elevated nonsynonymous mutation load increases neoantigen repertoire; in NSCLC, higher TMB associates with improved outcomes to atezolizumab‑based regimens, particularly when coupled to preserved MHC‑I and inflamed microenvironments.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Elevated nonsynonymous mutation load increases neoantigen repertoire; in NSCLC, higher TMB associates with improved outcomes to atezolizumab-based regimens, particularly when coupled to preserved MHC-I and inflamed microenvironments.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "High tumor mutational burden is clinically validated to correlate with better responses to atezolizumab in lung cancer.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "The relationship between high tumor mutational burden and atezolizumab efficacy is relevant and necessary for understanding baseline response in lung cancer.",
     "References": [
-      "https://cdn.clinicaltrials.gov/large-docs/21/NCT03498521/Prot_SAP_000.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
     ]
   },
   "Row6": {
     "Pathway ID/Name": "VEGF/TGF‑β‑driven immunosuppressive stroma",
-    "Verdict": "correct",
-    "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "In IMpower150, adding bevacizumab to atezolizumab‑chemotherapy improved outcomes in NMF1 and NMF4 and mitigated resistance in NMF2, where macrophage/TGF‑β‑CAF–rich stroma and VEGF‑mediated exclusion of CD8⁺ T cells limited atezolizumab activity.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, VEGF/TGF-β-driven immunosuppressive stroma is upregulated, leading to resistance to atezolizumab due to macrophage/TGF-β-CAF–rich stroma and VEGF-mediated exclusion of CD8⁺ T cells.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The pathway's role in resistance is inferred from mechanistic understanding of stromal interactions and immune exclusion, not directly validated in baseline lung cancer.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "Understanding the baseline upregulation of this pathway is crucial for interpreting resistance mechanisms to atezolizumab in lung cancer.",
     "References": [
-      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
     ]
   },
   "Row7": {
     "Pathway ID/Name": "Alternative immune checkpoints (TIM‑3, LAG‑3, etc.)",
-    "Verdict": "correct",
-    "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "Following PD‑1/PD‑L1 blockade, NSCLC tumors can upregulate TIM‑3, LAG‑3 and other inhibitory receptors on T cells, sustaining exhaustion and limiting durability of atezolizumab responses despite continued PD‑L1 inhibition.",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "At baseline, alternative immune checkpoints like TIM-3 and LAG-3 are not upregulated in response to atezolizumab, indicating sensitivity to initial PD-L1 blockade.",
     "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
-    "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Classification reasoning": "The role of alternative checkpoints is speculative at baseline but may become relevant post-treatment.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway's role is speculative and not directly relevant to baseline atezolizumab response in lung cancer.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
     ]
   },
   "Row8": {
     "Pathway ID/Name": "Myeloid‑derived suppressor cells / Treg and immunosuppressive cytokines",
     "Verdict": "correct",
     "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
     "Rationale": "Enrichment of MDSCs, Tregs, and cytokines such as TGF‑β and certain chemokines in the NSCLC TME dampens effector T‑cell activity; these features are prominent in resistant transcriptomic subtypes (e.g., NMF2) with poor benefit from atezolizumab despite PD‑L1 expression.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The presence of immunosuppressive cells and cytokines is known to correlate with resistance to atezolizumab in clinical settings.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "This pathway is relevant for understanding baseline resistance mechanisms to atezolizumab in lung cancer.",
     "References": [
-      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118"
     ]
   },
   "Row9": {
     "Pathway ID/Name": "Epigenetic repression of antigen presentation (e.g., LSD1‑mediated)",
-    "Verdict": "correct",
-    "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "In SCLC, overexpression of LSD1 and related epigenetic modifiers silences MHC‑I and interferon‑response genes, creating an “immune‑cold” state with limited benefit from PD‑L1 blockade; LSD1 inhibition can restore antigen presentation and sensitize tumors to anti‑PD‑L1 therapy.",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In SCLC, overexpression of LSD1 and related epigenetic modifiers silences MHC-I and interferon-response genes, creating an 'immune-cold' state with limited benefit from PD-L1 blockade; LSD1 inhibition can restore antigen presentation and sensitize tumors to anti-PD-L1 therapy.",
     "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Classification reasoning": "The pathway suggests a mechanism by which tumors may be resistant to atezolizumab, but it is not directly validated in clinical settings.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "Understanding epigenetic repression mechanisms is relevant for baseline resistance to atezolizumab in lung cancer.",
     "References": [
-      "https://cdn.clinicaltrials.gov/large-docs/21/NCT03498521/Prot_SAP_000.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568"
     ]
   },
   "Row10": {
     "Pathway ID/Name": "KRAS/STK11/KEAP1‑linked metabolic and immune pathways",
-    "Verdict": "correct",
-    "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "KRAS‑mutant NSCLC tends to show higher TMB/PD‑L1 and better ICI outcomes, whereas co‑mutations in STK11/KEAP1 drive metabolic reprogramming, low CD8 infiltration, and poor atezolizumab benefit, particularly in NMF2‑like phenotypes.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS-mutant NSCLC generally shows higher TMB/PD-L1 and better ICI outcomes, but co-mutations in STK11/KEAP1 lead to metabolic reprogramming, low CD8 infiltration, and poor atezolizumab benefit.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The impact of KRAS, STK11, and KEAP1 mutations on atezolizumab response in lung cancer is supported by clinical data.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "The pathway is clinically relevant for understanding baseline atezolizumab response in lung cancer, especially with specific mutations.",
     "References": [
-      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568"
     ]
   },
   "Row11": {
     "Pathway ID/Name": "B‑/T‑cell–inflamed transcriptional programs (e.g., NMF4 subtype)",
     "Verdict": "correct",
     "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "The NMF4 subtype in IMpower150, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, derived marked PFS/OS benefit from ABCP including atezolizumab, illustrating that pre‑existing adaptive immune activation strongly predicts sensitivity.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The NMF4 subtype, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, shows marked PFS/OS benefit from ABCP including atezolizumab, indicating pre‑existing adaptive immune activation predicts sensitivity.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The IMpower150 study provides clinical evidence that the NMF4 subtype benefits from atezolizumab, validating the pathway's role in predicting sensitivity.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "This pathway is clinically validated to predict sensitivity to atezolizumab in lung cancer, making it relevant for baseline response assessment.",
     "References": [
-      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
     ]
   },
   "Row12": {
     "Pathway ID/Name": "SCLC‑I inflamed subtype gene program",
     "Verdict": "correct",
     "Incorrect_entries": [],
-    "Regulation": "",
-    "Baseline effect": "",
-    "Rationale": "In ES‑SCLC, a transcriptionally defined SCLC‑I subtype with higher CD8A/B and immune‑activation genes experiences greater survival benefit from EP‑atezolizumab in IMpower133, whereas non‑inflamed SCLC subtypes remain largely refractory.",
-    "Pathway-drug relationship classification": "possibly related",
-    "Classification reasoning": "NO_LLM mode: not validated.",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In ES-SCLC, a transcriptionally defined SCLC-I subtype with higher CD8A/B and immune-activation genes experiences greater survival benefit from EP-atezolizumab in IMpower133, whereas non-inflamed SCLC subtypes remain largely refractory.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The SCLC-I inflamed subtype has been shown to correlate with improved survival in clinical trials with atezolizumab.",
     "Include decision": "include",
-    "Inclusion reasoning": "NO_LLM mode: inclusion not validated.",
+    "Inclusion reasoning": "The pathway is clinically validated to affect atezolizumab response in lung cancer, specifically ES-SCLC.",
     "References": [
-      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118/"
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
     ]
   }
 }

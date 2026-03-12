@@ -131,6 +131,8 @@ To maintain accuracy and avoid fabrication of clinical‑trial identifiers, desi
 
 ## 9. Pathway Evidence Table
 
+| Pathway ID/Name | Regulation (Up/Down) | Effect (Sensitive/Resistant) | Biological Rationale | References |
+| --- | --- | --- | --- | --- |
 | CTLA‑4 signaling (e.g., Reactome R-HSA-388841) | Down | Sensitive | Tremelimumab binds CTLA‑4 and blocks its interaction with CD80/CD86, disabling this early inhibitory checkpoint on T‑cell priming; in NSCLC this facilitates stronger antitumor T‑cell responses, particularly when combined with PD‑(L)1 blockade. | [1],[4],[16] |
 | CD28 co‑stimulatory signaling / T cell receptor signaling (KEGG hsa04660) | Up | Sensitive | By preventing CTLA‑4 from outcompeting CD28 for B7 ligands and from removing CD80/CD86 via trans‑endocytosis, tremelimumab enhances CD28‑dependent co‑stimulation and proximal TCR signaling, expanding tumour‑reactive CD4⁺/CD8⁺ T cells in NSCLC. | [1],[4],[5],[15],[18],[21] |
 | Effector CD8⁺ T‑cell activation vs. exhaustion (PD‑1, TIM‑3, LAG‑3, TIGIT modules) | Up (activation) / chronic Up (exhaustion) | Sensitive when activation dominates; Resistant when exhaustion dominates | Dual CTLA‑4/PD‑(L)1 blockade increases proliferating CD8⁺ T cells and effector cytokines, but chronic antigen exposure and compensatory upregulation of multiple inhibitory receptors drive an exhausted CD8⁺ phenotype linked to primary and acquired resistance to tremelimumab‑containing regimens. | [2],[8],[10],[11],[20],[23] |
