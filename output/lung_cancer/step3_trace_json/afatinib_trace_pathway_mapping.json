@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "drug_name": "afatinib",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\afatinib.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 9,
+    "rows_after_filter": 5,
+    "rows_dropped_by_include_filter": 3,
+    "rows_dropped_by_relationship_class_filter": 4,
+    "total_rows": 5,
+    "correct_count": 0,
+    "corrected_count": 5,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+      "Original Mapped MSigDB": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "original_mapped_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on activating EGFR mutations and their role in cancer, which is more specifically captured by 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER'. This pathway is higher priority than the current GO pathway and directly addresses EGFR signaling in the context of cancer, aligning with the biological context provided."
+    },
+    {
+      "Row": "Row4",
+      "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+      "Original Mapped MSigDB": "BIOCARTA_CDK5_PATHWAY",
+      "Final Mapped MSigDB": "BIOCARTA_ERK_PATHWAY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "BIOCARTA_ERK_PATHWAY",
+      "original_mapped_name": "BIOCARTA_CDK5_PATHWAY",
+      "effective_current_mapped_name": "BIOCARTA_CDK5_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on the RAS–RAF–MEK–ERK (MAPK) cascade, which is directly related to ERK signaling. The current mapping to BIOCARTA_CDK5_PATHWAY includes MEK1 but emphasizes Cdk5 regulation, which is not central to the described pathway. BIOCARTA_ERK_PATHWAY more accurately represents the RAS–RAF–MEK–ERK cascade and is a better fit for the biological context provided."
+    },
+    {
+      "Row": "Row5",
+      "Original Pathway Name": "MET/HGF pathway",
+      "Original Mapped MSigDB": "BIOCARTA_MET_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY",
+      "original_mapped_name": "BIOCARTA_MET_PATHWAY",
+      "effective_current_mapped_name": "BIOCARTA_MET_PATHWAY",
+      "llm_reasoning": "The BIOCARTA_MET_PATHWAY captures the MET/HGF pathway but is a lower priority compared to KEGG_MEDICUS pathways. The KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY specifically addresses the HGF-MET signaling and its downstream effects, including RAS-ERK, which aligns with the rationale provided. Given the priority order, KEGG_MEDICUS is preferred over BIOCARTA when both capture the biology equally well."
+    },
+    {
+      "Row": "Row9",
+      "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+      "Original Mapped MSigDB": "PID_LYMPH_ANGIOGENESIS_PATHWAY",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_VEGF",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_VEGF",
+      "original_mapped_name": "PID_LYMPH_ANGIOGENESIS_PATHWAY",
+      "effective_current_mapped_name": "PID_LYMPH_ANGIOGENESIS_PATHWAY",
+      "llm_reasoning": "The original pathway involves EGFR activation leading to VEGF and PD-L1 upregulation, promoting angiogenesis and immune evasion. The current mapping, PID_LYMPH_ANGIOGENESIS_PATHWAY, focuses on VEGFR3 signaling in lymphatic endothelium, which does not directly address EGFR or PD-L1. REACTOME_SIGNALING_BY_VEGF is a higher-priority pathway that captures the VEGF signaling aspect more accurately, aligning with the rationale provided."
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "BIOCARTA_AKT_PATHWAY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "BIOCARTA_AKT_PATHWAY",
+      "original_mapped_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway name 'ELK1–CIP2A–AKT survival axis (downstream of ERK)' emphasizes the AKT signaling component, which is not directly captured by the current mapping 'KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY'. The BIOCARTA_AKT_PATHWAY more specifically addresses the AKT signaling aspect, which is central to the rationale provided. Although BIOCARTA is lower priority than KEGG, it better represents the specific biological process described."
+    }
+  ]
+}

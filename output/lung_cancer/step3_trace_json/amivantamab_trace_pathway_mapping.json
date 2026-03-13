@@ -1,0 +1,85 @@
+{
+  "summary": {
+    "drug_name": "amivantamab",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\amivantamab.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 10,
+    "rows_after_filter": 6,
+    "rows_dropped_by_include_filter": 2,
+    "rows_dropped_by_relationship_class_filter": 4,
+    "total_rows": 6,
+    "correct_count": 2,
+    "corrected_count": 4,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "EGFR signaling (KEGG hsa04012)",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "original_mapped_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway 'EGFR signaling (KEGG hsa04012)' is focused on EGFR signaling, which is relevant to cancer, particularly NSCLC as mentioned in the rationale. The current mapping 'KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY' is specific to a subset of EGFR signaling involving PLCG and ERK, which may not fully capture the broader context of EGFR signaling in cancer. The alternative 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER' is a higher-priority REACTOME pathway that directly addresses EGFR signaling in cancer, aligning well with the biological context and rationale provided. Therefore, the mapping is corrected to this pathway."
+    },
+    {
+      "Row": "Row2",
+      "Original Pathway Name": "MET signaling (KEGG hsa04013)",
+      "Original Mapped MSigDB": "REACTOME_SIGNALING_BY_MET",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_MET",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "REACTOME_SIGNALING_BY_MET",
+      "llm_reasoning": "The current mapping 'REACTOME_SIGNALING_BY_MET' accurately represents the biological process described in the original pathway name 'MET signaling (KEGG hsa04013)' and the rationale provided. It is a comprehensive representation of MET signaling, which is consistent with the biological context of MET amplification or high MET expression in NSCLC. No higher-priority pathway captures the biology better, as there are no HALLMARK pathways listed among the candidates."
+    },
+    {
+      "Row": "Row3",
+      "Original Pathway Name": "EGFR–MET co‑activation / bypass network",
+      "Original Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "original_mapped_name": "REACTOME_SIGNALING_BY_EGFR",
+      "effective_current_mapped_name": "REACTOME_SIGNALING_BY_EGFR",
+      "llm_reasoning": "The original pathway name 'EGFR–MET co‑activation / bypass network' and rationale focus on EGFR and MET co-activation leading to resistance in cancer, which is more specifically captured by 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER'. This pathway is more relevant than 'REACTOME_SIGNALING_BY_EGFR' as it specifically addresses EGFR signaling in the context of cancer, aligning better with the resistance mechanism described. No HALLMARK pathway is available, so the REACTOME pathway with a more specific focus on cancer is preferred."
+    },
+    {
+      "Row": "Row6",
+      "Original Pathway Name": "EGFR ligand–dependent signaling (AREG‑high EGFR‑WT tumors)",
+      "Original Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "llm_reasoning": "The current mapping 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER' accurately represents the biological process described in the original pathway name and rationale. It specifically addresses EGFR signaling in cancer, which is relevant to the context of EGFR-wild-type NSCLC and amphiregulin-driven growth. No higher-priority pathway from the candidate list captures the biology better."
+    },
+    {
+      "Row": "Row7",
+      "Original Pathway Name": "Fc‑mediated ADCC and trogocytosis pathways",
+      "Original Mapped MSigDB": "KEGG_FC_GAMMA_R_MEDIATED_PHAGOCYTOSIS",
+      "Final Mapped MSigDB": "KEGG_NATURAL_KILLER_CELL_MEDIATED_CYTOTOXICITY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "KEGG_NATURAL_KILLER_CELL_MEDIATED_CYTOTOXICITY",
+      "original_mapped_name": "KEGG_FC_GAMMA_R_MEDIATED_PHAGOCYTOSIS",
+      "effective_current_mapped_name": "KEGG_FC_GAMMA_R_MEDIATED_PHAGOCYTOSIS",
+      "llm_reasoning": "The original pathway involves Fc-mediated ADCC and trogocytosis, which are immune effector functions involving NK cells and macrophages. The current mapping to KEGG_FC_GAMMA_R_MEDIATED_PHAGOCYTOSIS focuses on phagocytosis, which is not the primary mechanism described. KEGG_NATURAL_KILLER_CELL_MEDIATED_CYTOTOXICITY better captures the NK cell-mediated ADCC aspect of the pathway, aligning more closely with the biological context provided."
+    },
+    {
+      "Row": "Row8",
+      "Original Pathway Name": "EGFR trafficking and lysosomal degradation (endocytosis/ESCRT)",
+      "Original Mapped MSigDB": "BIOCARTA_CBL_PATHWAY",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR",
+      "original_mapped_name": "BIOCARTA_CBL_PATHWAY",
+      "effective_current_mapped_name": "BIOCARTA_CBL_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on EGFR trafficking, endocytosis, and lysosomal degradation, which are key components of EGFR signaling. While BIOCARTA_CBL_PATHWAY describes receptor internalization and degradation, REACTOME_SIGNALING_BY_EGFR is a higher-priority pathway that more comprehensively captures the signaling and trafficking aspects of EGFR, aligning better with the original pathway description and rationale."
+    }
+  ]
+}

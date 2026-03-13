@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "drug_name": "alectinib",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\alectinib.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 11,
+    "rows_after_filter": 5,
+    "rows_dropped_by_include_filter": 1,
+    "rows_dropped_by_relationship_class_filter": 6,
+    "total_rows": 5,
+    "correct_count": 1,
+    "corrected_count": 4,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "ALK signaling (Ras/MAPK, mTOR/PI3K/Akt, PLCγ; ALK receptor represents a starting signal able to stimulate various pathways)",
+      "Original Mapped MSigDB": "PID_ALK1_PATHWAY",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_ALK_IN_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_ALK_IN_CANCER",
+      "original_mapped_name": "PID_ALK1_PATHWAY",
+      "effective_current_mapped_name": "PID_ALK1_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on ALK signaling in cancer, specifically mentioning pathways like Ras/MAPK, mTOR/PI3K/Akt, and PLCγ. The current mapping 'PID_ALK1_PATHWAY' refers to ALK1 signaling events, which may not fully capture the cancer-specific context. 'REACTOME_SIGNALING_BY_ALK_IN_CANCER' is a more appropriate match as it directly addresses ALK signaling in cancer, aligning with the biological context provided. Additionally, REACTOME pathways have higher priority than PID pathways."
+    },
+    {
+      "Row": "Row3",
+      "Original Pathway Name": "PI3K/AKT pathway",
+      "Original Mapped MSigDB": "REACTOME_PI3K_AKT_SIGNALING_IN_CANCER",
+      "Final Mapped MSigDB": "REACTOME_PI3K_AKT_SIGNALING_IN_CANCER",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "REACTOME_PI3K_AKT_SIGNALING_IN_CANCER",
+      "llm_reasoning": "The current mapping 'REACTOME_PI3K_AKT_SIGNALING_IN_CANCER' accurately represents the PI3K/AKT pathway's role in cancer, as described in the rationale. It is a comprehensive pathway database and aligns with the biological context of PI3K/AKT pathway modulation in ALK-positive lung cancer. No higher-priority HALLMARK pathway is available, and the current mapping is appropriate given the priority order."
+    },
+    {
+      "Row": "Row6",
+      "Original Pathway Name": "Cell‑cycle control (G0/G1 vs S‑phase)",
+      "Original Mapped MSigDB": "BIOCARTA_G1_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_CELL_CYCLE",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "KEGG_CELL_CYCLE",
+      "original_mapped_name": "BIOCARTA_G1_PATHWAY",
+      "effective_current_mapped_name": "BIOCARTA_G1_PATHWAY",
+      "llm_reasoning": "The original pathway name 'Cell-cycle control (G0/G1 vs S-phase)' and the rationale focus on the transition from G0/G1 to S-phase, which is a key aspect of cell cycle regulation. While the BIOCARTA_G1_PATHWAY does cover the G1/S transition, the KEGG_CELL_CYCLE pathway provides a more comprehensive view of the entire cell cycle, including the G1/S transition. Given the priority order, KEGG pathways are preferred over BIOCARTA when they capture the biology equally well or better. Therefore, KEGG_CELL_CYCLE is a more appropriate mapping."
+    },
+    {
+      "Row": "Row7",
+      "Original Pathway Name": "DNA damage response / Apoptosis",
+      "Original Mapped MSigDB": "BIOCARTA_DNAFRAGMENT_PATHWAY",
+      "Final Mapped MSigDB": "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE",
+      "original_mapped_name": "BIOCARTA_DNAFRAGMENT_PATHWAY",
+      "effective_current_mapped_name": "BIOCARTA_DNAFRAGMENT_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on DNA damage response and apoptosis, specifically in the context of ALK signaling and DNA-damage-induced cell death. The current mapping, BIOCARTA_DNAFRAGMENT_PATHWAY, primarily describes the process of DNA fragmentation during apoptosis, which is a downstream event. The alternative candidate GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE more directly addresses the intrinsic apoptotic signaling pathway in response to DNA damage, aligning better with the original pathway name and rationale. Additionally, GO pathways have a higher priority than BIOCARTA pathways."
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "Global protein kinase pathways (PI3K/AKT/mTOR, Ras/BRAF/MEK/ERK)",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_ALK_IN_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_ALK_IN_CANCER",
+      "original_mapped_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on the PI3K/AKT/mTOR and Ras/BRAF/MEK/ERK pathways in the context of ALK-positive lung cancer, specifically mentioning the role of ALK inhibition by alectinib. The current mapping to 'KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY' is relevant but does not encompass the PI3K/AKT/mTOR pathway. The 'REACTOME_SIGNALING_BY_ALK_IN_CANCER' pathway is a higher-priority REACTOME pathway that better captures the involvement of ALK in cancer, aligning with the biological context provided."
+    }
+  ]
+}

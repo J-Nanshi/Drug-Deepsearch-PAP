@@ -1,0 +1,90 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Activating EGFR mutations lead to upregulation of EGFR signaling, making tumors sensitive to afatinib, which inhibits this pathway effectively.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pubmed.ncbi.nlm.nih.gov/31931137"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "original_mapped_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on activating EGFR mutations and their role in cancer, which is more specifically captured by 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER'. This pathway is higher priority than the current GO pathway and directly addresses EGFR signaling in the context of cancer, aligning with the biological context provided."
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_ERK_PATHWAY",
+    "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR mutations signal through the RAS–RAF–MEK–ERK pathway; afatinib reduces ERK phosphorylation in EGFR-driven cells, but KRAS/BRAF mutations or activation of alternative RTKs reactivate ERK, conferring resistance.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4340466"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "BIOCARTA_ERK_PATHWAY",
+    "original_mapped_name": "BIOCARTA_CDK5_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on the RAS–RAF–MEK–ERK (MAPK) cascade, which is directly related to ERK signaling. The current mapping to BIOCARTA_CDK5_PATHWAY includes MEK1 but emphasizes Cdk5 regulation, which is not central to the described pathway. BIOCARTA_ERK_PATHWAY more accurately represents the RAS–RAF–MEK–ERK cascade and is a better fit for the biological context provided."
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "MET/HGF pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR-TKI-resistant NSCLC and is highlighted as a key high-priority resistance node in multi-omics analyses, undermining afatinib efficacy unless co-targeted.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12553936",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY",
+    "original_mapped_name": "BIOCARTA_MET_PATHWAY",
+    "llm_reasoning": "The BIOCARTA_MET_PATHWAY captures the MET/HGF pathway but is a lower priority compared to KEGG_MEDICUS pathways. The KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY specifically addresses the HGF-MET signaling and its downstream effects, including RAS-ERK, which aligns with the rationale provided. Given the priority order, KEGG_MEDICUS is preferred over BIOCARTA when both capture the biology equally well."
+  },
+  "Row9": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_VEGF",
+    "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion, which are sensitive to afatinib treatment due to its EGFR inhibition.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9738331",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5244907",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7330402"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_VEGF",
+    "original_mapped_name": "PID_LYMPH_ANGIOGENESIS_PATHWAY",
+    "llm_reasoning": "The original pathway involves EGFR activation leading to VEGF and PD-L1 upregulation, promoting angiogenesis and immune evasion. The current mapping, PID_LYMPH_ANGIOGENESIS_PATHWAY, focuses on VEGFR3 signaling in lymphatic endothelium, which does not directly address EGFR or PD-L1. REACTOME_SIGNALING_BY_VEGF is a higher-priority pathway that captures the VEGF signaling aspect more accurately, aligning with the rationale provided."
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_AKT_PATHWAY",
+    "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib's inhibition of this pathway leads to decreased phosphorylation and activity, promoting apoptosis.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/201292s015lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "BIOCARTA_AKT_PATHWAY",
+    "original_mapped_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name 'ELK1–CIP2A–AKT survival axis (downstream of ERK)' emphasizes the AKT signaling component, which is not directly captured by the current mapping 'KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY'. The BIOCARTA_AKT_PATHWAY more specifically addresses the AKT signaling aspect, which is central to the rationale provided. Although BIOCARTA is lower priority than KEGG, it better represents the specific biological process described."
+  }
+}

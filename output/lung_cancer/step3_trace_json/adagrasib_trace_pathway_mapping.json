@@ -1,0 +1,129 @@
+{
+  "summary": {
+    "drug_name": "adagrasib",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\adagrasib.json",
+    "rows_before_filter": 24,
+    "rows_after_include_filter": 20,
+    "rows_after_filter": 10,
+    "rows_dropped_by_include_filter": 4,
+    "rows_dropped_by_relationship_class_filter": 10,
+    "total_rows": 10,
+    "correct_count": 4,
+    "corrected_count": 6,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "KEGG: hsa04014 – Ras signaling pathway",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The current mapping 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' accurately represents the biological process described in the original pathway name and rationale. It involves mutation-activated EGFR leading to RAS-ERK signaling, which is relevant to KRAS G12C mutations targeted by Adagrasib in lung cancer. No higher-priority pathway from the candidate list captures the biology better."
+    },
+    {
+      "Row": "Row2",
+      "Original Pathway Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The current mapping 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' correctly represents the biological process described in the original pathway name and rationale. It involves mutation-activated EGFR leading to RAS-ERK signaling, which aligns with the upregulation of the MAPK (RAF–MEK–ERK) signaling pathway in lung cancer with KRAS mutations. No higher-priority pathway from the candidate list captures the biology better."
+    },
+    {
+      "Row": "Row4",
+      "Original Pathway Name": "KEGG: hsa04151 – PI3K–AKT signaling pathway",
+      "Original Mapped MSigDB": "BIOCARTA_AKT_PATHWAY",
+      "Final Mapped MSigDB": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "original_mapped_name": "BIOCARTA_AKT_PATHWAY",
+      "effective_current_mapped_name": "BIOCARTA_AKT_PATHWAY",
+      "llm_reasoning": "The original pathway 'KEGG: hsa04151 – PI3K–AKT signaling pathway' involves the PI3K-AKT-mTOR axis, which is a key component in the rationale provided. The 'BIOCARTA_AKT_PATHWAY' does cover aspects of AKT signaling but does not explicitly include mTOR, which is crucial in the context of RTK-driven activation and resistance mechanisms described. The 'HALLMARK_PI3K_AKT_MTOR_SIGNALING' pathway captures the entire PI3K-AKT-mTOR signaling axis and is a higher-priority pathway according to the given priority order, making it a more appropriate mapping."
+    },
+    {
+      "Row": "Row6",
+      "Original Pathway Name": "KEGG: hsa04012 – ErbB signaling (EGFR/ERBB2/ERBB3/ERBB4)",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The current mapping 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' accurately represents the biological process described in the original pathway name and rationale. It focuses on mutation-activated EGFR signaling to RAS-ERK, which aligns with the context of KRAS G12C mutant lung cancer and the role of EGFR in such mutations. No higher-priority pathway from the candidate list captures the biology better."
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "KEGG: hsa05225 – Lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "original_mapped_name": "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on the RTK–RAS–MAPK pathway, which is often upregulated in lung cancer. The current mapping, RET fusion kinase to RAS-ERK signaling, does not directly address the common mutations like EGFR that are more relevant to the described biological context. The alternative candidate 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' better captures the involvement of RTK (EGFR) in the RAS-ERK signaling pathway, which is more aligned with the rationale provided. Additionally, it maintains the same priority level as the current mapping."
+    },
+    {
+      "Row": "Row13",
+      "Original Pathway Name": "KEGG: hsa04014 – Ras signaling pathway",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_MET_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_MET_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "original_mapped_name": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway name 'KEGG: hsa04014 – Ras signaling pathway' and the rationale involving KRAS G12C mutations suggest a focus on mutation-driven activation of the Ras signaling pathway. The current mapping 'KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY' emphasizes MET overexpression, which is not directly related to KRAS mutations. The alternative candidate 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_MET_TO_RAS_ERK_SIGNALING_PATHWAY' more accurately reflects the mutation-driven aspect of the pathway, aligning better with the biological context provided. No HALLMARK pathway is available, so the correction is made within the KEGG_MEDICUS category."
+    },
+    {
+      "Row": "Row14",
+      "Original Pathway Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_REFERENCE_GF_RTK_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "KEGG_MEDICUS_REFERENCE_GF_RTK_RAS_ERK_SIGNALING_PATHWAY",
+      "original_mapped_name": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale focus on the MAPK signaling pathway, specifically the RAF-MEK-ERK cascade, which is a key effector of mutant KRAS in NSCLC. The current mapping, 'KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY', emphasizes MET overexpression, which is not directly related to the KRAS-driven MAPK pathway described. The alternative candidate 'KEGG_MEDICUS_REFERENCE_GF_RTK_RAS_ERK_SIGNALING_PATHWAY' better captures the general RAS-ERK signaling pathway and is of higher priority as a reference pathway, making it a more appropriate mapping."
+    },
+    {
+      "Row": "Row15",
+      "Original Pathway Name": "KEGG: hsa04110 – Cell cycle (E2F, G2/M checkpoints)",
+      "Original Mapped MSigDB": "KEGG_CELL_CYCLE",
+      "Final Mapped MSigDB": "KEGG_CELL_CYCLE",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "KEGG_CELL_CYCLE",
+      "llm_reasoning": "The current mapping 'KEGG_CELL_CYCLE' accurately represents the biological process described in the original pathway name and rationale. It encompasses the cell cycle regulation, including E2F and G2/M checkpoints, which are relevant to the KRAS-driven cell-cycle programs in NSCLC. No higher-priority pathway from the candidate list captures the biology better than the current KEGG pathway."
+    },
+    {
+      "Row": "Row19",
+      "Original Pathway Name": "KEGG: hsa04310 – Wnt/β‑catenin and EMT‑related signaling",
+      "Original Mapped MSigDB": "SINGH_KRAS_DEPENDENCY_SIGNATURE",
+      "Final Mapped MSigDB": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+      "original_mapped_name": "SINGH_KRAS_DEPENDENCY_SIGNATURE",
+      "effective_current_mapped_name": "SINGH_KRAS_DEPENDENCY_SIGNATURE",
+      "llm_reasoning": "The original pathway name and rationale focus on Wnt/β-catenin signaling and its role in EMT phenotypes in KRAS G12C NSCLC. The current mapping 'SINGH_KRAS_DEPENDENCY_SIGNATURE' is more focused on KRAS dependency and EMT in the context of K-Ras mutations, which does not directly address the Wnt/β-catenin signaling aspect. The HALLMARK_WNT_BETA_CATENIN_SIGNALING pathway directly captures the Wnt/β-catenin signaling process, making it a more appropriate and higher-priority choice according to the pathway priority order."
+    },
+    {
+      "Row": "Row22",
+      "Original Pathway Name": "KEGG: hsa05223 – Non‑small cell lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+      "Original Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+      "original_mapped_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY",
+      "llm_reasoning": "The original pathway name and rationale describe the involvement of RTK–RAS–MAPK, PI3K, and STK11/KEAP1 modules in non-small cell lung cancer. The current mapping focuses specifically on mutation-activated EGFR to PI3K signaling, which does not fully encompass the broader pathway interactions described. The alternative candidate 'KEGG_NON_SMALL_CELL_LUNG_CANCER' better captures the overall biological context of non-small cell lung cancer, including the pathways mentioned, and is a KEGG pathway, which is prioritized over the current mapping."
+    }
+  ]
+}

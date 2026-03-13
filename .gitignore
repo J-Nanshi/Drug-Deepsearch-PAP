@@ -52,3 +52,6 @@ temp.*
 # Research data cache (optional - uncomment if you don't want to track these)
 # reports/
 # cache/
+
+# Ignore the msigdb_v2025.1.Hs.db file
+utils/msigdb_v2025.1.Hs.db

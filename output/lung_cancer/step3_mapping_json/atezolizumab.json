@@ -1,0 +1,139 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING",
+    "Original Pathway Name": "PD‑1/PD‑L1 inhibitory signaling (concept-level)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Atezolizumab blocks PD‑L1, preventing its engagement with PD‑1 and B7.1, reversing SHP‑mediated dephosphorylation of TCR/CD28 signaling components and restoring CD8⁺ T‑cell effector function in NSCLC and SCLC.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12847340",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING",
+    "original_mapped_name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway involves PD-1/PD-L1 inhibitory signaling, which affects CD28 and TCR signaling. While the KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY captures TCR signaling, the REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING pathway more specifically addresses the CD28 component, which is directly relevant to the mechanism of action of Atezolizumab. Given the priority order, REACTOME pathways are preferred over KEGG when they capture the biology equally well or better."
+  },
+  "Row2": {
+    "Mapped MSigDB Pathway Name": "REACTOME_CO_STIMULATION_BY_CD28",
+    "Original Pathway Name": "TCR/CD28 co‑stimulation (concept-level)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Effective PD-L1 blockade requires intact TCR recognition and CD28 co-stimulation; when these are functional, released PD-1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC-I subtypes.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_CO_STIMULATION_BY_CD28",
+    "original_mapped_name": "BIOCARTA_CTLA4_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale emphasize the importance of TCR recognition and CD28 co-stimulation in the context of PD-L1 blockade and T cell activation. While the BIOCARTA_CTLA4_PATHWAY does involve CD28, it primarily focuses on CTLA-4's role in opposing T cell activation. The REACTOME_CO_STIMULATION_BY_CD28 pathway more directly addresses the co-stimulation by CD28, aligning better with the original pathway's focus. Additionally, REACTOME pathways have a higher priority than BIOCARTA pathways, making this correction appropriate."
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_MHC_PATHWAY",
+    "Original Pathway Name": "MHC‑I antigen processing and presentation",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "High expression of HLA‑I and antigen‑processing genes enables presentation of neoantigens to CD8⁺ T cells; pan‑cancer and NSCLC data show that stronger MHC‑I pathway activity and CD8 infiltration correlate with higher response rates to PD‑1/PD‑L1 blockade including atezolizumab.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "BIOCARTA_MHC_PATHWAY",
+    "original_mapped_name": "BIOCARTA_CTLA4_PATHWAY",
+    "llm_reasoning": "The original pathway name 'MHC-I antigen processing and presentation' and the rationale focus on the role of MHC-I in antigen presentation to CD8+ T cells, which is not directly related to CTLA-4 signaling. The 'BIOCARTA_MHC_PATHWAY' specifically addresses antigen processing and presentation, making it a more accurate representation of the described biological process. Additionally, it is a BIOCARTA pathway like the original mapping, maintaining the same priority level."
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
+    "Original Pathway Name": "Tumor mutational burden / neoantigen load",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Elevated nonsynonymous mutation load increases neoantigen repertoire; in NSCLC, higher TMB associates with improved outcomes to atezolizumab-based regimens, particularly when coupled to preserved MHC-I and inflamed microenvironments.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
+    "original_mapped_name": "BIOCARTA_TCR_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on tumor mutational burden and neoantigen load, which are closely related to T cell activation and immune response. The BIOCARTA_TCR_PATHWAY is relevant but not optimal given the priority order. The KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY, which is a higher-priority KEGG pathway, captures the T cell receptor signaling process more comprehensively and is more aligned with the biological context of neoantigen recognition and T cell activation in response to tumor mutational burden."
+  },
+  "Row8": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS",
+    "Original Pathway Name": "Myeloid‑derived suppressor cells / Treg and immunosuppressive cytokines",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Enrichment of MDSCs, Tregs, and cytokines such as TGF‑β and certain chemokines in the NSCLC TME dampens effector T‑cell activity; these features are prominent in resistant transcriptomic subtypes (e.g., NMF2) with poor benefit from atezolizumab despite PD‑L1 expression.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS",
+    "original_mapped_name": "BIOCARTA_TOB1_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on the role of myeloid-derived suppressor cells (MDSCs), Tregs, and immunosuppressive cytokines like TGF-β in the tumor microenvironment, particularly in non-small cell lung cancer (NSCLC). The BIOCARTA_TOB1_PATHWAY primarily addresses T cell activation and anergy, which is not directly aligned with the specific focus on MDSCs and Tregs. The REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS pathway is more relevant as it involves signaling in myeloid cells, which are central to the function of MDSCs. Additionally, REACTOME pathways have a higher priority than BIOCARTA pathways, making this a more appropriate mapping."
+  },
+  "Row10": {
+    "Mapped MSigDB Pathway Name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+    "Original Pathway Name": "KRAS/STK11/KEAP1‑linked metabolic and immune pathways",
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS-mutant NSCLC generally shows higher TMB/PD-L1 and better ICI outcomes, but co-mutations in STK11/KEAP1 lead to metabolic reprogramming, low CD8 infiltration, and poor atezolizumab benefit.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+    "original_mapped_name": "HALLMARK_KRAS_SIGNALING_UP",
+    "llm_reasoning": "The original pathway name and rationale involve KRAS mutations in NSCLC with co-mutations in STK11/KEAP1 affecting metabolic and immune pathways. While HALLMARK_KRAS_SIGNALING_UP captures KRAS activation, it does not address the specific context of NSCLC or the co-mutations in STK11/KEAP1. KEGG_NON_SMALL_CELL_LUNG_CANCER is a higher-priority KEGG pathway that more comprehensively represents the NSCLC context, including the heterogeneity and potential co-mutations affecting treatment outcomes."
+  },
+  "Row11": {
+    "Mapped MSigDB Pathway Name": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+    "Original Pathway Name": "B‑/T‑cell–inflamed transcriptional programs (e.g., NMF4 subtype)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The NMF4 subtype, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, shows marked PFS/OS benefit from ABCP including atezolizumab, indicating pre‑existing adaptive immune activation predicts sensitivity.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+    "original_mapped_name": "BIOCARTA_41BB_PATHWAY",
+    "llm_reasoning": "The original pathway description emphasizes B- and T-cell inflammation and adaptive immune activation, which are closely related to NF-kB signaling. The HALLMARK_TNFA_SIGNALING_VIA_NFKB pathway captures the involvement of NF-kB in immune responses and inflammation, aligning well with the biological context provided. Given the priority order, HALLMARK pathways are preferred over BIOCARTA pathways when they capture the biology equally well or better. Therefore, the mapping is corrected to the HALLMARK_TNFA_SIGNALING_VIA_NFKB pathway."
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "KEGG_SMALL_CELL_LUNG_CANCER",
+    "Original Pathway Name": "SCLC‑I inflamed subtype gene program",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In ES-SCLC, a transcriptionally defined SCLC-I subtype with higher CD8A/B and immune-activation genes experiences greater survival benefit from EP-atezolizumab in IMpower133, whereas non-inflamed SCLC subtypes remain largely refractory.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_SMALL_CELL_LUNG_CANCER",
+    "original_mapped_name": "KEGG_ACUTE_MYELOID_LEUKEMIA",
+    "llm_reasoning": "The original pathway name 'SCLC-I inflamed subtype gene program' and the rationale focus on small cell lung cancer (SCLC), specifically the inflamed subtype, which is not related to acute myeloid leukemia (AML). The current mapping to 'KEGG_ACUTE_MYELOID_LEUKEMIA' is incorrect as it pertains to AML, not SCLC. Among the candidates, 'KEGG_SMALL_CELL_LUNG_CANCER' directly relates to SCLC and is a more appropriate mapping. Although it is a KEGG_LEGACY pathway, it is the only candidate directly related to SCLC, making it the best available option."
+  }
+}

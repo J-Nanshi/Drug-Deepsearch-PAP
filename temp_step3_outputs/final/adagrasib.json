@@ -1,0 +1,185 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "KEGG: hsa04014 – Ras signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Adagrasib targets KRAS G12C mutations, which are typically upregulated in lung cancer, leading to sensitivity when the pathway is inhibited.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499"
+    ],
+    "verdict": "correct",
+    "corrected_msigdb_name": null,
+    "original_mapped_name": null,
+    "llm_reasoning": "The current mapping 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' accurately represents the biological process described in the original pathway name and rationale. It involves mutation-activated EGFR leading to RAS-ERK signaling, which is relevant to KRAS G12C mutations and lung cancer. No higher-priority pathway from the candidate list captures the biology better."
+  },
+  "Row2": {
+    "Mapped MSigDB Pathway Name": "KEGG_MAPK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The MAPK (RAF–MEK–ERK) signaling pathway is upregulated in baseline lung cancer with KRAS mutations, leading to resistance to KRAS G12C inhibitors like adagrasib. Reactivation of ERK signaling is associated with resistance.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_MAPK_SIGNALING_PATHWAY",
+    "original_mapped_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on the MAPK (RAF–MEK–ERK) signaling pathway, which is a core component of the MAPK signaling cascade. The current mapping to 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' is specific to EGFR mutations, which may not fully encompass the broader MAPK pathway involved in KRAS mutations and ERK reactivation. The 'KEGG_MAPK_SIGNALING_PATHWAY' is a more general representation of the MAPK cascade, aligning better with the original pathway name and rationale. Additionally, KEGG pathways have higher priority than BIOCARTA pathways."
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+    "Original Pathway Name": "KEGG: hsa04151 – PI3K–AKT signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "RTK-driven activation of PI3K–AKT–mTOR is a key bypass route under KRAS G12C inhibition. MET, HER2, and other RTKs can restore survival signaling via PI3K–AKT despite KRAS G12C blockade, contributing to both intrinsic and acquired resistance to adagrasib.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+    "original_mapped_name": "BIOCARTA_AKT_PATHWAY",
+    "llm_reasoning": "The original pathway name 'KEGG: hsa04151 – PI3K–AKT signaling pathway' and the rationale provided focus on the PI3K–AKT–mTOR signaling axis, which is a key bypass route under KRAS G12C inhibition. The current mapping 'BIOCARTA_AKT_PATHWAY' does capture aspects of AKT signaling but does not emphasize the mTOR component, which is crucial in the context of the rationale. The 'HALLMARK_PI3K_AKT_MTOR_SIGNALING' pathway is a higher-priority HALLMARK pathway that more comprehensively captures the PI3K–AKT–mTOR signaling axis, making it a more appropriate mapping."
+  },
+  "Row6": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "KEGG: hsa04012 – ErbB signaling (EGFR/ERBB2/ERBB3/ERBB4)",
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline ErbB signaling in lung cancer is not upregulated by default; it is often downregulated or normal unless specific mutations or amplifications are present. Baseline sensitivity to adagrasib is expected in KRAS G12C mutant lung cancer, as it targets this mutation directly.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10377814",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394"
+    ],
+    "verdict": "correct",
+    "corrected_msigdb_name": null,
+    "original_mapped_name": null,
+    "llm_reasoning": "The current mapping 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' accurately represents the biological process described in the original pathway name and rationale. It specifically addresses mutation-activated EGFR signaling to RAS-ERK, which is relevant for KRAS G12C mutant lung cancer. No higher-priority pathway from the candidate list captures the biology better."
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "KEGG: hsa05225 – Lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline lung cancer, the RTK–RAS–MAPK pathway is often upregulated, and tumors with co-mutations like KEAP1 mutations are resistant to KRAS G12C inhibitors like adagrasib due to bypass signaling.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "original_mapped_name": "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on the RTK-RAS-MAPK pathway, which is closely related to EGFR signaling in lung cancer. The current mapping to RET fusion kinase is less relevant to the described biological context. The alternative candidate 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY' better captures the involvement of RTK-RAS-MAPK signaling in lung cancer, aligning with the rationale provided. Additionally, it is of the same priority level as the current mapping."
+  },
+  "Row13": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_MET_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "KEGG: hsa04014 – Ras signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS G12C mutations lead to upregulation of the Ras signaling pathway, making tumors sensitive to adagrasib, which inhibits KRAS G12C.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12660860",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_MET_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "original_mapped_name": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name 'KEGG: hsa04014 – Ras signaling pathway' and the rationale involving KRAS G12C mutations suggest a focus on mutation-driven activation of the Ras signaling pathway. The current mapping 'KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY' emphasizes MET overexpression, which is not directly related to KRAS mutations. The alternative candidate 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_MET_TO_RAS_ERK_SIGNALING_PATHWAY' more accurately reflects the mutation-driven aspect of the pathway, aligning better with the biological context provided. No HALLMARK pathway is available, so the correction is based on the best match within the KEGG_MEDICUS category."
+  },
+  "Row14": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_REFERENCE_GF_RTK_RAS_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The MAPK pathway is a key effector of mutant KRAS in NSCLC. At baseline, before adagrasib treatment, the pathway is typically upregulated due to KRAS mutations, making the cancer sensitive to adagrasib, which targets KRAS and reduces ERK phosphorylation.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10377814",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_MEDICUS_REFERENCE_GF_RTK_RAS_ERK_SIGNALING_PATHWAY",
+    "original_mapped_name": "KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on the MAPK (RAF-MEK-ERK) signaling pathway, which is a key effector of mutant KRAS in NSCLC. The current mapping 'KEGG_MEDICUS_VARIANT_MET_OVEREXPRESSION_TO_RAS_ERK_SIGNALING_PATHWAY' is specific to MET overexpression, which is not directly related to the KRAS-driven MAPK pathway described. The alternative candidate 'KEGG_MEDICUS_REFERENCE_GF_RTK_RAS_ERK_SIGNALING_PATHWAY' more accurately represents the general RAS-ERK signaling pathway involved in the MAPK cascade, aligning with the original pathway's focus and rationale. Additionally, it is a KEGG_MEDICUS pathway, which is prioritized over the current variant mapping."
+  },
+  "Row15": {
+    "Mapped MSigDB Pathway Name": "KEGG_CELL_CYCLE",
+    "Original Pathway Name": "KEGG: hsa04110 – Cell cycle (E2F, G2/M checkpoints)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In KRAS G12C‑addicted NSCLC, the cell cycle pathway is upregulated at baseline, contributing to cancer cell proliferation. Adagrasib targets this pathway, leading to sensitivity due to its inhibition of KRAS-driven cell-cycle programs.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042"
+    ],
+    "verdict": "correct",
+    "corrected_msigdb_name": null,
+    "original_mapped_name": null,
+    "llm_reasoning": "The current mapping 'KEGG_CELL_CYCLE' accurately represents the biological process described in the original pathway name and rationale. It encompasses the cell cycle regulation, including E2F and G2/M checkpoints, which are relevant to the KRAS-driven cell-cycle programs in NSCLC. No higher-priority pathway from the candidate list captures the biology better than the current KEGG pathway."
+  },
+  "Row19": {
+    "Mapped MSigDB Pathway Name": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+    "Original Pathway Name": "KEGG: hsa04310 – Wnt/β‑catenin and EMT‑related signaling",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EMT phenotypes in KRAS G12C NSCLC are associated with upregulated Wnt/β‑catenin and altered RTK profiles, reducing dependence on KRAS‑ERK and favoring bypass signaling. Reviews of clinical and preclinical data note that EMT‑high tumors show attenuated responses and earlier progression on adagrasib and other KRAS G12C inhibitors.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12883982",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+    "original_mapped_name": "SINGH_KRAS_DEPENDENCY_SIGNATURE",
+    "llm_reasoning": "The original pathway name and rationale focus on Wnt/β-catenin signaling and its role in EMT phenotypes in KRAS G12C NSCLC. The current mapping, SINGH_KRAS_DEPENDENCY_SIGNATURE, emphasizes KRAS dependency and EMT but does not specifically address Wnt/β-catenin signaling. The HALLMARK_WNT_BETA_CATENIN_SIGNALING pathway directly captures the Wnt/β-catenin signaling aspect, which is central to the original pathway description. Given the priority order, HALLMARK pathways are preferred when they capture the biology equally well or better."
+  },
+  "Row22": {
+    "Mapped MSigDB Pathway Name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+    "Original Pathway Name": "KEGG: hsa05223 – Non‑small cell lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline lung cancer, the RTK–RAS–MAPK and PI3K pathways are often upregulated, especially in KRAS-mutant tumors. STK11/KEAP1 mutations can confer resistance due to reduced KRAS dependency and increased reliance on alternative pathways.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10377814",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10046549"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+    "original_mapped_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on the RTK–RAS–MAPK, PI3K, and STK11/KEAP1 modules in non-small cell lung cancer. The current mapping, 'KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY', only covers the EGFR to PI3K signaling, which is a subset of the broader pathways involved. The alternative candidate 'KEGG_NON_SMALL_CELL_LUNG_CANCER' is a more comprehensive representation of the non-small cell lung cancer pathways, including the relevant modules, and is a KEGG pathway, which is prioritized over the current mapping."
+  }
+}
