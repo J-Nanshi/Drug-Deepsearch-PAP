@@ -31,7 +31,7 @@ import markdown2
 
 # PDF generation removed - using Markdown download only
 
-from agent_JN import graph, REPORT_PLANNER_INSTRUCTIONS, DEFAULT_REPORT_STRUCTURE
+from agent_JN_latest_changes import graph, REPORT_PLANNER_INSTRUCTIONS, DEFAULT_REPORT_STRUCTURE
 
 
 def parse_cancer_name_from_argv() -> str:

@@ -204,7 +204,7 @@ A pharmacoeconomic analysis using CAPItello‑291 data (NCT04305496) confirmed t
 
 [5] Fulvestrant plus capivasertib versus placebo after relapse or progression on an aromatase inhibitor in metastatic, oestrogen receptor-positive breast cancer (FAKTION): a multicentre, randomised, controlled, phase 2 trial – https://pmc.ncbi.nlm.nih.gov/articles/PMC7052734
 
-## Pathway Evidence Table
+## 9. Pathway Evidence Table
 
 | # | Pathway (name / representative components) | Regulation with capivasertib | Effect on drug sensitivity or resistance | Brief biological rationale and breast cancer evidence |
 |---|--------------------------------------------|------------------------------|------------------------------------------|------------------------------------------------------|

@@ -8,7 +8,6 @@ import time
 from pathlib import Path
 
 import requests
-from step1_md_to_schema_json import convert_md_file_to_json_file
 
 # API Configuration
 API_BASE_URL = "http://localhost:8009"
@@ -81,8 +80,8 @@ def check_progress(research_id: str):
         return None
 
 
-def download_report(research_id: str, drug_name: str, output_dir: Path, cancer_name: str):
-    """Download markdown report and write sibling harmonized JSON."""
+def download_report(research_id: str, drug_name: str, output_dir: Path):
+    """Download the markdown report."""
     try:
         response = requests.get(
             f"{API_BASE_URL}/api/download/{research_id}",
@@ -98,15 +97,6 @@ def download_report(research_id: str, drug_name: str, output_dir: Path, cancer_n
             f.write(response.content)
 
         print(f"Saved report to: {output_path}")
-        try:
-            json_path = convert_md_file_to_json_file(
-                output_path,
-                drug_name=drug_name,
-                cancer_name=cancer_name,
-            )
-            print(f"Saved schema JSON to: {json_path}")
-        except Exception as exc:
-            print(f"WARNING: markdown saved but JSON conversion failed for {output_path.name}: {exc}")
         return True
     except Exception as exc:
         print(f"Error downloading report: {exc}")
@@ -152,7 +142,7 @@ def wait_for_completion(research_id: str, max_wait_minutes: int = 30):
         time.sleep(10)
 
 
-def process_drug(drug_name: str, index: int, total: int, output_dir: Path, cancer_name: str):
+def process_drug(drug_name: str, index: int, total: int, output_dir: Path):
     """Process a single drug."""
     print(f"\n\n{'#' * 80}")
     print(f"# Drug {index}/{total}: {drug_name}")
@@ -161,20 +151,9 @@ def process_drug(drug_name: str, index: int, total: int, output_dir: Path, cance
     safe_name = "".join(c for c in drug_name if c.isalnum() or c in (" ", "-", "_")).rstrip()
     safe_name = safe_name.replace(" ", "_").lower()
     output_path = output_dir / f"{safe_name}.md"
-    json_path = output_dir / f"{safe_name}.json"
 
     if output_path.exists():
         print(f"Skipping {drug_name} - report already exists at {output_path}")
-        if not json_path.exists():
-            try:
-                generated_json = convert_md_file_to_json_file(
-                    output_path,
-                    drug_name=drug_name,
-                    cancer_name=cancer_name,
-                )
-                print(f"Generated missing schema JSON: {generated_json}")
-            except Exception as exc:
-                print(f"WARNING: Existing markdown could not be converted to JSON: {exc}")
         return True
 
     research_id = start_research(drug_name)
@@ -185,7 +164,7 @@ def process_drug(drug_name: str, index: int, total: int, output_dir: Path, cance
     if not success:
         return False
 
-    success = download_report(research_id, drug_name, output_dir, cancer_name)
+    success = download_report(research_id, drug_name, output_dir)
     time.sleep(5)
     return success
 
@@ -244,28 +223,13 @@ def main():
         safe_name = "".join(c for c in drug_name if c.isalnum() or c in (" ", "-", "_")).rstrip()
         safe_name = safe_name.replace(" ", "_").lower()
         output_path = output_dir / f"{safe_name}.md"
-        json_path = output_dir / f"{safe_name}.json"
 
         if output_path.exists():
-            if json_path.exists():
-                skipped += 1
-                print(f"\n[{index}/{total}] Skipping {drug_name} - markdown and JSON already exist")
-                continue
-            print(f"\n[{index}/{total}] Markdown exists but JSON missing for {drug_name}; converting now")
-            try:
-                convert_md_file_to_json_file(
-                    output_path,
-                    drug_name=drug_name,
-                    cancer_name=cancer_name,
-                )
-                skipped += 1
-                print(f"Generated missing JSON: {json_path}")
-            except Exception as exc:
-                failed += 1
-                print(f"Failed to generate JSON from existing markdown for {drug_name}: {exc}")
+            skipped += 1
+            print(f"\n[{index}/{total}] Skipping {drug_name} - already exists")
             continue
 
-        success = process_drug(drug_name, index, total, output_dir, cancer_name)
+        success = process_drug(drug_name, index, total, output_dir)
         if success:
             successful += 1
         else:
