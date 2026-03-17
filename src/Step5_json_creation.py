@@ -1,207 +1,214 @@
-# [markdown]
-# Step 5: JSON Creation from Drug Report
-# ------------------------------------------------------------------------------------------------
-# This script reads a prompt template (docx), a drug report (markdown), and a
-# pathway list (JSON) and feeds them to GPT-5.1 to generate structured JSON output.
-#
-# Input:
-#   - prompt3a.docx (prompt template)
-#   - Ribociclib_Report.md (drug report)
-#   - mapped_pathway_json/*_final_trial5.json (pathway list with "Mapped MSigDB Pathway Name")
-#
-# Output:
-#   - <drug>_structured_output.json
+﻿"""Step 5: Batch JSON creation from drug reports via Responses API + Instructor.
 
-# Imports
+This script reads:
+- a prompt template (.docx),
+- a directory of drug report markdown files (*.md),
+- a directory of per-drug pathway mapping JSON files (<drug>.json),
+
+and produces one validated structured JSON output per drug:
+- <output_dir>/<drug>.json
+
+Notes:
+- Drug name is inferred from markdown filename stem.
+- Each drug expects pathway JSON at <pathway_dir>/<drug>.json.
+- Missing pathway files are skipped with warning.
+- Responses API is used for generation.
+- Instructor + Pydantic enforce output schema and retries.
+"""
+
+from __future__ import annotations
+
+import argparse
 import json
 import os
-import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional
-from openai import OpenAI
 from time import sleep
+from typing import Any, Dict, List, Optional
 
-# For reading .docx files
-try:
-    from docx import Document
-except ImportError:
-    raise ImportError("python-docx is required. Install with: pip install python-docx")
+from openai import OpenAI
+from pydantic import BaseModel, ConfigDict, Field
 
-# Config
-# OpenAI Configuration
+# Optional .env loading
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ImportError:
     pass
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+# .docx reader
+try:
+    from docx import Document
+except ImportError as exc:
+    raise ImportError("python-docx is required. Install with: pip install python-docx") from exc
 
-if not OPENAI_API_KEY:
-    raise RuntimeError(
-        "OPENAI_API_KEY not found. Please set it using one of these methods:\n"
-        "1. Environment variable: $env:OPENAI_API_KEY = 'your-key'\n"
-        "2. Create a .env file with: OPENAI_API_KEY=your-key\n"
-        "3. Set directly in code (not recommended)"
+# Instructor is optional here; some versions do not expose `.responses`.
+try:
+    import instructor
+except ImportError as exc:
+    raise ImportError(
+        "instructor is required. Install with: pip install instructor"
+    ) from exc
+
+
+DEFAULT_MODEL = "o4-mini-deep-research"
+DEFAULT_TEMPERATURE = 0.2
+DEFAULT_MAX_OUTPUT_TOKENS = 16000
+DEFAULT_FILE_PATTERN = "*.md"
+DEFAULT_MAX_RETRIES = 3
+THROTTLE_SECONDS = 0.3
+
+
+class StructuredDrugOutput(BaseModel):
+    """Prompt3a-aligned canonical top-level schema with strict key control."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    drug_name: str
+    cancer_indication: Optional[str] = None
+    drug_category: Optional[str] = None
+    drug_class: Optional[str] = None
+    moa: Optional[str] = None
+    chembl_id: Optional[str] = None
+    drugbank_id: Optional[str] = None
+    synonyms: List[str] = Field(default_factory=list)
+    primary_targets: List[str] = Field(default_factory=list)
+    pathway_sets: List[str] = Field(default_factory=list)
+    pathway_sets_annotations: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
+    sensitivity_genes_up: List[str] = Field(default_factory=list)
+    sensitivity_genes_down: List[str] = Field(default_factory=list)
+    resistance_genes_up: List[str] = Field(default_factory=list)
+    resistance_genes_down: List[str] = Field(default_factory=list)
+    sensitivity_genes_up_annotations: List[Dict[str, Any]] = Field(default_factory=list)
+    sensitivity_genes_down_annotations: List[Dict[str, Any]] = Field(default_factory=list)
+    resistance_genes_up_annotations: List[Dict[str, Any]] = Field(default_factory=list)
+    resistance_genes_down_annotations: List[Dict[str, Any]] = Field(default_factory=list)
+    kg_gene_relationships: List[Dict[str, Any]] = Field(default_factory=list)
+    contraindications: List[str] = Field(default_factory=list)
+    citations: List[Any] = Field(default_factory=list)
+    notes: str = ""
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Step 5 batch JSON creation using Responses API + Instructor. "
+            "Deep-research options: o4-mini-deep-research (default), o3-deep-research."
+        )
     )
+    parser.add_argument("--prompt-docx", required=True, help="Path to prompts/prompt3a.docx")
+    parser.add_argument("--md-dir", required=True, help="Directory containing per-drug markdown files")
+    parser.add_argument(
+        "--pathway-dir",
+        required=True,
+        help="Directory containing per-drug pathway JSON files named <drug>.json",
+    )
+    parser.add_argument("--output-dir", required=True, help="Directory to write <drug>.json outputs")
 
-# Initialize OpenAI client
-client = OpenAI(api_key=OPENAI_API_KEY)
+    parser.add_argument(
+        "--model",
+        default=DEFAULT_MODEL,
+        help=(
+            "OpenAI model for Responses API "
+            "(recommended: o4-mini-deep-research or o3-deep-research)."
+        ),
+    )
+    parser.add_argument("--temperature", type=float, default=DEFAULT_TEMPERATURE)
+    parser.add_argument("--max-output-tokens", type=int, default=DEFAULT_MAX_OUTPUT_TOKENS)
+    parser.add_argument("--file-pattern", default=DEFAULT_FILE_PATTERN, help="Markdown glob pattern")
+    parser.add_argument("--max-retries", type=int, default=DEFAULT_MAX_RETRIES)
+    return parser.parse_args()
 
-# LLM Model Configuration - Using GPT-5.1 as specified
-LLM_MODEL = "gpt-5.1"
-LLM_TEMPERATURE = 0.2  # Low temperature for consistent, factual responses
-LLM_MAX_TOKENS = 16000  # Large token limit for comprehensive JSON output
 
-# --- Input/Output Paths ---
-PROMPT_DOCX_PATH = r"D:\GS\pathway-enrichment-pipeline\Step3a\input\prompt3a.docx"
-DRUG_REPORT_PATH = r"D:\GS\pathway-enrichment-pipeline\my_project\Ribociclib_Report.md"
-PATHWAY_JSON_PATH = r"D:\GS\pathway-enrichment-pipeline\my_project\mapped_pathway_json\ribociclib_step2_trial2_out_final_trial5.json"
-OUTPUT_DIR = r"mapped_pathway_json"
+def validate_inputs(args: argparse.Namespace) -> None:
+    prompt_path = Path(args.prompt_docx)
+    md_dir = Path(args.md_dir)
+    pathway_dir = Path(args.pathway_dir)
+    output_dir = Path(args.output_dir)
 
-# Ensure output directory exists
-Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
+    if not prompt_path.exists() or not prompt_path.is_file():
+        raise FileNotFoundError(f"Prompt docx not found: {prompt_path}")
+    if not md_dir.exists() or not md_dir.is_dir():
+        raise FileNotFoundError(f"Markdown directory not found: {md_dir}")
+    if not pathway_dir.exists() or not pathway_dir.is_dir():
+        raise FileNotFoundError(f"Pathway directory not found: {pathway_dir}")
 
-# Helpers
-def load_json(path: str) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as f:
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+
+def init_clients() -> tuple[OpenAI, Any]:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "OPENAI_API_KEY not found. Set it with environment variable or .env file."
+        )
+
+    openai_client = OpenAI(api_key=api_key)
+
+    mode = None
+    for name in ("RESPONSES_TOOLS", "RESPONSES_JSON", "JSON"):
+        if hasattr(instructor.Mode, name):
+            mode = getattr(instructor.Mode, name)
+            break
+
+    instructor_client = (
+        instructor.from_openai(openai_client, mode=mode)
+        if mode is not None
+        else instructor.from_openai(openai_client)
+    )
+    return openai_client, instructor_client
+
+
+def load_json(path: Path) -> Dict[str, Any]:
+    with path.open("r", encoding="utf-8") as f:
         return json.load(f)
 
-def save_json(obj: Any, path: str) -> None:
-    with open(path, "w", encoding="utf-8") as f:
+
+def save_json(obj: Any, path: Path) -> None:
+    with path.open("w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
-def read_docx(path: str) -> str:
-    """Read text content from a .docx file."""
-    doc = Document(path)
-    full_text = []
+
+def read_docx(path: Path) -> str:
+    doc = Document(str(path))
+    full_text: List[str] = []
     for para in doc.paragraphs:
         full_text.append(para.text)
-    # Also read tables if present
     for table in doc.tables:
         for row in table.rows:
             row_text = [cell.text for cell in row.cells]
             full_text.append(" | ".join(row_text))
     return "\n".join(full_text)
 
-def read_markdown(path: str) -> str:
-    """Read text content from a markdown file."""
-    with open(path, "r", encoding="utf-8") as f:
+
+def read_markdown(path: Path) -> str:
+    with path.open("r", encoding="utf-8") as f:
         return f.read()
 
-def extract_drug_name_from_report(report_content: str) -> str:
-    """Extract drug name from the report content."""
-    # Try to find drug name in the first few lines
-    lines = report_content.split("\n")[:20]
-    for line in lines:
-        # Look for patterns like "Ribociclib is" or "# Drug Summary" followed by drug name
-        match = re.search(r'^(?:#\s*)?(?:Drug\s+Summary\s*)?(\w+)\s+is\s+', line, re.IGNORECASE)
-        if match:
-            return match.group(1).capitalize()
-    # Fallback - try to find capitalized drug names
-    match = re.search(r'\b(Ribociclib|Palbociclib|Abemaciclib|Pembrolizumab|Trastuzumab|Dostarlimab|Tucatinib)\b', 
-                      report_content[:2000], re.IGNORECASE)
-    if match:
-        return match.group(1).capitalize()
-    return "Unknown"
 
-def extract_pathway_names(pathway_json_path: str) -> List[str]:
-    """
-    Extract only the 'Mapped MSigDB Pathway Name' values from the pathway JSON file.
-    
-    Args:
-        pathway_json_path: Path to the mapped pathway JSON file
-    
-    Returns:
-        List of pathway names
-    """
+def extract_pathway_names(pathway_json_path: Path) -> List[str]:
     pathway_data = load_json(pathway_json_path)
-    pathway_names = []
-    
-    for row_key, row_data in pathway_data.items():
+    pathway_names: List[str] = []
+    for _, row_data in pathway_data.items():
         if isinstance(row_data, dict) and "Mapped MSigDB Pathway Name" in row_data:
             pathway_name = row_data["Mapped MSigDB Pathway Name"]
-            if pathway_name and pathway_name not in pathway_names:
-                pathway_names.append(pathway_name)
-    
+            if isinstance(pathway_name, str):
+                cleaned = pathway_name.strip()
+                if cleaned and cleaned not in pathway_names:
+                    pathway_names.append(cleaned)
     return pathway_names
 
-# LLM Helper
-def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3) -> str:
-    """Call OpenAI API with retry logic."""
-    for attempt in range(max_retries):
-        try:
-            kwargs = {
-                "model": LLM_MODEL,
-                "messages": messages,
-                "temperature": LLM_TEMPERATURE,
-                "max_tokens": LLM_MAX_TOKENS,
-            }
-            response = client.chat.completions.create(**kwargs)
-            return response.choices[0].message.content.strip()
-        except Exception as e:
-            err = str(e)
-            print(f"OpenAI API error (attempt {attempt+1}/{max_retries}): {e}")
 
-            # Handle max_tokens parameter issues for newer models
-            if "max_tokens" in err and "not supported" in err and attempt < max_retries - 1:
-                try:
-                    kwargs.pop("max_tokens", None)
-                    kwargs["max_completion_tokens"] = LLM_MAX_TOKENS
-                    response = client.chat.completions.create(**kwargs)
-                    return response.choices[0].message.content.strip()
-                except Exception as e2:
-                    print(f"Retry with max_completion_tokens also failed: {e2}")
-
-            if attempt < max_retries - 1:
-                sleep(2 ** attempt)  # Exponential backoff
-            else:
-                raise
-    return ""
-
-def parse_json_response(response: str) -> Dict[str, Any]:
-    """Parse JSON from LLM response, handling common issues."""
-    response = response.strip()
-    
-    # Remove markdown code blocks if present
-    if response.startswith("```"):
-        response = re.sub(r"^```(?:json)?\s*\n?", "", response)
-        response = re.sub(r"\n?```\s*$", "", response)
-    
-    # Try to find JSON object in response if it has extra text
-    json_match = re.search(r'\{[\s\S]*\}', response)
-    if json_match:
-        response = json_match.group(0)
-    
-    # Fix common JSON issues - trailing commas before } or ]
-    response = re.sub(r',(\s*[}\]])', r'\1', response)
-    
-    return json.loads(response)
-
-# Main Generation Function
-def generate_structured_json(
+def build_user_prompt(
     prompt_template: str,
     drug_report: str,
     drug_name: str,
     pathway_list: List[str],
-) -> Dict[str, Any]:
-    """
-    Generate structured JSON output from prompt template and drug report.
-    
-    Args:
-        prompt_template: Content from prompt3a.docx
-        drug_report: Content from drug report markdown
-        drug_name: Name of the drug
-        pathway_list: List of mapped MSigDB pathway names
-    
-    Returns:
-        Structured JSON output
-    """
-    
-    # Format pathway list as a numbered list
-    pathway_list_str = "\n".join([f"  {i+1}. {name}" for i, name in enumerate(pathway_list)])
-    
-    user_prompt = f"""{prompt_template}
+    correction_note: Optional[str] = None,
+) -> str:
+    pathway_list_str = "\n".join([f"  {i + 1}. {name}" for i, name in enumerate(pathway_list)])
+
+    prompt = f"""{prompt_template}
 
 ---
 
@@ -216,149 +223,273 @@ DRUG REPORT:
 
 ---
 
-Based on the prompt instructions above, the pathway list, and the drug report provided, generate a comprehensive structured JSON output. 
+Based on the prompt instructions above, the pathway list, and the drug report provided, generate a comprehensive structured JSON output.
 The JSON should capture all relevant pathway-drug interactions, mechanisms, clinical evidence, and classifications from the report.
 Use the pathway names from <PATHWAY_LIST> as the canonical pathway identifiers.
 
 Return ONLY valid JSON (no markdown code blocks, no explanation outside JSON).
 """
+    if correction_note:
+        prompt += f"\n\nVALIDATION FEEDBACK (fix and regenerate):\n{correction_note}\n"
+    return prompt
 
-    messages = [
-        {
-            "role": "system", 
-            "content": """You are an expert in cancer biology, pharmacology, and pathway analysis. 
-Your task is to extract and structure information from drug reports into comprehensive JSON format.
-Be precise, scientifically accurate, and ensure the JSON is valid and well-structured.
-Include all relevant pathways, their regulations, effects on drug response, rationale, and classifications.
-Return ONLY valid JSON without any markdown formatting."""
-        },
-        {"role": "user", "content": user_prompt}
-    ]
-    
-    print(f"Sending request to {LLM_MODEL}...")
-    print(f"Prompt length: {len(user_prompt)} characters")
-    
-    try:
-        response = call_openai_with_retry(messages)
-        print(f"Response received: {len(response)} characters")
-        
-        result = parse_json_response(response)
-        print("JSON parsed successfully")
-        return result
-        
-    except json.JSONDecodeError as e:
-        print(f"ERROR: Failed to parse LLM response as JSON: {e}")
-        print(f"Response preview: {response[:500] if response else 'No response'}...")
-        return {
-            "drug_name": drug_name,
-            "error": f"JSON parsing failed: {str(e)}",
-            "raw_response_preview": response[:2000] if response else "No response"
-        }
-    except Exception as e:
-        print(f"ERROR: LLM call failed: {e}")
-        return {
-            "drug_name": drug_name,
-            "error": str(e)
-        }
 
-# Main Pipeline
-def run_json_creation_pipeline(
-    prompt_path: str,
-    report_path: str,
-    pathway_json_path: str,
-) -> str:
-    """
-    Run the JSON creation pipeline.
-    
-    Args:
-        prompt_path: Path to prompt3a.docx
-        report_path: Path to drug report markdown
-        pathway_json_path: Path to mapped pathway JSON file
-    
-    Returns:
-        Output file path
-    """
-    print(f"\n{'='*70}")
-    print("Step 5: JSON Creation from Drug Report")
-    print(f"{'='*70}")
-    
-    # Read prompt template
-    print(f"\nReading prompt template: {prompt_path}")
-    if not Path(prompt_path).exists():
-        raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
-    prompt_template = read_docx(prompt_path)
-    print(f"Prompt template loaded: {len(prompt_template)} characters")
-    
-    # Read drug report
-    print(f"\nReading drug report: {report_path}")
-    if not Path(report_path).exists():
-        raise FileNotFoundError(f"Drug report not found: {report_path}")
-    drug_report = read_markdown(report_path)
-    print(f"Drug report loaded: {len(drug_report)} characters")
-    
-    # Load pathway list
-    print(f"\nLoading pathway list: {pathway_json_path}")
-    if not Path(pathway_json_path).exists():
-        raise FileNotFoundError(f"Pathway JSON not found: {pathway_json_path}")
-    pathway_list = extract_pathway_names(pathway_json_path)
-    print(f"Pathway list loaded: {len(pathway_list)} pathways")
-    for i, name in enumerate(pathway_list, 1):
-        print(f"  {i}. {name}")
-    
-    # Extract drug name
-    drug_name = extract_drug_name_from_report(drug_report)
-    print(f"\nDrug name detected: {drug_name}")
-    
-    # Generate structured JSON
-    print(f"\n--- Generating Structured JSON for {drug_name} ---")
-    result = generate_structured_json(prompt_template, drug_report, drug_name, pathway_list)
-    
-    # Output directly without metadata wrapper
-    output = result
-    
-    # Save output
-    output_filename = f"{drug_name}_structured_output.json"
-    output_path = str(Path(OUTPUT_DIR) / output_filename)
-    save_json(output, output_path)
-    
-    print(f"\n--- SUMMARY ---")
-    print(f"Drug: {drug_name}")
-    print(f"Output saved to: {output_path}")
-    
-    if "error" in result:
-        print(f"WARNING: Generation encountered errors")
-    else:
-        # Count top-level keys in result
-        if isinstance(result, dict):
-            print(f"Top-level keys in output: {list(result.keys())}")
-    
-    return output_path
+def _normalize_instructor_result(result: Any) -> Dict[str, Any]:
+    if isinstance(result, StructuredDrugOutput):
+        return result.model_dump()
+    if hasattr(result, "model_dump"):
+        data = result.model_dump()
+        return StructuredDrugOutput.model_validate(data).model_dump()
+    if isinstance(result, dict):
+        return StructuredDrugOutput.model_validate(result).model_dump()
+    raise TypeError(f"Unexpected instructor result type: {type(result)}")
 
-# Main execution
-if __name__ == "__main__":
-    print("=" * 70)
-    print("Step 5: JSON Creation Pipeline")
-    print("=" * 70)
-    print(f"LLM Model: {LLM_MODEL}")
-    print(f"Prompt file: {PROMPT_DOCX_PATH}")
-    print(f"Report file: {DRUG_REPORT_PATH}")
-    print(f"Pathway JSON: {PATHWAY_JSON_PATH}")
-    
-    try:
-        output_path = run_json_creation_pipeline(
-            PROMPT_DOCX_PATH,
-            DRUG_REPORT_PATH,
-            PATHWAY_JSON_PATH
+
+def _extract_response_text(response: Any) -> str:
+    """Extract text from Responses API result across SDK variants."""
+    text = getattr(response, "output_text", None)
+    if isinstance(text, str) and text.strip():
+        return text
+
+    output = getattr(response, "output", None)
+    if isinstance(output, list):
+        chunks: List[str] = []
+        for item in output:
+            content = getattr(item, "content", None)
+            if not isinstance(content, list):
+                continue
+            for part in content:
+                part_text = getattr(part, "text", None)
+                if isinstance(part_text, str):
+                    chunks.append(part_text)
+        if chunks:
+            return "\n".join(chunks)
+    return ""
+
+
+def _is_deep_research_model(model: str) -> bool:
+    return "deep-research" in (model or "").lower()
+
+
+def call_responses_with_retry(
+    openai_client: OpenAI,
+    instructor_client: Any,
+    model: str,
+    temperature: float,
+    max_output_tokens: int,
+    prompt_template: str,
+    drug_report: str,
+    drug_name: str,
+    pathway_list: List[str],
+    max_retries: int,
+) -> Dict[str, Any]:
+    system_prompt = (
+        "You are an expert in cancer biology, pharmacology, and pathway analysis. "
+        "Your task is to extract and structure information from drug reports into comprehensive JSON format. "
+        "Be precise, scientifically accurate, and ensure the JSON exactly matches the requested schema. "
+        "Return only valid JSON."
+    )
+
+    correction_note: Optional[str] = None
+    last_error: Optional[Exception] = None
+    use_server_json_schema = not _is_deep_research_model(model)
+
+    for attempt in range(max_retries):
+        user_prompt = build_user_prompt(
+            prompt_template=prompt_template,
+            drug_report=drug_report,
+            drug_name=drug_name,
+            pathway_list=pathway_list,
+            correction_note=correction_note,
         )
-        
-        print(f"\n{'='*70}")
-        print("PIPELINE COMPLETE")
-        print(f"{'='*70}")
-        print(f"Output: {output_path}")
-        
-    except FileNotFoundError as e:
-        print(f"\nERROR: File not found - {e}")
-    except Exception as e:
-        print(f"\nERROR: Pipeline failed - {e}")
-        import traceback
-        traceback.print_exc()
+
+        try:
+            # Primary path: Responses API with strict JSON schema.
+            request_kwargs: Dict[str, Any] = {
+                "model": model,
+                "input": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                "temperature": temperature,
+                "max_output_tokens": max_output_tokens,
+            }
+
+            # Deep-research models require at least one tool.
+            if _is_deep_research_model(model):
+                request_kwargs["tools"] = [{"type": "web_search_preview"}]
+
+            if use_server_json_schema:
+                request_kwargs["text"] = {
+                    "format": {
+                        "type": "json_schema",
+                        "name": "structured_drug_output",
+                        "schema": StructuredDrugOutput.model_json_schema(),
+                        # Keep server-side schema guidance non-strict because this
+                        # payload includes free-form nested dict sections that do not
+                        # satisfy OpenAI strict-schema additionalProperties=false rules.
+                        # Final strictness is enforced by local Pydantic validation below.
+                        "strict": False,
+                    }
+                }
+
+            result = openai_client.responses.create(**request_kwargs)
+            response_text = _extract_response_text(result)
+            if not response_text.strip():
+                raise ValueError("Responses API returned empty text output.")
+            validated = StructuredDrugOutput.model_validate_json(response_text).model_dump()
+            validated["drug_name"] = drug_name
+            return validated
+        except Exception as exc:  # API + validation failures are both retried.
+            last_error = exc
+            err_text = str(exc)
+            print(f"OpenAI/instructor error (attempt {attempt + 1}/{max_retries}): {exc}")
+
+            # Deep-research models can reject text.format=json_schema.
+            # Disable server-side schema formatting and continue retrying with local validation.
+            if (
+                use_server_json_schema
+                and "text.format" in err_text
+                and "not supported" in err_text
+            ):
+                use_server_json_schema = False
+                correction_note = (
+                    "The model does not support server-side json_schema response formatting. "
+                    "Return raw valid JSON that matches the required schema exactly."
+                )
+                if attempt < max_retries - 1:
+                    sleep(2**attempt)
+                continue
+
+            correction_note = (
+                "The previous response failed schema validation or JSON parsing. "
+                f"Error: {str(exc)}. "
+                "Regenerate and strictly follow the required JSON schema with all expected top-level keys."
+            )
+            if attempt < max_retries - 1:
+                sleep(2**attempt)
+
+    raise RuntimeError(f"Failed to generate valid JSON for {drug_name}: {last_error}")
+
+
+def process_single_drug(
+    openai_client: OpenAI,
+    instructor_client: Any,
+    args: argparse.Namespace,
+    prompt_template: str,
+    md_path: Path,
+    pathway_dir: Path,
+    output_dir: Path,
+) -> str:
+    drug_name = md_path.stem
+    pathway_json_path = pathway_dir / f"{drug_name}.json"
+
+    if not pathway_json_path.exists():
+        return "skipped"
+
+    drug_report = read_markdown(md_path)
+    pathway_list = extract_pathway_names(pathway_json_path)
+
+    if not pathway_list:
+        print(f"WARNING: No pathways extracted for '{drug_name}'. Proceeding with empty list.")
+
+    result = call_responses_with_retry(
+        openai_client=openai_client,
+        instructor_client=instructor_client,
+        model=args.model,
+        temperature=args.temperature,
+        max_output_tokens=args.max_output_tokens,
+        prompt_template=prompt_template,
+        drug_report=drug_report,
+        drug_name=drug_name,
+        pathway_list=pathway_list,
+        max_retries=args.max_retries,
+    )
+
+    output_path = output_dir / f"{drug_name}.json"
+    save_json(result, output_path)
+    print(f"Saved: {output_path}")
+    return "processed"
+
+
+def run_batch_pipeline(args: argparse.Namespace) -> None:
+    validate_inputs(args)
+
+    prompt_path = Path(args.prompt_docx)
+    md_dir = Path(args.md_dir)
+    pathway_dir = Path(args.pathway_dir)
+    output_dir = Path(args.output_dir)
+
+    openai_client, instructor_client = init_clients()
+
+    prompt_template = read_docx(prompt_path)
+    md_files = sorted(md_dir.glob(args.file_pattern))
+
+    print("=" * 70)
+    print("Step 5: Batch JSON Creation")
+    print("=" * 70)
+    print(f"Model: {args.model}")
+    print(f"Prompt: {prompt_path}")
+    print(f"Markdown dir: {md_dir}")
+    print(f"Pathway dir: {pathway_dir}")
+    print(f"Output dir: {output_dir}")
+    print(f"File pattern: {args.file_pattern}")
+    print(f"Max retries: {args.max_retries}")
+    print(f"Throttle: {THROTTLE_SECONDS}s per drug")
+    print("-" * 70)
+
+    if not md_files:
+        print(f"No markdown files found in {md_dir} with pattern '{args.file_pattern}'.")
+        return
+
+    processed = 0
+    skipped = 0
+    failed = 0
+
+    for index, md_path in enumerate(md_files, start=1):
+        drug_name = md_path.stem
+        pathway_json_path = pathway_dir / f"{drug_name}.json"
+
+        print(f"\n[{index}/{len(md_files)}] Drug: {drug_name}")
+        if not pathway_json_path.exists():
+            print(f"WARNING: Missing pathway file, skipping: {pathway_json_path}")
+            skipped += 1
+            sleep(THROTTLE_SECONDS)
+            continue
+
+        try:
+            status = process_single_drug(
+                openai_client=openai_client,
+                instructor_client=instructor_client,
+                args=args,
+                prompt_template=prompt_template,
+                md_path=md_path,
+                pathway_dir=pathway_dir,
+                output_dir=output_dir,
+            )
+            if status == "processed":
+                processed += 1
+            else:
+                skipped += 1
+        except Exception as exc:
+            failed += 1
+            print(f"ERROR: Failed for '{drug_name}': {exc}")
+        finally:
+            sleep(THROTTLE_SECONDS)
+
+    print("\n" + "=" * 70)
+    print("Step 5 Summary")
+    print("=" * 70)
+    print(f"Total markdown files discovered: {len(md_files)}")
+    print(f"Processed: {processed}")
+    print(f"Skipped: {skipped}")
+    print(f"Failed: {failed}")
+
+
+def main() -> None:
+    args = parse_args()
+    run_batch_pipeline(args)
+
+
+if __name__ == "__main__":
+    main()

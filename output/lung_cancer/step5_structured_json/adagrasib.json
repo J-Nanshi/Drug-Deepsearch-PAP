@@ -1,0 +1,46 @@
+{
+  "drug_name": "adagrasib",
+  "cancer_indication": "KRAS G12C-mutated non-small cell lung cancer",
+  "drug_category": "KRAS-targeted therapy",
+  "drug_class": "KRAS G12C inhibitor",
+  "moa": "Adagrasib is a covalent, mutant-selective inhibitor of KRAS G12C that binds to the inactive GDP-bound state, suppressing downstream RAS–RAF–MEK–ERK and PI3K–AKT–mTOR signaling, leading to reduced proliferation and tumor regression in KRAS G12C-mutant NSCLC.",
+  "chembl_id": null,
+  "drugbank_id": null,
+  "synonyms": [
+    "Adagrasib",
+    "MRTX849",
+    "KRAZATI"
+  ],
+  "primary_targets": [
+    "KRAS"
+  ],
+  "pathway_sets": [
+    "HALLMARK_PI3K_AKT_MTOR_SIGNALING"
+  ],
+  "pathway_sets_annotations": {
+    "HALLMARK_PI3K_AKT_MTOR_SIGNALING": {
+      "description": "Involves PI3K activation leading to AKT and mTOR signaling, promoting cell survival and growth.",
+      "interpretation": "PI3K–AKT–mTOR signaling contributes to survival and resistance in KRAS-mutant NSCLC."
+    }
+  },
+  "sensitivity_genes_up": [],
+  "sensitivity_genes_down": [],
+  "resistance_genes_up": [],
+  "resistance_genes_down": [],
+  "sensitivity_genes_up_annotations": [],
+  "sensitivity_genes_down_annotations": [],
+  "resistance_genes_up_annotations": [],
+  "resistance_genes_down_annotations": [],
+  "kg_gene_relationships": [],
+  "contraindications": [],
+  "citations": [
+    "https://pubchem.ncbi.nlm.nih.gov/compound/Adagrasib",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2023/216340Orig1s000MultidisciplineR.pdf",
+    "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-grants-accelerated-approval-adagrasib-kras-g12c-mutated-nsclc",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/216340s000lbl.pdf",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10852394/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC11835422/",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2023/216340Orig1s000Approv.pdf"
+  ],
+  "notes": "Limited data on resistance pathways in breast cancer; see citations."
+}

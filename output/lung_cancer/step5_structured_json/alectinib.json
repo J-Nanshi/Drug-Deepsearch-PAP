@@ -1,0 +1,72 @@
+{
+  "drug_name": "alectinib",
+  "cancer_indication": null,
+  "drug_category": null,
+  "drug_class": "ALK tyrosine kinase inhibitor",
+  "moa": "Alectinib is a highly selective, second-generation ALK tyrosine kinase inhibitor that binds the ATP-binding site within the ALK kinase domain, blocking ALK autophosphorylation and downstream signal transduction. It is effective against several crizotinib-resistant ALK mutations, though less effective against G1202R.",
+  "chembl_id": null,
+  "drugbank_id": null,
+  "synonyms": [
+    "Alecensa"
+  ],
+  "primary_targets": [
+    "ALK"
+  ],
+  "pathway_sets": [
+    "REACTOME_SIGNALING_BY_ALK_IN_CANCER",
+    "REACTOME_PI3K_AKT_SIGNALING_IN_CANCER"
+  ],
+  "pathway_sets_annotations": {
+    "REACTOME_SIGNALING_BY_ALK_IN_CANCER": {
+      "description": "Involves ALK receptor signaling that activates pathways like MAPK, PI3K/AKT, and JAK/STAT.",
+      "interpretation": "Drives proliferation and survival in ALK-positive cancers."
+    },
+    "REACTOME_PI3K_AKT_SIGNALING_IN_CANCER": {
+      "description": "Central pro-survival pathway involving PI3K/AKT signaling.",
+      "interpretation": "Contributes to survival and resistance mechanisms in cancer."
+    }
+  },
+  "sensitivity_genes_up": [],
+  "sensitivity_genes_down": [],
+  "resistance_genes_up": [],
+  "resistance_genes_down": [],
+  "sensitivity_genes_up_annotations": [],
+  "sensitivity_genes_down_annotations": [],
+  "resistance_genes_up_annotations": [],
+  "resistance_genes_down_annotations": [],
+  "kg_gene_relationships": [],
+  "contraindications": [
+    "Hypersensitivity to the active substance or excipients"
+  ],
+  "citations": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5127851",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6069919/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6077883/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6385324/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6044318",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9434408",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6440803/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5594119",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/Alectinib",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/Alectinib-Hydrochloride",
+    "https://www.ncbi.nlm.nih.gov/books/NBK548591/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5876637/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12420365/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10887432/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709813/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10054655/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6580130/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9548212/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7899557/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC8592510/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12673995/",
+    "https://www.ema.europa.eu/en/documents/rmp/alecensa-epar-risk-management-plan_en.pdf",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9663323/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7757094/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12000942/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10035072/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7912146/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC11946249/"
+  ],
+  "notes": "Limited data on resistance pathways in breast cancer; see citations."
+}

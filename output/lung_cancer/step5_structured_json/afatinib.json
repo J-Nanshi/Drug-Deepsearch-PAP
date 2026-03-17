@@ -1,0 +1,77 @@
+{
+  "drug_name": "afatinib",
+  "cancer_indication": "Breast cancer – all molecular subtypes",
+  "drug_category": "HER2-targeted",
+  "drug_class": "ErbB family tyrosine kinase inhibitor",
+  "moa": "Afatinib is an irreversible ErbB family tyrosine kinase inhibitor that covalently binds to EGFR, HER2, and HER4, blocking their kinase activity and downstream signaling pathways such as MAPK and PI3K/AKT, leading to growth inhibition and apoptosis in EGFR-addicted tumors.",
+  "chembl_id": null,
+  "drugbank_id": null,
+  "synonyms": [
+    "Giotrif",
+    "Afatinib maleate",
+    "Afatinib dimaleate"
+  ],
+  "primary_targets": [
+    "EGFR",
+    "ERBB2",
+    "ERBB4"
+  ],
+  "pathway_sets": [
+    "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "BIOCARTA_ERK_PATHWAY",
+    "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY",
+    "REACTOME_SIGNALING_BY_VEGF",
+    "BIOCARTA_AKT_PATHWAY"
+  ],
+  "pathway_sets_annotations": {
+    "REACTOME_SIGNALING_BY_EGFR_IN_CANCER": {
+      "description": "Regulates EGFR signaling involved in cell proliferation and survival.",
+      "interpretation": "EGFR signaling is crucial in driving proliferation in EGFR-mutant cancers."
+    },
+    "BIOCARTA_ERK_PATHWAY": {
+      "description": "Involves ERK signaling in cell proliferation and differentiation.",
+      "interpretation": "ERK pathway activation contributes to cancer cell proliferation."
+    },
+    "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY": {
+      "description": "Involves HGF/MET signaling leading to RAS and ERK activation.",
+      "interpretation": "MET signaling can bypass EGFR inhibition, contributing to resistance."
+    },
+    "REACTOME_SIGNALING_BY_VEGF": {
+      "description": "Regulates angiogenesis through VEGF signaling.",
+      "interpretation": "VEGF signaling supports tumor angiogenesis and growth."
+    },
+    "BIOCARTA_AKT_PATHWAY": {
+      "description": "Involves AKT signaling in cell survival and metabolism.",
+      "interpretation": "AKT pathway activation supports cancer cell survival and resistance."
+    }
+  },
+  "sensitivity_genes_up": [],
+  "sensitivity_genes_down": [],
+  "resistance_genes_up": [],
+  "resistance_genes_down": [],
+  "sensitivity_genes_up_annotations": [],
+  "sensitivity_genes_down_annotations": [],
+  "resistance_genes_up_annotations": [],
+  "resistance_genes_down_annotations": [],
+  "kg_gene_relationships": [],
+  "contraindications": [
+    "Pregnancy",
+    "Lactation"
+  ],
+  "citations": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC4543855/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5244907/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10297373/",
+    "https://pubmed.ncbi.nlm.nih.gov/31931137/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12553936/",
+    "https://pubmed.ncbi.nlm.nih.gov/36069292/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9680984/",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/201292s015lbl.pdf",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5488108"
+  ],
+  "notes": "Limited data on breast cancer-specific pathways; see citations for lung cancer context."
+}

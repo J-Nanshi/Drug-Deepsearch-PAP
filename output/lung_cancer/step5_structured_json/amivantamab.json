@@ -1,0 +1,57 @@
+{
+  "drug_name": "amivantamab",
+  "cancer_indication": null,
+  "drug_category": null,
+  "drug_class": null,
+  "moa": "Amivantamab is a fully human, low‑fucose IgG1 bispecific antibody that targets EGFR and MET, blocking ligand binding and inhibiting downstream signaling. It enhances immune effector functions, promoting ADCC and trogocytosis, particularly relevant in EGFR exon 20 insertion NSCLC.",
+  "chembl_id": "CHEMBL4558324",
+  "drugbank_id": "DB16216",
+  "synonyms": [
+    "Rybrevant"
+  ],
+  "primary_targets": [
+    "EGFR",
+    "MET"
+  ],
+  "pathway_sets": [
+    "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "REACTOME_SIGNALING_BY_MET"
+  ],
+  "pathway_sets_annotations": {
+    "REACTOME_SIGNALING_BY_EGFR_IN_CANCER": {
+      "description": "Regulates cell proliferation and survival via EGFR activation.",
+      "interpretation": "EGFR signaling is central to survival and proliferation in EGFR-mutant NSCLC."
+    },
+    "REACTOME_SIGNALING_BY_MET": {
+      "description": "Involves MET receptor activation by HGF, driving oncogenesis.",
+      "interpretation": "MET signaling contributes to resistance in EGFR-mutant NSCLC."
+    }
+  },
+  "sensitivity_genes_up": [],
+  "sensitivity_genes_down": [],
+  "resistance_genes_up": [],
+  "resistance_genes_down": [],
+  "sensitivity_genes_up_annotations": [],
+  "sensitivity_genes_down_annotations": [],
+  "resistance_genes_up_annotations": [],
+  "resistance_genes_down_annotations": [],
+  "kg_gene_relationships": [],
+  "contraindications": [],
+  "citations": [
+    "https://pubmed.ncbi.nlm.nih.gov/35983925/",
+    "https://www.ncbi.nlm.nih.gov/pubmed/34913823",
+    "https://pubmed.ncbi.nlm.nih.gov/34913823/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC11614048/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+    "https://pubmed.ncbi.nlm.nih.gov/41206690/",
+    "https://pubmed.ncbi.nlm.nih.gov/32747419/",
+    "https://pubmed.ncbi.nlm.nih.gov/36652175",
+    "https://pubmed.ncbi.nlm.nih.gov/37022784/",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761210s000lbl.pdf",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605/",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/761210Orig1s002ltr.pdf",
+    "https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-amivantamab-vmjw-egfr-exon-20-insertion-mutated-non-small-cell-lung-cancer-indications",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093/"
+  ],
+  "notes": "The report focuses on non-small cell lung cancer, not breast cancer. No breast cancer-specific data available."
+}

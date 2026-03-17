@@ -1,0 +1,74 @@
+{
+  "drug_name": "atezolizumab",
+  "cancer_indication": "Breast cancer – all molecular subtypes",
+  "drug_category": "Immune checkpoint",
+  "drug_class": "PD-L1 inhibitor",
+  "moa": "Atezolizumab is a humanized IgG1 monoclonal antibody that binds PD-L1, blocking its interaction with PD-1 and B7.1, thereby releasing PD-1/PD-L1-mediated inhibition of cytotoxic T cells and restoring antitumor immune activity.",
+  "chembl_id": null,
+  "drugbank_id": "DB11595",
+  "synonyms": [
+    "Tecentriq",
+    "MPDL 3280A",
+    "MPDL-3280A",
+    "MPDL3280A",
+    "RG7446",
+    "RO5541267",
+    "Atezo"
+  ],
+  "primary_targets": [
+    "CD274",
+    "PDCD1",
+    "CD80"
+  ],
+  "pathway_sets": [
+    "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING",
+    "REACTOME_CO_STIMULATION_BY_CD28",
+    "BIOCARTA_MHC_PATHWAY",
+    "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY"
+  ],
+  "pathway_sets_annotations": {
+    "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING": {
+      "description": "Regulates T-cell activation via CD28 and PI3K/AKT signaling.",
+      "interpretation": "Critical for T-cell activation and proliferation, enhancing immune response against tumors."
+    },
+    "REACTOME_CO_STIMULATION_BY_CD28": {
+      "description": "Involves CD28-mediated co-stimulation of T cells.",
+      "interpretation": "Enhances T-cell activation and survival, important for effective immune response."
+    },
+    "BIOCARTA_MHC_PATHWAY": {
+      "description": "Involves antigen presentation via MHC molecules.",
+      "interpretation": "Essential for T-cell recognition of tumor antigens, influencing immune response."
+    },
+    "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY": {
+      "description": "Pathway involved in T-cell receptor signaling.",
+      "interpretation": "Facilitates T-cell activation and response to tumor antigens."
+    }
+  },
+  "sensitivity_genes_up": [],
+  "sensitivity_genes_down": [],
+  "resistance_genes_up": [],
+  "resistance_genes_down": [],
+  "sensitivity_genes_up_annotations": [],
+  "sensitivity_genes_down_annotations": [],
+  "resistance_genes_up_annotations": [],
+  "resistance_genes_down_annotations": [],
+  "kg_gene_relationships": [],
+  "contraindications": [
+    "Pre-existing autoimmune diseases",
+    "Immune deficiencies",
+    "Embryo-fetal toxicity"
+  ],
+  "citations": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC11352782/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10889010/",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/Atezolizumab",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10931414/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507/",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf",
+    "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+    "https://cdn.clinicaltrials.gov/large-docs/21/NCT03498521/Prot_SAP_000.pdf",
+    "https://clinicaltrials.gov/study/NCT02763579",
+    "https://clinicaltrials.gov/study/NCT02008227"
+  ],
+  "notes": "Limited data on resistance pathways in breast cancer; see citations."
+}
