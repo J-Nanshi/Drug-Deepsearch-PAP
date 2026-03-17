@@ -1,0 +1,214 @@
+{
+  "drug_name": "afatinib",
+  "input_file": "output\\lung_cancer\\step3_mapping_json\\afatinib.json",
+  "total_pathways": 5,
+  "llm_model": "gpt-4o",
+  "validation_tag_definitions": {
+    "mechanistically accurate and clinically validated": "Supported by clinical trial data and mechanistic understanding",
+    "mechanistically accurate only": "Biologically plausible based on mechanism but lacks clinical validation",
+    "mechanistically rare": "Possible but uncommon or unusual scenario",
+    "mechanistically not possible": "Contradicts known biology or mechanism of action"
+  },
+  "pathways": {
+    "REACTOME_SIGNALING_BY_EGFR_IN_CANCER": {
+      "pathway_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "drug_name": "afatinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "High EGFR signaling at baseline indicates active oncogenic driver mutations (e.g., EGFR exon 19 deletions) which are known to be sensitive to afatinib, an irreversible EGFR inhibitor.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Low baseline EGFR signaling might indicate compensatory pathways or partial inhibition by endogenous factors, yet tumors with specific EGFR mutations can still respond to afatinib.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "High EGFR signaling with resistance suggests secondary mutations (e.g., T790M) or activation of bypass pathways (e.g., MET amplification) that confer resistance to afatinib.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_downregulation": {
+          "description": "Low EGFR signaling with resistance may indicate reliance on alternative oncogenic pathways or prior treatment effects leading to pathway suppression.",
+          "validation_tag": "mechanistically rare"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Afatinib effectively inhibits EGFR signaling, but compensatory upregulation may occur in sensitive tumors due to feedback loops, yet overall pathway activity remains suppressed.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "sensitive_downregulation": {
+          "description": "Afatinib leads to sustained downregulation of EGFR signaling in sensitive tumors, resulting in tumor regression and clinical response.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "In resistant tumors, afatinib may initially suppress EGFR but alternative pathways (e.g., MET, HER2) become upregulated, maintaining oncogenic signaling.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Afatinib may reduce EGFR signaling, but resistance mechanisms (e.g., persistent downstream signaling) prevent effective tumor control.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      }
+    },
+    "BIOCARTA_ERK_PATHWAY": {
+      "pathway_name": "BIOCARTA_ERK_PATHWAY",
+      "drug_name": "afatinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of the ERK pathway in lung cancer often indicates active EGFR signaling, which afatinib can effectively inhibit, leading to tumor sensitivity.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of the ERK pathway may indicate reliance on alternative pathways, but residual EGFR signaling could still render tumors sensitive to afatinib.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Upregulation of the ERK pathway with resistance suggests alternative pathway activation or mutations downstream of EGFR, reducing afatinib efficacy.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of the ERK pathway in resistant tumors may indicate bypass signaling or compensatory mechanisms independent of EGFR.",
+          "validation_tag": "mechanistically rare"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Afatinib treatment in sensitive tumors may initially upregulate ERK as a feedback response, but sustained inhibition of EGFR eventually downregulates the pathway, leading to tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Afatinib effectively inhibits EGFR, leading to sustained downregulation of the ERK pathway and tumor regression in sensitive tumors.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "In resistant tumors, afatinib may fail to inhibit the ERK pathway due to compensatory signaling or mutations, maintaining pathway activity despite treatment.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Afatinib may downregulate the ERK pathway in resistant tumors, but resistance mechanisms may involve alternative pathways or mutations that sustain tumor survival.",
+          "validation_tag": "mechanistically rare"
+        }
+      }
+    },
+    "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY": {
+      "pathway_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY",
+      "drug_name": "afatinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of the HGF/MET/RAS/ERK pathway indicates active signaling that drives tumor growth, making it susceptible to afatinib, which inhibits EGFR and HER2, reducing downstream signaling.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation suggests low pathway activity, but sensitivity may arise from dependency on alternative EGFR signaling, which afatinib effectively targets.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Despite upregulation, resistance may occur due to compensatory activation of parallel pathways like PI3K/AKT, bypassing afatinib's effects.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Low pathway activity with resistance suggests reliance on non-EGFR pathways or mutations conferring afatinib resistance.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Afatinib treatment in sensitive tumors typically downregulates this pathway, but upregulation post-treatment may reflect compensatory mechanisms or tumor adaptation.",
+          "validation_tag": "mechanistically rare"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective afatinib treatment results in downregulation of the pathway, correlating with tumor regression and clinical response.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent upregulation post-afatinib indicates resistance, potentially due to MET amplification or alternative pathway activation.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation in resistant tumors suggests initial pathway inhibition, but resistance mechanisms like secondary mutations or bypass signaling maintain tumor viability.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      }
+    },
+    "REACTOME_SIGNALING_BY_VEGF": {
+      "pathway_name": "REACTOME_SIGNALING_BY_VEGF",
+      "drug_name": "afatinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of VEGF signaling in lung cancer may indicate high angiogenic activity, which can be disrupted by afatinib's EGFR inhibition, leading to reduced tumor vascularization and growth.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of VEGF signaling suggests low angiogenic dependency, but afatinib may still be effective due to its primary action on EGFR mutations driving tumor growth.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "High VEGF signaling could drive angiogenesis independent of EGFR, leading to resistance as afatinib primarily targets EGFR-driven pathways.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Low VEGF signaling with resistance suggests alternative pathways or mutations (e.g., MET amplification) are driving tumor growth, reducing afatinib efficacy.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Afatinib treatment may paradoxically increase VEGF signaling as a compensatory mechanism, but overall tumor reduction occurs due to effective EGFR pathway inhibition.",
+          "validation_tag": "mechanistically rare"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective inhibition of EGFR by afatinib leads to decreased VEGF signaling, reducing angiogenesis and tumor growth.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent upregulation of VEGF signaling post-treatment indicates a bypass mechanism, potentially involving alternative angiogenic pathways, maintaining resistance.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Despite VEGF signaling reduction, resistance persists due to other oncogenic pathways or mutations sustaining tumor growth.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      }
+    },
+    "BIOCARTA_AKT_PATHWAY": {
+      "pathway_name": "BIOCARTA_AKT_PATHWAY",
+      "drug_name": "afatinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of the AKT pathway suggests active signaling, which may drive EGFR-mutant lung cancer proliferation. Afatinib, an EGFR inhibitor, can effectively block upstream signaling, reducing AKT pathway activity and tumor growth.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of the AKT pathway may indicate reliance on alternative pathways for survival. Afatinib's inhibition of EGFR can further suppress compensatory signaling, leading to tumor regression.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent upregulation of the AKT pathway suggests activation of bypass signaling routes, such as PI3K mutations, conferring resistance to afatinib despite EGFR inhibition.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of the AKT pathway in resistant tumors may indicate reliance on other survival pathways, such as MET or HER2, which are not targeted by afatinib.",
+          "validation_tag": "mechanistically rare"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "In sensitive tumors, afatinib reduces AKT pathway activity by inhibiting EGFR, but transient upregulation may occur due to feedback loops before sustained suppression.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "sensitive_downregulation": {
+          "description": "Afatinib effectively suppresses the AKT pathway in sensitive tumors, leading to decreased cell proliferation and increased apoptosis.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "In resistant tumors, afatinib fails to suppress AKT pathway upregulation due to compensatory mechanisms, such as activation of alternative receptor tyrosine kinases.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Afatinib treatment may not affect the already downregulated AKT pathway in resistant tumors, as resistance mechanisms are independent of EGFR signaling.",
+          "validation_tag": "mechanistically rare"
+        }
+      }
+    }
+  }
+}

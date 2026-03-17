@@ -1,112 +1,163 @@
-# [markdown]
-# Step 4: Drug Administration Pathway Combinations
-# ------------------------------------------------------------------------------------------------
-# This script takes the final_trial5.json output and generates pathway-drug interaction
-# combinations for before and after drug administration.
-#
-# For each pathway, it generates 8 combinations:
-# - Before Administration: (sensitive/resistant) × (upregulation/downregulation) = 4
-# - After Administration: (sensitive/resistant) × (upregulation/downregulation) = 4
-#
-# Input:
-#   - *_final_trial5.json from mapped_pathway_json/
-#   - prompt3a.docx template
-#
-# Output:
-#   - <drug>_administration_combinations.json
+"""Step 4 drug administration pathway combinations pipeline.
 
-#Imports
+Overview:
+This script processes Step-3 mapping JSON files, extracts mapped MSigDB pathways,
+generates before/after administration pathway-drug combinations with an LLM,
+and writes one per-drug Step-4 JSON output.
+
+Inputs:
+- CLI:
+  - `--input-dir`
+  - `--output-dir`
+  - `--prompt-path`
+  - `--cancer-type`
+  - `--file-pattern` (optional, default: `*.json`)
+- Environment:
+  - `OPENAI_API_KEY`
+- Per-row fields (from Step-3 mapping JSON):
+  - `Mapped MSigDB Pathway Name`
+
+Logic:
+1. Load prompt template text from `--prompt-path`.
+2. Apply cancer-type substitution (`breast cancer`/`breast`) using `--cancer-type`.
+3. Read Step-3 mapping JSON files from `--input-dir` matching `--file-pattern`.
+4. For each file:
+   - infer drug name from filename stem,
+   - extract unique mapped MSigDB pathways,
+   - generate 8 scenario combinations per pathway (before/after administration),
+   - parse/validate JSON responses with retry logic,
+   - aggregate results and compute summary counts.
+5. Persist output JSON as `<drug>.json` in `--output-dir`.
+
+Outputs:
+- `<drug>.json` (Step-4 administration combinations per drug)
+"""
+
+import argparse
 import json
 import os
 import re
+import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
-from openai import OpenAI
 from time import sleep
+from typing import Any, Dict, List, Optional
 
-# For reading .docx files
-try:
-    from docx import Document
-except ImportError:
-    raise ImportError("python-docx is required. Install with: pip install python-docx")
-
-#Config
-MSIGDB_SQLITE_PATH = r"msigdb_v2025.1.Hs.db/msigdb_v2025.1.Hs.db"
+from openai import OpenAI
 
 # OpenAI Configuration
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ImportError:
     pass
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-if not OPENAI_API_KEY:
-    raise RuntimeError(
-        "OPENAI_API_KEY not found. Please set it using one of these methods:\n"
-        "1. Environment variable: $env:OPENAI_API_KEY = 'your-key'\n"
-        "2. Create a .env file with: OPENAI_API_KEY=your-key\n"
-        "3. Set directly in code (not recommended)"
-    )
-
-# Initialize OpenAI client
-client = OpenAI(api_key=OPENAI_API_KEY)
+client: Optional[OpenAI] = None
 
 # LLM Model Configuration
-LLM_MODEL = "gpt-5.1"  # or "gpt-4-turbo", "gpt-4", etc.
-LLM_TEMPERATURE = 0.4  # Low temperature for consistent responses
+LLM_MODEL = "gpt-4o"
+LLM_TEMPERATURE = 0.3
 LLM_MAX_TOKENS = 4000
-
-# --- Input/Output Paths ---
-INPUT_DIR = r"mapped_pathway_json"
-PROMPT_DOCX_PATH = r"D:\GS\pathway-enrichment-pipeline\Step3a\input\prompt3a.docx"
-OUTPUT_DIR = r"mapped_pathway_json"
-
-# Auto-detect trial5 final files
-TRIAL5_FILES = list(Path(INPUT_DIR).glob("*_final_trial5.json"))
 
 # Display controls
 PRINT_PROGRESS = True
 
-#Helpers
+# Validation tags for mechanistic classification
+VALIDATION_TAGS = [
+    "mechanistically accurate and clinically validated",
+    "mechanistically accurate only",
+    "mechanistically rare",
+    "mechanistically not possible",
+]
+
+
+def init_openai_client() -> None:
+    """Initialize OpenAI client from environment variable."""
+    global client
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if not openai_api_key:
+        raise RuntimeError(
+            "OPENAI_API_KEY not found. Please set it using one of these methods:\n"
+            "1. Environment variable: $env:OPENAI_API_KEY = 'your-key'\n"
+            "2. Create a .env file with: OPENAI_API_KEY=your-key\n"
+            "3. Set directly in code (not recommended)"
+        )
+    client = OpenAI(api_key=openai_api_key)
+
+
 def load_json(path: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def save_json(obj: Any, path: str) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
-def read_docx(path: str) -> str:
-    """Read text content from a .docx file."""
-    doc = Document(path)
-    full_text = []
-    for para in doc.paragraphs:
-        full_text.append(para.text)
-    return "\n".join(full_text)
 
-def extract_drug_name(filename: str) -> str:
-    """Extract drug name from filename like 'ribociclib_step2_trial2_out_final_trial5.json'"""
-    # Try to extract the first word before underscore
-    stem = Path(filename).stem
-    parts = stem.split("_")
-    if parts:
-        return parts[0].capitalize()
-    return "Unknown"
+def read_prompt_text(path: Path) -> str:
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
-def extract_pathway_list(trial5_data: Dict[str, Any]) -> List[str]:
-    """Extract unique 'Mapped MSigDB Pathway Name' values from trial5 output."""
-    pathways = []
-    for row_key, row_data in trial5_data.items():
-        pathway_name = row_data.get("Mapped MSigDB Pathway Name", "")
-        if pathway_name and pathway_name not in pathways:
+
+def normalize_cancer_terms(cancer_type: str) -> Dict[str, str]:
+    """Build cancer phrase/label for prompt substitutions."""
+    cleaned = cancer_type.strip()
+    if not cleaned:
+        raise ValueError("--cancer-type cannot be empty.")
+
+    if re.search(r"\bcancer\b", cleaned, flags=re.IGNORECASE):
+        cancer_phrase = cleaned
+    else:
+        cancer_phrase = f"{cleaned} cancer"
+
+    # Remove only trailing 'cancer' for single-word replacement.
+    cancer_label = re.sub(r"\s*cancer\s*$", "", cleaned, flags=re.IGNORECASE).strip()
+    if not cancer_label:
+        cancer_label = cleaned
+
+    return {"cancer_phrase": cancer_phrase, "cancer_label": cancer_label}
+
+
+def apply_cancer_type_to_prompt(prompt_text: str, cancer_type: str) -> str:
+    """Replace breast-specific wording in prompt using the selected cancer type."""
+    normalized = normalize_cancer_terms(cancer_type)
+    transformed = re.sub(
+        r"breast cancer",
+        normalized["cancer_phrase"],
+        prompt_text,
+        flags=re.IGNORECASE,
+    )
+    transformed = re.sub(
+        r"\bbreast\b",
+        normalized["cancer_label"],
+        transformed,
+        flags=re.IGNORECASE,
+    )
+    return transformed
+
+
+def extract_pathway_list(step3_data: Dict[str, Any]) -> List[str]:
+    """Extract unique 'Mapped MSigDB Pathway Name' values from Step 3 output."""
+    pathways: List[str] = []
+    seen = set()
+    for _, row_data in step3_data.items():
+        if not isinstance(row_data, dict):
+            continue
+        pathway_name = row_data.get("Mapped MSigDB Pathway Name")
+        if not isinstance(pathway_name, str):
+            continue
+        pathway_name = pathway_name.strip()
+        if pathway_name and pathway_name not in seen:
+            seen.add(pathway_name)
             pathways.append(pathway_name)
     return pathways
 
-# LLM Helper
+
 def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3) -> str:
     """Call OpenAI API with retry logic."""
+    if client is None:
+        raise RuntimeError("OpenAI client is not initialized. Call init_openai_client() first.")
     for attempt in range(max_retries):
         try:
             kwargs = {
@@ -119,9 +170,7 @@ def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3)
             return response.choices[0].message.content.strip()
         except Exception as e:
             err = str(e)
-            print(f"OpenAI API error (attempt {attempt+1}/{max_retries}): {e}")
-
-            # Handle max_tokens parameter issues
+            print(f"OpenAI API error (attempt {attempt + 1}/{max_retries}): {e}")
             if "max_tokens" in err and "not supported" in err and attempt < max_retries - 1:
                 try:
                     kwargs.pop("max_tokens", None)
@@ -132,42 +181,21 @@ def call_openai_with_retry(messages: List[Dict[str, str]], max_retries: int = 3)
                     print(f"Retry with max_completion_tokens also failed: {e2}")
 
             if attempt < max_retries - 1:
-                sleep(2 ** attempt)  # Exponential backoff
+                sleep(2**attempt)
             else:
                 raise
     return ""
 
-# Validation tags for mechanistic classification
-VALIDATION_TAGS = [
-    "mechanistically accurate and clinically validated",
-    "mechanistically accurate only",
-    "mechanistically rare",
-    "mechanistically not possible"
-]
 
-# Generate Combinations for a Single Pathway
 def generate_pathway_combinations(
     drug_name: str,
     pathway_name: str,
     base_prompt: str,
     retry_on_parse_error: bool = True,
 ) -> Dict[str, Any]:
-    """
-    Generate before/after administration combinations for a single pathway.
-    
-    Returns a dict with:
-    - pathway_name
-    - before_administration: {sensitive_upregulation, sensitive_downregulation, 
-                              resistant_upregulation, resistant_downregulation}
-      Each contains: description, validation_tag
-    - after_administration: {sensitive_upregulation, sensitive_downregulation,
-                             resistant_upregulation, resistant_downregulation}
-      Each contains: description, validation_tag
-    """
-    
-    # Sanitize pathway name for prompt (remove special chars that might confuse JSON)
+    """Generate before/after administration combinations for a single pathway."""
     safe_pathway_name = pathway_name.replace('"', '\\"')
-    
+
     prompt = f"""{base_prompt}
 
 DRUG NAME: {drug_name}
@@ -175,7 +203,7 @@ DRUG NAME: {drug_name}
 PATHWAY: {pathway_name}
 
 TASK:
-For the pathway "{safe_pathway_name}" and drug "{drug_name}", provide detailed biological descriptions for each of the following 8 scenarios. 
+For the pathway "{safe_pathway_name}" and drug "{drug_name}", provide detailed biological descriptions for each of the following 8 scenarios.
 
 For EACH scenario, also assign a validation tag from these options:
 - "mechanistically accurate and clinically validated" = supported by clinical trial data and mechanistic understanding
@@ -239,67 +267,62 @@ Return ONLY valid JSON (no markdown code blocks, no explanation outside JSON):
 
     messages = [
         {
-            "role": "system", 
-            "content": "You are an expert in cancer biology, pharmacology, and pathway analysis. Provide precise, scientifically accurate descriptions of pathway-drug interactions. Return ONLY valid JSON without any markdown formatting or code blocks."
+            "role": "system",
+            "content": (
+                "You are an expert in cancer biology, pharmacology, and pathway analysis. "
+                "Provide precise, scientifically accurate descriptions of pathway-drug interactions. "
+                "Return ONLY valid JSON without any markdown formatting or code blocks."
+            ),
         },
-        {"role": "user", "content": prompt}
+        {"role": "user", "content": prompt},
     ]
-    
+
     max_parse_attempts = 2 if retry_on_parse_error else 1
     last_error = None
     raw_response = ""
-    
+
     for parse_attempt in range(max_parse_attempts):
         try:
             response = call_openai_with_retry(messages)
             raw_response = response
-            
-            # Clean up response - remove markdown code blocks if present
             response = response.strip()
-            
-            # Remove markdown code blocks (```json ... ``` or ``` ... ```)
+
             if response.startswith("```"):
                 response = re.sub(r"^```(?:json)?\s*\n?", "", response)
                 response = re.sub(r"\n?```\s*$", "", response)
-            
-            # Try to find JSON object in response if it has extra text
-            json_match = re.search(r'\{[\s\S]*\}', response)
+
+            json_match = re.search(r"\{[\s\S]*\}", response)
             if json_match:
                 response = json_match.group(0)
-            
-            # Fix common JSON issues
-            # Remove trailing commas before } or ]
-            response = re.sub(r',(\s*[}\]])', r'\1', response)
-            
+
+            response = re.sub(r",(\s*[}\]])", r"\1", response)
             result = json.loads(response)
-            
-            # Validate the result has expected structure
+
             if "before_administration" not in result or "after_administration" not in result:
                 raise ValueError("Response missing required fields (before_administration, after_administration)")
-            
+
             return result
-            
+
         except json.JSONDecodeError as e:
             last_error = f"JSON parsing failed: {str(e)}"
-            print(f"  WARNING: Parse attempt {parse_attempt+1}/{max_parse_attempts} failed for {pathway_name}: {e}")
+            print(f"  WARNING: Parse attempt {parse_attempt + 1}/{max_parse_attempts} failed for {pathway_name}: {e}")
             if parse_attempt < max_parse_attempts - 1:
-                print(f"  Retrying with simplified prompt...")
-                # Add instruction to be more careful with JSON
-                messages[1]["content"] += "\n\nIMPORTANT: Your previous response had JSON formatting errors. Please return ONLY valid JSON, no other text."
+                messages[1][
+                    "content"
+                ] += "\n\nIMPORTANT: Your previous response had JSON formatting errors. Please return ONLY valid JSON, no other text."
                 sleep(1)
             continue
-            
+
         except ValueError as e:
             last_error = str(e)
             print(f"  WARNING: Validation failed for {pathway_name}: {e}")
             break
-            
+
         except Exception as e:
             last_error = str(e)
             print(f"  ERROR: LLM call failed for {pathway_name}: {e}")
             break
-    
-    # Return error result with diagnostic info
+
     print(f"  ERROR: All attempts failed for {pathway_name}")
     return {
         "pathway_name": pathway_name,
@@ -307,94 +330,80 @@ Return ONLY valid JSON (no markdown code blocks, no explanation outside JSON):
         "error": last_error,
         "raw_response_preview": raw_response[:500] if raw_response else "No response",
         "before_administration": create_error_placeholder("LLM parsing failed"),
-        "after_administration": create_error_placeholder("LLM parsing failed")
+        "after_administration": create_error_placeholder("LLM parsing failed"),
     }
+
 
 def create_error_placeholder(error_msg: str) -> Dict[str, Dict[str, str]]:
     """Create placeholder structure for failed pathways."""
     placeholder = {
         "description": f"ERROR: {error_msg}",
-        "validation_tag": "mechanistically not possible"
+        "validation_tag": "mechanistically not possible",
     }
     return {
         "sensitive_upregulation": placeholder.copy(),
         "sensitive_downregulation": placeholder.copy(),
         "resistant_upregulation": placeholder.copy(),
-        "resistant_downregulation": placeholder.copy()
+        "resistant_downregulation": placeholder.copy(),
     }
 
-# Main Pipeline
+
 def run_administration_pipeline(
     input_file: Path,
     base_prompt: str,
+    output_dir: Path,
 ) -> str:
-    """
-    Run the administration combinations pipeline for one trial5 file.
-    
-    Returns: output_path
-    """
-    # Extract drug name from filename
-    drug_name = extract_drug_name(str(input_file))
-    stem = input_file.stem.replace("_final_trial5", "")
-    
-    print(f"\n{'='*70}")
-    print(f"Processing: {drug_name}")
-    print(f"Input: {input_file}")
-    print(f"{'='*70}")
-    
-    # Load trial5 output
-    trial5_data = load_json(str(input_file))
-    
-    # Extract pathway list
-    pathways = extract_pathway_list(trial5_data)
-    print(f"Found {len(pathways)} unique pathways to process")
-    
-    # Process each pathway
+    """Run the administration combinations pipeline for one Step 3 mapping file."""
+    drug_name = input_file.stem
+
+    print(f"\n{'=' * 70}")
+    print(f"Processing drug: {drug_name}")
+    print(f"Input Step 3 JSON: {input_file}")
+    print(f"{'=' * 70}")
+
+    step3_data = load_json(str(input_file))
+    pathways = extract_pathway_list(step3_data)
+    print(f"Found {len(pathways)} unique mapped pathways")
+
     results = {
         "drug_name": drug_name,
+        "input_file": str(input_file),
         "total_pathways": len(pathways),
         "llm_model": LLM_MODEL,
         "validation_tag_definitions": {
             "mechanistically accurate and clinically validated": "Supported by clinical trial data and mechanistic understanding",
             "mechanistically accurate only": "Biologically plausible based on mechanism but lacks clinical validation",
             "mechanistically rare": "Possible but uncommon or unusual scenario",
-            "mechanistically not possible": "Contradicts known biology or mechanism of action"
+            "mechanistically not possible": "Contradicts known biology or mechanism of action",
         },
-        "pathways": {}
+        "pathways": {},
     }
-    
+
     for i, pathway in enumerate(pathways):
         if PRINT_PROGRESS:
-            print(f"  [{i+1}/{len(pathways)}] Processing: {pathway}...")
-        
-        # Generate combinations for this pathway
+            print(f"  [{i + 1}/{len(pathways)}] Processing: {pathway}...")
         combinations = generate_pathway_combinations(drug_name, pathway, base_prompt)
         results["pathways"][pathway] = combinations
-        
-        # Small delay to avoid rate limiting
         sleep(1.0)
-    
-    # Save output
-    output_path = str(Path(OUTPUT_DIR) / f"{stem}_administration_combinations.json")
+
+    output_path = str(output_dir / f"{drug_name}.json")
     save_json(results, output_path)
-    
+
     print(f"\n--- SUMMARY: {drug_name} ---")
     print(f"Pathways processed: {len(pathways)}")
     print(f"Output saved to: {output_path}")
-    
-    # Count errors and validation tags
+
     error_count = 0
     successful_count = 0
     validation_tag_counts = {tag: 0 for tag in VALIDATION_TAGS}
     failed_pathways = []
-    
+
     for pathway_name, p in results["pathways"].items():
         if "error" in p:
             error_count += 1
             failed_pathways.append(pathway_name)
         else:
             successful_count += 1
-            # Count validation tags
             for admin_time in ["before_administration", "after_administration"]:
                 if admin_time in p:
                     for combo in p[admin_time].values():
@@ -402,53 +411,101 @@ def run_administration_pipeline(
                             tag = combo["validation_tag"]
                             if tag in validation_tag_counts:
                                 validation_tag_counts[tag] += 1
-    
+
     print(f"Successful: {successful_count}")
     if error_count > 0:
         print(f"Errors encountered: {error_count}")
         print(f"Failed pathways: {', '.join(failed_pathways)}")
-    
-    print(f"\n--- VALIDATION TAG DISTRIBUTION ---")
+
+    print("\n--- VALIDATION TAG DISTRIBUTION ---")
     for tag, count in validation_tag_counts.items():
         print(f"  {tag}: {count}")
-    
+
     return output_path
 
-# Main execution
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Generate Step 4 drug-administration combinations from Step 3 mapping JSON."
+    )
+    parser.add_argument(
+        "--input-dir",
+        required=True,
+        help="Directory containing Step 3 mapping JSON files (<drug>.json).",
+    )
+    parser.add_argument(
+        "--output-dir",
+        required=True,
+        help="Directory where Step 4 output JSON files will be written.",
+    )
+    parser.add_argument(
+        "--prompt-path",
+        required=True,
+        help="Path to prompt text file (e.g., prompts/prompt3b_before_after_adminstration_matrix.txt).",
+    )
+    parser.add_argument(
+        "--cancer-type",
+        required=True,
+        help="Cancer type value used to replace breast-specific prompt text (e.g., lung, colorectal).",
+    )
+    parser.add_argument(
+        "--file-pattern",
+        default="*.json",
+        help="Glob pattern for input files in --input-dir (default: *.json).",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    # Read base prompt from docx
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+    args = parse_args()
+    input_dir = Path(args.input_dir)
+    output_dir = Path(args.output_dir)
+    prompt_path = Path(args.prompt_path)
+    cancer_type = args.cancer_type
+    file_pattern = args.file_pattern
+
+    if not input_dir.is_dir():
+        raise RuntimeError(f"Input directory does not exist: {input_dir}")
+    if not prompt_path.exists():
+        raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     print("Loading prompt template...")
-    if not Path(PROMPT_DOCX_PATH).exists():
-        raise FileNotFoundError(f"Prompt file not found: {PROMPT_DOCX_PATH}")
-    
-    base_prompt = read_docx(PROMPT_DOCX_PATH)
-    print(f"Loaded prompt template ({len(base_prompt)} characters)")
-    
-    # Check for trial5 files
-    if not TRIAL5_FILES:
-        raise RuntimeError(
-            f"No *_final_trial5.json files found in {INPUT_DIR}.\n"
-            "Please run pathway_mapping_trial5.py first to generate input files."
-        )
-    
-    print(f"\nFound {len(TRIAL5_FILES)} trial5 output file(s) to process:")
-    for f in TRIAL5_FILES:
+    raw_prompt = read_prompt_text(prompt_path)
+    base_prompt = apply_cancer_type_to_prompt(raw_prompt, cancer_type)
+    print(f"Loaded prompt template ({len(raw_prompt)} chars)")
+    print(f"Applied cancer-type substitutions using: {cancer_type}")
+
+    input_files = sorted(input_dir.glob(file_pattern))
+    if not input_files:
+        raise RuntimeError(f"No files matched pattern '{file_pattern}' in {input_dir}")
+
+    init_openai_client()
+
+    print(f"\nFound {len(input_files)} input file(s) to process:")
+    for f in input_files:
         print(f"  - {f.name}")
-    
-    # Run pipeline for each file
+
     outputs = []
-    for trial5_file in TRIAL5_FILES:
+    for input_file in input_files:
         try:
-            output_path = run_administration_pipeline(trial5_file, base_prompt)
+            output_path = run_administration_pipeline(input_file, base_prompt, output_dir)
             outputs.append(output_path)
         except Exception as e:
-            print(f"ERROR processing {trial5_file}: {e}")
+            print(f"ERROR processing {input_file}: {e}")
             import traceback
-            traceback.print_exc()
-    
-    print(f"\n{'='*70}")
-    print(f"PIPELINE COMPLETE")
-    print(f"{'='*70}")
-    print(f"Total files processed: {len(outputs)}")
-    print("All outputs saved to:", OUTPUT_DIR)
 
+            traceback.print_exc()
+
+    print(f"\n{'=' * 70}")
+    print("PIPELINE COMPLETE")
+    print(f"{'=' * 70}")
+    print(f"Total files processed: {len(outputs)}")
+    print("All outputs saved to:", output_dir)

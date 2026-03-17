@@ -1,0 +1,174 @@
+{
+  "drug_name": "alectinib",
+  "input_file": "output\\lung_cancer\\step3_mapping_json\\alectinib.json",
+  "total_pathways": 4,
+  "llm_model": "gpt-4o",
+  "validation_tag_definitions": {
+    "mechanistically accurate and clinically validated": "Supported by clinical trial data and mechanistic understanding",
+    "mechanistically accurate only": "Biologically plausible based on mechanism but lacks clinical validation",
+    "mechanistically rare": "Possible but uncommon or unusual scenario",
+    "mechanistically not possible": "Contradicts known biology or mechanism of action"
+  },
+  "pathways": {
+    "REACTOME_SIGNALING_BY_ALK_IN_CANCER": {
+      "pathway_name": "REACTOME_SIGNALING_BY_ALK_IN_CANCER",
+      "drug_name": "alectinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "ALK signaling is upregulated, driving oncogenic proliferation; alectinib effectively inhibits ALK, leading to tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Despite low ALK signaling, tumors may harbor ALK mutations that are still targetable by alectinib, leading to tumor sensitivity.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "ALK signaling is upregulated, but resistance mechanisms such as secondary mutations or bypass pathways prevent alectinib efficacy.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Low ALK signaling suggests reliance on alternative pathways, rendering alectinib ineffective.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Mechanistically not possible: Alectinib effectively inhibits ALK, preventing upregulation in sensitive tumors.",
+          "validation_tag": "mechanistically not possible"
+        },
+        "sensitive_downregulation": {
+          "description": "Alectinib successfully inhibits ALK signaling, leading to pathway downregulation and tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "Upregulation persists due to resistance mechanisms such as ALK mutations or activation of alternative pathways.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Despite ALK inhibition, tumors remain resistant due to reliance on non-ALK pathways or other resistance mechanisms.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      }
+    },
+    "REACTOME_PI3K_AKT_SIGNALING_IN_CANCER": {
+      "pathway_name": "REACTOME_PI3K_AKT_SIGNALING_IN_CANCER",
+      "drug_name": "alectinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of the PI3K/AKT pathway in ALK-positive lung cancer may indicate active signaling that is susceptible to inhibition by alectinib, which targets ALK and can indirectly reduce PI3K/AKT activity.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of the PI3K/AKT pathway at baseline may suggest reliance on ALK signaling for survival, making the tumor sensitive to alectinib's ALK inhibition.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Upregulation of the PI3K/AKT pathway may indicate alternative survival pathways that confer resistance to alectinib, as the tumor may not be solely dependent on ALK signaling.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of the PI3K/AKT pathway with resistance suggests that the tumor may not rely on this pathway for survival, possibly due to other compensatory mechanisms.",
+          "validation_tag": "mechanistically rare"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Continued upregulation of the PI3K/AKT pathway in sensitive tumors post-treatment may reflect compensatory mechanisms, but overall pathway activity is reduced due to effective ALK inhibition.",
+          "validation_tag": "mechanistically rare"
+        },
+        "sensitive_downregulation": {
+          "description": "Alectinib effectively inhibits ALK, leading to downregulation of the PI3K/AKT pathway in sensitive tumors, resulting in tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "In resistant tumors, persistent upregulation of the PI3K/AKT pathway after alectinib treatment suggests activation of bypass pathways or mutations that maintain pathway activity.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of the PI3K/AKT pathway in resistant tumors post-treatment may indicate partial pathway inhibition, but resistance mechanisms prevent effective tumor control.",
+          "validation_tag": "mechanistically rare"
+        }
+      }
+    },
+    "KEGG_CELL_CYCLE": {
+      "pathway_name": "KEGG_CELL_CYCLE",
+      "drug_name": "alectinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Baseline upregulation of the cell cycle pathway in ALK-positive lung cancer may indicate high proliferative activity, which is effectively targeted by alectinib, leading to tumor sensitivity.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Baseline downregulation of the cell cycle pathway may reflect a less aggressive tumor phenotype that remains sensitive to alectinib due to ALK dependency.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Upregulation of the cell cycle pathway at baseline may indicate alternative proliferative signaling pathways that confer resistance to alectinib.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of the cell cycle pathway at baseline might suggest quiescent tumor cells or alternative survival pathways that are not targeted by alectinib, leading to resistance.",
+          "validation_tag": "mechanistically rare"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "After alectinib treatment, upregulation of the cell cycle pathway in sensitive tumors may reflect compensatory mechanisms that are eventually overridden by effective ALK inhibition.",
+          "validation_tag": "mechanistically rare"
+        },
+        "sensitive_downregulation": {
+          "description": "Alectinib effectively downregulates the cell cycle pathway in sensitive tumors by inhibiting ALK-driven proliferation, leading to tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_upregulation": {
+          "description": "In resistant tumors, persistent upregulation of the cell cycle pathway after alectinib treatment indicates activation of bypass signaling pathways that maintain proliferation.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of the cell cycle pathway in resistant tumors after treatment may indicate a shift to non-proliferative survival mechanisms, such as autophagy or senescence.",
+          "validation_tag": "mechanistically rare"
+        }
+      }
+    },
+    "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE": {
+      "pathway_name": "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE",
+      "drug_name": "alectinib",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of the intrinsic apoptotic signaling pathway in response to DNA damage indicates active apoptosis, suggesting that the tumor is primed for apoptosis and thus sensitive to alectinib, which may further enhance apoptotic signaling.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of this pathway at baseline may indicate a lack of apoptotic signaling, but sensitivity to alectinib could be due to alternative pathways being activated that compensate and induce apoptosis.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "Despite upregulation of apoptotic signaling, resistance to alectinib may occur due to compensatory survival pathways or mutations that prevent effective apoptosis.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of apoptotic signaling suggests resistance to alectinib as the tumor lacks the apoptotic machinery necessary for effective cell death upon treatment.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Alectinib treatment further upregulates the intrinsic apoptotic signaling pathway, enhancing DNA damage-induced apoptosis and leading to tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation post-treatment in sensitive tumors may indicate effective clearance of tumor cells, reducing the need for active apoptotic signaling.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "In resistant tumors, upregulation post-treatment may reflect an initial response that is countered by survival pathways, preventing effective apoptosis.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_downregulation": {
+          "description": "Continued downregulation after alectinib treatment in resistant tumors indicates persistent lack of apoptotic response, contributing to treatment failure.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      }
+    }
+  }
+}

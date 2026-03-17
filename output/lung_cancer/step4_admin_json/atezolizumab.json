@@ -1,0 +1,334 @@
+{
+  "drug_name": "atezolizumab",
+  "input_file": "output\\lung_cancer\\step3_mapping_json\\atezolizumab.json",
+  "total_pathways": 8,
+  "llm_model": "gpt-4o",
+  "validation_tag_definitions": {
+    "mechanistically accurate and clinically validated": "Supported by clinical trial data and mechanistic understanding",
+    "mechanistically accurate only": "Biologically plausible based on mechanism but lacks clinical validation",
+    "mechanistically rare": "Possible but uncommon or unusual scenario",
+    "mechanistically not possible": "Contradicts known biology or mechanism of action"
+  },
+  "pathways": {
+    "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING": {
+      "pathway_name": "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "High baseline CD28-dependent PI3K/AKT signaling suggests active T-cell co-stimulation, potentially enhancing atezolizumab's efficacy by synergistically promoting T-cell activation and anti-tumor immunity.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "sensitive_downregulation": {
+          "description": "Low baseline signaling may indicate a lack of T-cell activation; however, atezolizumab could still be effective if other immune pathways are compensating or if the tumor microenvironment is conducive to immune activation.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "Despite high pathway activity, tumors may resist atezolizumab if there are compensatory immunosuppressive mechanisms or if the tumor microenvironment is hostile to immune infiltration.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_downregulation": {
+          "description": "Low pathway activity correlates with poor T-cell activation and an immune-desert phenotype, leading to resistance to atezolizumab.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Atezolizumab enhances T-cell activity, leading to further upregulation of CD28-dependent PI3K/AKT signaling, which supports robust anti-tumor responses.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective tumor clearance may lead to reduced T-cell activation and subsequent downregulation of the pathway, reflecting successful treatment.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent pathway activation post-treatment may indicate compensatory resistance mechanisms, such as immune checkpoint upregulation or immune evasion tactics by the tumor.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Continued low pathway activity post-treatment indicates failure of atezolizumab to activate T-cell responses, consistent with resistance.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      }
+    },
+    "REACTOME_CO_STIMULATION_BY_CD28": {
+      "pathway_name": "REACTOME_CO_STIMULATION_BY_CD28",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of CD28 co-stimulation at baseline suggests a robust T-cell activation environment, which can be enhanced by atezolizumab's PD-L1 blockade, leading to effective anti-tumor responses.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of CD28 signaling might indicate a suppressed immune environment, but atezolizumab can still enhance T-cell activity by blocking PD-L1, potentially overcoming initial suppression.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Despite upregulation of CD28 signaling, resistance may occur if other inhibitory pathways (e.g., CTLA-4) dominate, reducing atezolizumab's efficacy.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_downregulation": {
+          "description": "Low CD28 signaling combined with other suppressive mechanisms (e.g., high Treg presence) can lead to resistance to atezolizumab.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Atezolizumab enhances CD28-mediated T-cell activation by blocking PD-L1, leading to increased T-cell proliferation and cytokine production, resulting in tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "In sensitive tumors, atezolizumab may lead to transient downregulation of CD28 signaling as T-cells become activated and clear the tumor, reducing the need for co-stimulation.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent upregulation of CD28 signaling post-treatment may indicate compensatory resistance mechanisms, such as increased expression of other immune checkpoints.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_downregulation": {
+          "description": "Continued downregulation of CD28 signaling after treatment suggests a failure to reinvigorate T-cell responses, consistent with atezolizumab resistance.",
+          "validation_tag": "mechanistically accurate only"
+        }
+      }
+    },
+    "BIOCARTA_MHC_PATHWAY": {
+      "pathway_name": "BIOCARTA_MHC_PATHWAY",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "High baseline MHC pathway activity indicates robust antigen presentation, enhancing T-cell recognition and response to atezolizumab.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Low MHC pathway activity may still allow atezolizumab sensitivity if other immune pathways compensate or if MHC expression is inducible.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "Despite high MHC activity, tumors may resist atezolizumab due to immune evasion tactics like PD-L1 upregulation or T-cell exclusion.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Low MHC pathway activity can lead to poor antigen presentation, reducing T-cell activation and leading to atezolizumab resistance.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Atezolizumab enhances immune response by maintaining high MHC activity, promoting effective T-cell-mediated tumor clearance.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective atezolizumab treatment may initially downregulate MHC activity as tumor burden decreases, reflecting reduced antigen load.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent MHC upregulation post-treatment may indicate adaptive resistance mechanisms, such as alternative checkpoint activation.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Continued low MHC activity after atezolizumab suggests failure to engage T-cell responses, maintaining resistance.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      }
+    },
+    "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY": {
+      "pathway_name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "High baseline TCR signaling indicates active immune surveillance, which atezolizumab can enhance by blocking PD-L1, leading to effective anti-tumor responses.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Low baseline TCR signaling may still respond to atezolizumab if there are sufficient PD-1^int T cells that can be reactivated upon PD-L1 blockade.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Despite high TCR signaling, resistance can occur due to compensatory immune checkpoints or immunosuppressive tumor microenvironment.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_downregulation": {
+          "description": "Low TCR signaling and lack of immune infiltration suggest an immune-desert phenotype, leading to resistance to atezolizumab.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Atezolizumab enhances TCR signaling by blocking PD-L1, leading to increased T cell activation and tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective tumor clearance can result in reduced TCR signaling due to decreased antigen load and effector T cell contraction.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent upregulation post-treatment may indicate adaptive resistance mechanisms such as alternative checkpoint pathways.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_downregulation": {
+          "description": "Failure to upregulate TCR signaling after treatment suggests non-response due to intrinsic resistance mechanisms.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      }
+    },
+    "REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS": {
+      "pathway_name": "REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of CSF1 signaling in myeloid cells may indicate a pro-inflammatory tumor microenvironment that is responsive to immune checkpoint blockade, allowing atezolizumab to effectively enhance anti-tumor immunity.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of CSF1 signaling might reflect a less suppressive myeloid environment, which could still be permissive for atezolizumab efficacy due to other immune activating factors.",
+          "validation_tag": "mechanistically rare"
+        },
+        "resistant_upregulation": {
+          "description": "High CSF1 signaling can lead to increased recruitment and activation of immunosuppressive myeloid cells, which can counteract the effects of atezolizumab, leading to resistance.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_downregulation": {
+          "description": "Low CSF1 signaling might indicate a lack of myeloid cell involvement, but resistance could still occur due to other immune evasion mechanisms.",
+          "validation_tag": "mechanistically rare"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Atezolizumab may lead to increased CSF1 signaling as part of a feedback mechanism in sensitive tumors, but the overall immune activation outweighs the suppressive effects.",
+          "validation_tag": "mechanistically rare"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective atezolizumab treatment reduces CSF1 signaling, decreasing the suppressive myeloid cell population and enhancing T cell-mediated anti-tumor responses.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent upregulation of CSF1 signaling after atezolizumab treatment can maintain an immunosuppressive environment, contributing to treatment resistance.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of CSF1 signaling post-treatment may occur, but resistance persists due to alternative immune escape pathways.",
+          "validation_tag": "mechanistically rare"
+        }
+      }
+    },
+    "KEGG_NON_SMALL_CELL_LUNG_CANCER": {
+      "pathway_name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "High baseline PD-L1 expression and active immune signaling in NSCLC indicate pre-existing immune activation, which is effectively enhanced by atezolizumab, leading to tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Low baseline pathway activity may reflect low tumor burden or immune evasion, but atezolizumab can still activate latent immune responses in certain NSCLC subtypes.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Upregulation with resistance suggests alternative immune checkpoints or suppressive pathways dominate, reducing atezolizumab efficacy.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Low pathway activity with resistance indicates a lack of immune infiltration or activation, making atezolizumab ineffective.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Atezolizumab enhances immune activation and PD-L1 blockade, leading to increased immune cell infiltration and tumor regression.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective tumor clearance by atezolizumab may reduce pathway activity as immune cells eliminate tumor cells and resolve inflammation.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent pathway activation despite treatment indicates compensatory immune evasion mechanisms, such as upregulation of other checkpoints.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Failure to activate immune pathways post-treatment suggests atezolizumab is ineffective due to intrinsic tumor resistance mechanisms.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      }
+    },
+    "HALLMARK_TNFA_SIGNALING_VIA_NFKB": {
+      "pathway_name": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Upregulation of TNFα signaling via NF-κB at baseline suggests an inflamed tumor microenvironment with active immune infiltration, making it more likely to respond to atezolizumab, which targets PD-L1 to enhance immune response.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation of this pathway at baseline may indicate a less inflamed tumor but with potential for immune activation upon PD-L1 blockade, possibly due to other compensatory immune pathways.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Despite upregulation, resistance may occur if the tumor has adaptive immune resistance mechanisms such as high Treg infiltration or alternative immune checkpoints.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation of TNFα signaling via NF-κB at baseline in resistant tumors indicates a lack of immune activation and poor baseline immune infiltration, leading to resistance to atezolizumab.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Post-treatment upregulation in sensitive tumors reflects successful immune activation and enhanced anti-tumor activity due to PD-L1 blockade by atezolizumab.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "In sensitive tumors, downregulation after treatment may indicate effective tumor clearance and reduced inflammatory signaling as the immune response resolves.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent upregulation post-treatment in resistant tumors may signify ongoing inflammation without effective anti-tumor response, possibly due to immune evasion mechanisms.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Continued downregulation after treatment in resistant tumors indicates a lack of immune activation and failure of atezolizumab to induce an effective anti-tumor immune response.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      }
+    },
+    "KEGG_SMALL_CELL_LUNG_CANCER": {
+      "pathway_name": "KEGG_SMALL_CELL_LUNG_CANCER",
+      "drug_name": "atezolizumab",
+      "before_administration": {
+        "sensitive_upregulation": {
+          "description": "Baseline upregulation of the pathway indicates active oncogenic signaling that may create a highly immunogenic tumor microenvironment, making it more susceptible to immune checkpoint blockade by atezolizumab.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Downregulation at baseline suggests a less aggressive tumor phenotype with potential for immune activation upon PD-L1 blockade, leading to sensitivity to atezolizumab.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Despite pathway upregulation, resistance may occur due to compensatory immune evasion mechanisms or lack of T-cell infiltration, limiting atezolizumab efficacy.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Downregulation at baseline may reflect an immune-excluded tumor microenvironment or inherent resistance mechanisms, leading to poor response to atezolizumab.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      },
+      "after_administration": {
+        "sensitive_upregulation": {
+          "description": "Atezolizumab treatment may further enhance immune activation and tumor cell killing, sustaining pathway upregulation as a marker of ongoing immune response.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        },
+        "sensitive_downregulation": {
+          "description": "Effective atezolizumab therapy may lead to tumor clearance and reduced oncogenic signaling, resulting in pathway downregulation despite initial sensitivity.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_upregulation": {
+          "description": "Persistent pathway upregulation post-treatment may indicate adaptive resistance mechanisms, such as PD-L1 upregulation or alternative immune checkpoints, maintaining resistance.",
+          "validation_tag": "mechanistically accurate only"
+        },
+        "resistant_downregulation": {
+          "description": "Continued downregulation after treatment suggests ineffective immune activation and persistent tumor resistance, possibly due to immune exclusion or lack of antigen presentation.",
+          "validation_tag": "mechanistically accurate and clinically validated"
+        }
+      }
+    }
+  }
+}
