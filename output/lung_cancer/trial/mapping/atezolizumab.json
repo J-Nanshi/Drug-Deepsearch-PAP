@@ -1,0 +1,182 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "PD‑1/PD‑L1 inhibitory signaling (concept-level)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Atezolizumab blocks PD‑L1, preventing its engagement with PD‑1 and B7.1, reversing SHP‑mediated dephosphorylation of TCR/CD28 signaling components and restoring CD8⁺ T‑cell effector function in NSCLC and SCLC.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12847340",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%PD‑1%' OR gs.standard_name LIKE '%PD‑L1%' OR gsd.description_brief LIKE '%PD‑1%' OR gsd.description_brief LIKE '%PD‑L1%' OR gsd.description_full LIKE '%PD‑1%' OR gsd.description_full LIKE '%PD‑L1%' OR gsd.description_full LIKE '%TCR/CD28%' OR gsd.description_full LIKE '%CD8⁺ T‑cell%' OR gsd.description_full LIKE '%NSCLC%' OR gsd.description_full LIKE '%SCLC%') ORDER BY gs.standard_name LIKE '%PD‑1/PD‑L1 inhibitory signaling%' DESC, gsd.description_full LIKE '%Atezolizumab%' DESC LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row2": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_ASBCELL_PATHWAY",
+    "Original Pathway Name": "TCR/CD28 co‑stimulation (concept-level)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Effective PD‑L1 blockade requires intact TCR recognition and CD28 co‑stimulation; when these are functional, released PD‑1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC‑I subtypes.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%TCR/CD28 co‑stimulation%' OR gsd.description_full LIKE '%TCR recognition%' OR gsd.description_full LIKE '%CD28 co‑stimulation%' OR gsd.description_full LIKE '%PD‑1 brake%' OR gsd.description_full LIKE '%clonal expansion%' OR gsd.description_full LIKE '%cytokine production%' OR gsd.description_full LIKE '%tumor cell killing%' OR gsd.description_full LIKE '%inflamed NSCLC%' OR gsd.description_full LIKE '%SCLC‑I subtypes%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row3": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_IFNA_PATHWAY",
+    "Original Pathway Name": "IFN‑γ–JAK/STAT signaling",
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Loss-of-function in IFNGR/JAK/STAT components leads to downregulation of the pathway, contributing to resistance to PD-(L)1 inhibitors like atezolizumab in lung cancer.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%IFN%' OR gs.standard_name LIKE '%JAK/STAT%' OR gsd.description_brief LIKE '%IFN%' OR gsd.description_brief LIKE '%JAK/STAT%' OR gsd.description_full LIKE '%IFN%' OR gsd.description_full LIKE '%JAK/STAT%' OR gsd.description_full LIKE '%PD-(L)1%' OR gsd.description_full LIKE '%atezolizumab%' OR gsd.description_full LIKE '%lung cancer%') ORDER BY CASE WHEN gs.standard_name LIKE '%IFN%' THEN 1 WHEN gs.standard_name LIKE '%JAK/STAT%' THEN 2 ELSE 3 END, gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_ASBCELL_PATHWAY",
+    "Original Pathway Name": "MHC‑I antigen processing and presentation",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "High expression of HLA‑I and antigen‑processing genes enables presentation of neoantigens to CD8⁺ T cells; pan‑cancer and NSCLC data show that stronger MHC‑I pathway activity and CD8 infiltration correlate with higher response rates to PD‑1/PD‑L1 blockade including atezolizumab.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%MHC-I antigen processing and presentation%' OR gsd.description_brief LIKE '%MHC-I antigen processing and presentation%' OR gsd.description_full LIKE '%MHC-I antigen processing and presentation%' OR gsd.description_brief LIKE '%HLA-I%' OR gsd.description_full LIKE '%HLA-I%' OR gsd.description_brief LIKE '%CD8%' OR gsd.description_full LIKE '%CD8%' OR gsd.description_brief LIKE '%PD-1%' OR gsd.description_full LIKE '%PD-1%' OR gsd.description_brief LIKE '%PD-L1%' OR gsd.description_full LIKE '%PD-L1%' OR gsd.description_brief LIKE '%atezolizumab%' OR gsd.description_full LIKE '%atezolizumab%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "Tumor mutational burden / neoantigen load",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Elevated nonsynonymous mutation load increases neoantigen repertoire; in NSCLC, higher TMB associates with improved outcomes to atezolizumab-based regimens, particularly when coupled to preserved MHC-I and inflamed microenvironments.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%Tumor mutational burden%' OR gs.standard_name LIKE '%neoantigen load%' OR gsd.description_brief LIKE '%Tumor mutational burden%' OR gsd.description_brief LIKE '%neoantigen load%' OR gsd.description_full LIKE '%Tumor mutational burden%' OR gsd.description_full LIKE '%neoantigen load%' OR gsd.description_full LIKE '%nonsynonymous mutation load%' OR gsd.description_full LIKE '%neoantigen repertoire%' OR gsd.description_full LIKE '%NSCLC%' OR gsd.description_full LIKE '%TMB%' OR gsd.description_full LIKE '%atezolizumab%' OR gsd.description_full LIKE '%MHC-I%' OR gsd.description_full LIKE '%inflamed microenvironments%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row6": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "VEGF/TGF‑β‑driven immunosuppressive stroma",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The VEGF/TGF-β-driven immunosuppressive stroma is upregulated at baseline, contributing to resistance to atezolizumab due to the exclusion of CD8⁺ T cells.",
+    "Pathwayâ€“drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%VEGF%' OR gs.standard_name LIKE '%TGF-β%' OR gsd.description_brief LIKE '%VEGF%' OR gsd.description_brief LIKE '%TGF-β%' OR gsd.description_full LIKE '%VEGF%' OR gsd.description_full LIKE '%TGF-β%') AND (gs.standard_name LIKE '%immunosuppressive%' OR gsd.description_brief LIKE '%immunosuppressive%' OR gsd.description_full LIKE '%immunosuppressive%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row8": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_INFLAM_PATHWAY",
+    "Original Pathway Name": "Myeloid‑derived suppressor cells / Treg and immunosuppressive cytokines",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Enrichment of MDSCs, Tregs, and cytokines such as TGF‑β and certain chemokines in the NSCLC TME dampens effector T‑cell activity; these features are prominent in resistant transcriptomic subtypes (e.g., NMF2) with poor benefit from atezolizumab despite PD‑L1 expression.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%Myeloid%' OR gs.standard_name LIKE '%Treg%' OR gs.standard_name LIKE '%immunosuppressive%' OR gsd.description_brief LIKE '%MDSCs%' OR gsd.description_brief LIKE '%Tregs%' OR gsd.description_brief LIKE '%cytokines%' OR gsd.description_brief LIKE '%TGF‑β%' OR gsd.description_brief LIKE '%chemokines%' OR gsd.description_brief LIKE '%NSCLC%' OR gsd.description_brief LIKE '%TME%' OR gsd.description_brief LIKE '%effector T‑cell%' OR gsd.description_brief LIKE '%transcriptomic subtypes%' OR gsd.description_brief LIKE '%NMF2%' OR gsd.description_brief LIKE '%atezolizumab%' OR gsd.description_brief LIKE '%PD‑L1%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row10": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "KRAS/STK11/KEAP1‑linked metabolic and immune pathways",
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS mutations in NSCLC are associated with higher TMB/PD-L1 expression, potentially increasing sensitivity to ICIs like atezolizumab. However, co-mutations in STK11/KEAP1 lead to immune-suppressive environments and metabolic reprogramming, reducing CD8+ T cell infiltration and resulting in resistance to atezolizumab.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%KRAS%' OR gs.standard_name LIKE '%STK11%' OR gs.standard_name LIKE '%KEAP1%' OR gsd.description_brief LIKE '%KRAS%' OR gsd.description_brief LIKE '%STK11%' OR gsd.description_brief LIKE '%KEAP1%' OR gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%STK11%' OR gsd.description_full LIKE '%KEAP1%') AND (gs.standard_name LIKE '%metabolic%' OR gs.standard_name LIKE '%immune%' OR gsd.description_brief LIKE '%metabolic%' OR gsd.description_brief LIKE '%immune%' OR gsd.description_full LIKE '%metabolic%' OR gsd.description_full LIKE '%immune%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row11": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_TOB1_PATHWAY",
+    "Original Pathway Name": "B‑/T‑cell–inflamed transcriptional programs (e.g., NMF4 subtype)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The NMF4 subtype, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, derived marked PFS/OS benefit from ABCP including atezolizumab, illustrating that pre‑existing adaptive immune activation strongly predicts sensitivity.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%B-cell%' OR gs.standard_name LIKE '%T-cell%' OR gs.standard_name LIKE '%inflamed%' OR gsd.description_brief LIKE '%B-cell%' OR gsd.description_brief LIKE '%T-cell%' OR gsd.description_brief LIKE '%inflamed%' OR gsd.description_full LIKE '%B-cell%' OR gsd.description_full LIKE '%T-cell%' OR gsd.description_full LIKE '%inflamed%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "SCLC‑I inflamed subtype gene program",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In ES-SCLC, a transcriptionally defined SCLC-I subtype with higher CD8A/B and immune-activation genes experiences greater survival benefit from EP-atezolizumab in IMpower133, whereas non-inflamed SCLC subtypes remain largely refractory.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%SCLC-I inflamed subtype gene program%' OR gsd.description_brief LIKE '%SCLC-I inflamed subtype gene program%' OR gsd.description_full LIKE '%SCLC-I inflamed subtype gene program%' OR gsd.description_brief LIKE '%CD8A/B%' OR gsd.description_full LIKE '%CD8A/B%' OR gsd.description_brief LIKE '%immune-activation%' OR gsd.description_full LIKE '%immune-activation%') ORDER BY gs.standard_name LIKE '%SCLC-I inflamed subtype gene program%' DESC, gsd.description_brief LIKE '%SCLC-I inflamed subtype gene program%' DESC, gsd.description_full LIKE '%SCLC-I inflamed subtype gene program%' DESC LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  }
+}

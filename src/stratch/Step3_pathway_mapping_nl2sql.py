@@ -749,7 +749,7 @@ def run_verification_pipeline(
     nl2sql_model: str,
     out_final_dir: Path,
     out_trace_dir: Path,
-    out_pathways_dir: Path,
+    # out_pathways_dir: Path,
 ) -> Tuple[str, str, str]:
     drug_name = input_file.stem
 
@@ -875,7 +875,7 @@ def run_verification_pipeline(
 
     final_path = str(out_final_dir / f"{drug_name}.json")
     trace_path = str(out_trace_dir / f"{drug_name}_trace_pathway_mapping.json")
-    pathways_txt_path = str(out_pathways_dir / f"{drug_name}_pathways.txt")
+    # pathways_txt_path = str(out_pathways_dir / f"{drug_name}_pathways.txt")
 
     save_json(final_data, final_path)
 
@@ -942,11 +942,11 @@ def parse_args() -> argparse.Namespace:
         required=True,
         help="Output directory for <drug>_trace_pathway_mapping.json files.",
     )
-    parser.add_argument(
-        "--out-pathways-dir",
-        required=True,
-        help="Output directory for <drug>_pathways.txt files.",
-    )
+    # parser.add_argument(
+    #     "--out-pathways-dir",
+    #     required=True,
+    #     help="Output directory for <drug>_pathways.txt files.",
+    # )
     parser.add_argument(
         "--msigdb-sqlite-path",
         required=True,
@@ -971,7 +971,7 @@ if __name__ == "__main__":
     input_dir = Path(args.input_dir)
     out_final_dir = Path(args.out_final_dir)
     out_trace_dir = Path(args.out_trace_dir)
-    out_pathways_dir = Path(args.out_pathways_dir)
+    # out_pathways_dir = Path(args.out_pathways_dir)
     msigdb_sqlite_path = args.msigdb_sqlite_path
     nl2sql_model = args.nl2sql_model
 
@@ -980,7 +980,7 @@ if __name__ == "__main__":
 
     out_final_dir.mkdir(parents=True, exist_ok=True)
     out_trace_dir.mkdir(parents=True, exist_ok=True)
-    out_pathways_dir.mkdir(parents=True, exist_ok=True)
+    # out_pathways_dir.mkdir(parents=True, exist_ok=True)
 
     input_files = sorted(input_dir.glob("*.json"))
     if not input_files:
@@ -1012,7 +1012,7 @@ if __name__ == "__main__":
                 nl2sql_model=nl2sql_model,
                 out_final_dir=out_final_dir,
                 out_trace_dir=out_trace_dir,
-                out_pathways_dir=out_pathways_dir,
+                # out_pathways_dir=out_pathways_dir,
             )
             outputs.append((final_path, trace_path, pathways_txt_path))
         except Exception as e:
@@ -1027,4 +1027,58 @@ if __name__ == "__main__":
     print(f"Total files processed: {len(outputs)}")
     print("Final JSON outputs saved to:", out_final_dir)
     print("Trace JSON outputs saved to:", out_trace_dir)
-    print("Pathways TXT outputs saved to:", out_pathways_dir)
+    # print("Pathways TXT outputs saved to:", out_pathways_dir)
+
+
+# %% MSigDB SQLite visualizer (run this cell in VS Code/Jupyter)
+def visualize_msigdb_sqlite(db_path: str, preview_rows: int = 5) -> None:
+    """
+    Print tables in an SQLite DB with:
+    - column names/types
+    - total row count
+    - a small data preview
+    """
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    try:
+        tables = [
+            r[0]
+            for r in conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"
+            ).fetchall()
+        ]
+        if not tables:
+            print(f"No user tables found in: {db_path}")
+            return
+
+        print(f"Database: {db_path}")
+        print(f"Total tables: {len(tables)}")
+
+        for table in tables:
+            print("\n" + "=" * 80)
+            print(f"Table: {table}")
+
+            col_rows = conn.execute(f"PRAGMA table_info('{table}')").fetchall()
+            if col_rows:
+                print("Columns:")
+                for c in col_rows:
+                    print(f"  - {c['name']} ({c['type']})")
+            else:
+                print("Columns: <none>")
+
+            total_rows = conn.execute(f"SELECT COUNT(*) FROM '{table}'").fetchone()[0]
+            print(f"Row count: {total_rows}")
+
+            if preview_rows > 0 and total_rows > 0:
+                preview = conn.execute(
+                    f"SELECT * FROM '{table}' LIMIT {int(preview_rows)}"
+                ).fetchall()
+                print(f"Preview (first {len(preview)} row(s)):")
+                for idx, row in enumerate(preview, 1):
+                    print(f"  {idx}. {dict(row)}")
+    finally:
+        conn.close()
+
+
+# Example:
+# visualize_msigdb_sqlite(r"D:\GS\Drug-Deepsearch-PAP\utils\msigdb_v2025.1.Hs.db")

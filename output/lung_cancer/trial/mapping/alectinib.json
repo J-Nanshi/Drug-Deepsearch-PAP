@@ -1,0 +1,83 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "KEGG_INSULIN_SIGNALING_PATHWAY",
+    "Original Pathway Name": "ALK signaling (Ras/MAPK, mTOR/PI3K/Akt, PLCγ; ALK receptor represents a starting signal able to stimulate various pathways)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Alectinib is a highly specific second-generation ALK inhibitor that blocks ALK kinase activity, thereby suppressing downstream proliferative and survival signaling driven by oncogenic ALK fusions in NSCLC.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%ALK signaling%' OR gsd.description_brief LIKE '%ALK signaling%' OR gsd.description_full LIKE '%ALK signaling%' OR gsd.description_brief LIKE '%Ras/MAPK%' OR gsd.description_full LIKE '%Ras/MAPK%' OR gsd.description_brief LIKE '%mTOR/PI3K/Akt%' OR gsd.description_full LIKE '%mTOR/PI3K/Akt%' OR gsd.description_brief LIKE '%PLCγ%' OR gsd.description_full LIKE '%PLCγ%' OR gsd.description_brief LIKE '%ALK receptor%' OR gsd.description_full LIKE '%ALK receptor%' OR gsd.description_brief LIKE '%Alectinib%' OR gsd.description_full LIKE '%Alectinib%' OR gsd.description_brief LIKE '%ALK inhibitor%' OR gsd.description_full LIKE '%ALK inhibitor%' OR gsd.description_brief LIKE '%NSCLC%' OR gsd.description_full LIKE '%NSCLC%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row3": {
+    "Mapped MSigDB Pathway Name": "REACTOME_PI3K_AKT_ACTIVATION",
+    "Original Pathway Name": "PI3K/AKT pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The PI3K/AKT pathway is typically upregulated in baseline ALK-positive lung cancer, contributing to cell survival and proliferation. Alectinib targets ALK, leading to downstream effects including potential PI3K/AKT pathway inhibition.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10341773"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%PI3K%' OR gs.standard_name LIKE '%AKT%' OR gsd.description_brief LIKE '%PI3K%' OR gsd.description_brief LIKE '%AKT%' OR gsd.description_full LIKE '%PI3K%' OR gsd.description_full LIKE '%AKT%' OR gsd.description_brief LIKE '%ALK%' OR gsd.description_full LIKE '%ALK%' OR gsd.description_brief LIKE '%lung cancer%' OR gsd.description_full LIKE '%lung cancer%') ORDER BY gs.standard_name LIKE '%PI3K/AKT pathway%' DESC, gs.standard_name LIKE '%PI3K%' DESC, gs.standard_name LIKE '%AKT%' DESC LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row6": {
+    "Mapped MSigDB Pathway Name": "KEGG_SMALL_CELL_LUNG_CANCER",
+    "Original Pathway Name": "Cell‑cycle control (G0/G1 vs S‑phase)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Alectinib alone induces G0/G1 arrest, indicating sensitivity due to ALK blockade perturbing cell-cycle progression.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10855061"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%Cell-cycle control%' OR gsd.description_brief LIKE '%Cell-cycle control%' OR gsd.description_full LIKE '%Cell-cycle control%') AND (gs.standard_name LIKE '%G0/G1%' OR gsd.description_brief LIKE '%G0/G1%' OR gsd.description_full LIKE '%G0/G1%' OR gs.standard_name LIKE '%S-phase%' OR gsd.description_brief LIKE '%S-phase%' OR gsd.description_full LIKE '%S-phase%' OR gsd.description_brief LIKE '%G0/G1 arrest%' OR gsd.description_full LIKE '%G0/G1 arrest%' OR gsd.description_brief LIKE '%cell-cycle progression%' OR gsd.description_full LIKE '%cell-cycle progression%') ORDER BY gs.standard_name LIMIT 20",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row7": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "DNA damage response / Apoptosis",
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Alectinib reduces proliferation and induces apoptosis in ALK-expressing tumor cells, indicating that ALK inhibition primes cells for DNA-damage-induced cell death.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6461034"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%DNA damage response%' OR gs.standard_name LIKE '%Apoptosis%' OR gsd.description_brief LIKE '%DNA damage response%' OR gsd.description_brief LIKE '%Apoptosis%' OR gsd.description_full LIKE '%DNA damage response%' OR gsd.description_full LIKE '%Apoptosis%' OR gsd.description_brief LIKE '%ALK inhibition%' OR gsd.description_full LIKE '%ALK inhibition%' OR gsd.description_brief LIKE '%cell death%' OR gsd.description_full LIKE '%cell death%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row8": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "EGFR signaling network",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Phosphoproteomic analysis indicates EGFR is hyperactive in ALK-driven lung cancer cells, contributing to resistance against ALK inhibitors like alectinib.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6461034"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_brief LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%') AND (gs.standard_name LIKE '%ALK%' OR gsd.description_brief LIKE '%ALK%' OR gsd.description_full LIKE '%ALK%') ORDER BY CASE WHEN gs.standard_name LIKE '%EGFR%' THEN 1 ELSE 0 END + CASE WHEN gsd.description_brief LIKE '%EGFR%' THEN 1 ELSE 0 END + CASE WHEN gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END + CASE WHEN gs.standard_name LIKE '%ALK%' THEN 1 ELSE 0 END + CASE WHEN gsd.description_brief LIKE '%ALK%' THEN 1 ELSE 0 END + CASE WHEN gsd.description_full LIKE '%ALK%' THEN 1 ELSE 0 END DESC LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  }
+}

@@ -4,7 +4,7 @@
     "Original Pathway Name": "EGFR signaling (KEGG hsa04012)",
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "Amivantamab targets and inhibits EGFR signaling, which is often upregulated in EGFR-driven NSCLC, making tumors sensitive to its suppression.",
+    "Rationale": "Amivantamab targets and inhibits EGFR signaling, which is upregulated in EGFR-driven NSCLC, making tumors sensitive to its suppression.",
     "Pathway–drug relationship classification": "clinically validated",
     "References": [
       "https://pubmed.ncbi.nlm.nih.gov/35983925",
@@ -16,14 +16,14 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
     "original_mapped_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
-    "llm_reasoning": "The original pathway 'EGFR signaling (KEGG hsa04012)' is focused on EGFR signaling, which is relevant to cancer, particularly NSCLC as mentioned in the rationale. The current mapping 'KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY' is specific to a subset of EGFR signaling involving PLCG and ERK, which may not fully capture the broader context of EGFR signaling in cancer. The alternative 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER' is a higher-priority REACTOME pathway that directly addresses EGFR signaling in cancer, aligning well with the biological context and rationale provided. Therefore, the mapping is corrected to this pathway."
+    "llm_reasoning": "The original pathway 'EGFR signaling (KEGG hsa04012)' is focused on EGFR signaling, which is relevant to cancer, particularly NSCLC as mentioned in the rationale. The current mapping 'KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY' is specific but does not capture the broader context of EGFR signaling in cancer. The alternative 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER' is a higher-priority REACTOME pathway that more comprehensively represents EGFR signaling in the context of cancer, aligning with the rationale provided."
   },
   "Row2": {
     "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_MET",
     "Original Pathway Name": "MET signaling (KEGG hsa04013)",
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "MET amplification or high MET expression in NSCLC is associated with sensitivity to amivantamab, indicating that MET pathway upregulation is a key determinant of response.",
+    "Rationale": "Amivantamab targets MET signaling by blocking HGF-MET interaction, and MET amplification or mutation in NSCLC is associated with sensitivity to amivantamab.",
     "Pathway–drug relationship classification": "clinically validated",
     "References": [
       "https://pubmed.ncbi.nlm.nih.gov/35983925",
@@ -34,15 +34,15 @@
     "verdict": "correct",
     "corrected_msigdb_name": null,
     "original_mapped_name": null,
-    "llm_reasoning": "The current mapping 'REACTOME_SIGNALING_BY_MET' accurately represents the biological process described in the original pathway name 'MET signaling (KEGG hsa04013)' and the rationale provided. It is a comprehensive representation of MET signaling, which is consistent with the biological context of MET amplification or high MET expression in NSCLC. No higher-priority pathway captures the biology better, as there are no HALLMARK pathways listed among the candidates."
+    "llm_reasoning": "The current mapping 'REACTOME_SIGNALING_BY_MET' accurately represents the MET signaling pathway as described in the original pathway name and rationale. It is a REACTOME pathway, which is prioritized over KEGG_MEDICUS and BIOCARTA pathways. No HALLMARK pathway is available, and none of the alternative candidates provide a higher-priority or more accurate representation of the MET signaling process in the context of amivantamab's mechanism of action."
   },
   "Row3": {
-    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "Mapped MSigDB Pathway Name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
     "Original Pathway Name": "EGFR–MET co‑activation / bypass network",
     "Regulation": "upregulation",
     "Baseline effect": "resistant",
-    "Rationale": "EGFR–MET co-activation leads to resistance to EGFR TKIs due to MET-mediated maintenance of downstream signaling pathways. Amivantamab's bispecific action targets both EGFR and MET, overcoming this resistance mechanism.",
-    "Pathway–drug relationship classification": "clinically validated",
+    "Rationale": "EGFR and MET co-activation leads to upregulation of downstream PI3K and MAPK signaling, contributing to resistance against EGFR TKIs. Amivantamab targets both EGFR and MET, overcoming this resistance mechanism.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
     "References": [
       "https://pubmed.ncbi.nlm.nih.gov/35983925",
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
@@ -51,16 +51,50 @@
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
     ],
     "verdict": "mapping_corrected",
-    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "corrected_msigdb_name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
     "original_mapped_name": "REACTOME_SIGNALING_BY_EGFR",
-    "llm_reasoning": "The original pathway name 'EGFR–MET co‑activation / bypass network' and rationale focus on EGFR and MET co-activation leading to resistance in cancer, which is more specifically captured by 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER'. This pathway is more relevant than 'REACTOME_SIGNALING_BY_EGFR' as it specifically addresses EGFR signaling in the context of cancer, aligning better with the resistance mechanism described. No HALLMARK pathway is available, so the REACTOME pathway with a more specific focus on cancer is preferred."
+    "llm_reasoning": "The original pathway involves EGFR and MET co-activation leading to PI3K and MAPK signaling, contributing to resistance against EGFR TKIs. The HALLMARK_PI3K_AKT_MTOR_SIGNALING pathway captures the PI3K signaling aspect, which is central to the rationale provided. Given the priority order, HALLMARK pathways are preferred over REACTOME pathways when they capture the biology equally well. Therefore, the mapping is corrected to the HALLMARK pathway."
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+    "Original Pathway Name": "PI3K–AKT–mTOR pathway (KEGG hsa04151)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "EGFR and MET activate PI3K–AKT–mTOR via adaptor proteins such as Gab1 and direct PI3K recruitment; dual receptor blockade by amivantamab reduces survival signaling, while MET‑ or PI3K‑pathway reactivation is linked to resistance to upstream RTK inhibition, highlighting PI3K–AKT–mTOR attenuation as a major effector of sensitivity.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
+    ],
+    "verdict": "correct",
+    "corrected_msigdb_name": null,
+    "original_mapped_name": null,
+    "llm_reasoning": "The current mapping 'HALLMARK_PI3K_AKT_MTOR_SIGNALING' correctly represents the biological process described in the original pathway name and rationale. It captures the activation and signaling of the PI3K/AKT/mTOR pathway, which is central to the described EGFR and MET activation and resistance mechanisms. Given the priority order, a HALLMARK pathway is preferred if it captures the biology equally well, which it does in this case."
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) pathway (KEGG hsa04010)",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR and MET activation leads to upregulation of the RAS–RAF–MEK–ERK pathway, and MAPK-driven escape mechanisms, such as BRAF/KRAS activation, confer resistance to EGFR/MET-directed therapies like amivantamab.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_ERK_SIGNALING_PATHWAY",
+    "original_mapped_name": "BIOCARTA_CDK5_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on the RAS-RAF-MEK-ERK signaling cascade, particularly in the context of EGFR and MET activation. The BIOCARTA_CDK5_PATHWAY includes elements of MAPK signaling but emphasizes CDK5's role, which is not central to the original pathway's focus. The KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_ERK_SIGNALING_PATHWAY directly addresses the EGF-EGFR-RAS-ERK signaling, aligning more closely with the original pathway's biological context and has a higher priority than BIOCARTA pathways."
   },
   "Row6": {
     "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
     "Original Pathway Name": "EGFR ligand–dependent signaling (AREG‑high EGFR‑WT tumors)",
-    "Regulation": "downregulation",
+    "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "In EGFR-wild-type NSCLC, amphiregulin is highly expressed and drives EGFR-dependent growth; amivantamab blocks ligand binding and suppresses AREG-induced signaling and proliferation, with efficacy correlating with AREG RNA levels and being largely independent of Fc effector function in these models.",
+    "Rationale": "In EGFR‑wild‑type NSCLC, amphiregulin is highly expressed and drives EGFR‑dependent growth; amivantamab blocks ligand binding and suppresses AREG‑induced signaling and proliferation, with efficacy correlating with AREG RNA levels and being largely independent of Fc effector function in these models.",
     "Pathway–drug relationship classification": "experimental (clinical trials)",
     "References": [
       "https://pubmed.ncbi.nlm.nih.gov/32747419",
@@ -69,15 +103,15 @@
     "verdict": "correct",
     "corrected_msigdb_name": null,
     "original_mapped_name": null,
-    "llm_reasoning": "The current mapping 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER' accurately represents the biological process described in the original pathway name and rationale. It specifically addresses EGFR signaling in cancer, which is relevant to the context of EGFR-wild-type NSCLC and amphiregulin-driven growth. No higher-priority pathway from the candidate list captures the biology better."
+    "llm_reasoning": "The current mapping 'REACTOME_SIGNALING_BY_EGFR_IN_CANCER' accurately represents the biological process described in the original pathway name and rationale. It specifically addresses EGFR signaling in cancer, which is relevant to the context of EGFR-wild-type NSCLC and amphiregulin-driven growth. No higher-priority HALLMARK pathway is available, and the current REACTOME pathway is appropriate given the context."
   },
   "Row7": {
     "Mapped MSigDB Pathway Name": "KEGG_NATURAL_KILLER_CELL_MEDIATED_CYTOTOXICITY",
     "Original Pathway Name": "Fc‑mediated ADCC and trogocytosis pathways",
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "Low-fucose IgG1 engineering enhances FcγR engagement; amivantamab elicits NK- and mononuclear-cell–mediated ADCC and macrophage trogocytosis, and MET co-expression augments EGFR binding and ADCC at low antibody concentrations, providing an EGFR/MET-density–dependent immune effector pathway of tumor clearance.",
-    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "Rationale": "Low-fucose IgG1 engineering enhances FcγR engagement; amivantamab elicits NK- and mononuclear-cell-mediated ADCC and macrophage trogocytosis, and MET co-expression augments EGFR binding and ADCC at low antibody concentrations, providing an EGFR/MET-density-dependent immune effector pathway of tumor clearance.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
     "References": [
       "https://pubmed.ncbi.nlm.nih.gov/34913823",
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC11614048",
@@ -86,7 +120,7 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "KEGG_NATURAL_KILLER_CELL_MEDIATED_CYTOTOXICITY",
     "original_mapped_name": "KEGG_FC_GAMMA_R_MEDIATED_PHAGOCYTOSIS",
-    "llm_reasoning": "The original pathway involves Fc-mediated ADCC and trogocytosis, which are immune effector functions involving NK cells and macrophages. The current mapping to KEGG_FC_GAMMA_R_MEDIATED_PHAGOCYTOSIS focuses on phagocytosis, which is not the primary mechanism described. KEGG_NATURAL_KILLER_CELL_MEDIATED_CYTOTOXICITY better captures the NK cell-mediated ADCC aspect of the pathway, aligning more closely with the biological context provided."
+    "llm_reasoning": "The original pathway involves Fc-mediated ADCC and trogocytosis, which are processes primarily involving NK cells and macrophages. The current mapping to 'KEGG_FC_GAMMA_R_MEDIATED_PHAGOCYTOSIS' focuses on phagocytosis, which is not the primary mechanism described. 'KEGG_NATURAL_KILLER_CELL_MEDIATED_CYTOTOXICITY' better captures the NK cell-mediated ADCC aspect of the pathway, aligning more closely with the biological context provided. This correction is justified as it more accurately reflects the immune effector functions described, and it is a KEGG pathway, which is a high-priority source."
   },
   "Row8": {
     "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_EGFR",
@@ -103,6 +137,22 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR",
     "original_mapped_name": "BIOCARTA_CBL_PATHWAY",
-    "llm_reasoning": "The original pathway name and rationale focus on EGFR trafficking, endocytosis, and lysosomal degradation, which are key components of EGFR signaling. While BIOCARTA_CBL_PATHWAY describes receptor internalization and degradation, REACTOME_SIGNALING_BY_EGFR is a higher-priority pathway that more comprehensively captures the signaling and trafficking aspects of EGFR, aligning better with the original pathway description and rationale."
+    "llm_reasoning": "The original pathway name and rationale focus on EGFR trafficking, endocytosis, and lysosomal degradation, which are key components of EGFR signaling. While BIOCARTA_CBL_PATHWAY describes receptor internalization and degradation, REACTOME_SIGNALING_BY_EGFR is a higher-priority pathway that more comprehensively covers the signaling and trafficking aspects of EGFR, aligning better with the original pathway description and rationale."
+  },
+  "Row9": {
+    "Mapped MSigDB Pathway Name": "KEGG_ERBB_SIGNALING_PATHWAY",
+    "Original Pathway Name": "HER3/ErbB family dimerization network",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, EGFR-HER3 signaling is active, contributing to PI3K pathway activation. Amivantamab targets EGFR, potentially leading to compensatory HER3 upregulation, which may mediate resistance.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/36652175",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
+    ],
+    "verdict": "correct",
+    "corrected_msigdb_name": null,
+    "original_mapped_name": null,
+    "llm_reasoning": "The current mapping 'KEGG_ERBB_SIGNALING_PATHWAY' accurately represents the biological process described in the original pathway name and rationale. It encompasses the ErbB family dimerization network, including EGFR and HER3, and their role in PI3K pathway activation. No higher-priority pathway from the candidate list captures the biology better."
   }
 }

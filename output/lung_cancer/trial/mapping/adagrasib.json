@@ -1,0 +1,58 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_RAS_PATHWAY",
+    "Original Pathway Name": "KEGG: hsa04014 – Ras signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS mutations, including G12C, lead to upregulation of the Ras signaling pathway in lung cancer. Adagrasib targets KRAS G12C, making tumors with this mutation sensitive to the drug.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%Ras signaling pathway%' OR gsd.description_brief LIKE '%Ras signaling pathway%' OR gsd.description_full LIKE '%Ras signaling pathway%' OR gsd.description_brief LIKE '%KRAS%' OR gsd.description_full LIKE '%KRAS%' OR gsd.description_brief LIKE '%lung cancer%' OR gsd.description_full LIKE '%lung cancer%' OR gsd.description_brief LIKE '%Adagrasib%' OR gsd.description_full LIKE '%Adagrasib%') ORDER BY gs.standard_name LIKE '%Ras signaling pathway%' DESC, gsd.description_brief LIKE '%Ras signaling pathway%' DESC LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row2": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The MAPK (RAF–MEK–ERK) signaling pathway is upregulated in baseline KRAS-mutant lung cancer, contributing to resistance. While initial downregulation may sensitize cells, baseline activity is characterized by upregulation leading to resistance.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9697582",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8630042",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12037499",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10794394"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%MAPK%' OR gsd.description_brief LIKE '%MAPK%' OR gsd.description_full LIKE '%MAPK%' OR gsd.description_brief LIKE '%RAF–MEK–ERK%' OR gsd.description_full LIKE '%RAF–MEK–ERK%' OR gsd.description_brief LIKE '%KRAS%' OR gsd.description_full LIKE '%KRAS%' OR gsd.description_brief LIKE '%lung cancer%' OR gsd.description_full LIKE '%lung cancer%' OR gsd.description_brief LIKE '%resistance%' OR gsd.description_full LIKE '%resistance%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "KEGG: hsa05223 – Non‑small cell lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline lung cancer, the RTK–RAS–MAPK and PI3K pathways are often upregulated, particularly in KRAS-mutant tumors. However, co-mutations in STK11/KEAP1 can lead to resistance due to reliance on alternative pathways.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9662012",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10377814",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11963745",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10046549"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%Non-small cell lung cancer%' OR gsd.description_brief LIKE '%Non-small cell lung cancer%' OR gsd.description_full LIKE '%Non-small cell lung cancer%') AND (gs.standard_name LIKE '%RTK–RAS–MAPK%' OR gsd.description_brief LIKE '%RTK–RAS–MAPK%' OR gsd.description_full LIKE '%RTK–RAS–MAPK%') AND (gs.standard_name LIKE '%PI3K%' OR gsd.description_brief LIKE '%PI3K%' OR gsd.description_full LIKE '%PI3K%') AND (gs.standard_name LIKE '%STK11/KEAP1%' OR gsd.description_brief LIKE '%STK11/KEAP1%' OR gsd.description_full LIKE '%STK11/KEAP1%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  }
+}

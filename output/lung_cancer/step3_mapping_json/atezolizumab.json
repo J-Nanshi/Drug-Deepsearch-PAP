@@ -1,6 +1,6 @@
 {
   "Row1": {
-    "Mapped MSigDB Pathway Name": "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING",
+    "Mapped MSigDB Pathway Name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
     "Original Pathway Name": "PD‑1/PD‑L1 inhibitory signaling (concept-level)",
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
@@ -14,17 +14,17 @@
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC12847340",
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
     ],
-    "verdict": "mapping_corrected",
-    "corrected_msigdb_name": "REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING",
-    "original_mapped_name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
-    "llm_reasoning": "The original pathway involves PD-1/PD-L1 inhibitory signaling, which affects CD28 and TCR signaling. While the KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY captures TCR signaling, the REACTOME_CD28_DEPENDENT_PI3K_AKT_SIGNALING pathway more specifically addresses the CD28 component, which is directly relevant to the mechanism of action of Atezolizumab. Given the priority order, REACTOME pathways are preferred over KEGG when they capture the biology equally well or better."
+    "verdict": "correct",
+    "corrected_msigdb_name": null,
+    "original_mapped_name": null,
+    "llm_reasoning": "The KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY captures the biological context of PD-1/PD-L1 inhibitory signaling as it involves TCR/CD28 signaling components, which are directly affected by PD-1/PD-L1 interactions. The rationale describes the reversal of SHP-mediated dephosphorylation of TCR/CD28 signaling components, which is central to T-cell receptor signaling. No higher-priority pathway from the candidates captures this specific biology better than the current KEGG mapping."
   },
   "Row2": {
     "Mapped MSigDB Pathway Name": "REACTOME_CO_STIMULATION_BY_CD28",
     "Original Pathway Name": "TCR/CD28 co‑stimulation (concept-level)",
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "Effective PD-L1 blockade requires intact TCR recognition and CD28 co-stimulation; when these are functional, released PD-1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC-I subtypes.",
+    "Rationale": "Effective PD‑L1 blockade requires intact TCR recognition and CD28 co‑stimulation; when these are functional, released PD‑1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC‑I subtypes.",
     "Pathway–drug relationship classification": "mechanistically accurate",
     "References": [
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
@@ -37,6 +37,24 @@
     "corrected_msigdb_name": "REACTOME_CO_STIMULATION_BY_CD28",
     "original_mapped_name": "BIOCARTA_CTLA4_PATHWAY",
     "llm_reasoning": "The original pathway name and rationale emphasize the importance of TCR recognition and CD28 co-stimulation in the context of PD-L1 blockade and T cell activation. While the BIOCARTA_CTLA4_PATHWAY does involve CD28, it primarily focuses on CTLA-4's role in opposing T cell activation. The REACTOME_CO_STIMULATION_BY_CD28 pathway more directly addresses the co-stimulation by CD28, aligning better with the original pathway's focus. Additionally, REACTOME pathways have a higher priority than BIOCARTA pathways, making this correction appropriate."
+  },
+  "Row3": {
+    "Mapped MSigDB Pathway Name": "BIOCARTA_IFNG_PATHWAY",
+    "Original Pathway Name": "IFN‑γ–JAK/STAT signaling",
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Loss-of-function in IFNGR/JAK/STAT components leads to downregulation of the pathway, contributing to resistance to PD-(L)1 inhibitors like atezolizumab in lung cancer.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "BIOCARTA_IFNG_PATHWAY",
+    "original_mapped_name": "PID_IFNG_PATHWAY",
+    "llm_reasoning": "The original mapping 'PID_IFNG_PATHWAY' is a valid representation of the IFN-gamma signaling pathway. However, the 'BIOCARTA_IFNG_PATHWAY' is a higher-priority pathway within the candidate list that specifically represents IFN-gamma signaling, aligning well with the biological context of IFN-γ–JAK/STAT signaling. Given the priority order, BIOCARTA pathways are preferred over PID pathways when they capture the biology equally well."
   },
   "Row4": {
     "Mapped MSigDB Pathway Name": "BIOCARTA_MHC_PATHWAY",
@@ -54,7 +72,7 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "BIOCARTA_MHC_PATHWAY",
     "original_mapped_name": "BIOCARTA_CTLA4_PATHWAY",
-    "llm_reasoning": "The original pathway name 'MHC-I antigen processing and presentation' and the rationale focus on the role of MHC-I in antigen presentation to CD8+ T cells, which is not directly related to CTLA-4 signaling. The 'BIOCARTA_MHC_PATHWAY' specifically addresses antigen processing and presentation, making it a more accurate representation of the described biological process. Additionally, it is a BIOCARTA pathway like the original mapping, maintaining the same priority level."
+    "llm_reasoning": "The original pathway name 'MHC-I antigen processing and presentation' and the rationale focus on the role of MHC-I in antigen presentation to CD8+ T cells. The current mapping to 'BIOCARTA_CTLA4_PATHWAY' emphasizes T cell activation and co-stimulation, which is related but not directly focused on MHC-I antigen processing and presentation. 'BIOCARTA_MHC_PATHWAY' directly addresses antigen processing and presentation, making it a more accurate representation of the biological process described. No higher-priority pathways (e.g., HALLMARK) are available in the candidate list, so the correction is made within the BIOCARTA pathways."
   },
   "Row5": {
     "Mapped MSigDB Pathway Name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
@@ -71,7 +89,22 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
     "original_mapped_name": "BIOCARTA_TCR_PATHWAY",
-    "llm_reasoning": "The original pathway name and rationale focus on tumor mutational burden and neoantigen load, which are closely related to T cell activation and immune response. The BIOCARTA_TCR_PATHWAY is relevant but not optimal given the priority order. The KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY, which is a higher-priority KEGG pathway, captures the T cell receptor signaling process more comprehensively and is more aligned with the biological context of neoantigen recognition and T cell activation in response to tumor mutational burden."
+    "llm_reasoning": "The original pathway name and rationale focus on tumor mutational burden and neoantigen load, which are closely related to T cell activation and immune response. The BIOCARTA_TCR_PATHWAY is relevant but not optimal given the priority order. The KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY is a higher-priority pathway (KEGG over BIOCARTA) and more directly related to T cell receptor signaling, which is crucial for recognizing neoantigens and activating immune responses. Therefore, the mapping is corrected to a more appropriate and higher-priority pathway."
+  },
+  "Row6": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_VEGF",
+    "Original Pathway Name": "VEGF/TGF‑β‑driven immunosuppressive stroma",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The VEGF/TGF-β-driven immunosuppressive stroma is upregulated at baseline, contributing to resistance to atezolizumab due to the exclusion of CD8⁺ T cells.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_VEGF",
+    "original_mapped_name": "HALLMARK_TGF_BETA_SIGNALING",
+    "llm_reasoning": "The original pathway name 'VEGF/TGF‑β‑driven immunosuppressive stroma' involves both VEGF and TGF-β signaling. The current mapping 'HALLMARK_TGF_BETA_SIGNALING' only captures the TGF-β aspect. 'REACTOME_SIGNALING_BY_VEGF' is a higher-priority pathway that captures the VEGF component, which is crucial for the described immunosuppressive stroma and resistance to atezolizumab. Therefore, the mapping is corrected to include the VEGF signaling aspect."
   },
   "Row8": {
     "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS",
@@ -87,30 +120,30 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS",
     "original_mapped_name": "BIOCARTA_TOB1_PATHWAY",
-    "llm_reasoning": "The original pathway name and rationale focus on the role of myeloid-derived suppressor cells (MDSCs), Tregs, and immunosuppressive cytokines like TGF-β in the tumor microenvironment, particularly in non-small cell lung cancer (NSCLC). The BIOCARTA_TOB1_PATHWAY primarily addresses T cell activation and anergy, which is not directly aligned with the specific focus on MDSCs and Tregs. The REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS pathway is more relevant as it involves signaling in myeloid cells, which are central to the function of MDSCs. Additionally, REACTOME pathways have a higher priority than BIOCARTA pathways, making this a more appropriate mapping."
+    "llm_reasoning": "The original pathway name and rationale focus on the role of myeloid-derived suppressor cells (MDSCs), Tregs, and immunosuppressive cytokines in the tumor microenvironment, particularly in the context of NSCLC and immune resistance. The BIOCARTA_TOB1_PATHWAY primarily addresses T cell activation and anergy, which is not directly aligned with the specific focus on MDSCs and Tregs. The REACTOME_SIGNALING_BY_CSF1_M_CSF_IN_MYELOID_CELLS pathway is more relevant as it involves signaling in myeloid cells, which includes MDSCs, and is a higher-priority pathway according to the given order."
   },
   "Row10": {
-    "Mapped MSigDB Pathway Name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_REFERENCE_STRAD_STK11_TSC_SIGNALING_PATHWAY",
     "Original Pathway Name": "KRAS/STK11/KEAP1‑linked metabolic and immune pathways",
     "Regulation": "downregulation",
     "Baseline effect": "resistant",
-    "Rationale": "KRAS-mutant NSCLC generally shows higher TMB/PD-L1 and better ICI outcomes, but co-mutations in STK11/KEAP1 lead to metabolic reprogramming, low CD8 infiltration, and poor atezolizumab benefit.",
+    "Rationale": "KRAS mutations in NSCLC are associated with higher TMB/PD-L1 expression, potentially increasing sensitivity to ICIs like atezolizumab. However, co-mutations in STK11/KEAP1 lead to immune-suppressive environments and metabolic reprogramming, reducing CD8+ T cell infiltration and resulting in resistance to atezolizumab.",
     "Pathway–drug relationship classification": "clinically validated",
     "References": [
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568"
     ],
     "verdict": "mapping_corrected",
-    "corrected_msigdb_name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
-    "original_mapped_name": "HALLMARK_KRAS_SIGNALING_UP",
-    "llm_reasoning": "The original pathway name and rationale involve KRAS mutations in NSCLC with co-mutations in STK11/KEAP1 affecting metabolic and immune pathways. While HALLMARK_KRAS_SIGNALING_UP captures KRAS activation, it does not address the specific context of NSCLC or the co-mutations in STK11/KEAP1. KEGG_NON_SMALL_CELL_LUNG_CANCER is a higher-priority KEGG pathway that more comprehensively represents the NSCLC context, including the heterogeneity and potential co-mutations affecting treatment outcomes."
+    "corrected_msigdb_name": "KEGG_MEDICUS_REFERENCE_STRAD_STK11_TSC_SIGNALING_PATHWAY",
+    "original_mapped_name": "KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY",
+    "llm_reasoning": "The original pathway name and rationale focus on KRAS, STK11, and KEAP1 mutations affecting metabolic and immune pathways, particularly in the context of immune suppression and metabolic reprogramming. The current mapping to 'KEGG_T_CELL_RECEPTOR_SIGNALING_PATHWAY' primarily addresses T cell activation, which does not directly capture the metabolic and immune suppression aspects linked to STK11 and KEAP1 mutations. The 'KEGG_MEDICUS_REFERENCE_STRAD_STK11_TSC_SIGNALING_PATHWAY' is more relevant as it involves STK11 and is related to mTOR signaling, which is crucial for metabolic regulation. This pathway better aligns with the described biological context and rationale."
   },
   "Row11": {
     "Mapped MSigDB Pathway Name": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
     "Original Pathway Name": "B‑/T‑cell–inflamed transcriptional programs (e.g., NMF4 subtype)",
     "Regulation": "upregulation",
     "Baseline effect": "sensitive",
-    "Rationale": "The NMF4 subtype, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, shows marked PFS/OS benefit from ABCP including atezolizumab, indicating pre‑existing adaptive immune activation predicts sensitivity.",
+    "Rationale": "The NMF4 subtype, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, derived marked PFS/OS benefit from ABCP including atezolizumab, illustrating that pre‑existing adaptive immune activation strongly predicts sensitivity.",
     "Pathway–drug relationship classification": "clinically validated",
     "References": [
       "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
@@ -118,7 +151,7 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
     "original_mapped_name": "BIOCARTA_41BB_PATHWAY",
-    "llm_reasoning": "The original pathway description emphasizes B- and T-cell inflammation and adaptive immune activation, which are closely related to NF-kB signaling. The HALLMARK_TNFA_SIGNALING_VIA_NFKB pathway captures the involvement of NF-kB in immune responses and inflammation, aligning well with the biological context provided. Given the priority order, HALLMARK pathways are preferred over BIOCARTA pathways when they capture the biology equally well or better. Therefore, the mapping is corrected to the HALLMARK_TNFA_SIGNALING_VIA_NFKB pathway."
+    "llm_reasoning": "The original pathway name and rationale emphasize B- and T-cell inflammation and immune activation, which are closely related to NF-kB signaling. The HALLMARK_TNFA_SIGNALING_VIA_NFKB pathway captures the involvement of NF-kB in immune responses and inflammation, aligning well with the described biology. Given the priority order, a HALLMARK pathway is preferred over a BIOCARTA pathway when both capture the biology equally well."
   },
   "Row12": {
     "Mapped MSigDB Pathway Name": "KEGG_SMALL_CELL_LUNG_CANCER",
@@ -134,6 +167,6 @@
     "verdict": "mapping_corrected",
     "corrected_msigdb_name": "KEGG_SMALL_CELL_LUNG_CANCER",
     "original_mapped_name": "KEGG_ACUTE_MYELOID_LEUKEMIA",
-    "llm_reasoning": "The original pathway name 'SCLC-I inflamed subtype gene program' and the rationale focus on small cell lung cancer (SCLC), specifically the inflamed subtype, which is not related to acute myeloid leukemia (AML). The current mapping to 'KEGG_ACUTE_MYELOID_LEUKEMIA' is incorrect as it pertains to AML, not SCLC. Among the candidates, 'KEGG_SMALL_CELL_LUNG_CANCER' directly relates to SCLC and is a more appropriate mapping. Although it is a KEGG_LEGACY pathway, it is the only candidate directly related to SCLC, making it the best available option."
+    "llm_reasoning": "The original pathway name 'SCLC-I inflamed subtype gene program' and its rationale are specific to small cell lung cancer (SCLC), particularly focusing on immune activation and CD8A/B expression. The current mapping to 'KEGG_ACUTE_MYELOID_LEUKEMIA' is incorrect as it pertains to acute myeloid leukemia, which is unrelated to SCLC. Among the candidates, 'KEGG_SMALL_CELL_LUNG_CANCER' is the most appropriate as it directly relates to SCLC, aligning with the biological context of the original pathway name. This correction is also justified by the priority order, as KEGG pathways are preferred over BIOCARTA pathways."
   }
 }

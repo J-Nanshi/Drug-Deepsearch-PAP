@@ -1,0 +1,167 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SHC1_EVENTS_IN_EGFR_SIGNALING",
+    "Original Pathway Name": "EGFR signaling (KEGG hsa04012)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Amivantamab targets and inhibits EGFR signaling, which is upregulated in EGFR-driven NSCLC, making tumors sensitive to its suppression.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/35983925",
+      "https://pubmed.ncbi.nlm.nih.gov/34913823",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pubmed.ncbi.nlm.nih.gov/32747419",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%EGFR signaling%' OR gsd.description_brief LIKE '%EGFR signaling%' OR gsd.description_full LIKE '%EGFR signaling%' OR gsd.description_brief LIKE '%EGFR-driven NSCLC%' OR gsd.description_full LIKE '%EGFR-driven NSCLC%') ORDER BY CASE WHEN gs.standard_name LIKE '%EGFR signaling%' THEN 1 WHEN gsd.description_brief LIKE '%EGFR signaling%' THEN 2 WHEN gsd.description_full LIKE '%EGFR signaling%' THEN 3 WHEN gsd.description_brief LIKE '%EGFR-driven NSCLC%' THEN 4 WHEN gsd.description_full LIKE '%EGFR-driven NSCLC%' THEN 5 ELSE 6 END LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row2": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "MET signaling (KEGG hsa04013)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Amivantamab targets MET signaling by blocking HGF-MET interaction, and MET amplification or mutation in NSCLC is associated with sensitivity to amivantamab.",
+    "Pathwayâ€“drug relationship classification": "clinically validated",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/35983925",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pubmed.ncbi.nlm.nih.gov/41206690",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%MET signaling%' OR gsd.description_brief LIKE '%MET signaling%' OR gsd.description_full LIKE '%MET signaling%' OR gsd.description_brief LIKE '%HGF-MET interaction%' OR gsd.description_full LIKE '%HGF-MET interaction%' OR gsd.description_brief LIKE '%MET amplification%' OR gsd.description_full LIKE '%MET amplification%' OR gsd.description_brief LIKE '%mutation in NSCLC%' OR gsd.description_full LIKE '%mutation in NSCLC%') ORDER BY gs.standard_name LIKE '%MET signaling%' DESC, gsd.description_brief LIKE '%MET signaling%' DESC LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row3": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "EGFR–MET co‑activation / bypass network",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR and MET co-activation leads to upregulation of downstream PI3K and MAPK signaling, contributing to resistance against EGFR TKIs. Amivantamab targets both EGFR and MET, overcoming this resistance mechanism.",
+    "Pathwayâ€“drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/35983925",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pubmed.ncbi.nlm.nih.gov/41206690",
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%EGFR%' OR gs.standard_name LIKE '%MET%' OR gs.standard_name LIKE '%PI3K%' OR gs.standard_name LIKE '%MAPK%' OR gsd.description_brief LIKE '%EGFR%' OR gsd.description_brief LIKE '%MET%' OR gsd.description_brief LIKE '%PI3K%' OR gsd.description_brief LIKE '%MAPK%' OR gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%MET%' OR gsd.description_full LIKE '%PI3K%' OR gsd.description_full LIKE '%MAPK%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "PI3K–AKT–mTOR pathway (KEGG hsa04151)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "EGFR and MET activate PI3K–AKT–mTOR via adaptor proteins such as Gab1 and direct PI3K recruitment; dual receptor blockade by amivantamab reduces survival signaling, while MET‑ or PI3K‑pathway reactivation is linked to resistance to upstream RTK inhibition, highlighting PI3K–AKT–mTOR attenuation as a major effector of sensitivity.",
+    "Pathwayâ€“drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%PI3K–AKT–mTOR%' OR gsd.description_brief LIKE '%PI3K–AKT–mTOR%' OR gsd.description_full LIKE '%PI3K–AKT–mTOR%' OR gsd.description_brief LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR gsd.description_brief LIKE '%MET%' OR gsd.description_full LIKE '%MET%' OR gsd.description_brief LIKE '%PI3K%' OR gsd.description_full LIKE '%PI3K%' OR gsd.description_brief LIKE '%mTOR%' OR gsd.description_full LIKE '%mTOR%' OR gsd.description_brief LIKE '%RTK%' OR gsd.description_full LIKE '%RTK%' OR gsd.description_brief LIKE '%resistance%' OR gsd.description_full LIKE '%resistance%' OR gsd.description_brief LIKE '%sensitivity%' OR gsd.description_full LIKE '%sensitivity%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) pathway (KEGG hsa04010)",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "EGFR and MET activation leads to upregulation of the RAS–RAF–MEK–ERK pathway, and MAPK-driven escape mechanisms, such as BRAF/KRAS activation, confer resistance to EGFR/MET-directed therapies like amivantamab.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/37022784",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%RAS–RAF–MEK–ERK%' OR gsd.description_full LIKE '%RAS–RAF–MEK–ERK%' OR gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%MET%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%KRAS%') ORDER BY CASE WHEN gs.standard_name LIKE '%RAS–RAF–MEK–ERK%' THEN 1 WHEN gsd.description_full LIKE '%RAS–RAF–MEK–ERK%' THEN 2 ELSE 3 END, gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row6": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_REFERENCE_AREG_EGFR_PI3K_SIGNALING_PATHWAY",
+    "Original Pathway Name": "EGFR ligand–dependent signaling (AREG‑high EGFR‑WT tumors)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In EGFR‑wild‑type NSCLC, amphiregulin is highly expressed and drives EGFR‑dependent growth; amivantamab blocks ligand binding and suppresses AREG‑induced signaling and proliferation, with efficacy correlating with AREG RNA levels and being largely independent of Fc effector function in these models.",
+    "Pathwayâ€“drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/32747419",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%') AND (gs.standard_name LIKE '%AREG%' OR gsd.description_full LIKE '%AREG%') ORDER BY gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row7": {
+    "Mapped MSigDB Pathway Name": "UNMAPPED",
+    "Original Pathway Name": "Fc‑mediated ADCC and trogocytosis pathways",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Low-fucose IgG1 engineering enhances FcγR engagement; amivantamab elicits NK- and mononuclear-cell-mediated ADCC and macrophage trogocytosis, and MET co-expression augments EGFR binding and ADCC at low antibody concentrations, providing an EGFR/MET-density-dependent immune effector pathway of tumor clearance.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/34913823",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11614048",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842"
+    ],
+    "verdict": "unmapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%Fc-mediated ADCC%' OR gs.standard_name LIKE '%trogocytosis%' OR gsd.description_brief LIKE '%FcγR engagement%' OR gsd.description_brief LIKE '%NK-cell-mediated ADCC%' OR gsd.description_brief LIKE '%macrophage trogocytosis%' OR gsd.description_brief LIKE '%EGFR/MET-density-dependent immune effector pathway%') ORDER BY gs.standard_name LIKE '%Fc-mediated ADCC%' DESC, gs.standard_name LIKE '%trogocytosis%' DESC, gsd.description_brief LIKE '%FcγR engagement%' DESC, gsd.description_brief LIKE '%NK-cell-mediated ADCC%' DESC, gsd.description_brief LIKE '%macrophage trogocytosis%' DESC, gsd.description_brief LIKE '%EGFR/MET-density-dependent immune effector pathway%' DESC LIMIT 20;",
+    "nl2sql_decision_reason": null,
+    "nl2sql_failure_reason": "No valid candidates returned after filtering/validation."
+  },
+  "Row8": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_VARIANT_AMPLIFIED_EGFR_TO_PI3K_SIGNALING_PATHWAY",
+    "Original Pathway Name": "EGFR trafficking and lysosomal degradation (endocytosis/ESCRT)",
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Antibody binding to EGFR promotes receptor internalization and routing to lysosomes; amivantamab‑bound EGFR/MET complexes are internalized and degraded, aligning with EGFR trafficking models where ubiquitin‑ and ESCRT‑dependent endocytosis limits signaling duration and contributes to sustained pathway shutdown.",
+    "Pathwayâ€“drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/34913823",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10523842",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12070093"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%EGFR%' OR gs.standard_name LIKE '%endocytosis%' OR gs.standard_name LIKE '%ESCRT%' OR gsd.description_brief LIKE '%EGFR%' OR gsd.description_brief LIKE '%endocytosis%' OR gsd.description_brief LIKE '%ESCRT%' OR gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%endocytosis%' OR gsd.description_full LIKE '%ESCRT%') ORDER BY gs.standard_name LIKE '%EGFR%' DESC, gs.standard_name LIKE '%endocytosis%' DESC, gs.standard_name LIKE '%ESCRT%' DESC LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  },
+  "Row9": {
+    "Mapped MSigDB Pathway Name": "KEGG_ERBB_SIGNALING_PATHWAY",
+    "Original Pathway Name": "HER3/ErbB family dimerization network",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "At baseline, EGFR-HER3 signaling is active, contributing to PI3K pathway activation. Amivantamab targets EGFR, potentially leading to compensatory HER3 upregulation, which may mediate resistance.",
+    "Pathwayâ€“drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pubmed.ncbi.nlm.nih.gov/36652175",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11056605"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "nl2sql_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description FROM gene_set gs JOIN gene_set_details gsd ON gs.id = gsd.gene_set_id WHERE (gs.standard_name LIKE '%HER3%' OR gs.standard_name LIKE '%ErbB%' OR gs.standard_name LIKE '%EGFR%' OR gsd.description_brief LIKE '%PI3K%' OR gsd.description_brief LIKE '%HER3%' OR gsd.description_brief LIKE '%EGFR%') ORDER BY CASE WHEN gs.standard_name LIKE '%HER3%' THEN 1 WHEN gs.standard_name LIKE '%ErbB%' THEN 2 WHEN gs.standard_name LIKE '%EGFR%' THEN 3 ELSE 4 END, gs.standard_name LIMIT 20;",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  }
+}
