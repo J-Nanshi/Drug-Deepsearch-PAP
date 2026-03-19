@@ -58,8 +58,6 @@ try:
 except ImportError:
     pass
 
-client: Optional[OpenAI] = None
-
 DEFAULT_NL2SQL_MODEL = "gpt-4o"
 NL2SQL_TEMPERATURE = 0.0
 LLM_MAX_TOKENS = 2000
@@ -127,16 +125,19 @@ SQL_BLOCKLIST_PATTERN = re.compile(
 
 # General helpers
 def load_json(path: str) -> Dict[str, Any]:
+    """Load and return a UTF-8 JSON file as a Python dictionary."""
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_json(obj: Any, path: str) -> None:
+    """Write a Python object to an indented UTF-8 JSON file."""
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
 
 def save_pathways_txt(pathways: List[str], path: str) -> None:
+    """Write unique pathway names to a text file in first-seen order."""
     unique_pathways = list(dict.fromkeys(pathways))
     with open(path, "w", encoding="utf-8") as f:
         for pathway in unique_pathways:
@@ -144,21 +145,25 @@ def save_pathways_txt(pathways: List[str], path: str) -> None:
 
 
 def norm_text(s: str) -> str:
+    """Trim text and collapse repeated whitespace for stable comparisons."""
     s = (s or "").strip()
     s = re.sub(r"\s+", " ", s)
     return s
 
 
 def lower(s: str) -> str:
+    """Return normalized lowercase text."""
     return norm_text(s).lower()
 
 
 def short(s: str, n: int = 120) -> str:
+    """Return a shortened preview string for logs and trace output."""
     s = norm_text(s)
     return s if len(s) <= n else s[: n - 1] + "..."
 
 
 def listify_refs(x: Any) -> List[str]:
+    """Normalize a references field into a clean list of strings."""
     if x is None:
         return []
     if isinstance(x, list):
@@ -170,6 +175,7 @@ def listify_refs(x: Any) -> List[str]:
 
 
 def strip_markdown_fence(s: str) -> str:
+    """Remove surrounding Markdown code fences from model output if present."""
     s = (s or "").strip()
     if not s.startswith("```"):
         return s
@@ -179,11 +185,13 @@ def strip_markdown_fence(s: str) -> str:
 
 
 def is_row_included(entry: Dict[str, Any]) -> bool:
+    """Return True when a row's include decision keeps it in scope."""
     decision = lower(str(entry.get("Include decision", entry.get(" Include decision", ""))))
     return "include" in decision and "exclude" not in decision
 
 
 def get_relationship_classification(entry: Dict[str, Any]) -> str:
+    """Extract the pathway-drug relationship classification from known key variants."""
     return str(
         entry.get(
             "Pathwayâ€“drug relationship classification",
@@ -196,15 +204,18 @@ def get_relationship_classification(entry: Dict[str, Any]) -> str:
 
 
 def is_row_relationship_class_in_scope(entry: Dict[str, Any]) -> bool:
+    """Return True when a row's relationship class is allowed for mapping."""
     return lower(get_relationship_classification(entry)) in REL_CLASS_FILTER_VALUES
 
 
 def row_order(key: str) -> Tuple[int, str]:
+    """Sort row-like keys numerically when they contain embedded numbers."""
     m = re.search(r"(\d+)", key)
     return (int(m.group(1)) if m else 10**9, key)
 
 
 def get_pathway_name(entry: Dict[str, Any]) -> str:
+    """Extract the pathway name using the supported fallback field names."""
     return (
         entry.get("Original Pathway Name")
         or entry.get("Pathway")
@@ -216,6 +227,7 @@ def get_pathway_name(entry: Dict[str, Any]) -> str:
 # MSigDB structures and loading
 @dataclass
 class MSigDBRow:
+    """Canonical in-memory representation of one MSigDB pathway record."""
     msigdb_name: str
     collection: Optional[str]
     description: str
@@ -223,16 +235,19 @@ class MSigDBRow:
 
 
 def _list_tables(conn: sqlite3.Connection) -> List[str]:
+    """Return all table names present in the connected SQLite database."""
     cur = conn.cursor()
     return [r[0] for r in cur.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
 
 
 def _has_tables(conn: sqlite3.Connection, names: List[str]) -> bool:
+    """Return True when all requested tables exist in the SQLite schema."""
     tset = set(_list_tables(conn))
     return all(n in tset for n in names)
 
 
 def load_msigdb_metadata(db_path: str) -> List[MSigDBRow]:
+    """Load MSigDB pathway metadata from SQLite into normalized row objects."""
     conn = sqlite3.connect(db_path)
     try:
         cur = conn.cursor()
@@ -283,14 +298,17 @@ def load_msigdb_metadata(db_path: str) -> List[MSigDBRow]:
 
 
 def build_msigdb_lookup(msig_rows: List[MSigDBRow]) -> Dict[str, MSigDBRow]:
+    """Build a fast name-to-row lookup for MSigDB pathway validation."""
     return {row.msigdb_name: row for row in msig_rows}
 
 
 def validate_msigdb_name(name: str, msigdb_lookup: Dict[str, MSigDBRow]) -> bool:
+    """Return True when a pathway name exists in the loaded MSigDB lookup."""
     return name in msigdb_lookup
 
 
 def is_collection_excluded(collection: str, excluded_collections: set) -> bool:
+    """Return True when a collection matches one of the excluded collection rules."""
     collection = collection or ""
     for excl in excluded_collections:
         if collection == excl:
@@ -303,6 +321,7 @@ def is_collection_excluded(collection: str, excluded_collections: set) -> bool:
 
 
 def filter_msigdb_by_collection(msig_rows: List[MSigDBRow], excluded_collections: set) -> List[MSigDBRow]:
+    """Filter out MSigDB rows from excluded collections and print a small summary."""
     filtered = []
     excluded_count = 0
     for row in msig_rows:
@@ -318,11 +337,13 @@ def filter_msigdb_by_collection(msig_rows: List[MSigDBRow], excluded_collections
 
 # Token overlap + deterministic ranking
 def tokenize_for_overlap(text: str) -> List[str]:
+    """Tokenize text for overlap scoring using lowercase alphanumeric terms."""
     toks = re.findall(r"[a-z0-9]+", lower(text))
     return [t for t in toks if len(t) >= 3 and t not in STOPWORDS]
 
 
 def jaccard(a: List[str], b: List[str]) -> float:
+    """Compute Jaccard similarity between two token lists."""
     sa = set(a)
     sb = set(b)
     if not sa or not sb:
@@ -333,6 +354,7 @@ def jaccard(a: List[str], b: List[str]) -> float:
 
 
 def get_pathway_priority(msigdb_name: str) -> int:
+    """Return pathway priority rank based on configured name prefixes."""
     name_upper = (msigdb_name or "").upper()
     for i, prefix in enumerate(PATHWAY_PRIORITY):
         if name_upper.startswith(prefix):
@@ -341,6 +363,7 @@ def get_pathway_priority(msigdb_name: str) -> int:
 
 
 def compute_candidate_scores(pathway_name: str, rationale: str, candidate: Dict[str, Any]) -> Dict[str, Any]:
+    """Score one candidate using token overlap plus a curated pathway-priority bonus."""
     q_name = tokenize_for_overlap(pathway_name)
     q_rat = tokenize_for_overlap(rationale)
     c_name = tokenize_for_overlap(str(candidate.get("msigdb_name", "")))
@@ -375,6 +398,7 @@ def compute_candidate_scores(pathway_name: str, rationale: str, candidate: Dict[
 
 
 def rank_msigdb_candidates(pathway_name: str, rationale: str, candidates: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Rank candidates deterministically by score, priority, SQL score, and name."""
     scored = [compute_candidate_scores(pathway_name, rationale, c) for c in candidates]
     scored.sort(
         key=lambda c: (
@@ -387,8 +411,8 @@ def rank_msigdb_candidates(pathway_name: str, rationale: str, candidates: List[D
     return scored
 
 # OpenAI + NL2SQL
-def init_openai_client() -> None:
-    global client
+def init_openai_client() -> OpenAI:
+    """Initialize and return an OpenAI client from the OPENAI_API_KEY environment variable."""
     openai_api_key = os.getenv("OPENAI_API_KEY")
     if not openai_api_key:
         raise RuntimeError(
@@ -397,18 +421,17 @@ def init_openai_client() -> None:
             "2. Create a .env file with: OPENAI_API_KEY=your-key\n"
             "3. Set directly in code (not recommended)"
         )
-    client = OpenAI(api_key=openai_api_key)
+    return OpenAI(api_key=openai_api_key)
 
 
 def call_openai_with_retry(
+    client: OpenAI,
     messages: List[Dict[str, str]],
     model: str,
     temperature: float = NL2SQL_TEMPERATURE,
     max_retries: int = 3,
 ) -> str:
-    if client is None:
-        raise RuntimeError("OpenAI client is not initialized. Call init_openai_client() first.")
-
+    """Call the OpenAI chat completion API with retry and token-parameter fallback."""
     for attempt in range(max_retries):
         try:
             kwargs = {
@@ -441,6 +464,7 @@ def call_openai_with_retry(
 
 
 def build_schema_context(conn: sqlite3.Connection) -> str:
+    """Build a compact textual schema description for the NL2SQL prompt."""
     target_tables = ["gene_set", "gene_set_details", "namespace"]
     lines: List[str] = []
 
@@ -460,12 +484,14 @@ def build_schema_context(conn: sqlite3.Connection) -> str:
 
 
 def generate_nl2sql_query(
+    client: OpenAI,
     pathway_name: str,
     rationale: str,
     schema_context: str,
     model: str,
     top_k: int,
 ) -> Dict[str, Any]:
+    """Ask the model to generate one read-only SQL query for candidate retrieval."""
     prompt = f"""You are an expert SQL generator for SQLite MSigDB mapping.
 
 Task:
@@ -509,7 +535,12 @@ Return ONLY valid JSON:
     ]
 
     try:
-        response = call_openai_with_retry(messages=messages, model=model, temperature=NL2SQL_TEMPERATURE)
+        response = call_openai_with_retry(
+            client=client,
+            messages=messages,
+            model=model,
+            temperature=NL2SQL_TEMPERATURE,
+        )
         response = strip_markdown_fence(response)
         parsed = json.loads(response)
         return {
@@ -528,6 +559,7 @@ Return ONLY valid JSON:
 
 
 def validate_nl2sql_sql(sql: str) -> Tuple[bool, str, Optional[str]]:
+    """Validate generated SQL and return a safe single SELECT statement if allowed."""
     raw = (sql or "").strip()
     if not raw:
         return False, "", "Generated SQL is empty."
@@ -554,6 +586,7 @@ def execute_candidate_sql(
     sql: str,
     max_rows: int = 100,
 ) -> Tuple[List[Dict[str, Any]], Optional[str]]:
+    """Execute candidate SQL and normalize result rows into mapping candidate dictionaries."""
     try:
         cur = conn.cursor()
         cur.execute(sql)
@@ -606,6 +639,7 @@ def filter_sql_candidates_by_collection(
     candidates: List[Dict[str, Any]],
     excluded_collections: set,
 ) -> Tuple[List[Dict[str, Any]], int]:
+    """Drop SQL candidates from excluded collections and report how many were removed."""
     filtered: List[Dict[str, Any]] = []
     excluded_count = 0
 
@@ -623,6 +657,7 @@ def filter_sql_candidates_to_known_msigdb(
     candidates: List[Dict[str, Any]],
     msigdb_lookup: Dict[str, MSigDBRow],
 ) -> Tuple[List[Dict[str, Any]], int]:
+    """Keep only SQL candidates whose names exist in the loaded MSigDB lookup."""
     filtered: List[Dict[str, Any]] = []
     dropped_unknown = 0
 
@@ -637,6 +672,7 @@ def filter_sql_candidates_to_known_msigdb(
 
 
 def reduce_candidate_for_trace(c: Dict[str, Any]) -> Dict[str, Any]:
+    """Shrink a scored candidate to the fields needed in trace output."""
     return {
         "msigdb_name": c.get("msigdb_name"),
         "collection": c.get("collection"),
@@ -651,12 +687,14 @@ def reduce_candidate_for_trace(c: Dict[str, Any]) -> Dict[str, Any]:
 def nl2sql_map_single_row(
     row_key: str,
     entry: Dict[str, Any],
+    client: OpenAI,
     conn: sqlite3.Connection,
     schema_context: str,
     msigdb_lookup: Dict[str, MSigDBRow],
     nl2sql_model: str,
     top_k: int = TOP_CANDIDATES_FOR_MAPPING,
 ) -> Dict[str, Any]:
+    """Map one input row to a canonical MSigDB pathway using NL2SQL and deterministic ranking."""
     original_pathway = get_pathway_name(entry)
     rationale = str(entry.get("Rationale", ""))
 
@@ -684,6 +722,7 @@ def nl2sql_map_single_row(
         return result
 
     nl2sql_out = generate_nl2sql_query(
+        client=client,
         pathway_name=original_pathway,
         rationale=rationale,
         schema_context=schema_context,
@@ -744,6 +783,7 @@ def nl2sql_map_single_row(
 # Main verification pipeline
 def run_verification_pipeline(
     input_file: Path,
+    client: OpenAI,
     msigdb_sqlite_path: str,
     msigdb_lookup: Dict[str, MSigDBRow],
     nl2sql_model: str,
@@ -751,6 +791,7 @@ def run_verification_pipeline(
     out_trace_dir: Path,
     # out_pathways_dir: Path,
 ) -> Tuple[str, str, str]:
+    """Process one input JSON file, map all retained rows, and write final and trace outputs."""
     drug_name = input_file.stem
 
     print(f"\n{'='*70}")
@@ -801,6 +842,7 @@ def run_verification_pipeline(
             mapping = nl2sql_map_single_row(
                 row_key=row_key,
                 entry=entry,
+                client=client,
                 conn=conn,
                 schema_context=schema_context,
                 msigdb_lookup=msigdb_lookup,
@@ -923,6 +965,7 @@ def run_verification_pipeline(
 
 # CLI
 def parse_args() -> argparse.Namespace:
+    """Parse CLI arguments for the Step 3 NL2SQL mapping pipeline."""
     parser = argparse.ArgumentParser(
         description="MSigDB pathway mapper with NL2SQL candidate retrieval + deterministic ranking."
     )
@@ -995,7 +1038,7 @@ if __name__ == "__main__":
 
     msigdb_lookup = build_msigdb_lookup(msig_rows_all)
 
-    init_openai_client()
+    client = init_openai_client()
 
     print(f"\nUsing NL2SQL model: {nl2sql_model}")
     print(f"Found {len(input_files)} input file(s) to process:")
@@ -1007,6 +1050,7 @@ if __name__ == "__main__":
         try:
             final_path, trace_path, pathways_txt_path = run_verification_pipeline(
                 input_file=input_file,
+                client=client,
                 msigdb_sqlite_path=msigdb_sqlite_path,
                 msigdb_lookup=msigdb_lookup,
                 nl2sql_model=nl2sql_model,
@@ -1032,12 +1076,7 @@ if __name__ == "__main__":
 
 # %% MSigDB SQLite visualizer (run this cell in VS Code/Jupyter)
 def visualize_msigdb_sqlite(db_path: str, preview_rows: int = 5) -> None:
-    """
-    Print tables in an SQLite DB with:
-    - column names/types
-    - total row count
-    - a small data preview
-    """
+    """Print table structure, row counts, and sample rows for an SQLite database."""
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     try:
