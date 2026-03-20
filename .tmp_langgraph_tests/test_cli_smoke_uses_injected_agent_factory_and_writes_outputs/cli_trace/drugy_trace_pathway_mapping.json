@@ -1,0 +1,61 @@
+{
+  "summary": {
+    "drug_name": "drugy",
+    "input_file": "D:\\GS\\Drug-Deepsearch-PAP\\.tmp_langgraph_tests\\test_cli_smoke_uses_injected_agent_factory_and_writes_outputs\\cli_input\\drugy.json",
+    "rows_before_filter": 1,
+    "rows_after_include_filter": 1,
+    "rows_after_filter": 1,
+    "rows_dropped_by_include_filter": 0,
+    "rows_dropped_by_relationship_class_filter": 0,
+    "mapped_count": 1,
+    "unmapped_count": 0,
+    "sql_generation_errors": 0,
+    "sql_validation_errors": 0,
+    "sql_execution_errors": 0,
+    "nl2sql_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "mTOR signaling pathway",
+      "Rationale": "KRAS inhibition suppresses mTOR growth signaling.",
+      "Final Mapped MSigDB": "HALLMARK_MTORC1_SIGNALING",
+      "verdict": "mapped",
+      "generated_sql": "SELECT\n            gs.standard_name AS msigdb_name,\n            gs.collection_name AS collection,\n            COALESCE(gsd.description_full, gsd.description_brief, '') AS description,\n            0.99 AS sql_score\n        FROM gene_set gs\n        LEFT JOIN gene_set_details gsd ON gsd.gene_set_id = gs.id\n        WHERE gs.standard_name = 'HALLMARK_MTORC1_SIGNALING'\n        LIMIT 10",
+      "checked_sql": "SELECT\n            gs.standard_name AS msigdb_name,\n            gs.collection_name AS collection,\n            COALESCE(gsd.description_full, gsd.description_brief, '') AS description,\n            0.99 AS sql_score\n        FROM gene_set gs\n        LEFT JOIN gene_set_details gsd ON gsd.gene_set_id = gs.id\n        WHERE gs.standard_name = 'HALLMARK_MTORC1_SIGNALING'\n        LIMIT 10",
+      "agent_final_response": "done",
+      "agent_query_result_raw": "",
+      "agent_query_result_rows": [],
+      "candidate_count_raw": 1,
+      "candidate_count_after_collection_filter": 1,
+      "candidate_count_after_validation": 1,
+      "excluded_by_collection": 0,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "HALLMARK_MTORC1_SIGNALING",
+        "collection": "H",
+        "sql_score": 0.99,
+        "overlap_score": 0.282083,
+        "priority_rank": 0,
+        "priority_bonus": 0.05,
+        "ranking_score": 0.332083,
+        "description": "mTOR signaling and growth factor response pathway"
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "HALLMARK_MTORC1_SIGNALING",
+          "collection": "H",
+          "sql_score": 0.99,
+          "overlap_score": 0.282083,
+          "priority_rank": 0,
+          "priority_bonus": 0.05,
+          "ranking_score": 0.332083,
+          "description": "mTOR signaling and growth factor response pathway"
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    }
+  ]
+}

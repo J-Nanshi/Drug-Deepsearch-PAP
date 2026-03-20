@@ -1,0 +1,1044 @@
+{
+  "summary": {
+    "drug_name": "afatinib",
+    "input_file": "d:\\GS\\Drug-Deepsearch-PAP\\.tmp_afatinib_langgraph_input\\afatinib.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 9,
+    "rows_after_filter": 5,
+    "rows_dropped_by_include_filter": 3,
+    "rows_dropped_by_relationship_class_filter": 4,
+    "mapped_count": 5,
+    "unmapped_count": 0,
+    "sql_generation_errors": 0,
+    "sql_validation_errors": 0,
+    "sql_execution_errors": 0,
+    "nl2sql_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+      "Rationale": "Afatinib is an irreversible pan-ErbB inhibitor that covalently binds EGFR, HER2 and ErbB4, leading to prolonged suppression of EGFR phosphorylation and downstream survival signaling in EGFR‑mutant NSCLC, translating into higher response rates and longer PFS versus chemotherapy and first‑generation TKIs in exon 19 del/L858R disease.",
+      "Final Mapped MSigDB": "KEGG_ERBB_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%NSCLC%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%')\n   OR (gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%')\n   OR gsd.description_full LIKE '%Afatinib%'\n   OR gsd.description_full LIKE '%NSCLC%'\nORDER BY sql_score DESC\nLIMIT 20;",
+      "checked_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%NSCLC%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%')\n   OR (gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%')\n   OR gsd.description_full LIKE '%Afatinib%'\n   OR gsd.description_full LIKE '%NSCLC%'\nORDER BY sql_score DESC\nLIMIT 20;",
+      "agent_final_response": "The query returned several MSigDB pathways related to EGFR/ErbB signaling and non-small cell lung cancer (NSCLC). Here are some of the top candidates: 1. **KEGG_NON_SMALL_CELL_LUNG_CANCER** (Collection: C2:CP:KEGG_LEGACY) - This pathway is directly related to NSCLC, which is relevant given the context of EGFR mutations and treatment with Afatinib. 2. **KOBAYASHI_EGFR_SIGNALING_6HR_UP** (Collection: C2:CGP) - This pathway involves activating mutations in the EGFR tyrosine kinase domain, which is pertinent to the rationale provided. 3. **COLDREN_GEFITINIB_RESISTANCE_UP** (Collection: C2:CGP) - This pathway discusses resistance to EGFR tyrosine kinase inhibitors, relevant to the context of Afatinib and NSCLC. 4. **BIOCARTA_HER2_PATHWAY** (Collection: C2:CP:BIOCARTA) - This pathway involves Her2, which is part of the ErbB family, aligning with the pathway name and rationale. 5. **KEGG_ERBB_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_LEGACY) - This pathway covers the ErbB family of receptor tyrosine kinases, directly related to the pathway name. These pathways are strong candidates for mapping the original pathway mention to canonical MSigDB entries, considering both the pathway name and the rationale semantics.",
+      "agent_query_result_raw": "[('KEGG_NON_SMALL_CELL_LUNG_CANCER', 'C2:CP:KEGG_LEGACY', 'Non-small-cell lung cancer (NSCLC) accounts for approximately 80% of lung cancer and represents a heterogeneous group of cancers, consisting mainly of squamous cell (SCC), adeno (AC) and large-cell carcinoma. Molecular mechanisms altered in NSCLC include activation of oncogenes, such as K-RAS...', 3), ('KOBAYASHI_EGFR_SIGNALING_6HR_UP', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 2), ('COLDREN_GEFITINIB_RESISTANCE_UP', 'C2:CGP', 'Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...', 2), ('DING_LUNG_CANCER_MUTATED_SIGNIFICANTLY', 'C2:CGP', 'Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...', 2), ('DING_LUNG_CANCER_MUTATED_FREQUENTLY', 'C2:CGP', 'Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...', 2), ('DING_LUNG_CANCER_EXPRESSION_BY_COPY_NUMBER', 'C2:CGP', 'Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...', 2), ('DING_LUNG_CANCER_MUTATED_RECURRENTLY', 'C2:CGP', 'Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...', 2), ('DING_LUNG_CANCER_BY_MUTATION_RATE', 'C2:CGP', 'Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...', 2), ('KOBAYASHI_EGFR_SIGNALING_24HR_UP', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 2), ('KOBAYASHI_EGFR_SIGNALING_6HR_DN', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 2), ('COLDREN_GEFITINIB_RESISTANCE_DN', 'C2:CGP', 'Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...', 2), ('KOBAYASHI_EGFR_SIGNALING_24HR_DN', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 2), ('BIOCARTA_HER2_PATHWAY', 'C2:CP:BIOCARTA', 'Her2 or ERBB2 belongs to a class of proteins having high homology with epidermal growth factor receptor (EGFR or ERBB1). It encodes a protein with the molecular weight of 185 KDa. Unlike other members of EGFR family, no ligand for Her2 has been found and it usually associates with members of...', 2), ('KEGG_ERBB_SIGNALING_PATHWAY', 'C2:CP:KEGG_LEGACY', 'The ErbB family of receptor tyrosine kinases (RTKs) couples binding of extracellular growth factor ligands to intracellular signaling pathways regulating diverse biologic responses, including proliferation, differentiation, cell motility, and survival. Ligand binding to the four closely related...', 2), ('HOWLIN_PUBERTAL_MAMMARY_GLAND', 'C2:CGP', 'Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...', 2), ('HOWLIN_CITED1_TARGETS_1_UP', 'C2:CGP', 'Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...', 2), ('HOWLIN_CITED1_TARGETS_1_DN', 'C2:CGP', 'Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...', 2), ('HOWLIN_CITED1_TARGETS_2_UP', 'C2:CGP', 'Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...', 2), ('HOWLIN_CITED1_TARGETS_2_DN', 'C2:CGP', 'Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...', 2), ('FIGAROL_EGFR_TKI_DRUG_TOLERANT_CELL_UP', 'C2:CGP', 'Drug-tolerance has emerged as one of the major non-genetic adaptive processes driving resistance to targeted therapies such as tyrosine kinase inhibitors (TKI) in non-small cell lung cancer (NSCLC). To identify potential hallmarks of drug-tolerant cells (DTC), we performed RNAseq and scRNAseq...', 2)]",
+      "agent_query_result_rows": [
+        [
+          "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+          "C2:CP:KEGG_LEGACY",
+          "Non-small-cell lung cancer (NSCLC) accounts for approximately 80% of lung cancer and represents a heterogeneous group of cancers, consisting mainly of squamous cell (SCC), adeno (AC) and large-cell carcinoma. Molecular mechanisms altered in NSCLC include activation of oncogenes, such as K-RAS...",
+          3
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_6HR_UP",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          2
+        ],
+        [
+          "COLDREN_GEFITINIB_RESISTANCE_UP",
+          "C2:CGP",
+          "Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...",
+          2
+        ],
+        [
+          "DING_LUNG_CANCER_MUTATED_SIGNIFICANTLY",
+          "C2:CGP",
+          "Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...",
+          2
+        ],
+        [
+          "DING_LUNG_CANCER_MUTATED_FREQUENTLY",
+          "C2:CGP",
+          "Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...",
+          2
+        ],
+        [
+          "DING_LUNG_CANCER_EXPRESSION_BY_COPY_NUMBER",
+          "C2:CGP",
+          "Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...",
+          2
+        ],
+        [
+          "DING_LUNG_CANCER_MUTATED_RECURRENTLY",
+          "C2:CGP",
+          "Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...",
+          2
+        ],
+        [
+          "DING_LUNG_CANCER_BY_MUTATION_RATE",
+          "C2:CGP",
+          "Determining the genetic basis of cancer requires comprehensive analyses of large collections of histopathologically well-classified primary tumours. Here we report the results of a collaborative study to discover somatic mutations in 188 human lung adenocarcinomas. DNA sequencing of 623 genes...",
+          2
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_24HR_UP",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          2
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_6HR_DN",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          2
+        ],
+        [
+          "COLDREN_GEFITINIB_RESISTANCE_DN",
+          "C2:CGP",
+          "Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...",
+          2
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_24HR_DN",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          2
+        ],
+        [
+          "BIOCARTA_HER2_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Her2 or ERBB2 belongs to a class of proteins having high homology with epidermal growth factor receptor (EGFR or ERBB1). It encodes a protein with the molecular weight of 185 KDa. Unlike other members of EGFR family, no ligand for Her2 has been found and it usually associates with members of...",
+          2
+        ],
+        [
+          "KEGG_ERBB_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_LEGACY",
+          "The ErbB family of receptor tyrosine kinases (RTKs) couples binding of extracellular growth factor ligands to intracellular signaling pathways regulating diverse biologic responses, including proliferation, differentiation, cell motility, and survival. Ligand binding to the four closely related...",
+          2
+        ],
+        [
+          "HOWLIN_PUBERTAL_MAMMARY_GLAND",
+          "C2:CGP",
+          "Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...",
+          2
+        ],
+        [
+          "HOWLIN_CITED1_TARGETS_1_UP",
+          "C2:CGP",
+          "Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...",
+          2
+        ],
+        [
+          "HOWLIN_CITED1_TARGETS_1_DN",
+          "C2:CGP",
+          "Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...",
+          2
+        ],
+        [
+          "HOWLIN_CITED1_TARGETS_2_UP",
+          "C2:CGP",
+          "Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...",
+          2
+        ],
+        [
+          "HOWLIN_CITED1_TARGETS_2_DN",
+          "C2:CGP",
+          "Expression microarray analysis identified CITED1 among a group of genes specifically upregulated in the pubertal mouse mammary gland. At puberty, CITED1 localizes to the luminal epithelial cell population of the mammary ducts and the body cells of the terminal end buds. Generation of CITED1 gene...",
+          2
+        ],
+        [
+          "FIGAROL_EGFR_TKI_DRUG_TOLERANT_CELL_UP",
+          "C2:CGP",
+          "Drug-tolerance has emerged as one of the major non-genetic adaptive processes driving resistance to targeted therapies such as tyrosine kinase inhibitors (TKI) in non-small cell lung cancer (NSCLC). To identify potential hallmarks of drug-tolerant cells (DTC), we performed RNAseq and scRNAseq...",
+          2
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_collection_filter": 3,
+      "candidate_count_after_validation": 3,
+      "excluded_by_collection": 17,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "KEGG_ERBB_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_LEGACY",
+        "sql_score": 2.0,
+        "overlap_score": 0.142281,
+        "priority_rank": 3,
+        "priority_bonus": 0.025,
+        "ranking_score": 0.167281,
+        "description": "The ErbB family of receptor tyrosine kinases (RTKs) couples binding of extracellular growth factor ligands to intracellular signaling pathways regulating diverse biologic responses, including prolife..."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_ERBB_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_LEGACY",
+          "sql_score": 2.0,
+          "overlap_score": 0.142281,
+          "priority_rank": 3,
+          "priority_bonus": 0.025,
+          "ranking_score": 0.167281,
+          "description": "The ErbB family of receptor tyrosine kinases (RTKs) couples binding of extracellular growth factor ligands to intracellular signaling pathways regulating diverse biologic responses, including prolife..."
+        },
+        {
+          "msigdb_name": "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+          "collection": "C2:CP:KEGG_LEGACY",
+          "sql_score": 3.0,
+          "overlap_score": 0.01192,
+          "priority_rank": 3,
+          "priority_bonus": 0.025,
+          "ranking_score": 0.03692,
+          "description": "Non-small-cell lung cancer (NSCLC) accounts for approximately 80% of lung cancer and represents a heterogeneous group of cancers, consisting mainly of squamous cell (SCC), adeno (AC) and large-cell c..."
+        },
+        {
+          "msigdb_name": "BIOCARTA_HER2_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 2.0,
+          "overlap_score": 0.023664,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.031997,
+          "description": "Her2 or ERBB2 belongs to a class of proteins having high homology with epidermal growth factor receptor (EGFR or ERBB1). It encodes a protein with the molecular weight of 185 KDa. Unlike other member..."
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row4",
+      "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+      "Rationale": "The RAS–RAF–MEK–ERK (MAPK) cascade is upregulated in the presence of KRAS/BRAF mutations or bypass RTKs, leading to resistance to afatinib in lung cancer.",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%')\n   OR (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "checked_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%')\n   OR (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "agent_final_response": "The query returned 20 pathways related to the RAS–RAF–MEK–ERK (MAPK) cascade and its implications in cancer, particularly in the context of KRAS/BRAF mutations and resistance to treatments like afatinib in lung cancer. The pathways are from various collections, primarily C2:CGP and C2:CP:KEGG_MEDICUS, and include descriptions that mention signaling pathways and oncogenic signatures. Each entry has a high relevance score (sql_score of 2), indicating strong matches based on both the pathway name and the rationale semantics.",
+      "agent_query_result_raw": "[('SWEET_KRAS_TARGETS_DN', 'C2:CGP', 'Using advanced gene targeting methods, generating mouse models of cancer that accurately reproduce the genetic alterations present in human tumors is now relatively straightforward. The challenge is to determine to what extent such models faithfully mimic human disease with respect to the...', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated EGFR to PLCG-ERK signaling pathway. Pathway ID: N00024. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EML4-ALK fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00007. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PLCG_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EML4-ALK fusion kinase to PLCG-ERK signaling pathway. Pathway ID: N00025. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_LOSS_OF_RASSF1_TO_RAS_RASSF1_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Loss of RASSF1 to RAS-RASSF1 signaling pathway. Pathway ID: N00097. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated KRAS/NRAS to ERK signaling pathway. Pathway ID: N00012. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated KRAS/NRAS to PI3K signaling pathway. Pathway ID: N00032. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated BRAF to ERK signaling pathway. Pathway ID: N00013. Pathway type: Variant. Pathway class: nt06268 Melanoma.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'RET fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00008. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('SWEET_KRAS_ONCOGENIC_SIGNATURE', 'C2:CGP', 'Using advanced gene targeting methods, generating mouse models of cancer that accurately reproduce the genetic alterations present in human tumors is now relatively straightforward. The challenge is to determine to what extent such models faithfully mimic human disease with respect to the...', 2), ('SHEPARD_CRASH_AND_BURN_MUTANT_UP', 'C2:CGP', 'A major goal of cancer research has been to identify genes that contribute to cancer formation. The similar pathology between zebrafish and human tumors, as well as the past success of large-scale genetic screens in uncovering human disease genes, makes zebrafish an ideal system in which to find...', 2), ('SHEPARD_CRASH_AND_BURN_MUTANT_DN', 'C2:CGP', 'A major goal of cancer research has been to identify genes that contribute to cancer formation. The similar pathology between zebrafish and human tumors, as well as the past success of large-scale genetic screens in uncovering human disease genes, makes zebrafish an ideal system in which to find...', 2), ('SWEET_KRAS_TARGETS_UP', 'C2:CGP', 'Using advanced gene targeting methods, generating mouse models of cancer that accurately reproduce the genetic alterations present in human tumors is now relatively straightforward. The challenge is to determine to what extent such models faithfully mimic human disease with respect to the...', 2), ('KRAS.DF.V1_UP', 'C6', 'Profiling of immortalized human lung epithelial cells following oncogenic KRAS expression and TBK1 suppression. The purpose of the dataset is to analyze expression of genes induced by KRAS and regulated by TBK1. The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which...', 2), ('KRAS.AMP.LUNG_UP.V1_DN', 'C6', 'Profiling of immortalized human lung epithelial cells following oncogenic KRAS expression and TBK1 suppression. The purpose of the dataset is to analyze expression of genes induced by KRAS and regulated by TBK1. The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which...', 2), ('KRAS.AMP.LUNG_UP.V1_UP', 'C6', 'Profiling of immortalized human lung epithelial cells following oncogenic KRAS expression and TBK1 suppression. The purpose of the dataset is to analyze expression of genes induced by KRAS and regulated by TBK1. The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which...', 2), ('KRAS.300_UP.V1_DN', 'C6', 'The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which are aggressive and respond poorly to standard therapies. Although the identification of specific oncogenes has led to the development of clinically effective, molecularly targeted therapies in some cases, KRAS has...', 2)]",
+      "agent_query_result_rows": [
+        [
+          "SWEET_KRAS_TARGETS_DN",
+          "C2:CGP",
+          "Using advanced gene targeting methods, generating mouse models of cancer that accurately reproduce the genetic alterations present in human tumors is now relatively straightforward. The challenge is to determine to what extent such models faithfully mimic human disease with respect to the...",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated EGFR to PLCG-ERK signaling pathway. Pathway ID: N00024. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EML4-ALK fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00007. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EML4-ALK fusion kinase to PLCG-ERK signaling pathway. Pathway ID: N00025. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_LOSS_OF_RASSF1_TO_RAS_RASSF1_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Loss of RASSF1 to RAS-RASSF1 signaling pathway. Pathway ID: N00097. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated KRAS/NRAS to ERK signaling pathway. Pathway ID: N00012. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated KRAS/NRAS to PI3K signaling pathway. Pathway ID: N00032. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated BRAF to ERK signaling pathway. Pathway ID: N00013. Pathway type: Variant. Pathway class: nt06268 Melanoma.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "RET fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00008. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "SWEET_KRAS_ONCOGENIC_SIGNATURE",
+          "C2:CGP",
+          "Using advanced gene targeting methods, generating mouse models of cancer that accurately reproduce the genetic alterations present in human tumors is now relatively straightforward. The challenge is to determine to what extent such models faithfully mimic human disease with respect to the...",
+          2
+        ],
+        [
+          "SHEPARD_CRASH_AND_BURN_MUTANT_UP",
+          "C2:CGP",
+          "A major goal of cancer research has been to identify genes that contribute to cancer formation. The similar pathology between zebrafish and human tumors, as well as the past success of large-scale genetic screens in uncovering human disease genes, makes zebrafish an ideal system in which to find...",
+          2
+        ],
+        [
+          "SHEPARD_CRASH_AND_BURN_MUTANT_DN",
+          "C2:CGP",
+          "A major goal of cancer research has been to identify genes that contribute to cancer formation. The similar pathology between zebrafish and human tumors, as well as the past success of large-scale genetic screens in uncovering human disease genes, makes zebrafish an ideal system in which to find...",
+          2
+        ],
+        [
+          "SWEET_KRAS_TARGETS_UP",
+          "C2:CGP",
+          "Using advanced gene targeting methods, generating mouse models of cancer that accurately reproduce the genetic alterations present in human tumors is now relatively straightforward. The challenge is to determine to what extent such models faithfully mimic human disease with respect to the...",
+          2
+        ],
+        [
+          "KRAS.DF.V1_UP",
+          "C6",
+          "Profiling of immortalized human lung epithelial cells following oncogenic KRAS expression and TBK1 suppression. The purpose of the dataset is to analyze expression of genes induced by KRAS and regulated by TBK1. The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which...",
+          2
+        ],
+        [
+          "KRAS.AMP.LUNG_UP.V1_DN",
+          "C6",
+          "Profiling of immortalized human lung epithelial cells following oncogenic KRAS expression and TBK1 suppression. The purpose of the dataset is to analyze expression of genes induced by KRAS and regulated by TBK1. The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which...",
+          2
+        ],
+        [
+          "KRAS.AMP.LUNG_UP.V1_UP",
+          "C6",
+          "Profiling of immortalized human lung epithelial cells following oncogenic KRAS expression and TBK1 suppression. The purpose of the dataset is to analyze expression of genes induced by KRAS and regulated by TBK1. The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which...",
+          2
+        ],
+        [
+          "KRAS.300_UP.V1_DN",
+          "C6",
+          "The proto-oncogene KRAS is mutated in a wide array of human cancers, most of which are aggressive and respond poorly to standard therapies. Although the identification of specific oncogenes has led to the development of clinically effective, molecularly targeted therapies in some cases, KRAS has...",
+          2
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_collection_filter": 15,
+      "candidate_count_after_validation": 15,
+      "excluded_by_collection": 5,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_MEDICUS",
+        "sql_score": 2.0,
+        "overlap_score": 0.119987,
+        "priority_rank": 2,
+        "priority_bonus": 0.033333,
+        "ranking_score": 0.15332,
+        "description": "Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.119987,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.15332,
+          "description": "Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.119987,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.15332,
+          "description": "RET fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00008. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.113876,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.14721,
+          "description": "EML4-ALK fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00007. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.074594,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.107927,
+          "description": "Mutation-activated KRAS/NRAS to ERK signaling pathway. Pathway ID: N00012. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_LOSS_OF_RASSF1_TO_RAS_RASSF1_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.071769,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.105103,
+          "description": "Loss of RASSF1 to RAS-RASSF1 signaling pathway. Pathway ID: N00097. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.070193,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.103527,
+          "description": "Mutation-activated BRAF to ERK signaling pathway. Pathway ID: N00013. Pathway type: Variant. Pathway class: nt06268 Melanoma."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.068058,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.101391,
+          "description": "EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.068058,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.101391,
+          "description": "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.064751,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.098084,
+          "description": "Mutation-activated EGFR to PLCG-ERK signaling pathway. Pathway ID: N00024. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.06178,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.095113,
+          "description": "EML4-ALK fusion kinase to PLCG-ERK signaling pathway. Pathway ID: N00025. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row5",
+      "Original Pathway Name": "MET/HGF pathway",
+      "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR‑TKI‑resistant NSCLC and is highlighted as a key high‑priority resistance node in multi‑omics analyses, undermining afatinib efficacy unless co‑targeted.",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gsd.description_full LIKE '%MET%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%PI3K%' OR gsd.description_full LIKE '%PI3K%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%MAPK%' OR gsd.description_full LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%NSCLC%' OR gsd.description_full LIKE '%NSCLC%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%afatinib%' OR gsd.description_full LIKE '%afatinib%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gsd.description_full LIKE '%MET%' OR\n       gs.standard_name LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%' OR\n       gs.standard_name LIKE '%PI3K%' OR gsd.description_full LIKE '%PI3K%' OR\n       gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' OR\n       gs.standard_name LIKE '%MAPK%' OR gsd.description_full LIKE '%MAPK%' OR\n       gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' OR\n       gs.standard_name LIKE '%NSCLC%' OR gsd.description_full LIKE '%NSCLC%' OR\n       gs.standard_name LIKE '%afatinib%' OR gsd.description_full LIKE '%afatinib%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "checked_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gsd.description_full LIKE '%MET%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%PI3K%' OR gsd.description_full LIKE '%PI3K%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%MAPK%' OR gsd.description_full LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%NSCLC%' OR gsd.description_full LIKE '%NSCLC%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%afatinib%' OR gsd.description_full LIKE '%afatinib%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gsd.description_full LIKE '%MET%' OR\n       gs.standard_name LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%' OR\n       gs.standard_name LIKE '%PI3K%' OR gsd.description_full LIKE '%PI3K%' OR\n       gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' OR\n       gs.standard_name LIKE '%MAPK%' OR gsd.description_full LIKE '%MAPK%' OR\n       gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' OR\n       gs.standard_name LIKE '%NSCLC%' OR gsd.description_full LIKE '%NSCLC%' OR\n       gs.standard_name LIKE '%afatinib%' OR gsd.description_full LIKE '%afatinib%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "agent_final_response": "The query returned several pathways related to the MET/HGF pathway and its associated signaling mechanisms. Here are some notable results: 1. **BIOCARTA_TFF_PATHWAY** (Collection: C2:CP:BIOCARTA) - Focuses on epithelial repair mechanisms. 2. **KEGG_VEGF_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_LEGACY) - Involves VEGF-driven responses in endothelial cells. 3. **KOBAYASHI_EGFR_SIGNALING_6HR_UP** (Collection: C2:CGP) - Related to EGFR mutations and NSCLC. 4. **XU_HGF_SIGNALING_NOT_VIA_AKT1_6HR** (Collection: C2:CGP) - Discusses HGF's role in tumor cell survival. 5. **AGARWAL_AKT_PATHWAY_TARGETS** (Collection: C2:CGP) - Explores the PI3K/AKT pathway in colorectal cancer. 6. **KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_MEDICUS) - Directly references the HGF-MET-PI3K signaling pathway. These pathways highlight various aspects of MET/HGF signaling, including its role in cancer resistance and signaling pathways like PI3K-AKT and EGFR, which are relevant to the rationale provided.",
+      "agent_query_result_raw": "[('BIOCARTA_TFF_PATHWAY', 'C2:CP:BIOCARTA', 'Maintaining the integrity of the gastrointestinal tract despite the continual presence of microbial flora and injurious agents is essential. Epithelial repair requires restitution and regeneration. During restitution, epithelial cells spread and migrate across the basement membrane to...', 4), ('KEGG_VEGF_SIGNALING_PATHWAY', 'C2:CP:KEGG_LEGACY', 'There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic angiogenesis. The binding of VEGF to VEGFR-2 leads to a cascade of different signaling pathways,...', 4), ('KOBAYASHI_EGFR_SIGNALING_6HR_UP', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 3), ('COLDREN_GEFITINIB_RESISTANCE_UP', 'C2:CGP', 'Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...', 3), ('XU_HGF_SIGNALING_NOT_VIA_AKT1_6HR', 'C2:CGP', 'The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...', 3), ('XU_HGF_SIGNALING_NOT_VIA_AKT1_48HR_UP', 'C2:CGP', 'The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...', 3), ('XU_HGF_TARGETS_INDUCED_BY_AKT1_48HR_UP', 'C2:CGP', 'The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...', 3), ('XU_HGF_TARGETS_REPRESSED_BY_AKT1_UP', 'C2:CGP', 'The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...', 3), ('XU_HGF_TARGETS_REPRESSED_BY_AKT1_DN', 'C2:CGP', 'The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...', 3), ('AGARWAL_AKT_PATHWAY_TARGETS', 'C2:CGP', \"Our laboratory has delineated that the phosphatidylinositol 3' kinase (PI3K)/AKT/I kappa B kinase (IKK) pathway positively regulates NF kappa B and beta-catenin, both important transcriptional regulators in colorectal cancer (CRC). Therefore, we investigated the effect of inhibiting the...\", 3), ('ZWANG_DOWN_BY_2ND_EGF_PULSE', 'C2:CGP', 'Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...', 3), ('ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY', 'C2:CGP', 'Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...', 3), ('ZWANG_EGF_INTERVAL_UP', 'C2:CGP', 'Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...', 3), ('ZWANG_EGF_PERSISTENTLY_DN', 'C2:CGP', 'Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...', 3), ('KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'HGF-MET-PI3K signaling pathway. Pathway ID: N00043. Pathway type: Reference. Pathway class: nt06261 Gastric cancer.', 3), ('REACTOME_MET_ACTIVATES_PI3K_AKT_SIGNALING', 'C2:CP:REACTOME', None, 3), ('KOBAYASHI_EGFR_SIGNALING_24HR_UP', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 3), ('ZWANG_CLASS_1_TRANSIENTLY_INDUCED_BY_EGF', 'C2:CGP', 'Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...', 3), ('KOBAYASHI_EGFR_SIGNALING_6HR_DN', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 3), ('COLDREN_GEFITINIB_RESISTANCE_DN', 'C2:CGP', 'Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...', 3)]",
+      "agent_query_result_rows": [
+        [
+          "BIOCARTA_TFF_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Maintaining the integrity of the gastrointestinal tract despite the continual presence of microbial flora and injurious agents is essential. Epithelial repair requires restitution and regeneration. During restitution, epithelial cells spread and migrate across the basement membrane to...",
+          4
+        ],
+        [
+          "KEGG_VEGF_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_LEGACY",
+          "There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic angiogenesis. The binding of VEGF to VEGFR-2 leads to a cascade of different signaling pathways,...",
+          4
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_6HR_UP",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          3
+        ],
+        [
+          "COLDREN_GEFITINIB_RESISTANCE_UP",
+          "C2:CGP",
+          "Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...",
+          3
+        ],
+        [
+          "XU_HGF_SIGNALING_NOT_VIA_AKT1_6HR",
+          "C2:CGP",
+          "The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...",
+          3
+        ],
+        [
+          "XU_HGF_SIGNALING_NOT_VIA_AKT1_48HR_UP",
+          "C2:CGP",
+          "The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...",
+          3
+        ],
+        [
+          "XU_HGF_TARGETS_INDUCED_BY_AKT1_48HR_UP",
+          "C2:CGP",
+          "The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...",
+          3
+        ],
+        [
+          "XU_HGF_TARGETS_REPRESSED_BY_AKT1_UP",
+          "C2:CGP",
+          "The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...",
+          3
+        ],
+        [
+          "XU_HGF_TARGETS_REPRESSED_BY_AKT1_DN",
+          "C2:CGP",
+          "The cytokine scatter factor (SF) (hepatocyte growth factor) transduces various biologic actions, including cell motility, invasion, angiogenesis and apoptosis inhibition. The latter is relevant to understanding the role of SF in promoting tumor cell survival in different contexts, for example,...",
+          3
+        ],
+        [
+          "AGARWAL_AKT_PATHWAY_TARGETS",
+          "C2:CGP",
+          "Our laboratory has delineated that the phosphatidylinositol 3' kinase (PI3K)/AKT/I kappa B kinase (IKK) pathway positively regulates NF kappa B and beta-catenin, both important transcriptional regulators in colorectal cancer (CRC). Therefore, we investigated the effect of inhibiting the...",
+          3
+        ],
+        [
+          "ZWANG_DOWN_BY_2ND_EGF_PULSE",
+          "C2:CGP",
+          "Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...",
+          3
+        ],
+        [
+          "ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY",
+          "C2:CGP",
+          "Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...",
+          3
+        ],
+        [
+          "ZWANG_EGF_INTERVAL_UP",
+          "C2:CGP",
+          "Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...",
+          3
+        ],
+        [
+          "ZWANG_EGF_PERSISTENTLY_DN",
+          "C2:CGP",
+          "Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...",
+          3
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "HGF-MET-PI3K signaling pathway. Pathway ID: N00043. Pathway type: Reference. Pathway class: nt06261 Gastric cancer.",
+          3
+        ],
+        [
+          "REACTOME_MET_ACTIVATES_PI3K_AKT_SIGNALING",
+          "C2:CP:REACTOME",
+          null,
+          3
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_24HR_UP",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          3
+        ],
+        [
+          "ZWANG_CLASS_1_TRANSIENTLY_INDUCED_BY_EGF",
+          "C2:CGP",
+          "Normal cells require continuous exposure to growth factors in order to cross a restriction point and commit to cell-cycle progression. This can be replaced by two short, appropriately spaced pulses of growth factors, where the first pulse primes a process, which is completed by the second pulse,...",
+          3
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_6HR_DN",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          3
+        ],
+        [
+          "COLDREN_GEFITINIB_RESISTANCE_DN",
+          "C2:CGP",
+          "Tyrosine kinase inhibitors (TKI) of the epidermal growth factor receptor (EGFR) produce objective responses in a minority of patients with advanced-stage non-small cell lung cancer (NSCLC), and about half of all treated patients progress within 6 weeks of instituting therapy. Because the target...",
+          3
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_collection_filter": 4,
+      "candidate_count_after_validation": 4,
+      "excluded_by_collection": 16,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_MEDICUS",
+        "sql_score": 3.0,
+        "overlap_score": 0.23864,
+        "priority_rank": 2,
+        "priority_bonus": 0.033333,
+        "ranking_score": 0.271974,
+        "description": "HGF-MET-PI3K signaling pathway. Pathway ID: N00043. Pathway type: Reference. Pathway class: nt06261 Gastric cancer."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 3.0,
+          "overlap_score": 0.23864,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.271974,
+          "description": "HGF-MET-PI3K signaling pathway. Pathway ID: N00043. Pathway type: Reference. Pathway class: nt06261 Gastric cancer."
+        },
+        {
+          "msigdb_name": "REACTOME_MET_ACTIVATES_PI3K_AKT_SIGNALING",
+          "collection": "C2:CP:REACTOME",
+          "sql_score": 3.0,
+          "overlap_score": 0.070833,
+          "priority_rank": 1,
+          "priority_bonus": 0.041667,
+          "ranking_score": 0.1125,
+          "description": ""
+        },
+        {
+          "msigdb_name": "KEGG_VEGF_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_LEGACY",
+          "sql_score": 4.0,
+          "overlap_score": 0.086226,
+          "priority_rank": 3,
+          "priority_bonus": 0.025,
+          "ranking_score": 0.111226,
+          "description": "There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic a..."
+        },
+        {
+          "msigdb_name": "BIOCARTA_TFF_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 4.0,
+          "overlap_score": 0.087009,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.095343,
+          "description": "Maintaining the integrity of the gastrointestinal tract despite the continual presence of microbial flora and injurious agents is essential. Epithelial repair requires restitution and regeneration. D..."
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row9",
+      "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+      "Rationale": "EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion. Baseline EGFR-driven pathways are sensitive to afatinib, which targets EGFR mutations effectively.",
+      "Final Mapped MSigDB": "KEGG_VEGF_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%angiogenesis%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%immune evasion%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%afatinib%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%STAT3%' OR\n       gs.standard_name LIKE '%VEGF%' OR\n       gs.standard_name LIKE '%PD-L1%' OR\n       gsd.description_full LIKE '%EGFR%' OR\n       gsd.description_full LIKE '%STAT3%' OR\n       gsd.description_full LIKE '%VEGF%' OR\n       gsd.description_full LIKE '%PD-L1%' OR\n       gsd.description_full LIKE '%angiogenesis%' OR\n       gsd.description_full LIKE '%immune evasion%' OR\n       gsd.description_full LIKE '%afatinib%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "checked_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%angiogenesis%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%immune evasion%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%afatinib%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%STAT3%' OR\n       gs.standard_name LIKE '%VEGF%' OR\n       gs.standard_name LIKE '%PD-L1%' OR\n       gsd.description_full LIKE '%EGFR%' OR\n       gsd.description_full LIKE '%STAT3%' OR\n       gsd.description_full LIKE '%VEGF%' OR\n       gsd.description_full LIKE '%PD-L1%' OR\n       gsd.description_full LIKE '%angiogenesis%' OR\n       gsd.description_full LIKE '%immune evasion%' OR\n       gsd.description_full LIKE '%afatinib%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "agent_final_response": "The query returned several MSigDB pathways related to the original pathway name and rationale. Here are some of the top candidates: 1. **KEGG_VEGF_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_LEGACY) - This pathway involves VEGFR-2 as a major mediator of VEGF-driven responses, crucial for angiogenesis. 2. **DAUER_STAT3_TARGETS_UP** (Collection: C2:CGP) - This pathway is related to STAT3 targets, which are involved in processes like wound healing and cancer. 3. **ABE_VEGFA_TARGETS_2HR** (Collection: C2:CGP) - Focuses on genes induced by VEGF, a key factor in angiogenesis and vascular permeability. 4. **BIOCARTA_VEGF_PATHWAY** (Collection: C2:CP:BIOCARTA) - Highlights VEGF's role in blood vessel formation and pathological angiogenesis. 5. **KOBAYASHI_EGFR_SIGNALING_6HR_UP** (Collection: C2:CGP) - Related to EGFR signaling, particularly in the context of non-small cell lung cancer. These pathways are relevant to the EGFR, STAT3, VEGF, and PD-L1 components mentioned in the original pathway and rationale, with a focus on angiogenesis and immune evasion.",
+      "agent_query_result_raw": "[('KEGG_VEGF_SIGNALING_PATHWAY', 'C2:CP:KEGG_LEGACY', 'There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic angiogenesis. The binding of VEGF to VEGFR-2 leads to a cascade of different signaling pathways,...', 4), ('DAUER_STAT3_TARGETS_UP', 'C2:CGP', 'Wound healing and cancer are both characterized by cell proliferation, remodeling of extracellular matrix, cell invasion and migration, new blood vessel formation, and modulation of blood coagulation. The mechanisms that link wound healing and cancer are poorly understood. We report here that...', 3), ('DAUER_STAT3_TARGETS_DN', 'C2:CGP', 'Wound healing and cancer are both characterized by cell proliferation, remodeling of extracellular matrix, cell invasion and migration, new blood vessel formation, and modulation of blood coagulation. The mechanisms that link wound healing and cancer are poorly understood. We report here that...', 3), ('ABE_VEGFA_TARGETS_2HR', 'C2:CGP', 'Vascular endothelial growth factor (VEGF) is one of the most important factors that stimulate angiogenesis and vascular permeability. To clarify the role of VEGF, we analysed a human cDNA chip containing 7267 human genes to identify genes induced by VEGF in human umbilical vein endothelial cells...', 3), ('WESTON_VEGFA_TARGETS_6HR', 'C2:CGP', 'There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...', 3), ('WESTON_VEGFA_TARGETS_12HR', 'C2:CGP', 'There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...', 3), ('WESTON_VEGFA_TARGETS', 'C2:CGP', 'There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...', 3), ('ABE_VEGFA_TARGETS', 'C2:CGP', 'Vascular endothelial growth factor (VEGF) is one of the most important factors that stimulate angiogenesis and vascular permeability. To clarify the role of VEGF, we analysed a human cDNA chip containing 7267 human genes to identify genes induced by VEGF in human umbilical vein endothelial cells...', 3), ('ABE_VEGFA_TARGETS_30MIN', 'C2:CGP', 'Vascular endothelial growth factor (VEGF) is one of the most important factors that stimulate angiogenesis and vascular permeability. To clarify the role of VEGF, we analysed a human cDNA chip containing 7267 human genes to identify genes induced by VEGF in human umbilical vein endothelial cells...', 3), ('WESTON_VEGFA_TARGETS_3HR', 'C2:CGP', 'There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...', 3), ('BIOCARTA_VEGF_PATHWAY', 'C2:CP:BIOCARTA', 'Vascular endothelial growth factor (VEGF) plays a key role in physiological blood vessel formation and pathological angiogenesis such as tumor growth and ischemic diseases. Hypoxia is a potent inducer of VEGF in vitro. The increase in secreted biologically active VEGF protein from cells exposed...', 3), ('KOBAYASHI_EGFR_SIGNALING_6HR_UP', 'C2:CGP', 'Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...', 2), ('DE_YY1_TARGETS_UP', 'C2:CGP', 'We know that the Yin Yang 1 protein (YY1) overexpression is positively and strongly correlated with the degree of malignancy of bone tumors. Therefore, we questioned whether we could influence cell invasiveness by deleting YY1 in human osteosarcoma cells (SaOs-2), as tested in Matrigel-coated...', 2), ('DE_YY1_TARGETS_DN', 'C2:CGP', 'We know that the Yin Yang 1 protein (YY1) overexpression is positively and strongly correlated with the degree of malignancy of bone tumors. Therefore, we questioned whether we could influence cell invasiveness by deleting YY1 in human osteosarcoma cells (SaOs-2), as tested in Matrigel-coated...', 2), ('MIZUKAMI_HYPOXIA_UP', 'C2:CGP', 'Hypoxia inducible factor-1 (HIF-1) is considered a crucial mediator of the cellular response to hypoxia through its regulation of genes that control angiogenesis. It represents an attractive therapeutic target in colon cancer, one of the few tumor types that shows a clinical response to...', 2), ('LU_EZH2_TARGETS_UP', 'C2:CGP', 'Although VEGF-targeted therapies are showing promise, new angiogenesis targets are needed to make additional gains. Here, we show that increased Zeste homolog 2 (EZH2) expression in either tumor cells or in tumor vasculature is predictive of poor clinical outcome. The increase in endothelial...', 2), ('AZARE_NEOPLASTIC_TRANSFORMATION_BY_STAT3_UP', 'C2:CGP', 'The persistent activation of signal transducer and activator of transcription 3 (Stat3) is a common feature of prostate cancer. However, little is known about the Stat3 targets that may mediate prostate tumorigenesis. The introduction of an activating mutant form of Stat3 (Stat3-C) into...', 2), ('AZARE_NEOPLASTIC_TRANSFORMATION_BY_STAT3_DN', 'C2:CGP', 'The persistent activation of signal transducer and activator of transcription 3 (Stat3) is a common feature of prostate cancer. However, little is known about the Stat3 targets that may mediate prostate tumorigenesis. The introduction of an activating mutant form of Stat3 (Stat3-C) into...', 2), ('AZARE_STAT3_TARGETS', 'C2:CGP', 'The persistent activation of signal transducer and activator of transcription 3 (Stat3) is a common feature of prostate cancer. However, little is known about the Stat3 targets that may mediate prostate tumorigenesis. The introduction of an activating mutant form of Stat3 (Stat3-C) into...', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.', 2)]",
+      "agent_query_result_rows": [
+        [
+          "KEGG_VEGF_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_LEGACY",
+          "There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic angiogenesis. The binding of VEGF to VEGFR-2 leads to a cascade of different signaling pathways,...",
+          4
+        ],
+        [
+          "DAUER_STAT3_TARGETS_UP",
+          "C2:CGP",
+          "Wound healing and cancer are both characterized by cell proliferation, remodeling of extracellular matrix, cell invasion and migration, new blood vessel formation, and modulation of blood coagulation. The mechanisms that link wound healing and cancer are poorly understood. We report here that...",
+          3
+        ],
+        [
+          "DAUER_STAT3_TARGETS_DN",
+          "C2:CGP",
+          "Wound healing and cancer are both characterized by cell proliferation, remodeling of extracellular matrix, cell invasion and migration, new blood vessel formation, and modulation of blood coagulation. The mechanisms that link wound healing and cancer are poorly understood. We report here that...",
+          3
+        ],
+        [
+          "ABE_VEGFA_TARGETS_2HR",
+          "C2:CGP",
+          "Vascular endothelial growth factor (VEGF) is one of the most important factors that stimulate angiogenesis and vascular permeability. To clarify the role of VEGF, we analysed a human cDNA chip containing 7267 human genes to identify genes induced by VEGF in human umbilical vein endothelial cells...",
+          3
+        ],
+        [
+          "WESTON_VEGFA_TARGETS_6HR",
+          "C2:CGP",
+          "There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...",
+          3
+        ],
+        [
+          "WESTON_VEGFA_TARGETS_12HR",
+          "C2:CGP",
+          "There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...",
+          3
+        ],
+        [
+          "WESTON_VEGFA_TARGETS",
+          "C2:CGP",
+          "There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...",
+          3
+        ],
+        [
+          "ABE_VEGFA_TARGETS",
+          "C2:CGP",
+          "Vascular endothelial growth factor (VEGF) is one of the most important factors that stimulate angiogenesis and vascular permeability. To clarify the role of VEGF, we analysed a human cDNA chip containing 7267 human genes to identify genes induced by VEGF in human umbilical vein endothelial cells...",
+          3
+        ],
+        [
+          "ABE_VEGFA_TARGETS_30MIN",
+          "C2:CGP",
+          "Vascular endothelial growth factor (VEGF) is one of the most important factors that stimulate angiogenesis and vascular permeability. To clarify the role of VEGF, we analysed a human cDNA chip containing 7267 human genes to identify genes induced by VEGF in human umbilical vein endothelial cells...",
+          3
+        ],
+        [
+          "WESTON_VEGFA_TARGETS_3HR",
+          "C2:CGP",
+          "There is evidence that the vasculature of different organs display different functional characteristics in response to cytokines and growth factors. The aim of this study was to use cDNA gene expression microarray to analyse changes in gene expression following stimulation of myometrial...",
+          3
+        ],
+        [
+          "BIOCARTA_VEGF_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Vascular endothelial growth factor (VEGF) plays a key role in physiological blood vessel formation and pathological angiogenesis such as tumor growth and ischemic diseases. Hypoxia is a potent inducer of VEGF in vitro. The increase in secreted biologically active VEGF protein from cells exposed...",
+          3
+        ],
+        [
+          "KOBAYASHI_EGFR_SIGNALING_6HR_UP",
+          "C2:CGP",
+          "Activating mutations in the epidermal growth factor receptor (EGFR) tyrosine kinase domain determine responsiveness to EGFR tyrosine kinase inhibitors in patients with advanced non-small cell lung cancer (NSCLC). The modulation of transcriptional pathways by mutant EGFR signaling is not fully...",
+          2
+        ],
+        [
+          "DE_YY1_TARGETS_UP",
+          "C2:CGP",
+          "We know that the Yin Yang 1 protein (YY1) overexpression is positively and strongly correlated with the degree of malignancy of bone tumors. Therefore, we questioned whether we could influence cell invasiveness by deleting YY1 in human osteosarcoma cells (SaOs-2), as tested in Matrigel-coated...",
+          2
+        ],
+        [
+          "DE_YY1_TARGETS_DN",
+          "C2:CGP",
+          "We know that the Yin Yang 1 protein (YY1) overexpression is positively and strongly correlated with the degree of malignancy of bone tumors. Therefore, we questioned whether we could influence cell invasiveness by deleting YY1 in human osteosarcoma cells (SaOs-2), as tested in Matrigel-coated...",
+          2
+        ],
+        [
+          "MIZUKAMI_HYPOXIA_UP",
+          "C2:CGP",
+          "Hypoxia inducible factor-1 (HIF-1) is considered a crucial mediator of the cellular response to hypoxia through its regulation of genes that control angiogenesis. It represents an attractive therapeutic target in colon cancer, one of the few tumor types that shows a clinical response to...",
+          2
+        ],
+        [
+          "LU_EZH2_TARGETS_UP",
+          "C2:CGP",
+          "Although VEGF-targeted therapies are showing promise, new angiogenesis targets are needed to make additional gains. Here, we show that increased Zeste homolog 2 (EZH2) expression in either tumor cells or in tumor vasculature is predictive of poor clinical outcome. The increase in endothelial...",
+          2
+        ],
+        [
+          "AZARE_NEOPLASTIC_TRANSFORMATION_BY_STAT3_UP",
+          "C2:CGP",
+          "The persistent activation of signal transducer and activator of transcription 3 (Stat3) is a common feature of prostate cancer. However, little is known about the Stat3 targets that may mediate prostate tumorigenesis. The introduction of an activating mutant form of Stat3 (Stat3-C) into...",
+          2
+        ],
+        [
+          "AZARE_NEOPLASTIC_TRANSFORMATION_BY_STAT3_DN",
+          "C2:CGP",
+          "The persistent activation of signal transducer and activator of transcription 3 (Stat3) is a common feature of prostate cancer. However, little is known about the Stat3 targets that may mediate prostate tumorigenesis. The introduction of an activating mutant form of Stat3 (Stat3-C) into...",
+          2
+        ],
+        [
+          "AZARE_STAT3_TARGETS",
+          "C2:CGP",
+          "The persistent activation of signal transducer and activator of transcription 3 (Stat3) is a common feature of prostate cancer. However, little is known about the Stat3 targets that may mediate prostate tumorigenesis. The introduction of an activating mutant form of Stat3 (Stat3-C) into...",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_collection_filter": 3,
+      "candidate_count_after_validation": 3,
+      "excluded_by_collection": 17,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "KEGG_VEGF_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_LEGACY",
+        "sql_score": 4.0,
+        "overlap_score": 0.078693,
+        "priority_rank": 3,
+        "priority_bonus": 0.025,
+        "ranking_score": 0.103693,
+        "description": "There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic a..."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_VEGF_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_LEGACY",
+          "sql_score": 4.0,
+          "overlap_score": 0.078693,
+          "priority_rank": 3,
+          "priority_bonus": 0.025,
+          "ranking_score": 0.103693,
+          "description": "There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic a..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.051004,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.084337,
+          "description": "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "BIOCARTA_VEGF_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 3.0,
+          "overlap_score": 0.066885,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.075218,
+          "description": "Vascular endothelial growth factor (VEGF) plays a key role in physiological blood vessel formation and pathological angiogenesis such as tumor growth and ischemic diseases. Hypoxia is a potent induce..."
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+      "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib targets this pathway, leading to decreased phosphorylation and promoting apoptosis, indicating sensitivity.",
+      "Final Mapped MSigDB": "BIOCARTA_AKT_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ERK%' OR gsd.description_full LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%cell survival%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%phosphorylation%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%apoptosis%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%')\n   OR (gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%')\n   OR (gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%')\n   OR (gs.standard_name LIKE '%ERK%' OR gsd.description_full LIKE '%ERK%')\n   OR (gsd.description_full LIKE '%lung cancer%')\n   OR (gsd.description_full LIKE '%cell survival%')\n   OR (gsd.description_full LIKE '%Afatinib%')\n   OR (gsd.description_full LIKE '%phosphorylation%')\n   OR (gsd.description_full LIKE '%apoptosis%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "checked_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ERK%' OR gsd.description_full LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%cell survival%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%phosphorylation%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%apoptosis%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%')\n   OR (gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%')\n   OR (gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%')\n   OR (gs.standard_name LIKE '%ERK%' OR gsd.description_full LIKE '%ERK%')\n   OR (gsd.description_full LIKE '%lung cancer%')\n   OR (gsd.description_full LIKE '%cell survival%')\n   OR (gsd.description_full LIKE '%Afatinib%')\n   OR (gsd.description_full LIKE '%phosphorylation%')\n   OR (gsd.description_full LIKE '%apoptosis%')\nORDER BY sql_score DESC\nLIMIT 20;",
+      "agent_final_response": "The query returned several pathways related to signaling and survival mechanisms, with the highest relevance to the ELK1–CIP2A–AKT survival axis. Notably, the `BIOCARTA_AKT_PATHWAY` from the `C2:CP:BIOCARTA` collection is directly related to AKT signaling, which is a key component of the original pathway name. This pathway involves cell-surface receptors and second messengers like PIP3, which activate kinases involved in cell survival, aligning with the rationale of targeting pathways for cancer treatment. Other pathways, while related to signaling, may not directly match the specific ELK1–CIP2A–AKT axis but are involved in similar cellular processes.",
+      "agent_query_result_raw": "[('MARZEC_IL2_SIGNALING_UP', 'C2:CGP', 'In this study, we compared the effects of interleukin-2 (IL-2), IL-15, and IL-21 on gene expression, activation of cell signaling pathways, and functional properties of cells derived from CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 modulated, in a CTCL cell line, the...', 4), ('MARZEC_IL2_SIGNALING_DN', 'C2:CGP', 'In this study, we compared the effects of interleukin-2 (IL-2), IL-15, and IL-21 on gene expression, activation of cell signaling pathways, and functional properties of cells derived from CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 modulated, in a CTCL cell line, the...', 4), ('BIOCARTA_AKT_PATHWAY', 'C2:CP:BIOCARTA', 'Many cell-surface receptors induce production of second messengers like PIP3, phosphatidylinositol 3,4,5-trisphosphate, that convey signals to the cytoplasm from the cell surface. PIP3 signals activates the kinase PDK1, 3-phosphoinositide-dependent protein kinase-1, which in turn activates the...', 4), ('BIOCARTA_EDG1_PATHWAY', 'C2:CP:BIOCARTA', 'Sphingosine-1-phosphate (S1P) is an example of lipid messengers with both intracellular and extracellular functions. Intracellularly S1P regulates proliferation and survival; extracellularly S1P is a ligand for EDG1 (also known as S1P1). Activation of sphingosine kinase (SPHK), the enzyme that...', 4), ('BIOCARTA_RAS_PATHWAY', 'C2:CP:BIOCARTA', 'Ras activates many signaling cascades. Here we illustrate some of the well-characterized cascades in a generic compilation of effector molecules. The effectors mediate Ras stimulation to a diverse set of cellular signals. Many of these signals are interpreted differently depending on the cell...', 4), ('BIOCARTA_P27_PATHWAY', 'C2:CP:BIOCARTA', 'p27/Kip1 regulates the cell cycle by inhibiting the checkpoint kinase cdk2/cyclin E and blocking cell cycle progression through the G1-S transition. Cancer cells in some cases have reduced levels of p27, supporting the importance of p27 in cell cycle regulation. The activity of p27 is regulated...', 4), ('BIOCARTA_MET_PATHWAY', 'C2:CP:BIOCARTA', 'The hepatocyte growth factor receptor, also called c-Met, is activated by HGF and stimulates proliferation of hepatocytes and other cell types. Mutated forms of the HGF receptor are associated with oncogenesis and metastasis, making the HGF receptor a potential therapeutic target for cancer...', 4), ('BIOCARTA_TFF_PATHWAY', 'C2:CP:BIOCARTA', 'Maintaining the integrity of the gastrointestinal tract despite the continual presence of microbial flora and injurious agents is essential. Epithelial repair requires restitution and regeneration. During restitution, epithelial cells spread and migrate across the basement membrane to...', 4), ('GSE8685_IL2_STARVED_VS_IL2_ACT_IL2_STARVED_CD4_TCELL_UP', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_STARVED_VS_IL2_ACT_IL2_STARVED_CD4_TCELL_DN', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_UP', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_DN', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_UP', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_DN', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_ACT_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_UP', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_ACT_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_DN', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_UP', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL2_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_DN', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL15_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_UP', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4), ('GSE8685_IL15_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_DN', 'C7:IMMUNESIGDB', 'In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...', 4)]",
+      "agent_query_result_rows": [
+        [
+          "MARZEC_IL2_SIGNALING_UP",
+          "C2:CGP",
+          "In this study, we compared the effects of interleukin-2 (IL-2), IL-15, and IL-21 on gene expression, activation of cell signaling pathways, and functional properties of cells derived from CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 modulated, in a CTCL cell line, the...",
+          4
+        ],
+        [
+          "MARZEC_IL2_SIGNALING_DN",
+          "C2:CGP",
+          "In this study, we compared the effects of interleukin-2 (IL-2), IL-15, and IL-21 on gene expression, activation of cell signaling pathways, and functional properties of cells derived from CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 modulated, in a CTCL cell line, the...",
+          4
+        ],
+        [
+          "BIOCARTA_AKT_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Many cell-surface receptors induce production of second messengers like PIP3, phosphatidylinositol 3,4,5-trisphosphate, that convey signals to the cytoplasm from the cell surface. PIP3 signals activates the kinase PDK1, 3-phosphoinositide-dependent protein kinase-1, which in turn activates the...",
+          4
+        ],
+        [
+          "BIOCARTA_EDG1_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Sphingosine-1-phosphate (S1P) is an example of lipid messengers with both intracellular and extracellular functions. Intracellularly S1P regulates proliferation and survival; extracellularly S1P is a ligand for EDG1 (also known as S1P1). Activation of sphingosine kinase (SPHK), the enzyme that...",
+          4
+        ],
+        [
+          "BIOCARTA_RAS_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Ras activates many signaling cascades. Here we illustrate some of the well-characterized cascades in a generic compilation of effector molecules. The effectors mediate Ras stimulation to a diverse set of cellular signals. Many of these signals are interpreted differently depending on the cell...",
+          4
+        ],
+        [
+          "BIOCARTA_P27_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "p27/Kip1 regulates the cell cycle by inhibiting the checkpoint kinase cdk2/cyclin E and blocking cell cycle progression through the G1-S transition. Cancer cells in some cases have reduced levels of p27, supporting the importance of p27 in cell cycle regulation. The activity of p27 is regulated...",
+          4
+        ],
+        [
+          "BIOCARTA_MET_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "The hepatocyte growth factor receptor, also called c-Met, is activated by HGF and stimulates proliferation of hepatocytes and other cell types. Mutated forms of the HGF receptor are associated with oncogenesis and metastasis, making the HGF receptor a potential therapeutic target for cancer...",
+          4
+        ],
+        [
+          "BIOCARTA_TFF_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Maintaining the integrity of the gastrointestinal tract despite the continual presence of microbial flora and injurious agents is essential. Epithelial repair requires restitution and regeneration. During restitution, epithelial cells spread and migrate across the basement membrane to...",
+          4
+        ],
+        [
+          "GSE8685_IL2_STARVED_VS_IL2_ACT_IL2_STARVED_CD4_TCELL_UP",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_STARVED_VS_IL2_ACT_IL2_STARVED_CD4_TCELL_DN",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_UP",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_DN",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_UP",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_DN",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_ACT_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_UP",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_ACT_IL2_STARVED_VS_IL15_ACT_IL2_STARVED_CD4_TCELL_DN",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_UP",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL2_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_DN",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL15_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_UP",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ],
+        [
+          "GSE8685_IL15_ACT_IL2_STARVED_VS_IL21_ACT_IL2_STARVED_CD4_TCELL_DN",
+          "C7:IMMUNESIGDB",
+          "In this study we compared the effects of IL-2, IL-15, and IL-21 on the gene expression, activation of cell signaling pathways, and functional properties of cells derived from the CD4+ cutaneous T-cell lymphoma (CTCL). Whereas both IL-2 and IL-15 that signal through receptors that share the...",
+          4
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_collection_filter": 6,
+      "candidate_count_after_validation": 6,
+      "excluded_by_collection": 14,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "BIOCARTA_AKT_PATHWAY",
+        "collection": "C2:CP:BIOCARTA",
+        "sql_score": 4.0,
+        "overlap_score": 0.080185,
+        "priority_rank": 5,
+        "priority_bonus": 0.008333,
+        "ranking_score": 0.088519,
+        "description": "Many cell-surface receptors induce production of second messengers like PIP3, phosphatidylinositol 3,4,5-trisphosphate, that convey signals to the cytoplasm from the cell surface. PIP3 signals activa..."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "BIOCARTA_AKT_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 4.0,
+          "overlap_score": 0.080185,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.088519,
+          "description": "Many cell-surface receptors induce production of second messengers like PIP3, phosphatidylinositol 3,4,5-trisphosphate, that convey signals to the cytoplasm from the cell surface. PIP3 signals activa..."
+        },
+        {
+          "msigdb_name": "BIOCARTA_P27_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 4.0,
+          "overlap_score": 0.028889,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.037222,
+          "description": "p27/Kip1 regulates the cell cycle by inhibiting the checkpoint kinase cdk2/cyclin E and blocking cell cycle progression through the G1-S transition. Cancer cells in some cases have reduced levels of ..."
+        },
+        {
+          "msigdb_name": "BIOCARTA_EDG1_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 4.0,
+          "overlap_score": 0.0265,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.034833,
+          "description": "Sphingosine-1-phosphate (S1P) is an example of lipid messengers with both intracellular and extracellular functions. Intracellularly S1P regulates proliferation and survival; extracellularly S1P is a..."
+        },
+        {
+          "msigdb_name": "BIOCARTA_MET_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 4.0,
+          "overlap_score": 0.024006,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.032339,
+          "description": "The hepatocyte growth factor receptor, also called c-Met, is activated by HGF and stimulates proliferation of hepatocytes and other cell types. Mutated forms of the HGF receptor are associated with o..."
+        },
+        {
+          "msigdb_name": "BIOCARTA_TFF_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 4.0,
+          "overlap_score": 0.019255,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.027589,
+          "description": "Maintaining the integrity of the gastrointestinal tract despite the continual presence of microbial flora and injurious agents is essential. Epithelial repair requires restitution and regeneration. D..."
+        },
+        {
+          "msigdb_name": "BIOCARTA_RAS_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 4.0,
+          "overlap_score": 0.018963,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.027296,
+          "description": "Ras activates many signaling cascades. Here we illustrate some of the well-characterized cascades in a generic compilation of effector molecules. The effectors mediate Ras stimulation to a diverse se..."
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    }
+  ]
+}
