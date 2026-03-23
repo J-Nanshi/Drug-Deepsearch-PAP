@@ -1,0 +1,22 @@
+{
+  "pathway_sets": [
+    "HALLMARK_MTORC1_SIGNALING"
+  ],
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "HALLMARK_MTORC1_SIGNALING",
+    "Original Pathway Name": "mTOR signaling pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "KRAS inhibition suppresses mTOR growth signaling.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://example.com/ref1"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "langgraph_sql_agent_deterministic_rank",
+    "nl2sql_generated_sql": "SELECT\n            gs.standard_name AS msigdb_name,\n            gs.collection_name AS collection,\n            COALESCE(gsd.description_full, gsd.description_brief, '') AS description,\n            CASE WHEN gs.standard_name = 'HALLMARK_MTORC1_SIGNALING' THEN 0.99 ELSE 0.1 END AS sql_score\n        FROM gene_set gs\n        LEFT JOIN gene_set_details gsd ON gsd.gene_set_id = gs.id\n        ORDER BY sql_score DESC\n        LIMIT 10",
+    "nl2sql_checked_sql": "SELECT *\nFROM (\nSELECT\n            gs.standard_name AS msigdb_name,\n            gs.collection_name AS collection,\n            COALESCE(gsd.description_full, gsd.description_brief, '') AS description,\n            CASE WHEN gs.standard_name = 'HALLMARK_MTORC1_SIGNALING' THEN 0.99 ELSE 0.1 END AS sql_score\n        FROM gene_set gs\n        LEFT JOIN gene_set_details gsd ON gsd.gene_set_id = gs.id\n        ORDER BY sql_score DESC\n        LIMIT 10\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+    "nl2sql_decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+    "nl2sql_failure_reason": null
+  }
+}

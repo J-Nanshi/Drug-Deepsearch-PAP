@@ -8,10 +8,10 @@ The implementation follows the LangGraph SQL-agent pattern from the LangChain do
 - inspect schema
 - generate SQL
 - check SQL
-- run SQL
+- run SQL through an enforced collection-constrained wrapper
 
 After SQL execution, the script keeps the deterministic post-processing from the existing Step 3 flow:
-- filter excluded collections
+- validate returned names against the prefiltered MSigDB lookup
 - drop unknown MSigDB names
 - score candidates using pathway-name and rationale overlap
 - apply pathway-family priority tie-breaking
@@ -21,17 +21,20 @@ After SQL execution, the script keeps the deterministic post-processing from the
 - Step 2 row filtering by `Include decision`
 - relationship-class filtering
 - final output key `Mapped MSigDB Pathway Name`
+- top-level final output key `pathway_sets`
 - per-drug final JSON output
 - per-drug trace JSON output
-- unique pathways text output
 
 ## Main Logic
 1. Load Step 2 JSON rows.
 2. Keep only rows that are included and in allowed relationship classes.
-3. Load MSigDB metadata from the SQLite database.
+3. Load MSigDB metadata from the SQLite database, filtered to:
+   - `source_species_code = 'HS'`
+   - included collections only: `H`, `C2:CP%`, `C5:GO:BP`
 4. For each retained row:
    - build a pathway-mapping request from pathway name + rationale
    - run the custom LangGraph SQL agent
+   - constrain executed SQL to allowed collections only: `H`, `C2:CP%`, `C5:GO:BP`
    - capture generated SQL, checked SQL, and tool output in trace fields
    - validate the checked SQL as a single read-only `SELECT`
    - execute the query against SQLite
@@ -41,10 +44,14 @@ After SQL execution, the script keeps the deterministic post-processing from the
 5. Save:
    - `<drug>.json`
    - `<drug>_trace_pathway_mapping.json`
-   - `<drug>_pathways.txt`
 
 ## Output Files
 ### Final JSON
+The final mapping JSON contains a top-level:
+- `pathway_sets`
+
+This is the unique list of mapped MSigDB pathway names in row order, excluding `UNMAPPED`.
+
 Each retained row contains:
 - `Mapped MSigDB Pathway Name`
 - original pathway context fields
@@ -58,7 +65,7 @@ The trace file includes:
 - generated SQL
 - checked SQL
 - raw SQL-tool output
-- candidate counts before and after filtering
+- candidate counts before and after validation
 - chosen candidate
 - top ranked candidates
 - failure type and reason

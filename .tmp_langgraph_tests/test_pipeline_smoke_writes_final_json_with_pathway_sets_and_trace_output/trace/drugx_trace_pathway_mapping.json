@@ -1,7 +1,7 @@
 {
   "summary": {
     "drug_name": "drugx",
-    "input_file": "D:\\GS\\Drug-Deepsearch-PAP\\.tmp_langgraph_tests\\test_pipeline_smoke_writes_final_trace_and_pathways_outputs\\input\\drugx.json",
+    "input_file": "D:\\GS\\Drug-Deepsearch-PAP\\.tmp_langgraph_tests\\test_pipeline_smoke_writes_final_json_with_pathway_sets_and_trace_output\\input\\drugx.json",
     "rows_before_filter": 2,
     "rows_after_include_filter": 2,
     "rows_after_filter": 1,
@@ -22,7 +22,7 @@
       "Final Mapped MSigDB": "HALLMARK_MTORC1_SIGNALING",
       "verdict": "mapped",
       "generated_sql": "SELECT\n            gs.standard_name AS msigdb_name,\n            gs.collection_name AS collection,\n            COALESCE(gsd.description_full, gsd.description_brief, '') AS description,\n            CASE WHEN gs.standard_name = 'HALLMARK_MTORC1_SIGNALING' THEN 0.99 ELSE 0.1 END AS sql_score\n        FROM gene_set gs\n        LEFT JOIN gene_set_details gsd ON gsd.gene_set_id = gs.id\n        ORDER BY sql_score DESC\n        LIMIT 10",
-      "checked_sql": "SELECT\n            gs.standard_name AS msigdb_name,\n            gs.collection_name AS collection,\n            COALESCE(gsd.description_full, gsd.description_brief, '') AS description,\n            CASE WHEN gs.standard_name = 'HALLMARK_MTORC1_SIGNALING' THEN 0.99 ELSE 0.1 END AS sql_score\n        FROM gene_set gs\n        LEFT JOIN gene_set_details gsd ON gsd.gene_set_id = gs.id\n        ORDER BY sql_score DESC\n        LIMIT 10",
+      "checked_sql": "SELECT *\nFROM (\nSELECT\n            gs.standard_name AS msigdb_name,\n            gs.collection_name AS collection,\n            COALESCE(gsd.description_full, gsd.description_brief, '') AS description,\n            CASE WHEN gs.standard_name = 'HALLMARK_MTORC1_SIGNALING' THEN 0.99 ELSE 0.1 END AS sql_score\n        FROM gene_set gs\n        LEFT JOIN gene_set_details gsd ON gsd.gene_set_id = gs.id\n        ORDER BY sql_score DESC\n        LIMIT 10\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
       "agent_final_response": "done",
       "agent_query_result_raw": "[('ok',)]",
       "agent_query_result_rows": [
@@ -30,9 +30,9 @@
           "ok"
         ]
       ],
-      "candidate_count_raw": 10,
+      "candidate_count_raw": 7,
       "candidate_count_after_validation": 3,
-      "excluded_unknown_names": 7,
+      "excluded_unknown_names": 4,
       "selected_candidate": {
         "msigdb_name": "HALLMARK_MTORC1_SIGNALING",
         "collection": "H",

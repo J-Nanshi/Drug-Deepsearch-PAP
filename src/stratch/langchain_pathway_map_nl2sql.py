@@ -17,13 +17,14 @@ import sqlite3
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Literal, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Literal, Optional, Sequence, Tuple
 from urllib.parse import urlparse
 
 from langchain.chat_models import init_chat_model
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langchain_community.utilities import SQLDatabase
 from langchain_core.messages import AIMessage, BaseMessage, ToolMessage
+from langchain_core.tools import tool
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
@@ -40,14 +41,17 @@ LOGGER = logging.getLogger(__name__)
 DEFAULT_NL2SQL_MODEL = "gpt-4o"
 TOP_CANDIDATES_FOR_MAPPING = 20
 
-EXCLUDED_COLLECTIONS = {
-    "C1",
-    "C2:CGP",
-    "C3",
-    "C4",
-    "C7",
-    "C8",
-}
+INCLUDED_COLLECTIONS_SQL = (
+    "gs.collection_name = 'H' OR "
+    "gs.collection_name LIKE 'C2:CP%' OR "
+    "gs.collection_name = 'C5:GO:BP'"
+)
+
+ALLOWED_COLLECTIONS_WHERE_SQL = (
+    "collection = 'H' OR "
+    "collection LIKE 'C2:CP%' OR "
+    "collection = 'C5:GO:BP'"
+)
 
 PATHWAY_PRIORITY = [
     "HALLMARK",
@@ -148,14 +152,6 @@ def save_json(obj: Any, path: str | Path) -> None:
     """Write a UTF-8 JSON file with indentation."""
     with open(path, "w", encoding="utf-8") as handle:
         json.dump(obj, handle, ensure_ascii=False, indent=2)
-
-
-def save_pathways_txt(pathways: Iterable[str], path: str | Path) -> None:
-    """Write unique pathway names in first-seen order."""
-    unique_pathways = list(dict.fromkeys(pathways))
-    with open(path, "w", encoding="utf-8") as handle:
-        for pathway in unique_pathways:
-            handle.write(f"{pathway}\n")
 
 
 def _is_blackhole_proxy_url(value: Optional[str]) -> bool:
@@ -262,6 +258,19 @@ def row_order(key: str) -> Tuple[int, str]:
     return (int(match.group(1)) if match else 10**9, key)
 
 
+def collect_pathway_sets(final_rows: Dict[str, Dict[str, Any]]) -> List[str]:
+    """Collect unique mapped pathway names in row order, excluding UNMAPPED."""
+    ordered_names: List[str] = []
+    seen: set[str] = set()
+    for _, row in sorted(final_rows.items(), key=lambda item: row_order(item[0])):
+        name = str(row.get("Mapped MSigDB Pathway Name", "")).strip()
+        if not name or name == "UNMAPPED" or name in seen:
+            continue
+        seen.add(name)
+        ordered_names.append(name)
+    return ordered_names
+
+
 def get_pathway_name(entry: Dict[str, Any]) -> str:
     """Extract the pathway name using supported fallback keys."""
     value = find_entry_value(
@@ -314,28 +323,50 @@ def load_msigdb_metadata(db_path: str | Path) -> List[MSigDBRow]:
             raise RuntimeError("Unsupported MSigDB SQLite schema: expected gene_set + gene_set_details.")
 
         if "namespace" in set(_list_tables(conn)):
-            query = """
+            query = f"""
             SELECT
                 gs.standard_name AS msigdb_name,
                 gs.collection_name AS collection,
-                COALESCE(NULLIF(gsd.description_full, ''), NULLIF(gsd.description_brief, ''), '') AS description,
+                CASE
+                    WHEN NULLIF(gsd.description_full, '') IS NOT NULL
+                         AND NULLIF(gsd.description_brief, '') IS NOT NULL
+                        THEN gsd.description_full || ' ' || gsd.description_brief
+                    WHEN NULLIF(gsd.description_full, '') IS NOT NULL
+                        THEN gsd.description_full
+                    WHEN NULLIF(gsd.description_brief, '') IS NOT NULL
+                        THEN gsd.description_brief
+                    ELSE ''
+                END AS description,
                 ns.label AS source
             FROM gene_set gs
             LEFT JOIN gene_set_details gsd
                 ON gsd.gene_set_id = gs.id
             LEFT JOIN namespace ns
                 ON ns.id = gsd.primary_namespace_id
+            WHERE gsd.source_species_code = 'HS'
+              AND ({INCLUDED_COLLECTIONS_SQL})
             """
         else:
-            query = """
+            query = f"""
             SELECT
                 gs.standard_name AS msigdb_name,
                 gs.collection_name AS collection,
-                COALESCE(NULLIF(gsd.description_full, ''), NULLIF(gsd.description_brief, ''), '') AS description,
+                CASE
+                    WHEN NULLIF(gsd.description_full, '') IS NOT NULL
+                         AND NULLIF(gsd.description_brief, '') IS NOT NULL
+                        THEN gsd.description_full || ' ' || gsd.description_brief
+                    WHEN NULLIF(gsd.description_full, '') IS NOT NULL
+                        THEN gsd.description_full
+                    WHEN NULLIF(gsd.description_brief, '') IS NOT NULL
+                        THEN gsd.description_brief
+                    ELSE ''
+                END AS description,
                 NULL AS source
             FROM gene_set gs
             LEFT JOIN gene_set_details gsd
                 ON gsd.gene_set_id = gs.id
+            WHERE gsd.source_species_code = 'HS'
+              AND ({INCLUDED_COLLECTIONS_SQL})
             """
         output: List[MSigDBRow] = []
         for name, collection, description, source in conn.execute(query).fetchall():
@@ -362,19 +393,6 @@ def build_msigdb_lookup(msig_rows: Sequence[MSigDBRow]) -> Dict[str, MSigDBRow]:
 def validate_msigdb_name(name: str, msigdb_lookup: Dict[str, MSigDBRow]) -> bool:
     """Return True when a pathway name exists in the loaded lookup."""
     return name in msigdb_lookup
-
-
-def is_collection_excluded(collection: str, excluded_collections: set[str]) -> bool:
-    """Return True when a collection matches an exclusion rule."""
-    normalized = collection or ""
-    for excluded in excluded_collections:
-        if normalized == excluded:
-            return True
-        if normalized.startswith(excluded + ":"):
-            return True
-        if ":" in excluded and excluded in normalized:
-            return True
-    return False
 
 
 def tokenize_for_overlap(text: str) -> List[str]:
@@ -476,6 +494,18 @@ def validate_nl2sql_sql(sql: str) -> Tuple[bool, str, Optional[str]]:
     return True, statement, None
 
 
+def constrain_query_to_allowed_collections(sql: str) -> str:
+    """Wrap a query so only allowed collection families are returned."""
+    normalized = (sql or "").strip().rstrip(";")
+    if not normalized:
+        return normalized
+    return (
+        "SELECT *\n"
+        f"FROM (\n{normalized}\n) AS allowed_candidates\n"
+        f"WHERE {ALLOWED_COLLECTIONS_WHERE_SQL}"
+    )
+
+
 def execute_candidate_sql(
     conn: sqlite3.Connection,
     sql: str,
@@ -524,22 +554,6 @@ def execute_candidate_sql(
         except Exception:
             continue
     return output, None
-
-
-def filter_sql_candidates_by_collection(
-    candidates: Sequence[Dict[str, Any]],
-    excluded_collections: set[str],
-) -> Tuple[List[Dict[str, Any]], int]:
-    """Drop candidates from excluded collections."""
-    filtered: List[Dict[str, Any]] = []
-    excluded_count = 0
-    for candidate in candidates:
-        collection = str(candidate.get("collection", ""))
-        if is_collection_excluded(collection, excluded_collections):
-            excluded_count += 1
-            continue
-        filtered.append(dict(candidate))
-    return filtered, excluded_count
 
 
 def filter_sql_candidates_to_known_msigdb(
@@ -595,7 +609,14 @@ class LangGraphPathwaySQLAgent:
         get_schema_tool = self.tools["sql_db_schema"]
         get_schema_node = ToolNode([get_schema_tool], name="get_schema")
 
-        run_query_tool = self.tools["sql_db_query"]
+        base_run_query_tool = self.tools["sql_db_query"]
+
+        @tool("sql_db_query")
+        def run_query_tool(query: str) -> str:
+            """Execute a read-only SQLite query constrained to allowed collections."""
+            constrained_query = constrain_query_to_allowed_collections(query)
+            return str(base_run_query_tool.invoke({"query": constrained_query}))
+
         run_query_node = ToolNode([run_query_tool], name="run_query")
 
         def list_tables(_: MessagesState) -> Dict[str, List[BaseMessage]]:
@@ -631,6 +652,8 @@ class LangGraphPathwaySQLAgent:
             "names and descriptions. "
             "The query must return these exact aliases: msigdb_name, collection, description. "
             "It may also return a numeric sql_score alias. "
+            "The executed SQL will be constrained to allowed collections only: H, C2:CP*, and C5:GO:BP. "
+            "Always expose the pathway collection through the alias named collection. "
             "Do not use DML or DDL. "
             "After query results are available, do not call more tools; instead provide a brief summary."
         )
@@ -646,6 +669,8 @@ class LangGraphPathwaySQLAgent:
             "Double check the query for common mistakes, including incorrect joins, missing aliases, "
             "data-type issues, invalid columns, and failure to return the required aliases "
             "msigdb_name, collection, description. "
+            "Make sure the query remains compatible with an outer collection filter that keeps only "
+            "H, C2:CP*, and C5:GO:BP via the collection alias. "
             "If you find issues, rewrite the query. If not, reproduce it exactly. "
             "Then call the SQL execution tool."
         )
@@ -690,6 +715,7 @@ class LangGraphPathwaySQLAgent:
             "- Use both pathway name and rationale semantics.\n"
             "- Return exact aliases msigdb_name, collection, description.\n"
             "- sql_score is optional but preferred.\n"
+            "- Allowed collections only: H, C2:CP*, C5:GO:BP.\n"
             f"- LIMIT {top_k} or fewer rows.\n"
             "- Keep the query read-only and use the strongest candidate ordering first."
         )
@@ -711,7 +737,7 @@ class LangGraphPathwaySQLAgent:
                     continue
                 query = tool_call.get("args", {}).get("query")
                 if norm_text(query):
-                    queries.append(str(query))
+                    queries.append(constrain_query_to_allowed_collections(str(query)))
         return queries
 
     def run_candidate_query(self, pathway_name: str, rationale: str, top_k: int) -> AgentRunTrace:
@@ -768,9 +794,7 @@ def map_single_row_with_agent(
         "agent_query_result_raw": None,
         "agent_query_result_rows": [],
         "candidate_count_raw": 0,
-        "candidate_count_after_collection_filter": 0,
         "candidate_count_after_validation": 0,
-        "excluded_by_collection": 0,
         "excluded_unknown_names": 0,
         "selected_candidate": None,
         "top_candidates": [],
@@ -807,7 +831,10 @@ def map_single_row_with_agent(
         result["failure_type"] = "sql_validation_error"
         return result
 
-    candidates_raw, execution_error = execute_candidate_sql(conn, safe_sql, max_rows=max(top_k * 5, 50))
+    constrained_sql = constrain_query_to_allowed_collections(safe_sql)
+    result["checked_sql"] = constrained_sql
+
+    candidates_raw, execution_error = execute_candidate_sql(conn, constrained_sql, max_rows=max(top_k * 5, 50))
     if execution_error:
         result["failure_reason"] = execution_error
         result["failure_type"] = "sql_execution_error"
@@ -815,11 +842,7 @@ def map_single_row_with_agent(
 
     result["candidate_count_raw"] = len(candidates_raw)
 
-    candidates_filtered, excluded_count = filter_sql_candidates_by_collection(candidates_raw, EXCLUDED_COLLECTIONS)
-    result["candidate_count_after_collection_filter"] = len(candidates_filtered)
-    result["excluded_by_collection"] = excluded_count
-
-    candidates_valid, unknown_count = filter_sql_candidates_to_known_msigdb(candidates_filtered, msigdb_lookup)
+    candidates_valid, unknown_count = filter_sql_candidates_to_known_msigdb(candidates_raw, msigdb_lookup)
     result["candidate_count_after_validation"] = len(candidates_valid)
     result["excluded_unknown_names"] = unknown_count
 
@@ -852,8 +875,8 @@ def run_pathway_mapping_pipeline(
     out_final_dir: Path,
     out_trace_dir: Path,
     top_k: int = TOP_CANDIDATES_FOR_MAPPING,
-) -> Tuple[str, str, str]:
-    """Process one input JSON file and write final, trace, and pathways outputs."""
+) -> Tuple[str, str]:
+    """Process one input JSON file and write final and trace outputs."""
     drug_name = input_file.stem
     LOGGER.info("")
     LOGGER.info("=" * 70)
@@ -932,9 +955,7 @@ def run_pathway_mapping_pipeline(
                     "agent_query_result_raw": mapping.get("agent_query_result_raw"),
                     "agent_query_result_rows": mapping.get("agent_query_result_rows"),
                     "candidate_count_raw": mapping.get("candidate_count_raw"),
-                    "candidate_count_after_collection_filter": mapping.get("candidate_count_after_collection_filter"),
                     "candidate_count_after_validation": mapping.get("candidate_count_after_validation"),
-                    "excluded_by_collection": mapping.get("excluded_by_collection"),
                     "excluded_unknown_names": mapping.get("excluded_unknown_names"),
                     "selected_candidate": mapping.get("selected_candidate"),
                     "top_candidates": mapping.get("top_candidates"),
@@ -946,18 +967,13 @@ def run_pathway_mapping_pipeline(
     finally:
         conn.close()
 
+    final_output: Dict[str, Any] = {"pathway_sets": collect_pathway_sets(final_data)}
+    final_output.update(final_data)
+
     final_path = out_final_dir / f"{drug_name}.json"
     trace_path = out_trace_dir / f"{drug_name}_trace_pathway_mapping.json"
-    pathways_path = out_final_dir / f"{drug_name}_pathways.txt"
 
-    save_json(final_data, final_path)
-    save_pathways_txt(
-        (
-            row["Mapped MSigDB Pathway Name"]
-            for _, row in sorted(final_data.items(), key=lambda item: row_order(item[0]))
-        ),
-        pathways_path,
-    )
+    save_json(final_output, final_path)
     save_json(
         {
             "summary": {
@@ -991,9 +1007,8 @@ def run_pathway_mapping_pipeline(
     LOGGER.info("Outputs:")
     LOGGER.info("  Final: %s", final_path)
     LOGGER.info("  Trace: %s", trace_path)
-    LOGGER.info("  Pathways TXT: %s", pathways_path)
 
-    return str(final_path), str(trace_path), str(pathways_path)
+    return str(final_path), str(trace_path)
 
 
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:

@@ -1,0 +1,812 @@
+{
+  "summary": {
+    "drug_name": "afatinib",
+    "input_file": "D:\\GS\\Drug-Deepsearch-PAP\\.tmp_afatinib_langgraph_input\\afatinib.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 9,
+    "rows_after_filter": 5,
+    "rows_dropped_by_include_filter": 3,
+    "rows_dropped_by_relationship_class_filter": 4,
+    "mapped_count": 5,
+    "unmapped_count": 0,
+    "sql_generation_errors": 0,
+    "sql_validation_errors": 0,
+    "sql_execution_errors": 0,
+    "nl2sql_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+      "Rationale": "Afatinib is an irreversible pan-ErbB inhibitor that covalently binds EGFR, HER2 and ErbB4, leading to prolonged suppression of EGFR phosphorylation and downstream survival signaling in EGFR‑mutant NSCLC, translating into higher response rates and longer PFS versus chemotherapy and first‑generation TKIs in exon 19 del/L858R disease.",
+      "Final Mapped MSigDB": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       c.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%NSCLC%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN collection c ON gs.collection_name = c.collection_name\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%ErbB%' OR gsd.description_full LIKE '%Afatinib%' OR gsd.description_full LIKE '%NSCLC%')\nAND c.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "checked_sql": "SELECT *\nFROM (\nSELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       c.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%NSCLC%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN collection c ON gs.collection_name = c.collection_name\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%ErbB%' OR gsd.description_full LIKE '%Afatinib%' OR gsd.description_full LIKE '%NSCLC%')\nAND c.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query returned one pathway candidate: `GOBP_ERBB2_EGFR_SIGNALING_PATHWAY` from the `C5:GO:BP` collection. This pathway is relevant to the search terms, particularly focusing on EGFR and ErbB signaling, which aligns with the original pathway name and rationale provided. The sql_score indicates a match based on the presence of key terms in the pathway name or description.",
+      "agent_query_result_raw": "[('GOBP_ERBB2_EGFR_SIGNALING_PATHWAY', 'C5:GO:BP', None, 1)]",
+      "agent_query_result_rows": [
+        [
+          "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+          "C5:GO:BP",
+          null,
+          1
+        ]
+      ],
+      "candidate_count_raw": 1,
+      "candidate_count_after_validation": 1,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+        "collection": "C5:GO:BP",
+        "sql_score": 1.0,
+        "overlap_score": 0.108108,
+        "priority_rank": 4,
+        "priority_bonus": 0.016667,
+        "ranking_score": 0.124775,
+        "description": ""
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.108108,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.124775,
+          "description": ""
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row4",
+      "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+      "Rationale": "The RAS–RAF–MEK–ERK (MAPK) cascade is upregulated in the presence of KRAS/BRAF mutations or bypass RTKs, leading to resistance to afatinib in lung cancer.",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       c.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN collection c ON gs.collection_name = c.collection_name\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%')\n   OR (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%')\n   AND (c.collection_name = 'H' OR c.collection_name LIKE 'C2:CP%' OR c.collection_name = 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "checked_sql": "SELECT *\nFROM (\nSELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       c.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN collection c ON gs.collection_name = c.collection_name\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%')\n   OR (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%RTKs%' OR gsd.description_full LIKE '%afatinib%' OR gsd.description_full LIKE '%lung cancer%')\n   AND (c.collection_name = 'H' OR c.collection_name LIKE 'C2:CP%' OR c.collection_name = 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query identified several pathways related to the RAS–RAF–MEK–ERK (MAPK) cascade, particularly in the context of mutations and lung cancer resistance mechanisms. The top candidates include pathways like \"EGF-EGFR-RAS-RASSF1 signaling pathway\" and \"Mutation-activated EGFR to RAS-ERK signaling pathway,\" both of which are part of the C2:CP:KEGG_MEDICUS collection. These pathways are relevant due to their involvement in signaling processes that are upregulated in the presence of KRAS/BRAF mutations or bypass RTKs, leading to resistance to treatments like afatinib in lung cancer. Each pathway has a high sql_score of 2, indicating strong relevance based on the search criteria.",
+      "agent_query_result_raw": "[('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated EGFR to PLCG-ERK signaling pathway. Pathway ID: N00024. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EML4-ALK fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00007. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PLCG_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'EML4-ALK fusion kinase to PLCG-ERK signaling pathway. Pathway ID: N00025. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_LOSS_OF_RASSF1_TO_RAS_RASSF1_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Loss of RASSF1 to RAS-RASSF1 signaling pathway. Pathway ID: N00097. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated KRAS/NRAS to ERK signaling pathway. Pathway ID: N00012. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated KRAS/NRAS to PI3K signaling pathway. Pathway ID: N00032. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated BRAF to ERK signaling pathway. Pathway ID: N00013. Pathway type: Variant. Pathway class: nt06268 Melanoma.', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2), ('KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'RET fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00008. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.', 2)]",
+      "agent_query_result_rows": [
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated EGFR to PLCG-ERK signaling pathway. Pathway ID: N00024. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EML4-ALK fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00007. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "EML4-ALK fusion kinase to PLCG-ERK signaling pathway. Pathway ID: N00025. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_LOSS_OF_RASSF1_TO_RAS_RASSF1_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Loss of RASSF1 to RAS-RASSF1 signaling pathway. Pathway ID: N00097. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated KRAS/NRAS to ERK signaling pathway. Pathway ID: N00012. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated KRAS/NRAS to PI3K signaling pathway. Pathway ID: N00032. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated BRAF to ERK signaling pathway. Pathway ID: N00013. Pathway type: Variant. Pathway class: nt06268 Melanoma.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "RET fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00008. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer.",
+          2
+        ]
+      ],
+      "candidate_count_raw": 11,
+      "candidate_count_after_validation": 11,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_MEDICUS",
+        "sql_score": 2.0,
+        "overlap_score": 0.119987,
+        "priority_rank": 2,
+        "priority_bonus": 0.033333,
+        "ranking_score": 0.15332,
+        "description": "Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.119987,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.15332,
+          "description": "Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.119987,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.15332,
+          "description": "RET fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00008. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.113876,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.14721,
+          "description": "EML4-ALK fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00007. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.074594,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.107927,
+          "description": "Mutation-activated KRAS/NRAS to ERK signaling pathway. Pathway ID: N00012. Pathway type: Variant. Pathway class: nt06260 Colorectal cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_LOSS_OF_RASSF1_TO_RAS_RASSF1_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.071769,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.105103,
+          "description": "Loss of RASSF1 to RAS-RASSF1 signaling pathway. Pathway ID: N00097. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.070193,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.103527,
+          "description": "Mutation-activated BRAF to ERK signaling pathway. Pathway ID: N00013. Pathway type: Variant. Pathway class: nt06268 Melanoma."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.068058,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.101391,
+          "description": "EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.068058,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.101391,
+          "description": "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.064751,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.098084,
+          "description": "Mutation-activated EGFR to PLCG-ERK signaling pathway. Pathway ID: N00024. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.06178,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.095113,
+          "description": "EML4-ALK fusion kinase to PLCG-ERK signaling pathway. Pathway ID: N00025. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer."
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row5",
+      "Original Pathway Name": "MET/HGF pathway",
+      "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR‑TKI‑resistant NSCLC and is highlighted as a key high‑priority resistance node in multi‑omics analyses, undermining afatinib efficacy unless co‑targeted.",
+      "Final Mapped MSigDB": "GOBP_ALLANTOIN_METABOLIC_PROCESS",
+      "verdict": "mapped",
+      "generated_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       c.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gs.standard_name LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%PI3K%' OR gsd.description_full LIKE '%AKT%' OR gsd.description_full LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%NSCLC%' OR gsd.description_full LIKE '%afatinib%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN collection c ON gs.collection_name = c.collection_name\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gs.standard_name LIKE '%HGF%' \n       OR gsd.description_full LIKE '%PI3K%' OR gsd.description_full LIKE '%AKT%' OR gsd.description_full LIKE '%MAPK%' \n       OR gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%ErbB%' \n       OR gsd.description_full LIKE '%NSCLC%' OR gsd.description_full LIKE '%afatinib%')\n  AND c.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "checked_sql": "SELECT *\nFROM (\nSELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       c.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gs.standard_name LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%PI3K%' OR gsd.description_full LIKE '%AKT%' OR gsd.description_full LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%NSCLC%' OR gsd.description_full LIKE '%afatinib%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN collection c ON gs.collection_name = c.collection_name\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gs.standard_name LIKE '%HGF%' \n       OR gsd.description_full LIKE '%PI3K%' OR gsd.description_full LIKE '%AKT%' OR gsd.description_full LIKE '%MAPK%' \n       OR gsd.description_full LIKE '%EGFR%' OR gsd.description_full LIKE '%ErbB%' \n       OR gsd.description_full LIKE '%NSCLC%' OR gsd.description_full LIKE '%afatinib%')\n  AND c.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query returned 20 pathways from the C5:GO:BP collection, each with a sql_score of 1. These pathways include various metabolic processes and transitions, such as \"GOBP_VERY_LONG_CHAIN_FATTY_ACID_METABOLIC_PROCESS\" and \"GOBP_TRANSITION_METAL_ION_TRANSPORT\". However, none of the pathways directly match the MET/HGF pathway or its associated rationale semantics related to PI3K–AKT, MAPK, EGFR, or NSCLC. This suggests that the database may not have a direct match for the MET/HGF pathway under the specified collections.",
+      "agent_query_result_raw": "[('GOBP_VERY_LONG_CHAIN_FATTY_ACID_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_TRANSITION_METAL_ION_TRANSPORT', 'C5:GO:BP', None, 1), ('GOBP_CITRULLINE_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_SULFUR_AMINO_ACID_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_ALLANTOIN_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_PEPTIDOGLYCAN_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_REGULATION_OF_GLUTAMINE_FAMILY_AMINO_ACID_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_REGULATION_OF_ARGININE_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_MITOCHONDRIAL_RNA_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_RNA_METHYLATION', 'C5:GO:BP', None, 1), ('GOBP_GANGLIOSIDE_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_METANEPHROS_DEVELOPMENT', 'C5:GO:BP', None, 1), ('GOBP_LONG_CHAIN_FATTY_ACID_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_HISTAMINE_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_DETERMINATION_OF_LEFT_RIGHT_ASYMMETRY_IN_LATERAL_MESODERM', 'C5:GO:BP', None, 1), ('GOBP_MESENCHYMAL_TO_EPITHELIAL_TRANSITION_INVOLVED_IN_METANEPHROS_MORPHOGENESIS', 'C5:GO:BP', None, 1), ('GOBP_METANEPHROS_MORPHOGENESIS', 'C5:GO:BP', None, 1), ('GOBP_REGULATION_OF_MESENCHYMAL_TO_EPITHELIAL_TRANSITION_INVOLVED_IN_METANEPHROS_MORPHOGENESIS', 'C5:GO:BP', None, 1), ('GOBP_CARBOHYDRATE_METABOLIC_PROCESS', 'C5:GO:BP', None, 1), ('GOBP_POLYSACCHARIDE_METABOLIC_PROCESS', 'C5:GO:BP', None, 1)]",
+      "agent_query_result_rows": [
+        [
+          "GOBP_VERY_LONG_CHAIN_FATTY_ACID_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_TRANSITION_METAL_ION_TRANSPORT",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_CITRULLINE_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_SULFUR_AMINO_ACID_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_ALLANTOIN_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_PEPTIDOGLYCAN_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_REGULATION_OF_GLUTAMINE_FAMILY_AMINO_ACID_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_REGULATION_OF_ARGININE_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_MITOCHONDRIAL_RNA_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_RNA_METHYLATION",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_GANGLIOSIDE_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_METANEPHROS_DEVELOPMENT",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_LONG_CHAIN_FATTY_ACID_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_HISTAMINE_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_DETERMINATION_OF_LEFT_RIGHT_ASYMMETRY_IN_LATERAL_MESODERM",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_MESENCHYMAL_TO_EPITHELIAL_TRANSITION_INVOLVED_IN_METANEPHROS_MORPHOGENESIS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_METANEPHROS_MORPHOGENESIS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_REGULATION_OF_MESENCHYMAL_TO_EPITHELIAL_TRANSITION_INVOLVED_IN_METANEPHROS_MORPHOGENESIS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_CARBOHYDRATE_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "GOBP_POLYSACCHARIDE_METABOLIC_PROCESS",
+          "C5:GO:BP",
+          null,
+          1
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_validation": 20,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "GOBP_ALLANTOIN_METABOLIC_PROCESS",
+        "collection": "C5:GO:BP",
+        "sql_score": 1.0,
+        "overlap_score": 0.0,
+        "priority_rank": 4,
+        "priority_bonus": 0.016667,
+        "ranking_score": 0.016667,
+        "description": ""
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "GOBP_ALLANTOIN_METABOLIC_PROCESS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_CARBOHYDRATE_METABOLIC_PROCESS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_CITRULLINE_METABOLIC_PROCESS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_DETERMINATION_OF_LEFT_RIGHT_ASYMMETRY_IN_LATERAL_MESODERM",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_GANGLIOSIDE_METABOLIC_PROCESS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_HISTAMINE_METABOLIC_PROCESS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_LONG_CHAIN_FATTY_ACID_METABOLIC_PROCESS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_MESENCHYMAL_TO_EPITHELIAL_TRANSITION_INVOLVED_IN_METANEPHROS_MORPHOGENESIS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_METANEPHROS_DEVELOPMENT",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_METANEPHROS_MORPHOGENESIS",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.016667,
+          "description": ""
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row9",
+      "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+      "Rationale": "EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion. Baseline EGFR-driven pathways are sensitive to afatinib, which targets EGFR mutations effectively.",
+      "Final Mapped MSigDB": "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+      "verdict": "mapped",
+      "generated_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%angiogenesis%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%immune evasion%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "checked_sql": "SELECT *\nFROM (\nSELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description,\n       (CASE WHEN gs.standard_name LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%STAT3%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%VEGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%PD-L1%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%angiogenesis%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%immune evasion%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query returned several pathways with varying relevance scores based on the presence of keywords related to the EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion pathway. The top candidates include: 1. **GOBP_ERBB2_EGFR_SIGNALING_PATHWAY** (Collection: C5:GO:BP) - This pathway is directly related to EGFR signaling, which is relevant to the original pathway mention. 2. **HALLMARK_IL6_JAK_STAT3_SIGNALING** (Collection: H) - This pathway involves STAT3 signaling, which is part of the original pathway mention. These pathways have a higher relevance score due to the presence of keywords like EGFR and STAT3. Other pathways listed have a score of 0, indicating no direct keyword matches.",
+      "agent_query_result_raw": "[('GOBP_ERBB2_EGFR_SIGNALING_PATHWAY', 'C5:GO:BP', None, 1), ('HALLMARK_IL6_JAK_STAT3_SIGNALING', 'H', None, 1), ('SA_B_CELL_RECEPTOR_COMPLEXES', 'C2:CP', None, 0), ('SIG_CD40PATHWAYMAP', 'C2:CP', None, 0), ('SIG_PIP3_SIGNALING_IN_CARDIAC_MYOCTES', 'C2:CP', None, 0), ('SA_CASPASE_CASCADE', 'C2:CP', None, 0), ('SIG_CHEMOTAXIS', 'C2:CP', None, 0), ('SIG_IL4RECEPTOR_IN_B_LYPHOCYTES', 'C2:CP', None, 0), ('WNT_SIGNALING', 'C2:CP', None, 0), ('SIG_REGULATION_OF_THE_ACTIN_CYTOSKELETON_BY_RHO_GTPASES', 'C2:CP', None, 0), ('SA_FAS_SIGNALING', 'C2:CP', None, 0), ('SA_G1_AND_S_PHASES', 'C2:CP', None, 0), ('SIG_INSULIN_RECEPTOR_PATHWAY_IN_CARDIAC_MYOCYTES', 'C2:CP', None, 0), ('SIG_PIP3_SIGNALING_IN_B_LYMPHOCYTES', 'C2:CP', None, 0), ('SIG_BCR_SIGNALING_PATHWAY', 'C2:CP', None, 0), ('SA_G2_AND_M_PHASES', 'C2:CP', None, 0), ('SA_MMP_CYTOKINE_CONNECTION', 'C2:CP', None, 0), ('SA_PROGRAMMED_CELL_DEATH', 'C2:CP', None, 0), ('SA_PTEN_PATHWAY', 'C2:CP', None, 0), ('SA_REG_CASCADE_OF_CYCLIN_EXPR', 'C2:CP', None, 0)]",
+      "agent_query_result_rows": [
+        [
+          "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+          "C5:GO:BP",
+          null,
+          1
+        ],
+        [
+          "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+          "H",
+          null,
+          1
+        ],
+        [
+          "SA_B_CELL_RECEPTOR_COMPLEXES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_CD40PATHWAYMAP",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_PIP3_SIGNALING_IN_CARDIAC_MYOCTES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_CASPASE_CASCADE",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_CHEMOTAXIS",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_IL4RECEPTOR_IN_B_LYPHOCYTES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "WNT_SIGNALING",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_REGULATION_OF_THE_ACTIN_CYTOSKELETON_BY_RHO_GTPASES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_FAS_SIGNALING",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_G1_AND_S_PHASES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_INSULIN_RECEPTOR_PATHWAY_IN_CARDIAC_MYOCYTES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_PIP3_SIGNALING_IN_B_LYMPHOCYTES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SIG_BCR_SIGNALING_PATHWAY",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_G2_AND_M_PHASES",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_MMP_CYTOKINE_CONNECTION",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_PROGRAMMED_CELL_DEATH",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_PTEN_PATHWAY",
+          "C2:CP",
+          null,
+          0
+        ],
+        [
+          "SA_REG_CASCADE_OF_CYCLIN_EXPR",
+          "C2:CP",
+          null,
+          0
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_validation": 20,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+        "collection": "H",
+        "sql_score": 1.0,
+        "overlap_score": 0.04,
+        "priority_rank": 0,
+        "priority_bonus": 0.05,
+        "ranking_score": 0.09,
+        "description": ""
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+          "collection": "H",
+          "sql_score": 1.0,
+          "overlap_score": 0.04,
+          "priority_rank": 0,
+          "priority_bonus": 0.05,
+          "ranking_score": 0.09,
+          "description": ""
+        },
+        {
+          "msigdb_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+          "collection": "C5:GO:BP",
+          "sql_score": 1.0,
+          "overlap_score": 0.046522,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.063188,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_B_CELL_RECEPTOR_COMPLEXES",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_CASPASE_CASCADE",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_FAS_SIGNALING",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_G1_AND_S_PHASES",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_G2_AND_M_PHASES",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_MMP_CYTOKINE_CONNECTION",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_PROGRAMMED_CELL_DEATH",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        },
+        {
+          "msigdb_name": "SA_PTEN_PATHWAY",
+          "collection": "C2:CP",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.0,
+          "description": ""
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+      "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib targets this pathway, leading to decreased phosphorylation and promoting apoptosis, indicating sensitivity.",
+      "Final Mapped MSigDB": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "verdict": "mapped",
+      "generated_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%cell survival%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%apoptosis%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\n  AND (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%' \n       OR gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%' \n       OR gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' \n       OR gsd.description_full LIKE '%lung cancer%' \n       OR gsd.description_full LIKE '%cell survival%' \n       OR gsd.description_full LIKE '%Afatinib%' \n       OR gsd.description_full LIKE '%apoptosis%')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "checked_sql": "SELECT *\nFROM (\nSELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description, \n       (CASE WHEN gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%lung cancer%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%cell survival%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%Afatinib%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%apoptosis%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\n  AND (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%' \n       OR gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%' \n       OR gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%' \n       OR gsd.description_full LIKE '%lung cancer%' \n       OR gsd.description_full LIKE '%cell survival%' \n       OR gsd.description_full LIKE '%Afatinib%' \n       OR gsd.description_full LIKE '%apoptosis%')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query identified one relevant pathway from the MSigDB database: - **msigdb_name**: HALLMARK_PI3K_AKT_MTOR_SIGNALING - **collection**: H - **description**: None - **sql_score**: 1 This pathway is part of the Hallmark collection and is related to the PI3K/AKT/mTOR signaling, which aligns with the ELK1–CIP2A–AKT survival axis mentioned in the original pathway name and rationale.",
+      "agent_query_result_raw": "[('HALLMARK_PI3K_AKT_MTOR_SIGNALING', 'H', None, 1)]",
+      "agent_query_result_rows": [
+        [
+          "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+          "H",
+          null,
+          1
+        ]
+      ],
+      "candidate_count_raw": 1,
+      "candidate_count_after_validation": 1,
+      "excluded_unknown_names": 0,
+      "selected_candidate": {
+        "msigdb_name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+        "collection": "H",
+        "sql_score": 1.0,
+        "overlap_score": 0.042133,
+        "priority_rank": 0,
+        "priority_bonus": 0.05,
+        "ranking_score": 0.092133,
+        "description": ""
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+          "collection": "H",
+          "sql_score": 1.0,
+          "overlap_score": 0.042133,
+          "priority_rank": 0,
+          "priority_bonus": 0.05,
+          "ranking_score": 0.092133,
+          "description": ""
+        }
+      ],
+      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "failure_type": null,
+      "failure_reason": null
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+# Changes In LangChain SQL Code
+
+Date: 2026-03-23
+Target file: `src/stratch/langchain_pathway_map_nl2sql.py`
+
+## Overview
+This note records the changes made today in the LangGraph/LangChain SQL pathway-mapping pipeline, why each change was needed, and how the behavior of the code changed.
+
+The goal of today's work was to make the SQL-based mapping pipeline:
+- more reliable in the current environment
+- more biologically constrained at the MSigDB loading stage
+- cleaner by removing collection filtering noise after SQL retrieval
+- easier to trace and test
+
+## 1. Fixed OpenAI / LangChain connection failures caused by proxy settings
+
+### Reason
+The LangGraph SQL agent was failing with `Connection error.` during SQL generation. Investigation showed that the process was inheriting proxy environment variables pointing to a dead local endpoint:
+- `HTTP_PROXY=http://127.0.0.1:9`
+- `HTTPS_PROXY=http://127.0.0.1:9`
+- `ALL_PROXY=http://127.0.0.1:9`
+
+This caused both direct OpenAI calls and LangChain chat model calls to fail before any SQL was generated.
+
+### Change
+Added:
+- `_is_blackhole_proxy_url(...)`
+- `clear_blackhole_proxy_env()`
+
+These functions detect loopback proxy URLs on port `9` and remove them from the environment before the model is used.
+
+### Effect
+- LangGraph SQL generation now works in this environment.
+- The SQL agent can connect to OpenAI successfully without requiring manual shell cleanup.
+
+## 2. Changed MSigDB description loading logic
+
+### Reason
+The previous SQL loader logic selected:
+- `description_full` first
+- `description_brief` second
+- `''` if both were empty
+
+That meant potentially useful short-form summary text from `description_brief` was lost whenever `description_full` existed.
+
+### Change
+Updated the `description` expression inside `load_msigdb_metadata()`:
+- if both `description_full` and `description_brief` exist and are non-empty:
+  - use `description_full || ' ' || description_brief`
+- else use whichever one exists
+- else use `''`
+
+### Effect
+- Candidate descriptions are richer.
+- Ranking has more text available for overlap matching.
+- Trace output carries more informative pathway descriptions.
+
+## 3. Added species filtering during MSigDB loading
+
+### Reason
+The database contains multiple species codes such as:
+- `HS`
+- `MM`
+- `RM`
+- `RN`
+- `DR`
+
+The pathway-mapping use case here is human-centric and should not mix cross-species pathway details into the loaded dataset.
+
+### Change
+Added SQL filtering in `load_msigdb_metadata()`:
+- `WHERE gsd.source_species_code = 'HS'`
+
+This was added to both branches:
+- when the `namespace` table exists
+- when the `namespace` table does not exist
+
+### Effect
+- Only human (`HS`) pathway metadata is loaded into memory.
+- Non-human rows are excluded before later mapping steps.
+
+## 4. Replaced collection exclusion with collection inclusion at load time
+
+### Reason
+Previously, collection filtering happened after SQL retrieval, row by row. That produced noisy candidate sets such as:
+- many candidates retrieved by SQL
+- many removed later because of excluded collections
+- trace values like:
+  - `candidate_count_after_collection_filter`
+  - `excluded_by_collection`
+
+This created unnecessary clutter and made the SQL retrieval stage noisier than needed.
+
+Also, the desired collection policy changed from exclusion-based to inclusion-based.
+
+### Old behavior
+The code used `EXCLUDED_COLLECTIONS` and then filtered post-query candidates with:
+- `is_collection_excluded(...)`
+- `filter_sql_candidates_by_collection(...)`
+
+### New behavior
+Collection filtering now happens during `load_msigdb_metadata()`.
+
+Included collections are now:
+- exact `H`
+- any collection starting with `C2:CP`
+- exact `C5:GO:BP`
+
+Implemented using:
+- `INCLUDED_COLLECTIONS_SQL`
+
+Current inclusion SQL:
+- `gs.collection_name = 'H'`
+- `gs.collection_name LIKE 'C2:CP%'`
+- `gs.collection_name = 'C5:GO:BP'`
+
+### Effect
+- The loaded MSigDB dataset is already constrained to the desired pathway families.
+- Post-query candidate filtering by collection is no longer needed.
+- The SQL candidate stage is cleaner and closer to the final valid search space.
+
+## 5. Removed post-query collection filter logic
+
+### Reason
+Once collection filtering moved to `load_msigdb_metadata()`, the post-query collection filter became redundant.
+
+### Change
+Removed:
+- `EXCLUDED_COLLECTIONS`
+- `is_collection_excluded(...)`
+- `filter_sql_candidates_by_collection(...)`
+
+Updated `map_single_row_with_agent()` so the pipeline now goes directly from:
+- `execute_candidate_sql(...)`
+to
+- `filter_sql_candidates_to_known_msigdb(...)`
+
+instead of performing an intermediate collection exclusion step.
+
+### Effect
+- Fewer moving parts in the row-level mapping flow
+- less duplicated filtering logic
+- simpler trace interpretation
+
+## 6. Simplified trace output while preserving compatibility elsewhere
+
+### Reason
+Because collection filtering no longer happens after SQL retrieval, the following trace keys became obsolete:
+- `candidate_count_after_collection_filter`
+- `excluded_by_collection`
+
+Keeping them would be misleading because no post-query collection filtering stage exists anymore.
+
+### Change
+Removed these keys from the row trace object.
+
+Kept these keys unchanged:
+- `candidate_count_raw`
+- `candidate_count_after_validation`
+- `excluded_unknown_names`
+- `selected_candidate`
+- `top_candidates`
+- `decision_reason`
+- `failure_type`
+- `failure_reason`
+
+### Effect
+- Trace JSON remains useful and mostly stable
+- obsolete counters are removed
+- final output JSON contract remains unchanged
+
+## 7. Preserved final row/output contract
+
+### Reason
+Downstream code depends on the Step 3-style output shape, especially:
+- `Mapped MSigDB Pathway Name`
+- per-drug output JSON
+- trace JSON
+- pathways TXT
+
+The internal refactor should not break consumers unless explicitly intended.
+
+### Change
+No breaking changes were made to the final mapped row structure.
+
+### Effect
+- downstream pipeline stages can continue to consume the final output
+- internal filtering improvements stay mostly invisible to later steps
+
+## 8. Added and updated tests to lock behavior
+
+### Reason
+The loader and filtering behavior changed significantly today. Without tests, it would be easy to regress:
+- description concatenation
+- HS filtering
+- namespace/no-namespace branching
+- inclusion-only collection filtering
+- trace shape after removal of collection-filter counters
+
+### Change
+Updated `tests/test_langchain_pathway_map_nl2sql.py` to cover:
+
+#### Loader behavior
+- both `description_full` and `description_brief` present
+- only `description_full`
+- only `description_brief`
+- both empty
+- non-`HS` rows filtered out
+- `namespace` branch still works
+- no-`namespace` branch still works
+
+#### Inclusion filtering
+- `H` retained
+- `C2:CP:REACTOME` retained
+- `C5:GO:BP` retained
+- `C5:GO:CC` excluded
+- `C6` excluded
+- `C3:*` excluded
+
+#### Trace behavior
+- `candidate_count_after_collection_filter` removed
+- `excluded_by_collection` removed
+
+#### Existing mapping behavior
+- row-level mapping still works
+- no-valid-candidate case still works
+- CLI smoke test still passes
+
+### Effect
+- today's changes are now protected by tests
+- future refactors can be validated more safely
+
+## 9. Resulting pipeline behavior after today's changes
+
+The current effective pipeline is now:
+
+1. Load MSigDB data
+2. Filter to `HS`
+3. Filter to included collections only:
+   - `H`
+   - `C2:CP%`
+   - `C5:GO:BP`
+4. Build lookup from the filtered MSigDB dataset
+5. For each retained Step 2 row:
+   - use LangGraph SQL agent to generate SQL
+   - validate SQL
+   - execute SQL
+   - validate returned pathway names against the prefiltered MSigDB lookup
+   - rank candidates
+   - write final and trace outputs
+
+This means collection filtering is now a preload dataset constraint, not a post-query cleanup step.
+
+## 10. Files affected today
+
+Primary code:
+- `src/stratch/langchain_pathway_map_nl2sql.py`
+
+Tests:
+- `tests/test_langchain_pathway_map_nl2sql.py`
+
+## 11. Why these changes matter
+
+Today's changes improve the pipeline in four important ways:
+
+### Reliability
+- fixes environment-specific OpenAI connection failures
+
+### Biological relevance
+- restricts metadata to human pathways only
+- restricts loaded pathways to the intended pathway families
+
+### Signal-to-noise quality
+- reduces irrelevant SQL candidates before row-level mapping
+- removes noisy post-query collection filtering
+
+### Maintainability
+- simpler row-level logic
+- clearer trace semantics
+- stronger automated test coverage
+
+## 12. Removed pathways.txt output and moved pathway sets into final JSON
+
+### Reason
+The `<drug>_pathways.txt` file was storing data that was already derivable from the final mapping output:
+- one pathway name per retained mapped row
+- de-duplicated in first-seen order
+
+That made the text file redundant and added an extra output artifact to manage. Since this information belongs to the mapping result itself, it is cleaner to persist it directly in the final JSON.
+
+### Change
+Removed the pathways text output flow from `langchain_pathway_map_nl2sql.py`:
+- deleted `save_pathways_txt(...)`
+- removed `<drug>_pathways.txt` creation from `run_pathway_mapping_pipeline()`
+- removed related logging and return values
+
+Added a new helper:
+- `collect_pathway_sets(...)`
+
+This helper builds a top-level `pathway_sets` list for the final mapping JSON using:
+- first-seen row order
+- unique pathway names only
+- exclusion of `UNMAPPED`
+
+The final JSON shape now starts like:
+- `{"pathway_sets": [...], "Row1": {...}, "Row2": {...}}`
+
+### Effect
+- final mapping output now carries both row-level mappings and the aggregate pathway-set list in one file
+- one redundant artifact is removed from the pipeline
+- consumers no longer need to read a second text file just to get the mapped pathway names
+
+## 13. Updated tests and documentation for the new output contract
+
+### Reason
+Once `pathways.txt` was removed, the tests and usage docs needed to describe the final output contract accurately.
+
+### Change
+Updated tests to verify:
+- `<drug>_pathways.txt` is no longer expected
+- final JSON includes top-level `pathway_sets`
+- `pathway_sets` preserves row order, de-duplicates names, and skips `UNMAPPED`
+
+Updated the trial README to reflect:
+- no more pathways text output
+- `pathway_sets` is now part of the final JSON
+- MSigDB preload filtering behavior remains the source of allowed pathway families
+
+### Effect
+- test coverage now protects the new JSON-first output design
+- the documentation matches the actual behavior of the script
+
+## 14. Forced the LangGraph SQL agent to execute only allowed collections
+
+### Reason
+The preload lookup was already restricted to the allowed pathway families, but the raw LangGraph SQL tool could still query the full SQLite database. That meant trace output could still contain disallowed collection rows such as `C2:CGP`, even when those rows were not eligible for final selection.
+
+This was confusing because the final selection policy and the raw SQL-agent trace were not aligned.
+
+### Change
+Added:
+- `constrain_query_to_allowed_collections(...)`
+
+Updated the agent so the `sql_db_query` tool is now wrapped and always executes a constrained outer query:
+- `SELECT * FROM (<agent query>) AS allowed_candidates WHERE ...`
+
+The enforced SQL-side allowed collections are:
+- `collection = 'H'`
+- `collection LIKE 'C2:CP%'`
+- `collection = 'C5:GO:BP'`
+
+Also updated the graph prompts so the model is explicitly told that:
+- only these collection families are allowed
+- the query must expose the collection through the alias `collection`
+
+### Effect
+- raw SQL-agent execution is now restricted to the same allowed collection families used by the mapping policy
+- trace output is less noisy and better aligned with the actual candidate pool
+- disallowed collections such as `C2:CGP` are blocked before agent SQL results are returned
