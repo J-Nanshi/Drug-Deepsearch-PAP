@@ -29,14 +29,29 @@
       "candidate_count_raw": 1,
       "candidate_count_after_validation": 1,
       "excluded_unknown_names": 0,
+      "selection_stage": "sql_rerank",
       "selected_candidate": {
         "msigdb_name": "HALLMARK_MTORC1_SIGNALING",
         "collection": "H",
         "sql_score": 0.99,
         "overlap_score": 0.282083,
+        "semantic_query_score": 0.472072,
+        "semantic_name_score": 0.0,
+        "semantic_description_score": 0.518834,
+        "entity_match_score": 0.5,
+        "concept_match_score": 0.0,
+        "sql_support_score": 1.0,
         "priority_rank": 0,
         "priority_bonus": 0.05,
-        "ranking_score": 0.332083,
+        "ranking_score": 0.370571,
+        "shared_entities": [
+          "MTOR"
+        ],
+        "shared_concepts": [],
+        "candidate_rejection_reason": null,
+        "retrieval_sources": [
+          "sql"
+        ],
         "description": "mTOR signaling and growth factor response pathway"
       },
       "top_candidates": [
@@ -45,13 +60,27 @@
           "collection": "H",
           "sql_score": 0.99,
           "overlap_score": 0.282083,
+          "semantic_query_score": 0.472072,
+          "semantic_name_score": 0.0,
+          "semantic_description_score": 0.518834,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.0,
+          "sql_support_score": 1.0,
           "priority_rank": 0,
           "priority_bonus": 0.05,
-          "ranking_score": 0.332083,
+          "ranking_score": 0.370571,
+          "shared_entities": [
+            "MTOR"
+          ],
+          "shared_concepts": [],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
           "description": "mTOR signaling and growth factor response pathway"
         }
       ],
-      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
       "failure_type": null,
       "failure_reason": null
     }

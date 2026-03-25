@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import hashlib
 import json
 import logging
 import os
@@ -40,6 +41,8 @@ LOGGER = logging.getLogger(__name__)
 
 DEFAULT_NL2SQL_MODEL = "gpt-4o"
 TOP_CANDIDATES_FOR_MAPPING = 20
+SEMANTIC_EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+SEMANTIC_CACHE_DIR = Path(".cache") / "langchain_pathway_map_nl2sql"
 
 INCLUDED_COLLECTIONS_SQL = (
     "gs.collection_name = 'H' OR "
@@ -93,6 +96,49 @@ STOPWORDS = {
     "without",
 }
 
+BIO_ENTITY_ALIASES = {
+    "EGFR": ["EGFR", "ERBB1"],
+    "ERBB": ["ERBB"],
+    "ERBB2": ["ERBB2", "HER2"],
+    "ERBB3": ["ERBB3", "HER3"],
+    "ERBB4": ["ERBB4", "HER4"],
+    "MET": ["MET"],
+    "HGF": ["HGF"],
+    "STAT3": ["STAT3"],
+    "VEGF": ["VEGF", "VEGFA"],
+    "PDL1": ["PD-L1", "PDL1", "CD274"],
+    "KRAS": ["KRAS"],
+    "NRAS": ["NRAS"],
+    "BRAF": ["BRAF"],
+    "RAS": ["RAS"],
+    "RAF": ["RAF"],
+    "MEK": ["MEK", "MAP2K"],
+    "ERK": ["ERK", "MAPK1", "MAPK3"],
+    "MAPK": ["MAPK"],
+    "PI3K": ["PI3K", "PIK3", "PIK3CA"],
+    "AKT": ["AKT", "AKT1", "AKT2", "AKT3"],
+    "MTOR": ["MTOR", "mTOR"],
+}
+
+BIO_CONCEPT_PATTERNS = {
+    "ERBB_SIGNALING": [r"\bERBB\b", r"\bEGFR SIGNALING\b", r"\bERBB SIGNALING\b"],
+    "MAPK_CASCADE": [r"\bMAPK\b", r"\bRAS\b", r"\bRAF\b", r"\bMEK\b", r"\bERK\b"],
+    "PI3K_AKT": [r"\bPI3K\b", r"\bAKT\b"],
+    "ANGIOGENESIS": [r"\bANGIOGENESIS\b", r"\bVEGF\b"],
+    "IMMUNE_EVASION": [r"IMMUNE EVASION", r"PD L1", r"PDL1", r"CD274"],
+    "BYPASS_SIGNALING": [r"\bBYPASS\b", r"\bRESISTANCE\b"],
+    "FUSION_KINASE": [r"FUSION KINASE", r"\bFUSION\b"],
+    "MUTATION_ACTIVATED": [r"MUTATION ACTIVATED", r"\bMUTANT\b", r"\bACTIVATING\b"],
+    "SURVIVAL": [r"\bSURVIVAL\b", r"\bANTI APOPTOTIC\b", r"\bCELL SURVIVAL\b"],
+    "CELL_CYCLE": [r"\bCELL CYCLE\b", r"\bMITOSIS\b"],
+}
+
+OFF_TARGET_CONTEXT_PATTERNS = {
+    "CARDIAC": [r"\bCARDIAC\b", r"\bMYOCYTE", r"\bMYOCYTES\b"],
+    "LYMPHOID": [r"\bB CELL\b", r"\bB LYMPH", r"\bLYMPHOCYTE\b", r"\bLYMPHOCYTES\b"],
+    "NEURONAL": [r"\bNEURON", r"\bBRAIN\b", r"\bSYNAP"],
+}
+
 SQL_BLOCKLIST_PATTERN = re.compile(
     r"\b(insert|update|delete|drop|alter|create|replace|truncate|attach|detach|pragma|"
     r"vacuum|reindex|analyze|grant|revoke|commit|rollback)\b",
@@ -140,6 +186,15 @@ class AgentRunTrace:
     final_response: str
     query_result_raw: str
     query_result_rows: List[Any]
+
+
+@dataclass(frozen=True)
+class BiologyFeatures:
+    """Normalized biological entities and concepts extracted from text."""
+
+    entities: frozenset[str]
+    concepts: frozenset[str]
+    normalized_text: str
 
 
 def load_json(path: str | Path) -> Dict[str, Any]:
@@ -395,6 +450,79 @@ def validate_msigdb_name(name: str, msigdb_lookup: Dict[str, MSigDBRow]) -> bool
     return name in msigdb_lookup
 
 
+def normalize_biology_text(text: str) -> str:
+    """Normalize text for biological pattern matching."""
+    return re.sub(r"[^A-Z0-9]+", " ", str(text or "").upper()).strip()
+
+
+def build_semantic_query_text(pathway_name: str, rationale: str) -> str:
+    """Create the merged query text used for retrieval and reranking."""
+    pathway = norm_text(pathway_name)
+    rationale_text = norm_text(rationale)
+    if rationale_text:
+        return f"Pathway: {pathway}. Rationale: {rationale_text}"
+    return f"Pathway: {pathway}"
+
+
+def build_candidate_corpus_text(
+    msigdb_name: str,
+    collection: Optional[str],
+    description: str,
+) -> str:
+    """Create a rich text representation of one MSigDB candidate."""
+    parts = [
+        f"Pathway: {norm_text(msigdb_name)}",
+        f"Collection: {norm_text(collection)}" if norm_text(collection) else "",
+        f"Description: {norm_text(description)}" if norm_text(description) else "",
+    ]
+    return " ".join(part for part in parts if part)
+
+
+def extract_biology_features(text: str) -> BiologyFeatures:
+    """Extract normalized entities and concepts from free text."""
+    normalized = normalize_biology_text(text)
+    entities: set[str] = set()
+    concepts: set[str] = set()
+
+    for canonical_name, aliases in BIO_ENTITY_ALIASES.items():
+        if any(re.search(rf"(?<![A-Z0-9]){re.escape(normalize_biology_text(alias))}(?![A-Z0-9])", normalized) for alias in aliases):
+            entities.add(canonical_name)
+
+    for concept_name, patterns in BIO_CONCEPT_PATTERNS.items():
+        if any(re.search(pattern, normalized) for pattern in patterns):
+            concepts.add(concept_name)
+
+    if {"RAS", "RAF", "MEK", "ERK"} & entities:
+        concepts.add("MAPK_CASCADE")
+    if {"PI3K", "AKT"} & entities:
+        concepts.add("PI3K_AKT")
+    if {"EGFR", "ERBB", "ERBB2", "ERBB3", "ERBB4"} & entities:
+        concepts.add("ERBB_SIGNALING")
+    if {"VEGF"} & entities:
+        concepts.add("ANGIOGENESIS")
+    if {"PDL1"} & entities:
+        concepts.add("IMMUNE_EVASION")
+
+    return BiologyFeatures(
+        entities=frozenset(entities),
+        concepts=frozenset(concepts),
+        normalized_text=normalized,
+    )
+
+
+def detect_off_target_context_penalty(query_text: str, candidate_text: str) -> float:
+    """Penalize candidates with strong unrelated tissue/system context absent from query."""
+    normalized_query = normalize_biology_text(query_text)
+    normalized_candidate = normalize_biology_text(candidate_text)
+    penalty = 0.0
+    for patterns in OFF_TARGET_CONTEXT_PATTERNS.values():
+        query_has_context = any(re.search(pattern, normalized_query) for pattern in patterns)
+        candidate_has_context = any(re.search(pattern, normalized_candidate) for pattern in patterns)
+        if candidate_has_context and not query_has_context:
+            penalty += 0.03
+    return penalty
+
+
 def tokenize_for_overlap(text: str) -> List[str]:
     """Tokenize text for overlap scoring using lowercase alphanumeric terms."""
     tokens = re.findall(r"[a-z0-9]+", lower(text))
@@ -419,45 +547,364 @@ def get_pathway_priority(msigdb_name: str) -> int:
     return len(PATHWAY_PRIORITY)
 
 
-def compute_candidate_scores(pathway_name: str, rationale: str, candidate: Dict[str, Any]) -> Dict[str, Any]:
-    """Score one candidate using overlap plus priority bonus."""
+class SimilarityModel:
+    """Sentence-transformer retrieval with TF-IDF fallback."""
+
+    def __init__(self, corpus_texts: Sequence[str], prefer_embeddings: bool = True) -> None:
+        self.corpus_texts = [norm_text(text) for text in corpus_texts]
+        self.use_embeddings = False
+        self.embedding_model_name = SEMANTIC_EMBEDDING_MODEL
+
+        if prefer_embeddings:
+            try:
+                clear_blackhole_proxy_env()
+                from sentence_transformers import SentenceTransformer
+                import numpy as np_local
+
+                self._np = np_local
+                self.embedder = SentenceTransformer(self.embedding_model_name)
+                SEMANTIC_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+                corpus_hash = hashlib.sha256("\n".join(self.corpus_texts).encode("utf-8")).hexdigest()
+                model_tag = self.embedding_model_name.replace("/", "_")
+                emb_cache_path = SEMANTIC_CACHE_DIR / f"embeddings_{model_tag}_{corpus_hash}.npy"
+                if emb_cache_path.exists():
+                    self.corpus_emb = np_local.load(str(emb_cache_path))
+                else:
+                    self.corpus_emb = self.embedder.encode(
+                        self.corpus_texts,
+                        normalize_embeddings=True,
+                        batch_size=64,
+                        show_progress_bar=False,
+                    )
+                    np_local.save(str(emb_cache_path), self.corpus_emb)
+                self.use_embeddings = True
+                return
+            except Exception as exc:
+                LOGGER.warning(
+                    "sentence-transformers unavailable for semantic reranking (%s); using TF-IDF fallback.",
+                    exc,
+                )
+
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.metrics.pairwise import cosine_similarity
+
+        self.vectorizer = TfidfVectorizer(
+            ngram_range=(1, 2),
+            min_df=1,
+            max_df=0.95,
+            stop_words="english",
+        )
+        self.cosine_similarity = cosine_similarity
+        self.corpus_mat = self.vectorizer.fit_transform(self.corpus_texts)
+
+    def topk(self, query_text: str, k: int = 10) -> List[Tuple[int, float]]:
+        """Return top-k corpus matches."""
+        text = norm_text(query_text)
+        if not text:
+            return []
+        if self.use_embeddings:
+            query_emb = self.embedder.encode([text], normalize_embeddings=True)
+            scores = (self.corpus_emb @ query_emb[0]).astype(float)
+            top_indices = scores.argsort()[::-1][:k]
+            return [(int(index), float(scores[index])) for index in top_indices]
+
+        query_vec = self.vectorizer.transform([text])
+        scores = self.cosine_similarity(self.corpus_mat, query_vec).reshape(-1)
+        top_indices = scores.argsort()[::-1][:k]
+        return [(int(index), float(scores[index])) for index in top_indices]
+
+    def score_pair(self, left_text: str, right_text: str) -> float:
+        """Return cosine-style similarity for two arbitrary texts."""
+        left = norm_text(left_text)
+        right = norm_text(right_text)
+        if not left or not right:
+            return 0.0
+        if self.use_embeddings:
+            pair_embeddings = self.embedder.encode([left, right], normalize_embeddings=True)
+            return float(pair_embeddings[0] @ pair_embeddings[1])
+
+        left_vec = self.vectorizer.transform([left])
+        right_vec = self.vectorizer.transform([right])
+        return float(self.cosine_similarity(left_vec, right_vec)[0][0])
+
+
+class SemanticMSigDBIndex:
+    """Semantic retrieval and biological feature cache for allowed MSigDB rows."""
+
+    def __init__(self, rows: Sequence[MSigDBRow], prefer_embeddings: bool = True) -> None:
+        self.rows = list(rows)
+        self.rows_by_name = {row.msigdb_name: row for row in self.rows}
+        self.corpus_texts = [
+            build_candidate_corpus_text(row.msigdb_name, row.collection, row.description)
+            for row in self.rows
+        ]
+        self.corpus_text_by_name = {
+            row.msigdb_name: build_candidate_corpus_text(row.msigdb_name, row.collection, row.description)
+            for row in self.rows
+        }
+        self.features_by_name = {
+            row.msigdb_name: extract_biology_features(self.corpus_text_by_name[row.msigdb_name])
+            for row in self.rows
+        }
+        self.similarity_model = SimilarityModel(self.corpus_texts, prefer_embeddings=prefer_embeddings)
+
+    def get_row(self, name: str) -> Optional[MSigDBRow]:
+        """Return one cached row by MSigDB name."""
+        return self.rows_by_name.get(name)
+
+    def get_corpus_text(self, name: str, fallback_description: str = "", fallback_collection: str = "") -> str:
+        """Return the canonical corpus text for a candidate name."""
+        row = self.get_row(name)
+        if row is not None:
+            return self.corpus_text_by_name[name]
+        return build_candidate_corpus_text(name, fallback_collection, fallback_description)
+
+    def get_features(self, name: str, fallback_text: str = "") -> BiologyFeatures:
+        """Return cached biological features for a candidate name."""
+        row = self.get_row(name)
+        if row is not None:
+            return self.features_by_name[name]
+        return extract_biology_features(fallback_text)
+
+    def topk_candidates(self, query_text: str, k: int = 20) -> List[Dict[str, Any]]:
+        """Return top-k semantic retrieval candidates over the filtered MSigDB corpus."""
+        candidates: List[Dict[str, Any]] = []
+        for index, score in self.similarity_model.topk(query_text, k=k):
+            row = self.rows[index]
+            candidates.append(
+                {
+                    "msigdb_name": row.msigdb_name,
+                    "collection": row.collection or "",
+                    "description": row.description,
+                    "sql_score": 0.0,
+                    "semantic_seed_score": round(float(score), 6),
+                    "retrieval_source": "semantic_fallback",
+                }
+            )
+        return candidates
+
+
+def build_semantic_index(
+    msig_rows: Sequence[MSigDBRow],
+    prefer_embeddings: bool = True,
+) -> SemanticMSigDBIndex:
+    """Build the semantic search index for allowed MSigDB rows."""
+    return SemanticMSigDBIndex(msig_rows, prefer_embeddings=prefer_embeddings)
+
+
+def compute_candidate_scores(
+    pathway_name: str,
+    rationale: str,
+    candidate: Dict[str, Any],
+    semantic_index: Optional[SemanticMSigDBIndex] = None,
+    max_sql_score: float = 0.0,
+) -> Dict[str, Any]:
+    """Score one candidate using semantics, biology, SQL support, and priority."""
+    query_text = build_semantic_query_text(pathway_name, rationale)
     query_name_tokens = tokenize_for_overlap(pathway_name)
     query_rationale_tokens = tokenize_for_overlap(rationale)
     candidate_name_tokens = tokenize_for_overlap(str(candidate.get("msigdb_name", "")))
     candidate_desc_tokens = tokenize_for_overlap(str(candidate.get("description", "")))
 
-    overlap_score = (
+    lexical_overlap_score = (
         0.40 * jaccard(query_name_tokens, candidate_name_tokens)
         + 0.20 * jaccard(query_name_tokens, candidate_desc_tokens)
         + 0.15 * jaccard(query_rationale_tokens, candidate_name_tokens)
         + 0.25 * jaccard(query_rationale_tokens, candidate_desc_tokens)
     )
 
+    candidate_name = str(candidate.get("msigdb_name", ""))
+    candidate_description = str(candidate.get("description", ""))
+    candidate_collection = str(candidate.get("collection", ""))
+    candidate_text = build_candidate_corpus_text(candidate_name, candidate_collection, candidate_description)
+
+    if semantic_index is not None:
+        semantic_query_score = semantic_index.similarity_model.score_pair(query_text, candidate_text)
+        semantic_name_score = semantic_index.similarity_model.score_pair(pathway_name, candidate_name)
+        semantic_description_score = semantic_index.similarity_model.score_pair(
+            rationale or pathway_name,
+            candidate_description or candidate_text,
+        )
+        candidate_features = semantic_index.get_features(candidate_name, candidate_text)
+    else:
+        semantic_query_score = lexical_overlap_score
+        semantic_name_score = jaccard(query_name_tokens, candidate_name_tokens)
+        semantic_description_score = jaccard(query_rationale_tokens, candidate_desc_tokens)
+        candidate_features = extract_biology_features(candidate_text)
+
+    query_features = extract_biology_features(query_text)
+    query_entity_count = max(len(query_features.entities), 1)
+    query_concept_count = max(len(query_features.concepts), 1)
+    shared_entities = query_features.entities & candidate_features.entities
+    shared_concepts = query_features.concepts & candidate_features.concepts
+    entity_match_score = len(shared_entities) / query_entity_count if query_features.entities else 0.0
+    concept_match_score = len(shared_concepts) / query_concept_count if query_features.concepts else 0.0
+
     priority_rank = get_pathway_priority(str(candidate.get("msigdb_name", "")))
     priority_bonus = 0.0
     if priority_rank < len(PATHWAY_PRIORITY):
         priority_bonus = 0.05 * (len(PATHWAY_PRIORITY) - priority_rank) / len(PATHWAY_PRIORITY)
 
+    sql_support_score = 0.0
+    raw_sql_score = float(candidate.get("sql_score", 0.0) or 0.0)
+    if max_sql_score > 0.0:
+        sql_support_score = raw_sql_score / max_sql_score
+    elif raw_sql_score > 0.0:
+        sql_support_score = 1.0
+
+    penalty = detect_off_target_context_penalty(query_text, candidate_text)
+    if query_features.entities and entity_match_score == 0.0:
+        penalty += 0.05
+    elif len(query_features.entities) >= 2 and entity_match_score < 0.5:
+        penalty += 0.02
+    if query_features.concepts and concept_match_score == 0.0:
+        penalty += 0.03
+
+    ranking_score = (
+        0.35 * semantic_query_score
+        + 0.20 * semantic_name_score
+        + 0.10 * semantic_description_score
+        + 0.15 * entity_match_score
+        + 0.10 * concept_match_score
+        + 0.03 * lexical_overlap_score
+        + 0.02 * sql_support_score
+        + priority_bonus
+        - penalty
+    )
+
     enriched = dict(candidate)
-    enriched["overlap_score"] = round(overlap_score, 6)
+    enriched["overlap_score"] = round(lexical_overlap_score, 6)
+    enriched["semantic_query_score"] = round(semantic_query_score, 6)
+    enriched["semantic_name_score"] = round(semantic_name_score, 6)
+    enriched["semantic_description_score"] = round(semantic_description_score, 6)
+    enriched["entity_match_score"] = round(entity_match_score, 6)
+    enriched["concept_match_score"] = round(concept_match_score, 6)
+    enriched["sql_support_score"] = round(sql_support_score, 6)
     enriched["priority_rank"] = priority_rank
     enriched["priority_bonus"] = round(priority_bonus, 6)
-    enriched["ranking_score"] = round(overlap_score + priority_bonus, 6)
+    enriched["off_target_context_penalty"] = round(penalty, 6)
+    enriched["shared_entities"] = sorted(shared_entities)
+    enriched["shared_concepts"] = sorted(shared_concepts)
+    enriched["ranking_score"] = round(ranking_score, 6)
     return enriched
 
 
-def rank_msigdb_candidates(pathway_name: str, rationale: str, candidates: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Rank candidates deterministically by score, priority, SQL score, and name."""
-    scored = [compute_candidate_scores(pathway_name, rationale, candidate) for candidate in candidates]
+def get_candidate_rejection_reason(
+    candidate: Dict[str, Any],
+    query_features: BiologyFeatures,
+) -> Optional[str]:
+    """Return a human-readable reason when a candidate should be skipped."""
+    reasons: List[str] = []
+    if query_features.entities and float(candidate.get("entity_match_score", 0.0)) <= 0.0:
+        reasons.append("missing_query_entities")
+    if query_features.concepts and float(candidate.get("concept_match_score", 0.0)) <= 0.0:
+        reasons.append("missing_query_concepts")
+    if float(candidate.get("semantic_query_score", 0.0)) < 0.18:
+        reasons.append("low_semantic_query_score")
+    if float(candidate.get("off_target_context_penalty", 0.0)) >= 0.03:
+        reasons.append("off_target_context")
+    if float(candidate.get("ranking_score", 0.0)) < 0.12:
+        reasons.append("low_ranking_score")
+    return ", ".join(reasons) if reasons else None
+
+
+def rank_msigdb_candidates(
+    pathway_name: str,
+    rationale: str,
+    candidates: Sequence[Dict[str, Any]],
+    semantic_index: Optional[SemanticMSigDBIndex] = None,
+) -> List[Dict[str, Any]]:
+    """Rank candidates deterministically by semantic, biological, and SQL support signals."""
+    max_sql_score = max((float(candidate.get("sql_score", 0.0) or 0.0) for candidate in candidates), default=0.0)
+    scored = [
+        compute_candidate_scores(
+            pathway_name,
+            rationale,
+            candidate,
+            semantic_index=semantic_index,
+            max_sql_score=max_sql_score,
+        )
+        for candidate in candidates
+    ]
     scored.sort(
         key=lambda candidate: (
             -float(candidate.get("ranking_score", 0.0)),
+            -float(candidate.get("entity_match_score", 0.0)),
+            -float(candidate.get("concept_match_score", 0.0)),
             int(candidate.get("priority_rank", len(PATHWAY_PRIORITY))),
-            -float(candidate.get("sql_score", 0.0)),
+            -float(candidate.get("sql_support_score", 0.0)),
             str(candidate.get("msigdb_name", "")).upper(),
         )
     )
     return scored
+
+
+def should_trigger_semantic_fallback(
+    ranked_candidates: Sequence[Dict[str, Any]],
+    pathway_name: str,
+    rationale: str,
+) -> bool:
+    """Decide whether SQL-only candidates are too weak to trust."""
+    if not ranked_candidates:
+        return True
+    query_features = extract_biology_features(build_semantic_query_text(pathway_name, rationale))
+    top = ranked_candidates[0]
+    if get_candidate_rejection_reason(top, query_features):
+        return True
+    if query_features.entities and float(top.get("entity_match_score", 0.0)) < 0.5:
+        return True
+    return False
+
+
+def merge_candidate_lists(
+    sql_candidates: Sequence[Dict[str, Any]],
+    semantic_candidates: Sequence[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """Merge SQL and semantic candidates by name while preserving the best available metadata."""
+    merged: Dict[str, Dict[str, Any]] = {}
+    for source_name, source_candidates in (("sql", sql_candidates), ("semantic_fallback", semantic_candidates)):
+        for candidate in source_candidates:
+            name = str(candidate.get("msigdb_name", "")).strip()
+            if not name:
+                continue
+            current = merged.get(name)
+            if current is None:
+                current = dict(candidate)
+                current["retrieval_sources"] = []
+                merged[name] = current
+            if source_name not in current["retrieval_sources"]:
+                current["retrieval_sources"].append(source_name)
+            if float(candidate.get("sql_score", 0.0) or 0.0) > float(current.get("sql_score", 0.0) or 0.0):
+                current["sql_score"] = float(candidate.get("sql_score", 0.0) or 0.0)
+            if not norm_text(current.get("description", "")) and norm_text(candidate.get("description", "")):
+                current["description"] = candidate.get("description", "")
+            if not norm_text(current.get("collection", "")) and norm_text(candidate.get("collection", "")):
+                current["collection"] = candidate.get("collection", "")
+            if "semantic_seed_score" in candidate:
+                current["semantic_seed_score"] = max(
+                    float(current.get("semantic_seed_score", 0.0) or 0.0),
+                    float(candidate.get("semantic_seed_score", 0.0) or 0.0),
+                )
+    return list(merged.values())
+
+
+def select_best_candidate(
+    ranked_candidates: Sequence[Dict[str, Any]],
+    pathway_name: str,
+    rationale: str,
+) -> Tuple[Optional[Dict[str, Any]], List[Dict[str, Any]]]:
+    """Select the best biologically relevant candidate and annotate rejected ones."""
+    query_features = extract_biology_features(build_semantic_query_text(pathway_name, rationale))
+    annotated: List[Dict[str, Any]] = []
+    selected: Optional[Dict[str, Any]] = None
+    for candidate in ranked_candidates:
+        annotated_candidate = dict(candidate)
+        rejection_reason = get_candidate_rejection_reason(annotated_candidate, query_features)
+        annotated_candidate["candidate_rejection_reason"] = rejection_reason
+        annotated.append(annotated_candidate)
+        if selected is None and rejection_reason is None:
+            selected = annotated_candidate
+    return selected, annotated
 
 
 def parse_sql_agent_query_result(raw_content: Any) -> List[Any]:
@@ -494,10 +941,24 @@ def validate_nl2sql_sql(sql: str) -> Tuple[bool, str, Optional[str]]:
     return True, statement, None
 
 
+def validate_candidate_generation_sql(sql: str) -> Optional[str]:
+    """Return an error string when SQL is too weak for pathway candidate generation."""
+    normalized = lower(sql)
+    if " as msigdb_name" not in normalized or " as collection" not in normalized or " as description" not in normalized:
+        return "SQL must project msigdb_name, collection, and description aliases."
+    if "limit" not in normalized:
+        return "SQL must bound candidate count with LIMIT."
+    if "where" not in normalized and "order by" not in normalized:
+        return "SQL must filter or rank candidate rows."
+    return None
+
+
 def constrain_query_to_allowed_collections(sql: str) -> str:
     """Wrap a query so only allowed collection families are returned."""
     normalized = (sql or "").strip().rstrip(";")
     if not normalized:
+        return normalized
+    if "AS allowed_candidates" in normalized and ALLOWED_COLLECTIONS_WHERE_SQL in normalized:
         return normalized
     return (
         "SELECT *\n"
@@ -579,9 +1040,19 @@ def reduce_candidate_for_trace(candidate: Dict[str, Any]) -> Dict[str, Any]:
         "collection": candidate.get("collection"),
         "sql_score": candidate.get("sql_score", 0.0),
         "overlap_score": candidate.get("overlap_score", 0.0),
+        "semantic_query_score": candidate.get("semantic_query_score", 0.0),
+        "semantic_name_score": candidate.get("semantic_name_score", 0.0),
+        "semantic_description_score": candidate.get("semantic_description_score", 0.0),
+        "entity_match_score": candidate.get("entity_match_score", 0.0),
+        "concept_match_score": candidate.get("concept_match_score", 0.0),
+        "sql_support_score": candidate.get("sql_support_score", 0.0),
         "priority_rank": candidate.get("priority_rank", len(PATHWAY_PRIORITY)),
         "priority_bonus": candidate.get("priority_bonus", 0.0),
         "ranking_score": candidate.get("ranking_score", 0.0),
+        "shared_entities": candidate.get("shared_entities", []),
+        "shared_concepts": candidate.get("shared_concepts", []),
+        "candidate_rejection_reason": candidate.get("candidate_rejection_reason"),
+        "retrieval_sources": candidate.get("retrieval_sources", []),
         "description": short(candidate.get("description", ""), 200),
     }
 
@@ -652,6 +1123,11 @@ class LangGraphPathwaySQLAgent:
             "names and descriptions. "
             "The query must return these exact aliases: msigdb_name, collection, description. "
             "It may also return a numeric sql_score alias. "
+            "Use SQL only to generate a biologically plausible candidate pool; final ranking happens later. "
+            "Prefer pathway/process relevance rather than broad incidental gene mentions. "
+            "Avoid generic organ-, tissue-, or cell-type-specific pathways unless the input explicitly points there. "
+            "Prefer candidate pathways whose names or descriptions encode mechanism, signaling cascade, mutation, "
+            "angiogenesis, immune evasion, bypass signaling, or survival context when present in the input. "
             "The executed SQL will be constrained to allowed collections only: H, C2:CP*, and C5:GO:BP. "
             "Always expose the pathway collection through the alias named collection. "
             "Do not use DML or DDL. "
@@ -669,6 +1145,7 @@ class LangGraphPathwaySQLAgent:
             "Double check the query for common mistakes, including incorrect joins, missing aliases, "
             "data-type issues, invalid columns, and failure to return the required aliases "
             "msigdb_name, collection, description. "
+            "Reject SQL that only does broad gene-token matching without pathway or process relevance. "
             "Make sure the query remains compatible with an outer collection filter that keeps only "
             "H, C2:CP*, and C5:GO:BP via the collection alias. "
             "If you find issues, rewrite the query. If not, reproduce it exactly. "
@@ -716,6 +1193,8 @@ class LangGraphPathwaySQLAgent:
             "- Return exact aliases msigdb_name, collection, description.\n"
             "- sql_score is optional but preferred.\n"
             "- Allowed collections only: H, C2:CP*, C5:GO:BP.\n"
+            "- Prefer biologically relevant pathway/process matches, not gene-name-only matches.\n"
+            "- Avoid unrelated tissue- or organ-specific pathways unless the input explicitly says so.\n"
             f"- LIMIT {top_k} or fewer rows.\n"
             "- Keep the query read-only and use the strongest candidate ordering first."
         )
@@ -737,7 +1216,7 @@ class LangGraphPathwaySQLAgent:
                     continue
                 query = tool_call.get("args", {}).get("query")
                 if norm_text(query):
-                    queries.append(constrain_query_to_allowed_collections(str(query)))
+                    queries.append(str(query).strip().rstrip(";"))
         return queries
 
     def run_candidate_query(self, pathway_name: str, rationale: str, top_k: int) -> AgentRunTrace:
@@ -778,6 +1257,7 @@ def map_single_row_with_agent(
     sql_agent: Any,
     conn: sqlite3.Connection,
     msigdb_lookup: Dict[str, MSigDBRow],
+    semantic_index: Optional[SemanticMSigDBIndex] = None,
     top_k: int = TOP_CANDIDATES_FOR_MAPPING,
 ) -> Dict[str, Any]:
     """Map one input row to a canonical MSigDB pathway using LangGraph SQL generation."""
@@ -798,6 +1278,7 @@ def map_single_row_with_agent(
         "excluded_unknown_names": 0,
         "selected_candidate": None,
         "top_candidates": [],
+        "selection_stage": None,
         "decision_reason": None,
         "failure_reason": None,
         "failure_type": None,
@@ -831,6 +1312,12 @@ def map_single_row_with_agent(
         result["failure_type"] = "sql_validation_error"
         return result
 
+    candidate_sql_error = validate_candidate_generation_sql(safe_sql)
+    if candidate_sql_error:
+        result["failure_reason"] = candidate_sql_error
+        result["failure_type"] = "sql_validation_error"
+        return result
+
     constrained_sql = constrain_query_to_allowed_collections(safe_sql)
     result["checked_sql"] = constrained_sql
 
@@ -846,22 +1333,62 @@ def map_single_row_with_agent(
     result["candidate_count_after_validation"] = len(candidates_valid)
     result["excluded_unknown_names"] = unknown_count
 
-    if not candidates_valid:
-        result["failure_reason"] = "No valid candidates returned after filtering/validation."
+    if semantic_index is not None:
+        ranked_sql = rank_msigdb_candidates(
+            original_pathway,
+            rationale,
+            candidates_valid,
+            semantic_index=semantic_index,
+        )
+        use_fallback = should_trigger_semantic_fallback(ranked_sql, original_pathway, rationale)
+        semantic_candidates: List[Dict[str, Any]] = []
+        if use_fallback:
+            semantic_candidates = semantic_index.topk_candidates(
+                build_semantic_query_text(original_pathway, rationale),
+                k=max(top_k * 2, 20),
+            )
+        merged_candidates = merge_candidate_lists(candidates_valid, semantic_candidates)
+        ranked = rank_msigdb_candidates(
+            original_pathway,
+            rationale,
+            merged_candidates,
+            semantic_index=semantic_index,
+        )
+        selected, annotated_candidates = select_best_candidate(ranked, original_pathway, rationale)
+        result["top_candidates"] = [
+            reduce_candidate_for_trace(candidate)
+            for candidate in annotated_candidates[:10]
+        ]
+    else:
+        if not candidates_valid:
+            result["failure_reason"] = "No valid candidates returned after filtering/validation."
+            result["failure_type"] = "no_valid_candidates"
+            return result
+        ranked = rank_msigdb_candidates(original_pathway, rationale, candidates_valid)
+        selected, annotated_candidates = select_best_candidate(ranked, original_pathway, rationale)
+        result["top_candidates"] = [
+            reduce_candidate_for_trace(candidate)
+            for candidate in annotated_candidates[:10]
+        ]
+
+    if selected is None:
+        result["failure_reason"] = "No biologically relevant candidates cleared the ranking thresholds."
         result["failure_type"] = "no_valid_candidates"
         return result
 
-    ranked = rank_msigdb_candidates(original_pathway, rationale, candidates_valid)
-    top_candidates = ranked[: top_k if top_k > 0 else 1]
-    result["top_candidates"] = [reduce_candidate_for_trace(candidate) for candidate in top_candidates[:10]]
-
-    selected = top_candidates[0]
     result["verdict"] = "mapped"
     result["mapped_msigdb_name"] = str(selected.get("msigdb_name", "UNMAPPED"))
     result["selected_candidate"] = reduce_candidate_for_trace(selected)
+    result["selection_stage"] = (
+        "semantic_fallback"
+        if "semantic_fallback" in selected.get("retrieval_sources", [])
+        and "sql" not in selected.get("retrieval_sources", [])
+        else "sql_rerank"
+    )
     result["decision_reason"] = (
-        "Selected highest deterministic ranking score using overlap + priority bonus, "
-        "then tie-break by priority, sql_score, and pathway name."
+        "Selected highest biologically relevant ranking score using semantic similarity, "
+        "entity/concept coverage, pathway priority, and SQL support. "
+        "Alphabetical ordering is used only as the last-resort deterministic fallback."
     )
     return result
 
@@ -871,6 +1398,7 @@ def run_pathway_mapping_pipeline(
     sql_agent: Any,
     msigdb_sqlite_path: str | Path,
     msigdb_lookup: Dict[str, MSigDBRow],
+    semantic_index: Optional[SemanticMSigDBIndex],
     nl2sql_model: str,
     out_final_dir: Path,
     out_trace_dir: Path,
@@ -909,6 +1437,7 @@ def run_pathway_mapping_pipeline(
                 sql_agent=sql_agent,
                 conn=conn,
                 msigdb_lookup=msigdb_lookup,
+                semantic_index=semantic_index,
                 top_k=top_k,
             )
 
@@ -934,7 +1463,7 @@ def run_pathway_mapping_pipeline(
                 "Pathway-drug relationship classification": get_relationship_classification(entry),
                 "References": listify_refs(entry.get("References")),
                 "verdict": mapping["verdict"],
-                "mapping_method": "langgraph_sql_agent_deterministic_rank",
+                "mapping_method": "langgraph_sql_agent_bio_semantic_rank",
                 "nl2sql_generated_sql": mapping.get("generated_sql"),
                 "nl2sql_checked_sql": mapping.get("checked_sql"),
                 "nl2sql_decision_reason": mapping.get("decision_reason"),
@@ -957,6 +1486,7 @@ def run_pathway_mapping_pipeline(
                     "candidate_count_raw": mapping.get("candidate_count_raw"),
                     "candidate_count_after_validation": mapping.get("candidate_count_after_validation"),
                     "excluded_unknown_names": mapping.get("excluded_unknown_names"),
+                    "selection_stage": mapping.get("selection_stage"),
                     "selected_candidate": mapping.get("selected_candidate"),
                     "top_candidates": mapping.get("top_candidates"),
                     "decision_reason": mapping.get("decision_reason"),
@@ -1064,8 +1594,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     msig_rows = load_msigdb_metadata(msigdb_sqlite_path)
     LOGGER.info("Loaded %s MSigDB pathways total", len(msig_rows))
     msigdb_lookup = build_msigdb_lookup(msig_rows)
-
     clear_blackhole_proxy_env()
+    LOGGER.info("Building semantic retrieval index...")
+    semantic_index = build_semantic_index(msig_rows)
 
     LOGGER.info("")
     LOGGER.info("Using LangGraph SQL model: %s", args.nl2sql_model)
@@ -1088,6 +1619,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     sql_agent=sql_agent,
                     msigdb_sqlite_path=msigdb_sqlite_path,
                     msigdb_lookup=msigdb_lookup,
+                    semantic_index=semantic_index,
                     nl2sql_model=args.nl2sql_model,
                     out_final_dir=out_final_dir,
                     out_trace_dir=out_trace_dir,

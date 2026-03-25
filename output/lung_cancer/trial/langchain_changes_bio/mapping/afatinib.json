@@ -1,0 +1,107 @@
+{
+  "pathway_sets": [
+    "KEGG_ERBB_SIGNALING_PATHWAY",
+    "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+    "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+    "KEGG_VEGF_SIGNALING_PATHWAY",
+    "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY"
+  ],
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "KEGG_ERBB_SIGNALING_PATHWAY",
+    "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Afatinib is an irreversible pan-ErbB inhibitor that covalently binds EGFR, HER2 and ErbB4, leading to prolonged suppression of EGFR phosphorylation and downstream survival signaling in EGFR‑mutant NSCLC, translating into higher response rates and longer PFS versus chemotherapy and first‑generation TKIs in exon 19 del/L858R disease.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pubmed.ncbi.nlm.nih.gov/31931137"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "langgraph_sql_agent_bio_semantic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%mutation%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%signaling%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%survival%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' OR\n       gsd.description_full LIKE '%mutation%' OR gsd.description_full LIKE '%signaling%' OR\n       gsd.description_full LIKE '%survival%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name LIKE 'C5:GO:BP%')\nORDER BY sql_score DESC\nLIMIT 20",
+    "nl2sql_checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%mutation%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%signaling%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%survival%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' OR\n       gsd.description_full LIKE '%mutation%' OR gsd.description_full LIKE '%signaling%' OR\n       gsd.description_full LIKE '%survival%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name LIKE 'C5:GO:BP%')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+    "nl2sql_decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+    "nl2sql_failure_reason": null
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The RAS–RAF–MEK–ERK (MAPK) cascade is upregulated in the presence of KRAS/BRAF mutations or bypass RTKs, leading to resistance to afatinib in lung cancer.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4340466"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "langgraph_sql_agent_bio_semantic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' OR gs.standard_name LIKE '%MAPK%')\n  AND (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name = 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20",
+    "nl2sql_checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' OR gs.standard_name LIKE '%MAPK%')\n  AND (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name = 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+    "nl2sql_decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+    "nl2sql_failure_reason": null
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+    "Original Pathway Name": "MET/HGF pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR‑TKI‑resistant NSCLC and is highlighted as a key high‑priority resistance node in multi‑omics analyses, undermining afatinib efficacy unless co‑targeted.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12553936",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "langgraph_sql_agent_bio_semantic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%PI3K%' OR gsd.description_brief LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%bypass%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' OR gsd.description_full LIKE '%MET%')\n  AND (gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C2:CP:REACTOME', 'C2:CP:KEGG', 'C2:CP:PID', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20",
+    "nl2sql_checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%PI3K%' OR gsd.description_brief LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%bypass%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' OR gsd.description_full LIKE '%MET%')\n  AND (gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C2:CP:REACTOME', 'C2:CP:KEGG', 'C2:CP:PID', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+    "nl2sql_decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+    "nl2sql_failure_reason": null
+  },
+  "Row9": {
+    "Mapped MSigDB Pathway Name": "KEGG_VEGF_SIGNALING_PATHWAY",
+    "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion. Baseline EGFR-driven pathways are sensitive to afatinib, which targets EGFR mutations effectively.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9738331",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5244907",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7330402"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "langgraph_sql_agent_bio_semantic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%')\n  AND (gs.standard_name LIKE '%STAT3%' OR gsd.description_full LIKE '%STAT3%')\n  AND (gs.standard_name LIKE '%VEGF%' OR gsd.description_full LIKE '%VEGF%')\n  AND (gs.standard_name LIKE '%PD-L1%' OR gsd.description_full LIKE '%PD-L1%')\n  AND (gs.standard_name LIKE '%angiogenesis%' OR gsd.description_full LIKE '%angiogenesis%')\n  AND (gs.standard_name LIKE '%immune evasion%' OR gsd.description_full LIKE '%immune evasion%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20",
+    "nl2sql_checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%')\n  AND (gs.standard_name LIKE '%STAT3%' OR gsd.description_full LIKE '%STAT3%')\n  AND (gs.standard_name LIKE '%VEGF%' OR gsd.description_full LIKE '%VEGF%')\n  AND (gs.standard_name LIKE '%PD-L1%' OR gsd.description_full LIKE '%PD-L1%')\n  AND (gs.standard_name LIKE '%angiogenesis%' OR gsd.description_full LIKE '%angiogenesis%')\n  AND (gs.standard_name LIKE '%immune evasion%' OR gsd.description_full LIKE '%immune evasion%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+    "nl2sql_decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+    "nl2sql_failure_reason": null
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+    "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib targets this pathway, leading to decreased phosphorylation and promoting apoptosis, indicating sensitivity.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/201292s015lbl.pdf"
+    ],
+    "verdict": "mapped",
+    "mapping_method": "langgraph_sql_agent_bio_semantic_rank",
+    "nl2sql_generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%')\n  AND (gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%')\n  AND (gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%')\n  AND (gs.standard_name LIKE '%survival%' OR gsd.description_full LIKE '%survival%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20",
+    "nl2sql_checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%')\n  AND (gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%')\n  AND (gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%')\n  AND (gs.standard_name LIKE '%survival%' OR gsd.description_full LIKE '%survival%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+    "nl2sql_decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+    "nl2sql_failure_reason": null
+  }
+}

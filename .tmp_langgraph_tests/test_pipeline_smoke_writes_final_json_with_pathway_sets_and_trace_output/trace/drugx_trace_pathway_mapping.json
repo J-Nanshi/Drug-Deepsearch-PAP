@@ -33,14 +33,29 @@
       "candidate_count_raw": 7,
       "candidate_count_after_validation": 3,
       "excluded_unknown_names": 4,
+      "selection_stage": "sql_rerank",
       "selected_candidate": {
         "msigdb_name": "HALLMARK_MTORC1_SIGNALING",
         "collection": "H",
         "sql_score": 0.99,
         "overlap_score": 0.282083,
+        "semantic_query_score": 0.472072,
+        "semantic_name_score": 0.0,
+        "semantic_description_score": 0.518834,
+        "entity_match_score": 0.5,
+        "concept_match_score": 0.0,
+        "sql_support_score": 1.0,
         "priority_rank": 0,
         "priority_bonus": 0.05,
-        "ranking_score": 0.332083,
+        "ranking_score": 0.370571,
+        "shared_entities": [
+          "MTOR"
+        ],
+        "shared_concepts": [],
+        "candidate_rejection_reason": null,
+        "retrieval_sources": [
+          "sql"
+        ],
         "description": "mTOR signaling and growth factor response pathway"
       },
       "top_candidates": [
@@ -49,9 +64,23 @@
           "collection": "H",
           "sql_score": 0.99,
           "overlap_score": 0.282083,
+          "semantic_query_score": 0.472072,
+          "semantic_name_score": 0.0,
+          "semantic_description_score": 0.518834,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.0,
+          "sql_support_score": 1.0,
           "priority_rank": 0,
           "priority_bonus": 0.05,
-          "ranking_score": 0.332083,
+          "ranking_score": 0.370571,
+          "shared_entities": [
+            "MTOR"
+          ],
+          "shared_concepts": [],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
           "description": "mTOR signaling and growth factor response pathway"
         },
         {
@@ -59,9 +88,21 @@
           "collection": "C5:GO:BP",
           "sql_score": 0.1,
           "overlap_score": 0.052679,
+          "semantic_query_score": 0.05704,
+          "semantic_name_score": 0.0,
+          "semantic_description_score": 0.245272,
+          "entity_match_score": 0.0,
+          "concept_match_score": 0.0,
+          "sql_support_score": 0.10101,
           "priority_rank": 4,
           "priority_bonus": 0.016667,
-          "ranking_score": 0.069345,
+          "ranking_score": 0.014758,
+          "shared_entities": [],
+          "shared_concepts": [],
+          "candidate_rejection_reason": "missing_query_entities, low_semantic_query_score, off_target_context, low_ranking_score",
+          "retrieval_sources": [
+            "sql"
+          ],
           "description": "cell growth full"
         },
         {
@@ -69,13 +110,25 @@
           "collection": "C2:CP:REACTOME",
           "sql_score": 0.1,
           "overlap_score": 0.0,
+          "semantic_query_score": 0.0,
+          "semantic_name_score": 0.0,
+          "semantic_description_score": 0.0,
+          "entity_match_score": 0.0,
+          "concept_match_score": 0.0,
+          "sql_support_score": 0.10101,
           "priority_rank": 1,
           "priority_bonus": 0.041667,
-          "ranking_score": 0.041667,
+          "ranking_score": -0.006313,
+          "shared_entities": [],
+          "shared_concepts": [],
+          "candidate_rejection_reason": "missing_query_entities, low_semantic_query_score, off_target_context, low_ranking_score",
+          "retrieval_sources": [
+            "sql"
+          ],
           "description": "Cell cycle progression and mitosis"
         }
       ],
-      "decision_reason": "Selected highest deterministic ranking score using overlap + priority bonus, then tie-break by priority, sql_score, and pathway name.",
+      "decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
       "failure_type": null,
       "failure_reason": null
     }

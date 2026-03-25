@@ -1,0 +1,237 @@
+{
+  "Row1": {
+    "Pathway ID/Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Afatinib is an irreversible pan-ErbB inhibitor that covalently binds EGFR, HER2 and ErbB4, leading to prolonged suppression of EGFR phosphorylation and downstream survival signaling in EGFR‑mutant NSCLC, translating into higher response rates and longer PFS versus chemotherapy and first‑generation TKIs in exon 19 del/L858R disease.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "The pathway is clinically validated as afatinib is approved for use in EGFR-mutant NSCLC, showing efficacy in patients with activating EGFR mutations.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The information is relevant and necessary for understanding the baseline response of lung cancer to afatinib, particularly in the context of EGFR mutations.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pubmed.ncbi.nlm.nih.gov/31931137"
+    ]
+  },
+  "Row2": {
+    "Pathway ID/Name": "JAK/STAT3 axis (EGFR–IL‑6–JAK1/2–STAT3)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In EGFR-mutant NSCLC, afatinib effectively inhibits AKT/ERK but fails to suppress STAT3 Tyr705 phosphorylation and STAT3/BCL-2/BCL-XL survival signaling; IL-6/JAK1/2-mediated STAT3 activation and high pSTAT3 are linked to poor prognosis and EGFR-TKI resistance.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship is inferred from mechanistic evidence showing that STAT3 activation is linked to resistance, and inhibition of this pathway can synergize with afatinib.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to afatinib in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9738331",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4543855",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183"
+    ]
+  },
+  "Row3": {
+    "Pathway ID/Name": "PI3K–AKT–mTOR signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "In baseline lung cancer, PI3K–AKT–mTOR signaling is often upregulated due to EGFR activation. Afatinib targets EGFR, but if there are downstream lesions like PIK3CA mutations or PTEN loss, the pathway remains active, leading to resistance.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The relationship between PI3K–AKT–mTOR signaling and afatinib resistance is inferred from mechanistic evidence of downstream mutations maintaining pathway activity.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding PI3K–AKT–mTOR signaling is crucial for predicting afatinib resistance in lung cancer, making it relevant for baseline pathway analysis.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7330402",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9680984"
+    ]
+  },
+  "Row4": {
+    "Pathway ID/Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The RAS–RAF–MEK–ERK (MAPK) cascade is upregulated in the presence of KRAS/BRAF mutations or bypass RTKs, leading to resistance to afatinib in lung cancer.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway's role in resistance due to KRAS/BRAF mutations or bypass RTKs is supported by mechanistic evidence.",
+    "Include decision": "include",
+    "Inclusion reasoning": "Understanding the MAPK cascade's role in resistance is crucial for interpreting afatinib's baseline efficacy in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4340466"
+    ]
+  },
+  "Row5": {
+    "Pathway ID/Name": "MET/HGF pathway",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR‑TKI‑resistant NSCLC and is highlighted as a key high‑priority resistance node in multi‑omics analyses, undermining afatinib efficacy unless co‑targeted.",
+    "Pathway-drug relationship classification": "clinically validated",
+    "Classification reasoning": "MET activation as a resistance mechanism to EGFR-TKIs like afatinib is well-documented in clinical settings.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The MET/HGF pathway is a clinically validated resistance mechanism relevant to baseline afatinib response in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12553936",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf"
+    ]
+  },
+  "Row6": {
+    "Pathway ID/Name": "HER2 (ERBB2) and AXL‑driven EMT/bypass signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Upregulation of HER2 and AXL, often coupled with epithelial‑mesenchymal transition, sustains AKT/MAPK and NF‑κB signaling despite EGFR inhibition. HER2 activation can compensate for EGFR blockade, and AXL overexpression with EMT is linked to acquired resistance to EGFR‑TKIs, including afatinib, in EGFR‑mutant NSCLC models.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The pathway involves mechanisms that are known to contribute to resistance post-treatment, but baseline upregulation suggests potential sensitivity to initial afatinib treatment.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding potential baseline sensitivity and mechanisms that could lead to resistance, which is important for therapeutic strategy planning.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7330402",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9560750"
+    ]
+  },
+  "Row7": {
+    "Pathway ID/Name": "Wnt/β‑catenin signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline Wnt/β-catenin signaling is typically downregulated in lung cancer sensitive to afatinib, as Wnt activation is associated with resistance mechanisms post-treatment.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The rationale is based on post-treatment observations and mechanistic inferences rather than baseline clinical evidence.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The information is based on post-treatment changes and not relevant for baseline afatinib response in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831"
+    ]
+  },
+  "Row8": {
+    "Pathway ID/Name": "Chromatin/epigenetic remodeling of EGFR axis",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline chromatin/epigenetic remodeling is not inherently upregulated in untreated lung cancer; adaptive changes occur post-treatment. Baseline EGFR signaling is sensitive to afatinib, as it targets EGFR mutations effectively.",
+    "Pathway-drug relationship classification": "not needed",
+    "Classification reasoning": "The described epigenetic changes are adaptive and occur post-treatment, not at baseline.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway description focuses on post-treatment adaptive resistance mechanisms, which are not relevant for baseline afatinib response.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12553936",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5488108"
+    ]
+  },
+  "Row9": {
+    "Pathway ID/Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion. Baseline EGFR-driven pathways are sensitive to afatinib, which targets EGFR mutations effectively.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway involves EGFR, which is a direct target of afatinib, making the mechanistic link accurate.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding the baseline sensitivity of lung cancer to afatinib due to its targeting of EGFR.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9738331",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5244907",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7330402"
+    ]
+  },
+  "Row10": {
+    "Pathway ID/Name": "IL‑6/IL‑6R–JAK–STAT3 paracrine loop",
+    "Verdict": "correct",
+    "Incorrect_entries": [],
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Tumor and stromal IL‑6 production activates JAK/STAT3, promoting survival, angiogenesis and chemoradioresistance; high IL‑6 and pSTAT3 correlate with poor outcomes, and IL‑6R/JAK/STAT3 signaling has been specifically implicated as a resistance mechanism to EGFR‑TKIs and afatinib.",
+    "Pathway-drug relationship classification": "inferred from mechanistic evidence",
+    "Classification reasoning": "The role of IL-6/IL-6R–JAK–STAT3 in resistance to EGFR-TKIs, including afatinib, is supported by mechanistic studies suggesting its involvement in resistance mechanisms.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding baseline resistance mechanisms to afatinib in lung cancer, which is crucial for therapeutic strategy development.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9738331",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183"
+    ]
+  },
+  "Row11": {
+    "Pathway ID/Name": "FGFR2/3 signaling",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation",
+      "effect"
+    ],
+    "Regulation": "downregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Baseline FGFR2/3 signaling is not typically upregulated in untreated lung cancer; resistance mechanisms involving FGFR2/3 are usually adaptive post-treatment.",
+    "Pathway-drug relationship classification": "not needed",
+    "Classification reasoning": "The described FGFR2/3 upregulation is a post-treatment adaptation, not a baseline characteristic.",
+    "Include decision": "exclude",
+    "Inclusion reasoning": "The pathway's role is speculative and not relevant to baseline afatinib response in lung cancer.",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626"
+    ]
+  },
+  "Row12": {
+    "Pathway ID/Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+    "Verdict": "corrected",
+    "Incorrect_entries": [
+      "regulation"
+    ],
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib targets this pathway, leading to decreased phosphorylation and promoting apoptosis, indicating sensitivity.",
+    "Pathway-drug relationship classification": "mechanistically accurate",
+    "Classification reasoning": "The pathway is mechanistically accurate as it describes a known downstream effect of afatinib in lung cancer cells.",
+    "Include decision": "include",
+    "Inclusion reasoning": "The pathway is relevant for understanding the baseline mechanism of afatinib sensitivity in lung cancer.",
+    "References": [
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/201292s015lbl.pdf"
+    ]
+  }
+}

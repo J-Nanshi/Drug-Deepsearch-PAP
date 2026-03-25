@@ -12,9 +12,10 @@ The implementation follows the LangGraph SQL-agent pattern from the LangChain do
 
 After SQL execution, the script keeps the deterministic post-processing from the existing Step 3 flow:
 - validate returned names against the prefiltered MSigDB lookup
-- drop unknown MSigDB names
-- score candidates using pathway-name and rationale overlap
-- apply pathway-family priority tie-breaking
+- build a semantic reranking layer over the allowed MSigDB corpus
+- score candidates using semantic similarity, biological entity/concept coverage, SQL support, and pathway-family priority
+- use semantic fallback retrieval when SQL candidates are weak
+- apply biologically meaningful tie-breaking before any alphabetical fallback
 - choose one final mapped MSigDB pathway or `UNMAPPED`
 
 ## What It Preserves
@@ -39,7 +40,9 @@ After SQL execution, the script keeps the deterministic post-processing from the
    - validate the checked SQL as a single read-only `SELECT`
    - execute the query against SQLite
    - filter invalid candidates
-   - rank candidates deterministically
+   - rerank SQL candidates using semantic similarity plus biological entity/concept coverage
+   - trigger semantic fallback retrieval when SQL candidates are weak or biologically off-target
+   - select the best biologically relevant candidate deterministically
    - write the selected pathway into the final output row
 5. Save:
    - `<drug>.json`
@@ -66,6 +69,9 @@ The trace file includes:
 - checked SQL
 - raw SQL-tool output
 - candidate counts before and after validation
+- semantic and biological ranking details for selected/top candidates
+- `selection_stage` (`sql_rerank` or `semantic_fallback`)
+- candidate rejection reasons when a stronger candidate is preferred
 - chosen candidate
 - top ranked candidates
 - failure type and reason
@@ -92,3 +98,4 @@ python src/stratch/langchain_pathway_map_nl2sql.py `
 - This script is intended as a cleaner, production-oriented trial implementation.
 - Logging replaces print-control globals such as `PRINT_SUMMARY` and `PRINT_VERIFICATION_PROGRESS`.
 - The LangGraph agent is non-interactive by design so it can run in batch mode.
+- SQL is used for candidate generation, while final pathway selection is driven by semantic and biological reranking.

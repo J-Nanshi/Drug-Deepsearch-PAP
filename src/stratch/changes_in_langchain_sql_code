@@ -1,10 +1,9 @@
 # Changes In LangChain SQL Code
 
-Date: 2026-03-23
 Target file: `src/stratch/langchain_pathway_map_nl2sql.py`
 
 ## Overview
-This note records the changes made today in the LangGraph/LangChain SQL pathway-mapping pipeline, why each change was needed, and how the behavior of the code changed.
+This note records the changes made in the LangGraph/LangChain SQL pathway-mapping pipeline, why each change was needed, and how the behavior of the code changed.
 
 The goal of today's work was to make the SQL-based mapping pipeline:
 - more reliable in the current environment
@@ -357,3 +356,133 @@ Also updated the graph prompts so the model is explicitly told that:
 - raw SQL-agent execution is now restricted to the same allowed collection families used by the mapping policy
 - trace output is less noisy and better aligned with the actual candidate pool
 - disallowed collections such as `C2:CGP` are blocked before agent SQL results are returned
+
+## 15. Replaced token-heavy ranking with bio-semantic reranking
+
+### Reason
+The old ranking logic relied mostly on approximate token overlap plus a small pathway-family bonus. That caused three major issues:
+- semantically similar but differently worded pathways could be missed
+- ties could be broken by alphabetical order instead of biological meaning
+- SQL keyword hits could dominate even when they were biologically off-target
+
+This was especially visible in `afatinib` traces where candidates could match one token such as `STAT3` or `PIP3` but still be mechanistically unrelated to the original pathway mention.
+
+### Change
+Added a new semantic and biology-aware ranking layer in `src/stratch/langchain_pathway_map_nl2sql.py`:
+- `SimilarityModel`
+- `SemanticMSigDBIndex`
+- `build_semantic_index(...)`
+- `extract_biology_features(...)`
+- `compute_candidate_scores(...)` refactored to include:
+  - `semantic_query_score`
+  - `semantic_name_score`
+  - `semantic_description_score`
+  - `entity_match_score`
+  - `concept_match_score`
+  - `sql_support_score`
+  - `priority_bonus`
+  - off-target context penalties
+
+The semantic layer reuses the same local sentence-transformer family already used elsewhere in the repo:
+- default `all-MiniLM-L6-v2`
+- cached corpus embeddings
+- TF-IDF fallback if sentence-transformers initialization fails
+
+### Effect
+- final selection is now based on semantic relevance and biological coverage, not just token overlap
+- the ranking can prefer candidates that better match the mechanism implied by the pathway name and rationale
+- the trace now exposes why a candidate was selected or rejected in biologically interpretable terms
+
+## 16. Removed alphabetical tie-break as a meaningful selector
+
+### Reason
+Under the previous implementation, if two candidates tied on ranking score, priority rank, and SQL score, the final winner was chosen alphabetically by pathway name. That is deterministic, but it is not biologically meaningful.
+
+### Change
+Updated candidate sorting so the tie-break chain is now:
+1. highest `ranking_score`
+2. highest `entity_match_score`
+3. highest `concept_match_score`
+4. lower `priority_rank`
+5. higher `sql_support_score`
+6. alphabetical name only as the last-resort stability fallback
+
+Also added candidate rejection logic so weak or off-target candidates can be skipped even if they appear early in the sorted list.
+
+### Effect
+- biological relevance now decides ties before lexical ordering does
+- alphabetical ordering remains only as a deterministic fallback, not as a real ranking signal
+
+## 17. Reduced SQL-agent responsibility to candidate generation
+
+### Reason
+The SQL agent was previously doing most of the practical retrieval logic through keyword-heavy query construction, which could produce broad or weak candidate pools. That made the entire mapping sensitive to brittle SQL heuristics.
+
+### Change
+Strengthened the SQL-agent prompts so SQL is explicitly treated as candidate generation only. The prompts now tell the model to:
+- prefer pathway/process relevance over incidental gene mentions
+- avoid unrelated tissue- or organ-specific pathways unless the input demands that context
+- keep the query compatible with constrained allowed collections
+
+Added deterministic SQL candidate-generation checks:
+- alias validation for `msigdb_name`, `collection`, `description`
+- `LIMIT` requirement
+- filter/ranking requirement
+
+### Effect
+- SQL still drives candidate discovery
+- final selection logic now lives in deterministic biological reranking rather than in prompt-only SQL heuristics
+
+## 18. Added semantic fallback retrieval for weak SQL pools
+
+### Reason
+Even with better prompts, SQL can still return weak or biologically narrow candidates. If SQL-only retrieval is weak, relying on it forces poor mappings.
+
+### Change
+Added semantic fallback behavior:
+- rerank SQL candidates first
+- detect when the top SQL pool is weak or biologically off-target
+- retrieve additional candidates directly from the filtered MSigDB corpus
+- merge SQL and semantic candidates
+- rerank the merged pool biologically
+
+The trace now records:
+- `selection_stage`
+- richer candidate score breakdown
+- `candidate_rejection_reason`
+
+### Effect
+- the mapper is no longer trapped by a weak SQL candidate pool
+- better semantic candidates can still win when SQL generation misses the best pathway family
+
+## 19. Cleaned SQL trace behavior and aligned outputs with the new ranking layer
+
+### Reason
+The earlier collection-constrained execution path could produce double-wrapped SQL in `checked_sql`, which made the trace harder to inspect. Also, the output metadata still described the method as a deterministic SQL-only ranker even after the bio-semantic changes.
+
+### Change
+- updated SQL trace handling to keep `generated_sql` readable and apply collection constraints once at execution time
+- changed the row output `mapping_method` to:
+  - `langgraph_sql_agent_bio_semantic_rank`
+- expanded trace candidate objects with semantic/biological score fields and rejection metadata
+
+### Effect
+- trace JSON is easier to understand
+- output metadata now matches the actual implementation behavior
+
+## 20. Added test coverage for the bio-semantic upgrade
+
+### Reason
+The new logic introduces more nuanced ranking behavior that would be easy to regress without targeted tests.
+
+### Change
+Updated `tests/test_langchain_pathway_map_nl2sql.py` to cover:
+- semantic index creation with TF-IDF fallback for fast tests
+- biological alias normalization (`HER2 -> ERBB2`, `PD-L1 -> PDL1`)
+- biologically meaningful ranking over generic lexical ordering
+- off-target context rejection
+- semantic-aware pipeline and CLI smoke behavior
+
+### Effect
+- the new ranking stack is protected by focused regression tests
+- the trial mapper can evolve further with higher confidence

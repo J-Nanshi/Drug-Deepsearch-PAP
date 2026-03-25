@@ -1,0 +1,1560 @@
+{
+  "summary": {
+    "drug_name": "afatinib",
+    "input_file": "D:\\GS\\Drug-Deepsearch-PAP\\.tmp_afatinib_langchain_changes_bio_input\\afatinib.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 9,
+    "rows_after_filter": 5,
+    "rows_dropped_by_include_filter": 3,
+    "rows_dropped_by_relationship_class_filter": 4,
+    "mapped_count": 5,
+    "unmapped_count": 0,
+    "sql_generation_errors": 0,
+    "sql_validation_errors": 0,
+    "sql_execution_errors": 0,
+    "nl2sql_model": "gpt-4o"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+      "Rationale": "Afatinib is an irreversible pan-ErbB inhibitor that covalently binds EGFR, HER2 and ErbB4, leading to prolonged suppression of EGFR phosphorylation and downstream survival signaling in EGFR‑mutant NSCLC, translating into higher response rates and longer PFS versus chemotherapy and first‑generation TKIs in exon 19 del/L858R disease.",
+      "Final Mapped MSigDB": "KEGG_ERBB_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%mutation%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%signaling%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%survival%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' OR\n       gsd.description_full LIKE '%mutation%' OR gsd.description_full LIKE '%signaling%' OR\n       gsd.description_full LIKE '%survival%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name LIKE 'C5:GO:BP%')\nORDER BY sql_score DESC\nLIMIT 20",
+      "checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%mutation%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%signaling%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%survival%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%' OR\n       gs.standard_name LIKE '%ErbB%' OR gsd.description_full LIKE '%ErbB%' OR\n       gsd.description_full LIKE '%mutation%' OR gsd.description_full LIKE '%signaling%' OR\n       gsd.description_full LIKE '%survival%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name LIKE 'C5:GO:BP%')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query returned several pathways related to EGFR/ErbB signaling and mutations, which are relevant to the input context of EGFR mutations and survival signaling in NSCLC. Here are some of the top candidates: 1. **KEGG_ERBB_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_LEGACY) - This pathway directly involves ErbB signaling, which is central to the input context. 2. **KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_MEDICUS) - This pathway involves EGFR mutations leading to downstream signaling, aligning with the described mechanism. 3. **KEGG_MEDICUS_VARIANT_MUTATION_INACTIVATED_ERBB4_TO_NRG_ERBB4_PI3K_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_MEDICUS) - This pathway involves ErbB4 and PI3K signaling, relevant to the broader ErbB family context. 4. **KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_MEDICUS) - This pathway describes EGFR mutations leading to RAS/ERK signaling, which is pertinent to the survival signaling mentioned. These pathways are highly relevant to the input context, focusing on EGFR/ErbB signaling and mutations, which are critical in NSCLC and targeted by drugs like Afatinib.",
+      "agent_query_result_raw": "[('KEGG_ERBB_SIGNALING_PATHWAY', 'C2:CP:KEGG_LEGACY', 'ErbB signaling pathway', 4), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGFR* -> PLCG -> IP3 -> (Ca2+,DAG) -> PKC -> RAF -> MEK -> ERK -> CCND1', 3), ('KEGG_MEDICUS_VARIANT_MUTATION_INACTIVATED_ERBB4_TO_NRG_ERBB4_PI3K_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: NRG // ERBB4*', 3), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_USP8_TO_EGFR_ERK_ACTH_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: USP8* -> EGFR -> ERK1/2 -> ACTH', 3), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGFR* -> GRB2 -> SOS -> RAS -> RAF -> MEK -> ERK -> CCND1', 3), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGFR* -> PI3K -> PIP3 -> AKT -| BAD', 3), ('BIOCARTA_IL7_PATHWAY', 'C2:CP:BIOCARTA', 'IL-7 Signal Transduction', 3), ('BIOCARTA_PTEN_PATHWAY', 'C2:CP:BIOCARTA', 'PTEN dependent cell cycle arrest and apoptosis', 3), ('BIOCARTA_HER2_PATHWAY', 'C2:CP:BIOCARTA', 'Role of ERBB2 in Signal Transduction and Oncology', 3), ('KEGG_VEGF_SIGNALING_PATHWAY', 'C2:CP:KEGG_LEGACY', 'VEGF signaling pathway', 3), ('KEGG_PROSTATE_CANCER', 'C2:CP:KEGG_LEGACY', 'Prostate cancer', 3), ('KEGG_NON_SMALL_CELL_LUNG_CANCER', 'C2:CP:KEGG_LEGACY', 'Non-small cell lung cancer', 3), ('BIOCARTA_EGFR_SMRTE_PATHWAY', 'C2:CP:BIOCARTA', 'Map Kinase Inactivation of SMRT Corepressor', 2), ('KEGG_ARRHYTHMOGENIC_RIGHT_VENTRICULAR_CARDIOMYOPATHY_ARVC', 'C2:CP:KEGG_LEGACY', 'Arrhythmogenic right ventricular cardiomyopathy (ARVC)', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_INACTIVATED_DJ1_TO_FAS_JNK_SIGNALING_PATWHAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: DJ1* // (DAXX+ASK1) -> JNK', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> (RASSF1+RASSF5) -> STK4', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> RAF -> MEK -> ERK -> CCND1', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_JNK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> MEKK1 -> MKK4 -> JNK', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_PI3K_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> PI3K -> PIP3 -> AKT -| BAD', 2), ('KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RALGDS_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> RALGDS -> RAL', 2)]",
+      "agent_query_result_rows": [
+        [
+          "KEGG_ERBB_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_LEGACY",
+          "ErbB signaling pathway",
+          4
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGFR* -> PLCG -> IP3 -> (Ca2+,DAG) -> PKC -> RAF -> MEK -> ERK -> CCND1",
+          3
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_INACTIVATED_ERBB4_TO_NRG_ERBB4_PI3K_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: NRG // ERBB4*",
+          3
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_USP8_TO_EGFR_ERK_ACTH_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: USP8* -> EGFR -> ERK1/2 -> ACTH",
+          3
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGFR* -> GRB2 -> SOS -> RAS -> RAF -> MEK -> ERK -> CCND1",
+          3
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGFR* -> PI3K -> PIP3 -> AKT -| BAD",
+          3
+        ],
+        [
+          "BIOCARTA_IL7_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "IL-7 Signal Transduction",
+          3
+        ],
+        [
+          "BIOCARTA_PTEN_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "PTEN dependent cell cycle arrest and apoptosis",
+          3
+        ],
+        [
+          "BIOCARTA_HER2_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Role of ERBB2 in Signal Transduction and Oncology",
+          3
+        ],
+        [
+          "KEGG_VEGF_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_LEGACY",
+          "VEGF signaling pathway",
+          3
+        ],
+        [
+          "KEGG_PROSTATE_CANCER",
+          "C2:CP:KEGG_LEGACY",
+          "Prostate cancer",
+          3
+        ],
+        [
+          "KEGG_NON_SMALL_CELL_LUNG_CANCER",
+          "C2:CP:KEGG_LEGACY",
+          "Non-small cell lung cancer",
+          3
+        ],
+        [
+          "BIOCARTA_EGFR_SMRTE_PATHWAY",
+          "C2:CP:BIOCARTA",
+          "Map Kinase Inactivation of SMRT Corepressor",
+          2
+        ],
+        [
+          "KEGG_ARRHYTHMOGENIC_RIGHT_VENTRICULAR_CARDIOMYOPATHY_ARVC",
+          "C2:CP:KEGG_LEGACY",
+          "Arrhythmogenic right ventricular cardiomyopathy (ARVC)",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_INACTIVATED_DJ1_TO_FAS_JNK_SIGNALING_PATWHAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: DJ1* // (DAXX+ASK1) -> JNK",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> (RASSF1+RASSF5) -> STK4",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> RAF -> MEK -> ERK -> CCND1",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_JNK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> MEKK1 -> MKK4 -> JNK",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_PI3K_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> PI3K -> PIP3 -> AKT -| BAD",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RALGDS_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> RALGDS -> RAL",
+          2
+        ]
+      ],
+      "candidate_count_raw": 20,
+      "candidate_count_after_validation": 20,
+      "excluded_unknown_names": 0,
+      "selection_stage": "sql_rerank",
+      "selected_candidate": {
+        "msigdb_name": "KEGG_ERBB_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_LEGACY",
+        "sql_score": 4.0,
+        "overlap_score": 0.203571,
+        "semantic_query_score": 0.575852,
+        "semantic_name_score": 0.634129,
+        "semantic_description_score": 0.582442,
+        "entity_match_score": 1.0,
+        "concept_match_score": 0.666667,
+        "sql_support_score": 1.0,
+        "priority_rank": 3,
+        "priority_bonus": 0.025,
+        "ranking_score": 0.654392,
+        "shared_entities": [
+          "EGFR",
+          "ERBB",
+          "ERBB2",
+          "ERBB4"
+        ],
+        "shared_concepts": [
+          "ERBB_SIGNALING",
+          "SURVIVAL"
+        ],
+        "candidate_rejection_reason": null,
+        "retrieval_sources": [
+          "sql"
+        ],
+        "description": "ErbB signaling pathway"
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_ERBB_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_LEGACY",
+          "sql_score": 4.0,
+          "overlap_score": 0.203571,
+          "semantic_query_score": 0.575852,
+          "semantic_name_score": 0.634129,
+          "semantic_description_score": 0.582442,
+          "entity_match_score": 1.0,
+          "concept_match_score": 0.666667,
+          "sql_support_score": 1.0,
+          "priority_rank": 3,
+          "priority_bonus": 0.025,
+          "ranking_score": 0.654392,
+          "shared_entities": [
+            "EGFR",
+            "ERBB",
+            "ERBB2",
+            "ERBB4"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "SURVIVAL"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "ErbB signaling pathway"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 3.0,
+          "overlap_score": 0.087696,
+          "semantic_query_score": 0.57059,
+          "semantic_name_score": 0.666513,
+          "semantic_description_score": 0.50004,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.666667,
+          "sql_support_score": 0.75,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.518144,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MUTATION_ACTIVATED"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: EGFR* -> GRB2 -> SOS -> RAS -> RAF -> MEK -> ERK -> CCND1"
+        },
+        {
+          "msigdb_name": "BIOCARTA_HER2_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 3.0,
+          "overlap_score": 0.004167,
+          "semantic_query_score": 0.5693,
+          "semantic_name_score": 0.259668,
+          "semantic_description_score": 0.581773,
+          "entity_match_score": 1.0,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.75,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.516157,
+          "shared_entities": [
+            "EGFR",
+            "ERBB",
+            "ERBB2",
+            "ERBB4"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Role of ERBB2 in Signal Transduction and Oncology"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 3.0,
+          "overlap_score": 0.085881,
+          "semantic_query_score": 0.53074,
+          "semantic_name_score": 0.641478,
+          "semantic_description_score": 0.468712,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.666667,
+          "sql_support_score": 0.75,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.496002,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MUTATION_ACTIVATED"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: EGFR* -> PLCG -> IP3 -> (Ca2+,DAG) -> PKC -> RAF -> MEK -> ERK -> CCND1"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_USP8_TO_EGFR_ERK_ACTH_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 3.0,
+          "overlap_score": 0.088551,
+          "semantic_query_score": 0.526688,
+          "semantic_name_score": 0.610765,
+          "semantic_description_score": 0.464748,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.666667,
+          "sql_support_score": 0.75,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.488125,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MUTATION_ACTIVATED"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: USP8* -> EGFR -> ERK1/2 -> ACTH"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.092039,
+          "semantic_query_score": 0.562736,
+          "semantic_name_score": 0.676585,
+          "semantic_description_score": 0.491221,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.5,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.478325,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> RAF -> MEK -> ERK -> CCND1"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 3.0,
+          "overlap_score": 0.096748,
+          "semantic_query_score": 0.491913,
+          "semantic_name_score": 0.595127,
+          "semantic_description_score": 0.458054,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.666667,
+          "sql_support_score": 0.75,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.472403,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MUTATION_ACTIVATED"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: EGFR* -> PI3K -> PIP3 -> AKT -| BAD"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.092039,
+          "semantic_query_score": 0.541019,
+          "semantic_name_score": 0.610416,
+          "semantic_description_score": 0.476762,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.5,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.456044,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> PI3K -> PIP3 -> AKT -| BAD"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_JNK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.092999,
+          "semantic_query_score": 0.518732,
+          "semantic_name_score": 0.635546,
+          "semantic_description_score": 0.454659,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.5,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.451088,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> MEKK1 -> MKK4 -> JNK"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RALGDS_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.094083,
+          "semantic_query_score": 0.517646,
+          "semantic_name_score": 0.599557,
+          "semantic_description_score": 0.453261,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.5,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.443403,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> RALGDS -> RAL"
+        }
+      ],
+      "decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row4",
+      "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+      "Rationale": "The RAS–RAF–MEK–ERK (MAPK) cascade is upregulated in the presence of KRAS/BRAF mutations or bypass RTKs, leading to resistance to afatinib in lung cancer.",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' OR gs.standard_name LIKE '%MAPK%')\n  AND (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name = 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20",
+      "checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%RAS%' OR gs.standard_name LIKE '%RAF%' OR gs.standard_name LIKE '%MEK%' OR gs.standard_name LIKE '%ERK%' OR gs.standard_name LIKE '%MAPK%')\n  AND (gsd.description_full LIKE '%KRAS%' OR gsd.description_full LIKE '%BRAF%' OR gsd.description_full LIKE '%bypass%' OR gsd.description_full LIKE '%resistance%')\n  AND (gs.collection_name = 'H' OR gs.collection_name LIKE 'C2:CP%' OR gs.collection_name = 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query returned three candidate pathways that are relevant to the RAS–RAF–MEK–ERK (MAPK) cascade and its role in resistance mechanisms: 1. **KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_MEDICUS) - Description: Pathway Definition from KEGG: (KRAS*,NRAS*) -> RAF -> MEK -> ERK -> CCND1 - SQL Score: 2 2. **KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_MEDICUS) - Description: Pathway Definition from KEGG: (KRAS*,NRAS*) -> PI3K -> PIP3 -> AKT -| BAD - SQL Score: 2 3. **KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY** (Collection: C2:CP:KEGG_MEDICUS) - Description: Pathway Definition from KEGG: BRAF* -> MEK -> ERK - SQL Score: 2 These pathways are directly related to the signaling cascade involving KRAS/BRAF mutations and their downstream effects, which are relevant to the context of resistance to afatinib in lung cancer.",
+      "agent_query_result_raw": "[('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: (KRAS*,NRAS*) -> RAF -> MEK -> ERK -> CCND1', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: (KRAS*,NRAS*) -> PI3K -> PIP3 -> AKT -| BAD', 2), ('KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY', 'C2:CP:KEGG_MEDICUS', 'Pathway Definition from KEGG: BRAF* -> MEK -> ERK', 2)]",
+      "agent_query_result_rows": [
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: (KRAS*,NRAS*) -> RAF -> MEK -> ERK -> CCND1",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: (KRAS*,NRAS*) -> PI3K -> PIP3 -> AKT -| BAD",
+          2
+        ],
+        [
+          "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY",
+          "C2:CP:KEGG_MEDICUS",
+          "Pathway Definition from KEGG: BRAF* -> MEK -> ERK",
+          2
+        ]
+      ],
+      "candidate_count_raw": 3,
+      "candidate_count_after_validation": 3,
+      "excluded_unknown_names": 0,
+      "selection_stage": "sql_rerank",
+      "selected_candidate": {
+        "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_MEDICUS",
+        "sql_score": 2.0,
+        "overlap_score": 0.131683,
+        "semantic_query_score": 0.565556,
+        "semantic_name_score": 0.454463,
+        "semantic_description_score": 0.544456,
+        "entity_match_score": 0.571429,
+        "concept_match_score": 0.5,
+        "sql_support_score": 1.0,
+        "priority_rank": 2,
+        "priority_bonus": 0.033333,
+        "ranking_score": 0.536281,
+        "shared_entities": [
+          "ERK",
+          "KRAS",
+          "MEK",
+          "RAF"
+        ],
+        "shared_concepts": [
+          "MAPK_CASCADE"
+        ],
+        "candidate_rejection_reason": null,
+        "retrieval_sources": [
+          "sql"
+        ],
+        "description": "Pathway Definition from KEGG: (KRAS*,NRAS*) -> RAF -> MEK -> ERK -> CCND1"
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.131683,
+          "semantic_query_score": 0.565556,
+          "semantic_name_score": 0.454463,
+          "semantic_description_score": 0.544456,
+          "entity_match_score": 0.571429,
+          "concept_match_score": 0.5,
+          "sql_support_score": 1.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.536281,
+          "shared_entities": [
+            "ERK",
+            "KRAS",
+            "MEK",
+            "RAF"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: (KRAS*,NRAS*) -> RAF -> MEK -> ERK -> CCND1"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_BRAF_TO_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.116286,
+          "semantic_query_score": 0.487773,
+          "semantic_name_score": 0.420002,
+          "semantic_description_score": 0.4758,
+          "entity_match_score": 0.428571,
+          "concept_match_score": 0.5,
+          "sql_support_score": 1.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.453409,
+          "shared_entities": [
+            "BRAF",
+            "ERK",
+            "MEK"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: BRAF* -> MEK -> ERK"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_KRAS_NRAS_TO_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 2.0,
+          "overlap_score": 0.015171,
+          "semantic_query_score": 0.481261,
+          "semantic_name_score": 0.377714,
+          "semantic_description_score": 0.426162,
+          "entity_match_score": 0.142857,
+          "concept_match_score": 0.0,
+          "sql_support_score": 1.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.311817,
+          "shared_entities": [
+            "KRAS"
+          ],
+          "shared_concepts": [],
+          "candidate_rejection_reason": "missing_query_concepts, off_target_context",
+          "retrieval_sources": [
+            "sql"
+          ],
+          "description": "Pathway Definition from KEGG: (KRAS*,NRAS*) -> PI3K -> PIP3 -> AKT -| BAD"
+        }
+      ],
+      "decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row5",
+      "Original Pathway Name": "MET/HGF pathway",
+      "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR‑TKI‑resistant NSCLC and is highlighted as a key high‑priority resistance node in multi‑omics analyses, undermining afatinib efficacy unless co‑targeted.",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%PI3K%' OR gsd.description_brief LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%bypass%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' OR gsd.description_full LIKE '%MET%')\n  AND (gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C2:CP:REACTOME', 'C2:CP:KEGG', 'C2:CP:PID', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20",
+      "checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_brief AS description, \n       (CASE WHEN gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' THEN 1 ELSE 0 END +\n        CASE WHEN gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%PI3K%' OR gsd.description_brief LIKE '%AKT%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%MAPK%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%EGFR%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%bypass%' THEN 1 ELSE 0 END +\n        CASE WHEN gsd.description_brief LIKE '%resistance%' THEN 1 ELSE 0 END) AS sql_score\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%MET%' OR gsd.description_brief LIKE '%MET%' OR gsd.description_full LIKE '%MET%')\n  AND (gs.standard_name LIKE '%HGF%' OR gsd.description_brief LIKE '%HGF%' OR gsd.description_full LIKE '%HGF%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C2:CP:REACTOME', 'C2:CP:KEGG', 'C2:CP:PID', 'C5:GO:BP')\nORDER BY sql_score DESC\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query has been executed successfully, but no results were returned. This suggests that there are no pathways in the MSigDB database that match the specified criteria for the MET/HGF pathway and its associated rationale within the allowed collections. The search focused on pathways involving MET, HGF, PI3K, AKT, MAPK, EGFR, bypass signaling, and resistance mechanisms, but none were found that met these criteria. This could indicate a gap in the database for this specific pathway or its detailed description.",
+      "agent_query_result_raw": "",
+      "agent_query_result_rows": [],
+      "candidate_count_raw": 0,
+      "candidate_count_after_validation": 0,
+      "excluded_unknown_names": 0,
+      "selection_stage": "semantic_fallback",
+      "selected_candidate": {
+        "msigdb_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_MEDICUS",
+        "sql_score": 0.0,
+        "overlap_score": 0.22476,
+        "semantic_query_score": 0.546817,
+        "semantic_name_score": 0.631299,
+        "semantic_description_score": 0.537231,
+        "entity_match_score": 0.571429,
+        "concept_match_score": 0.25,
+        "sql_support_score": 0.0,
+        "priority_rank": 2,
+        "priority_bonus": 0.033333,
+        "ranking_score": 0.522159,
+        "shared_entities": [
+          "AKT",
+          "HGF",
+          "MET",
+          "PI3K"
+        ],
+        "shared_concepts": [
+          "PI3K_AKT"
+        ],
+        "candidate_rejection_reason": null,
+        "retrieval_sources": [
+          "semantic_fallback"
+        ],
+        "description": "HGF-MET-PI3K signaling pathway. Pathway ID: N00043. Pathway type: Reference. Pathway class: nt06261 Gastric cancer. Pathway Definition from KEGG: HGF -> MET -> GAB1 -> PI3K -> PIP3 -> AKT -| BAD"
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.22476,
+          "semantic_query_score": 0.546817,
+          "semantic_name_score": 0.631299,
+          "semantic_description_score": 0.537231,
+          "entity_match_score": 0.571429,
+          "concept_match_score": 0.25,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.522159,
+          "shared_entities": [
+            "AKT",
+            "HGF",
+            "MET",
+            "PI3K"
+          ],
+          "shared_concepts": [
+            "PI3K_AKT"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "HGF-MET-PI3K signaling pathway. Pathway ID: N00043. Pathway type: Reference. Pathway class: nt06261 Gastric cancer. Pathway Definition from KEGG: HGF -> MET -> GAB1 -> PI3K -> PIP3 -> AKT -| BAD"
+        },
+        {
+          "msigdb_name": "BIOCARTA_MET_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 0.0,
+          "overlap_score": 0.216757,
+          "semantic_query_score": 0.620502,
+          "semantic_name_score": 0.5502,
+          "semantic_description_score": 0.546181,
+          "entity_match_score": 0.428571,
+          "concept_match_score": 0.75,
+          "sql_support_score": 0.0,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.515956,
+          "shared_entities": [
+            "AKT",
+            "HGF",
+            "MET"
+          ],
+          "shared_concepts": [
+            "BYPASS_SIGNALING",
+            "MAPK_CASCADE",
+            "PI3K_AKT"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "The hepatocyte growth factor receptor, also called c-Met, is activated by HGF and stimulates proliferation of hepatocytes and other cell types. Mutated forms of the HGF receptor are associated with o..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.076038,
+          "semantic_query_score": 0.578128,
+          "semantic_name_score": 0.468809,
+          "semantic_description_score": 0.573832,
+          "entity_match_score": 0.428571,
+          "concept_match_score": 0.75,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.50839,
+          "shared_entities": [
+            "AKT",
+            "EGFR",
+            "PI3K"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MAPK_CASCADE",
+            "PI3K_AKT"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF-EGFR-RAS-PI3K signaling pathway. Pathway ID: N00030. Pathway type: Reference. Pathway class: nt06260 Colorectal cancer. Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> PI3K -> ..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_HGF_MET_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.190594,
+          "semantic_query_score": 0.59102,
+          "semantic_name_score": 0.631833,
+          "semantic_description_score": 0.559286,
+          "entity_match_score": 0.285714,
+          "concept_match_score": 0.25,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.47606,
+          "shared_entities": [
+            "HGF",
+            "MET"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "HGF-MET-RAS-ERK signaling pathway. Pathway ID: N00216. Pathway type: Reference. Pathway class: nt06261 Gastric cancer. Pathway Definition from KEGG: HGF -> MET -> GRB2 -> SOS -> RAS -> RAF -> MEK -> ..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_JNK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.068506,
+          "semantic_query_score": 0.575097,
+          "semantic_name_score": 0.509682,
+          "semantic_description_score": 0.566545,
+          "entity_match_score": 0.285714,
+          "concept_match_score": 0.5,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.468121,
+          "shared_entities": [
+            "EGFR",
+            "MAPK"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF-EGFR-RAS-JNK signaling pathway. Pathway ID: N00542. Pathway type: Reference. Pathway class: nt06526 MAPK signaling. Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> MEKK1 -> MKK..."
+        },
+        {
+          "msigdb_name": "REACTOME_MET_ACTIVATES_PI3K_AKT_SIGNALING",
+          "collection": "C2:CP:REACTOME",
+          "sql_score": 0.0,
+          "overlap_score": 0.135119,
+          "semantic_query_score": 0.58861,
+          "semantic_name_score": 0.429867,
+          "semantic_description_score": 0.562999,
+          "entity_match_score": 0.428571,
+          "concept_match_score": 0.25,
+          "sql_support_score": 0.0,
+          "priority_rank": 1,
+          "priority_bonus": 0.041667,
+          "ranking_score": 0.463293,
+          "shared_entities": [
+            "AKT",
+            "MET",
+            "PI3K"
+          ],
+          "shared_concepts": [
+            "PI3K_AKT"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "MET activates PI3K/AKT signaling"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.060931,
+          "semantic_query_score": 0.573551,
+          "semantic_name_score": 0.484167,
+          "semantic_description_score": 0.546424,
+          "entity_match_score": 0.142857,
+          "concept_match_score": 0.5,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.438809,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS ..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RALGDS_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.06331,
+          "semantic_query_score": 0.55233,
+          "semantic_name_score": 0.531051,
+          "semantic_description_score": 0.513666,
+          "entity_match_score": 0.142857,
+          "concept_match_score": 0.5,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.437554,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF-EGFR-RAS-RalGDS signaling pathway. Pathway ID: N00103. Pathway type: Reference. Pathway class: nt06260 Colorectal cancer. Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> RALGDS..."
+        },
+        {
+          "msigdb_name": "KEGG_ERBB_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_LEGACY",
+          "sql_score": 0.0,
+          "overlap_score": 0.086351,
+          "semantic_query_score": 0.540361,
+          "semantic_name_score": 0.364174,
+          "semantic_description_score": 0.527163,
+          "entity_match_score": 0.428571,
+          "concept_match_score": 0.5,
+          "sql_support_score": 0.0,
+          "priority_rank": 3,
+          "priority_bonus": 0.025,
+          "ranking_score": 0.436554,
+          "shared_entities": [
+            "EGFR",
+            "ERBB",
+            "MAPK"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "The ErbB family of receptor tyrosine kinases (RTKs) couples binding of extracellular growth factor ligands to intracellular signaling pathways regulating diverse biologic responses, including prolife..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_TGFA_EGFR_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.062646,
+          "semantic_query_score": 0.569268,
+          "semantic_name_score": 0.474579,
+          "semantic_description_score": 0.547458,
+          "entity_match_score": 0.142857,
+          "concept_match_score": 0.5,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.435547,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING",
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "TGFA-EGFR-RAS-ERK signaling pathway. Pathway ID: N00229. Pathway type: Reference. Pathway class: nt06260 Colorectal cancer. Pathway Definition from KEGG: TGFA -> EGFR -> GRB2 -> SOS -> RAS -> RAF -> ..."
+        }
+      ],
+      "decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row9",
+      "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+      "Rationale": "EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion. Baseline EGFR-driven pathways are sensitive to afatinib, which targets EGFR mutations effectively.",
+      "Final Mapped MSigDB": "KEGG_VEGF_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%')\n  AND (gs.standard_name LIKE '%STAT3%' OR gsd.description_full LIKE '%STAT3%')\n  AND (gs.standard_name LIKE '%VEGF%' OR gsd.description_full LIKE '%VEGF%')\n  AND (gs.standard_name LIKE '%PD-L1%' OR gsd.description_full LIKE '%PD-L1%')\n  AND (gs.standard_name LIKE '%angiogenesis%' OR gsd.description_full LIKE '%angiogenesis%')\n  AND (gs.standard_name LIKE '%immune evasion%' OR gsd.description_full LIKE '%immune evasion%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20",
+      "checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, gs.collection_name AS collection, gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%EGFR%' OR gsd.description_full LIKE '%EGFR%')\n  AND (gs.standard_name LIKE '%STAT3%' OR gsd.description_full LIKE '%STAT3%')\n  AND (gs.standard_name LIKE '%VEGF%' OR gsd.description_full LIKE '%VEGF%')\n  AND (gs.standard_name LIKE '%PD-L1%' OR gsd.description_full LIKE '%PD-L1%')\n  AND (gs.standard_name LIKE '%angiogenesis%' OR gsd.description_full LIKE '%angiogenesis%')\n  AND (gs.standard_name LIKE '%immune evasion%' OR gsd.description_full LIKE '%immune evasion%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query did not return any results. This could be due to the specificity of the search terms or the absence of a direct match in the database. The query was designed to find pathways related to EGFR, STAT3, VEGF, PD-L1, angiogenesis, and immune evasion within the allowed collections. If you have any other specific terms or broader criteria to explore, please let me know!",
+      "agent_query_result_raw": "",
+      "agent_query_result_rows": [],
+      "candidate_count_raw": 0,
+      "candidate_count_after_validation": 0,
+      "excluded_unknown_names": 0,
+      "selection_stage": "semantic_fallback",
+      "selected_candidate": {
+        "msigdb_name": "KEGG_VEGF_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_LEGACY",
+        "sql_score": 0.0,
+        "overlap_score": 0.078693,
+        "semantic_query_score": 0.632855,
+        "semantic_name_score": 0.412514,
+        "semantic_description_score": 0.666942,
+        "entity_match_score": 0.25,
+        "concept_match_score": 0.333333,
+        "sql_support_score": 0.0,
+        "priority_rank": 3,
+        "priority_bonus": 0.025,
+        "ranking_score": 0.44889,
+        "shared_entities": [
+          "VEGF"
+        ],
+        "shared_concepts": [
+          "ANGIOGENESIS"
+        ],
+        "candidate_rejection_reason": null,
+        "retrieval_sources": [
+          "semantic_fallback"
+        ],
+        "description": "There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic a..."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_VEGF_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_LEGACY",
+          "sql_score": 0.0,
+          "overlap_score": 0.078693,
+          "semantic_query_score": 0.632855,
+          "semantic_name_score": 0.412514,
+          "semantic_description_score": 0.666942,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 3,
+          "priority_bonus": 0.025,
+          "ranking_score": 0.44889,
+          "shared_entities": [
+            "VEGF"
+          ],
+          "shared_concepts": [
+            "ANGIOGENESIS"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "There is now much evidence that VEGFR-2 is the major mediator of VEGF-driven responses in endothelial cells and it is considered to be a crucial signal transducer in both physiologic and pathologic a..."
+        },
+        {
+          "msigdb_name": "REACTOME_SIGNALING_BY_VEGF",
+          "collection": "C2:CP:REACTOME",
+          "sql_score": 0.0,
+          "overlap_score": 0.098214,
+          "semantic_query_score": 0.49507,
+          "semantic_name_score": 0.483416,
+          "semantic_description_score": 0.624567,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 1,
+          "priority_bonus": 0.041667,
+          "ranking_score": 0.427861,
+          "shared_entities": [
+            "VEGF"
+          ],
+          "shared_concepts": [
+            "ANGIOGENESIS"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "Signaling by VEGF"
+        },
+        {
+          "msigdb_name": "PID_VEGF_VEGFR_PATHWAY",
+          "collection": "C2:CP:PID",
+          "sql_score": 0.0,
+          "overlap_score": 0.084848,
+          "semantic_query_score": 0.529003,
+          "semantic_name_score": 0.532862,
+          "semantic_description_score": 0.645845,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.409687,
+          "shared_entities": [
+            "VEGF"
+          ],
+          "shared_concepts": [
+            "ANGIOGENESIS"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "VEGF and VEGFR signaling network"
+        },
+        {
+          "msigdb_name": "WP_VEGFAVEGFR2_SIGNALING",
+          "collection": "C2:CP:WIKIPATHWAYS",
+          "sql_score": 0.0,
+          "overlap_score": 0.0,
+          "semantic_query_score": 0.519183,
+          "semantic_name_score": 0.490074,
+          "semantic_description_score": 0.679775,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.39854,
+          "shared_entities": [
+            "VEGF"
+          ],
+          "shared_concepts": [
+            "ANGIOGENESIS"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "VEGFA-VEGFR2 signaling"
+        },
+        {
+          "msigdb_name": "GOBP_VASCULAR_ENDOTHELIAL_GROWTH_FACTOR_RECEPTOR_2_SIGNALING_PATHWAY",
+          "collection": "C5:GO:BP",
+          "sql_score": 0.0,
+          "overlap_score": 0.010923,
+          "semantic_query_score": 0.49674,
+          "semantic_name_score": 0.442963,
+          "semantic_description_score": 0.590707,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.38935,
+          "shared_entities": [
+            "VEGF"
+          ],
+          "shared_concepts": [
+            "ANGIOGENESIS"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "The series of molecular signals initiated by a ligand binding to a vascular endothelial growth factor receptor-2 (VEGFR-2) on the surface of a target cell, and ending with the regulation of a downstr..."
+        },
+        {
+          "msigdb_name": "WP_RELATIONSHIP_BETWEEN_INFLAMMATION_COX2_AND_EGFR",
+          "collection": "C2:CP:WIKIPATHWAYS",
+          "sql_score": 0.0,
+          "overlap_score": 0.077391,
+          "semantic_query_score": 0.493469,
+          "semantic_name_score": 0.522901,
+          "semantic_description_score": 0.569459,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.387395,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "Relationship between inflammation, COX-2 and EGFR"
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_RASSF1_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.047784,
+          "semantic_query_score": 0.470215,
+          "semantic_name_score": 0.42486,
+          "semantic_description_score": 0.511709,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.386318,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF-EGFR-RAS-RASSF1 signaling pathway. Pathway ID: N00096. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS ..."
+        },
+        {
+          "msigdb_name": "GOBP_VASCULAR_ENDOTHELIAL_GROWTH_FACTOR_SIGNALING_PATHWAY",
+          "collection": "C5:GO:BP",
+          "sql_score": 0.0,
+          "overlap_score": 0.012481,
+          "semantic_query_score": 0.467751,
+          "semantic_name_score": 0.457839,
+          "semantic_description_score": 0.597398,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 4,
+          "priority_bonus": 0.016667,
+          "ranking_score": 0.382895,
+          "shared_entities": [
+            "VEGF"
+          ],
+          "shared_concepts": [
+            "ANGIOGENESIS"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "The series of molecular signals initiated by vascular endothelial growth factor (VEGF) binding its receptor on the surface of the target cell, and ending with the regulation of a downstream cellular ..."
+        },
+        {
+          "msigdb_name": "WP_EGFEGFR_SIGNALING",
+          "collection": "C2:CP:WIKIPATHWAYS",
+          "sql_score": 0.0,
+          "overlap_score": 0.036905,
+          "semantic_query_score": 0.494633,
+          "semantic_name_score": 0.427504,
+          "semantic_description_score": 0.67513,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 6,
+          "priority_bonus": 0.0,
+          "ranking_score": 0.378076,
+          "shared_entities": [
+            "EGFR"
+          ],
+          "shared_concepts": [
+            "ERBB_SIGNALING"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF/EGFR signaling"
+        },
+        {
+          "msigdb_name": "BIOCARTA_VEGF_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 0.0,
+          "overlap_score": 0.066885,
+          "semantic_query_score": 0.50038,
+          "semantic_name_score": 0.408278,
+          "semantic_description_score": 0.540784,
+          "entity_match_score": 0.25,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.37204,
+          "shared_entities": [
+            "VEGF"
+          ],
+          "shared_concepts": [
+            "ANGIOGENESIS"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "Vascular endothelial growth factor (VEGF) plays a key role in physiological blood vessel formation and pathological angiogenesis such as tumor growth and ischemic diseases. Hypoxia is a potent induce..."
+        }
+      ],
+      "decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+      "failure_type": null,
+      "failure_reason": null
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+      "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib targets this pathway, leading to decreased phosphorylation and promoting apoptosis, indicating sensitivity.",
+      "Final Mapped MSigDB": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+      "verdict": "mapped",
+      "generated_sql": "SELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%')\n  AND (gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%')\n  AND (gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%')\n  AND (gs.standard_name LIKE '%survival%' OR gsd.description_full LIKE '%survival%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20",
+      "checked_sql": "SELECT *\nFROM (\nSELECT gs.standard_name AS msigdb_name, \n       gs.collection_name AS collection, \n       gsd.description_full AS description\nFROM gene_set gs\nJOIN gene_set_details gsd ON gs.id = gsd.gene_set_id\nWHERE (gs.standard_name LIKE '%ELK1%' OR gsd.description_full LIKE '%ELK1%')\n  AND (gs.standard_name LIKE '%CIP2A%' OR gsd.description_full LIKE '%CIP2A%')\n  AND (gs.standard_name LIKE '%AKT%' OR gsd.description_full LIKE '%AKT%')\n  AND (gs.standard_name LIKE '%survival%' OR gsd.description_full LIKE '%survival%')\n  AND gs.collection_name IN ('H', 'C2:CP', 'C5:GO:BP')\nLIMIT 20\n) AS allowed_candidates\nWHERE collection = 'H' OR collection LIKE 'C2:CP%' OR collection = 'C5:GO:BP'",
+      "agent_final_response": "The query did not return any results. This suggests that there may not be a direct match in the MSigDB database for the specific pathway \"ELK1–CIP2A–AKT survival axis\" as described. It is possible that the pathway is either not represented in the database or is described using different terminology. Further exploration or alternative pathway databases might be necessary to find a match.",
+      "agent_query_result_raw": "",
+      "agent_query_result_rows": [],
+      "candidate_count_raw": 0,
+      "candidate_count_after_validation": 0,
+      "excluded_unknown_names": 0,
+      "selection_stage": "semantic_fallback",
+      "selected_candidate": {
+        "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+        "collection": "C2:CP:KEGG_MEDICUS",
+        "sql_score": 0.0,
+        "overlap_score": 0.061374,
+        "semantic_query_score": 0.656336,
+        "semantic_name_score": 0.530905,
+        "semantic_description_score": 0.585586,
+        "entity_match_score": 0.5,
+        "concept_match_score": 0.333333,
+        "sql_support_score": 0.0,
+        "priority_rank": 2,
+        "priority_bonus": 0.033333,
+        "ranking_score": 0.537965,
+        "shared_entities": [
+          "ERK"
+        ],
+        "shared_concepts": [
+          "MAPK_CASCADE"
+        ],
+        "candidate_rejection_reason": null,
+        "retrieval_sources": [
+          "semantic_fallback"
+        ],
+        "description": "EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EGF -> EGFR -> PLCG -> IP3 -> (Ca2+,..."
+      },
+      "top_candidates": [
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.061374,
+          "semantic_query_score": 0.656336,
+          "semantic_name_score": 0.530905,
+          "semantic_description_score": 0.585586,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.537965,
+          "shared_entities": [
+            "ERK"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF-EGFR-PLCG-ERK signaling pathway. Pathway ID: N00023. Pathway type: Reference. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EGF -> EGFR -> PLCG -> IP3 -> (Ca2+,..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.0565,
+          "semantic_query_score": 0.64719,
+          "semantic_name_score": 0.505559,
+          "semantic_description_score": 0.577028,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.528693,
+          "shared_entities": [
+            "ERK"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EML4-ALK fusion kinase to PLCG-ERK signaling pathway. Pathway ID: N00025. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EML4-ALK -> PLCG -> I..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.059504,
+          "semantic_query_score": 0.644456,
+          "semantic_name_score": 0.508828,
+          "semantic_description_score": 0.562323,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.527009,
+          "shared_entities": [
+            "ERK"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EML4-ALK fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00007. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EML4-ALK -> RAS -> RAF..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.060315,
+          "semantic_query_score": 0.644981,
+          "semantic_name_score": 0.50815,
+          "semantic_description_score": 0.54849,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.525698,
+          "shared_entities": [
+            "ERK"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "Mutation-activated EGFR to RAS-ERK signaling pathway. Pathway ID: N00014. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EGFR* -> GRB2 -> SOS ..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_MUTATION_ACTIVATED_EGFR_TO_PLCG_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.058816,
+          "semantic_query_score": 0.620318,
+          "semantic_name_score": 0.497523,
+          "semantic_description_score": 0.559808,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.516028,
+          "shared_entities": [
+            "ERK"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "Mutation-activated EGFR to PLCG-ERK signaling pathway. Pathway ID: N00024. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EGFR* -> PLCG -> IP3..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_REFERENCE_EGF_EGFR_RAS_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.031923,
+          "semantic_query_score": 0.566273,
+          "semantic_name_score": 0.473988,
+          "semantic_description_score": 0.469438,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.666667,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.515895,
+          "shared_entities": [
+            "AKT"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE",
+            "PI3K_AKT"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EGF-EGFR-RAS-PI3K signaling pathway. Pathway ID: N00030. Pathway type: Reference. Pathway class: nt06260 Colorectal cancer. Pathway Definition from KEGG: EGF -> EGFR -> GRB2 -> SOS -> RAS -> PI3K -> ..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_EML4_ALK_FUSION_KINASE_TO_PI3K_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.044033,
+          "semantic_query_score": 0.636833,
+          "semantic_name_score": 0.433228,
+          "semantic_description_score": 0.613931,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.513918,
+          "shared_entities": [
+            "AKT"
+          ],
+          "shared_concepts": [
+            "PI3K_AKT"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "EML4-ALK fusion kinase to PI3K signaling pathway. Pathway ID: N00047. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: EML4-ALK -> PI3K -> PIP3 ..."
+        },
+        {
+          "msigdb_name": "KEGG_MEDICUS_VARIANT_RET_FUSION_KINASE_TO_RAS_ERK_SIGNALING_PATHWAY",
+          "collection": "C2:CP:KEGG_MEDICUS",
+          "sql_score": 0.0,
+          "overlap_score": 0.062887,
+          "semantic_query_score": 0.617201,
+          "semantic_name_score": 0.499466,
+          "semantic_description_score": 0.504444,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 2,
+          "priority_bonus": 0.033333,
+          "ranking_score": 0.509911,
+          "shared_entities": [
+            "ERK"
+          ],
+          "shared_concepts": [
+            "MAPK_CASCADE"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "RET fusion kinase to RAS-ERK signaling pathway. Pathway ID: N00008. Pathway type: Variant. Pathway class: nt06266 Non-small cell lung cancer. Pathway Definition from KEGG: RET* -> RAS -> RAF -> MEK -..."
+        },
+        {
+          "msigdb_name": "REACTOME_CONSTITUTIVE_SIGNALING_BY_AKT1_E17K_IN_CANCER",
+          "collection": "C2:CP:REACTOME",
+          "sql_score": 0.0,
+          "overlap_score": 0.015171,
+          "semantic_query_score": 0.580397,
+          "semantic_name_score": 0.486763,
+          "semantic_description_score": 0.562192,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.333333,
+          "sql_support_score": 0.0,
+          "priority_rank": 1,
+          "priority_bonus": 0.041667,
+          "ranking_score": 0.507166,
+          "shared_entities": [
+            "AKT"
+          ],
+          "shared_concepts": [
+            "PI3K_AKT"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "Constitutive Signaling by AKT1 E17K in Cancer"
+        },
+        {
+          "msigdb_name": "BIOCARTA_AKT_PATHWAY",
+          "collection": "C2:CP:BIOCARTA",
+          "sql_score": 0.0,
+          "overlap_score": 0.083029,
+          "semantic_query_score": 0.614344,
+          "semantic_name_score": 0.427668,
+          "semantic_description_score": 0.541088,
+          "entity_match_score": 0.5,
+          "concept_match_score": 0.666667,
+          "sql_support_score": 0.0,
+          "priority_rank": 5,
+          "priority_bonus": 0.008333,
+          "ranking_score": 0.507154,
+          "shared_entities": [
+            "AKT"
+          ],
+          "shared_concepts": [
+            "PI3K_AKT",
+            "SURVIVAL"
+          ],
+          "candidate_rejection_reason": null,
+          "retrieval_sources": [
+            "semantic_fallback"
+          ],
+          "description": "Many cell-surface receptors induce production of second messengers like PIP3, phosphatidylinositol 3,4,5-trisphosphate, that convey signals to the cytoplasm from the cell surface. PIP3 signals activa..."
+        }
+      ],
+      "decision_reason": "Selected highest biologically relevant ranking score using semantic similarity, entity/concept coverage, pathway priority, and SQL support. Alphabetical ordering is used only as the last-resort deterministic fallback.",
+      "failure_type": null,
+      "failure_reason": null
+    }
+  ]
+}
