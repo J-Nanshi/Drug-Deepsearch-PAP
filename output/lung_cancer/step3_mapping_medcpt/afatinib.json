@@ -1,0 +1,90 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "REACTOME_CONSTITUTIVE_SIGNALING_BY_LIGAND_RESPONSIVE_EGFR_CANCER_VARIANTS",
+    "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Afatinib is an irreversible pan-ErbB inhibitor that covalently binds EGFR, HER2 and ErbB4, leading to prolonged suppression of EGFR phosphorylation and downstream survival signaling in EGFR‑mutant NSCLC, translating into higher response rates and longer PFS versus chemotherapy and first‑generation TKIs in exon 19 del/L858R disease.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pubmed.ncbi.nlm.nih.gov/31931137"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_CONSTITUTIVE_SIGNALING_BY_LIGAND_RESPONSIVE_EGFR_CANCER_VARIANTS",
+    "original_mapped_name": "WP_EGFEGFR_SIGNALING",
+    "llm_reasoning": "WP_EGFEGFR_SIGNALING is a generic EGF/EGFR signaling pathway and does not capture the key disease-specific biology in the original name and rationale: activating EGFR mutations in cancer with constitutive signaling and TKI sensitivity/resistance context. A Reactome cancer-variant pathway is a better semantic and biological match, and Reactome has higher priority than WikiPathways. Among the candidates, Constitutive Signaling by Ligand-Responsive EGFR Cancer Variants best reflects activating EGFR mutations in NSCLC."
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "REACTOME_ONCOGENIC_MAPK_SIGNALING",
+    "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The RAS–RAF–MEK–ERK (MAPK) cascade is upregulated in the presence of KRAS/BRAF mutations or bypass RTKs, leading to resistance to afatinib in lung cancer.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4943365",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4340466"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_ONCOGENIC_MAPK_SIGNALING",
+    "original_mapped_name": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE",
+    "llm_reasoning": "The original pathway describes the RAS–RAF–MEK–ERK (MAPK) cascade itself, especially its activation in KRAS/BRAF-driven resistance. WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE is broader and focuses on drug resistance rather than the MAPK cascade mechanism. Among the candidates, REACTOME_ONCOGENIC_MAPK_SIGNALING is a closer biological match and has higher priority than WikiPathways."
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_MET",
+    "Original Pathway Name": "MET/HGF pathway",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "MET amplification or HGF overexpression activates PI3K–AKT and MAPK independently of EGFR, reducing dependence on ErbB signaling; MET activation is a recognized bypass route in EGFR‑TKI‑resistant NSCLC and is highlighted as a key high‑priority resistance node in multi‑omics analyses, undermining afatinib efficacy unless co‑targeted.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11323831",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10477626",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7828553",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12553936",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/201292s000lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_MET",
+    "original_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+    "llm_reasoning": "The current WikiPathways mapping is too broad and describes metastatic trait amplification rather than the specific MET/HGF signaling axis. The biology in the prompt is explicitly MET/HGF-driven bypass signaling in EGFR-TKI resistance, which is directly captured by the higher-priority Reactome pathway 'Signaling by MET'. This is a much closer and more precise match than the current mapping."
+  },
+  "Row9": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "EGFR activation leads to upregulation of VEGF and PD-L1, promoting angiogenesis and immune evasion. Baseline EGFR-driven pathways are sensitive to afatinib, which targets EGFR mutations effectively.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC9738331",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10863183",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5244907",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7330402"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "original_mapped_name": "REACTOME_EGFR_DOWNREGULATION",
+    "llm_reasoning": "REACTOME_EGFR_DOWNREGULATION is not a good match because the original pathway describes EGFR-driven oncogenic signaling leading to VEGF/angiogenesis and PD-L1-mediated immune evasion, not receptor downregulation. Among the candidates, REACTOME_SIGNALING_BY_EGFR_IN_CANCER best captures the core EGFR oncogenic biology and is more appropriate than a downregulation term. HALLMARK_ANGIOGENESIS reflects only one downstream component and does not cover the EGFR/PD-L1 context as well."
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The ELK1–CIP2A–AKT axis is upregulated in baseline lung cancer, contributing to cell survival. Afatinib targets this pathway, leading to decreased phosphorylation and promoting apoptosis, indicating sensitivity.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/201292s015lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+    "original_mapped_name": "WP_APOPTOSIS_MODULATION_AND_SIGNALING",
+    "llm_reasoning": "The current mapping to a generic apoptosis term is not the best fit. The original pathway describes the ELK1–CIP2A–AKT survival axis downstream of ERK, with afatinib acting through EGFR/ERBB inhibition to suppress this pro-survival signaling and induce apoptosis. This is primarily an EGFR/ERBB cancer signaling pathway rather than a standalone apoptosis pathway. Among the candidates, REACTOME_SIGNALING_BY_EGFR_IN_CANCER captures the upstream biology most directly and is higher priority than the current WikiPathways apoptosis mapping."
+  }
+}

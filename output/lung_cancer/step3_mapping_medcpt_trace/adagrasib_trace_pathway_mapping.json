@@ -1,0 +1,52 @@
+{
+  "summary": {
+    "drug_name": "adagrasib",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\adagrasib.json",
+    "rows_before_filter": 14,
+    "rows_after_include_filter": 11,
+    "rows_after_filter": 3,
+    "rows_dropped_by_include_filter": 3,
+    "rows_dropped_by_relationship_class_filter": 8,
+    "total_rows": 3,
+    "correct_count": 1,
+    "corrected_count": 2,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-5.4-mini"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "KEGG: hsa04014 – Ras signaling pathway",
+      "Original Mapped MSigDB": "WP_RAS_SIGNALING",
+      "Final Mapped MSigDB": "WP_RAS_SIGNALING",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "WP_RAS_SIGNALING",
+      "llm_reasoning": "WP_RAS_SIGNALING is a direct and biologically accurate match for KEGG hsa04014 Ras signaling pathway. The rationale centers on KRAS G12C-driven activation of Ras signaling in lung cancer, which is exactly captured by a generic Ras signaling pathway. Although HALLMARK_KRAS_SIGNALING_UP reflects downstream transcriptional consequences of KRAS activation, it is not an equally direct replacement for the pathway itself, so no correction is needed."
+    },
+    {
+      "Row": "Row2",
+      "Original Pathway Name": "KEGG: hsa04010 – MAPK (RAF–MEK–ERK) signaling pathway",
+      "Original Mapped MSigDB": "GOBP_NEGATIVE_ADAPTATION_OF_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "HALLMARK_KRAS_SIGNALING_UP",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "HALLMARK_KRAS_SIGNALING_UP",
+      "original_mapped_name": "GOBP_NEGATIVE_ADAPTATION_OF_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "GOBP_NEGATIVE_ADAPTATION_OF_SIGNALING_PATHWAY",
+      "llm_reasoning": "The current GO term describes negative adaptation of signaling after prolonged stimulation, which is not a good match for the original pathway, a MAPK (RAF–MEK–ERK) signaling pathway that is upregulated in KRAS-mutant lung cancer and contributes to resistance. A higher-priority HALLMARK set captures this biology better: HALLMARK_KRAS_SIGNALING_UP reflects genes up-regulated by KRAS activation and is more directly aligned with baseline KRAS-driven MAPK/ERK pathway activation than a generic negative-adaptation GO term."
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "KEGG: hsa05223 – Non‑small cell lung cancer (RTK–RAS–MAPK, PI3K, STK11/KEAP1 modules)",
+      "Original Mapped MSigDB": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "Final Mapped MSigDB": "WP_NONSMALL_CELL_LUNG_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "WP_NONSMALL_CELL_LUNG_CANCER",
+      "original_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "effective_current_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "llm_reasoning": "The current mapping is too generic and does not specifically represent KEGG hsa05223 non-small cell lung cancer or its core RTK-RAS-MAPK, PI3K, STK11/KEAP1 modules. Among the candidates, WP_NONSMALL_CELL_LUNG_CANCER is the closest direct semantic match to the original pathway. HALLMARK_KRAS_SIGNALING_UP captures one important component of the biology, but it is narrower than the full KEGG pathway and therefore not as appropriate as a disease-specific lung cancer pathway."
+    }
+  ]
+}

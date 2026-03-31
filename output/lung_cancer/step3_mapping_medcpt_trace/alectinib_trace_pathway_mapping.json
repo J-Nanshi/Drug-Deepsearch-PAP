@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "drug_name": "alectinib",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\alectinib.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 9,
+    "rows_after_filter": 5,
+    "rows_dropped_by_include_filter": 3,
+    "rows_dropped_by_relationship_class_filter": 4,
+    "total_rows": 5,
+    "correct_count": 3,
+    "corrected_count": 2,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-5.4-mini"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "ALK signaling (Ras/MAPK, mTOR/PI3K/Akt, PLCγ; ALK receptor represents a starting signal able to stimulate various pathways)",
+      "Original Mapped MSigDB": "REACTOME_SIGNALING_BY_ALK",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_ALK",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "REACTOME_SIGNALING_BY_ALK",
+      "llm_reasoning": "REACTOME_SIGNALING_BY_ALK directly matches the described biology: ALK receptor signaling with downstream Ras/MAPK, PI3K/Akt/mTOR, and PLCγ pathways. The rationale about alectinib inhibiting oncogenic ALK fusions in NSCLC is consistent with this pathway. No higher-priority HALLMARK set captures ALK signaling specifically, so the current Reactome mapping is appropriate."
+    },
+    {
+      "Row": "Row3",
+      "Original Pathway Name": "PI3K/AKT pathway",
+      "Original Mapped MSigDB": "WP_PI3KAKTMTOR_SIGNALING_AND_THERAPEUTIC_OPPORTUNITIES_IN_PROSTATE_CANCER",
+      "Final Mapped MSigDB": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "original_mapped_name": "WP_PI3KAKTMTOR_SIGNALING_AND_THERAPEUTIC_OPPORTUNITIES_IN_PROSTATE_CANCER",
+      "effective_current_mapped_name": "WP_PI3KAKTMTOR_SIGNALING_AND_THERAPEUTIC_OPPORTUNITIES_IN_PROSTATE_CANCER",
+      "llm_reasoning": "The current WikiPathways mapping is biologically related but too specific and context-limited to prostate cancer, whereas the original pathway name and rationale refer to the general PI3K/AKT pathway in ALK-positive lung cancer and ALK inhibitor effects. The HALLMARK_PI3K_AKT_MTOR_SIGNALING gene set captures the core PI3K/AKT/mTOR biology more directly and has higher priority than WikiPathways, so it is the better MSigDB mapping."
+    },
+    {
+      "Row": "Row6",
+      "Original Pathway Name": "Cell‑cycle control (G0/G1 vs S‑phase)",
+      "Original Mapped MSigDB": "SA_G1_AND_S_PHASES",
+      "Final Mapped MSigDB": "REACTOME_MITOTIC_G1_PHASE_AND_G1_S_TRANSITION",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_MITOTIC_G1_PHASE_AND_G1_S_TRANSITION",
+      "original_mapped_name": "SA_G1_AND_S_PHASES",
+      "effective_current_mapped_name": "SA_G1_AND_S_PHASES",
+      "llm_reasoning": "The current mapping SA_G1_AND_S_PHASES is biologically close, but the original pathway name emphasizes control at the G0/G1 versus S-phase boundary, and the rationale specifically describes G0/G1 arrest after ALK blockade. A more precise match is REACTOME_MITOTIC_G1_PHASE_AND_G1_S_TRANSITION, which directly captures G1/S control and cell-cycle arrest at this checkpoint. It is also higher-priority than the current self-contained annotation and better aligned than broader cell-cycle phase sets."
+    },
+    {
+      "Row": "Row7",
+      "Original Pathway Name": "DNA damage response / Apoptosis",
+      "Original Mapped MSigDB": "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE",
+      "Final Mapped MSigDB": "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "GOBP_INTRINSIC_APOPTOTIC_SIGNALING_PATHWAY_IN_RESPONSE_TO_DNA_DAMAGE",
+      "llm_reasoning": "The current mapping precisely matches the stated biology: an intrinsic apoptotic signaling pathway triggered in response to DNA damage. The original pathway name and rationale emphasize DNA-damage-associated apoptosis, and the GO term explicitly captures that process. Although HALLMARK_APOPTOSIS is a broader apoptosis set, it is less specific and does not better represent the DNA damage response context."
+    },
+    {
+      "Row": "Row8",
+      "Original Pathway Name": "EGFR signaling network",
+      "Original Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "llm_reasoning": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER matches the stated biology: EGFR hyperactivation in cancer cells and its role in resistance to ALK inhibition. The original pathway name is EGFR signaling network, and the current Reactome mapping is the most specific and appropriate candidate. ALK-related candidates describe the upstream oncogenic context, not the EGFR signaling network itself, and no higher-priority HALLMARK pathway captures this process more directly."
+    }
+  ]
+}

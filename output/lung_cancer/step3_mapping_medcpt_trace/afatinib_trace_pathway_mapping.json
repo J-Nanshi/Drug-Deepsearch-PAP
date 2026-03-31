@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "drug_name": "afatinib",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\afatinib.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 9,
+    "rows_after_filter": 5,
+    "rows_dropped_by_include_filter": 3,
+    "rows_dropped_by_relationship_class_filter": 4,
+    "total_rows": 5,
+    "correct_count": 0,
+    "corrected_count": 5,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-5.4-mini"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "EGFR/ErbB signaling (activating EGFR mutations)",
+      "Original Mapped MSigDB": "WP_EGFEGFR_SIGNALING",
+      "Final Mapped MSigDB": "REACTOME_CONSTITUTIVE_SIGNALING_BY_LIGAND_RESPONSIVE_EGFR_CANCER_VARIANTS",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_CONSTITUTIVE_SIGNALING_BY_LIGAND_RESPONSIVE_EGFR_CANCER_VARIANTS",
+      "original_mapped_name": "WP_EGFEGFR_SIGNALING",
+      "effective_current_mapped_name": "WP_EGFEGFR_SIGNALING",
+      "llm_reasoning": "WP_EGFEGFR_SIGNALING is a generic EGF/EGFR signaling pathway and does not capture the key disease-specific biology in the original name and rationale: activating EGFR mutations in cancer with constitutive signaling and TKI sensitivity/resistance context. A Reactome cancer-variant pathway is a better semantic and biological match, and Reactome has higher priority than WikiPathways. Among the candidates, Constitutive Signaling by Ligand-Responsive EGFR Cancer Variants best reflects activating EGFR mutations in NSCLC."
+    },
+    {
+      "Row": "Row4",
+      "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) cascade",
+      "Original Mapped MSigDB": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE",
+      "Final Mapped MSigDB": "REACTOME_ONCOGENIC_MAPK_SIGNALING",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_ONCOGENIC_MAPK_SIGNALING",
+      "original_mapped_name": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE",
+      "effective_current_mapped_name": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE",
+      "llm_reasoning": "The original pathway describes the RAS–RAF–MEK–ERK (MAPK) cascade itself, especially its activation in KRAS/BRAF-driven resistance. WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE is broader and focuses on drug resistance rather than the MAPK cascade mechanism. Among the candidates, REACTOME_ONCOGENIC_MAPK_SIGNALING is a closer biological match and has higher priority than WikiPathways."
+    },
+    {
+      "Row": "Row5",
+      "Original Pathway Name": "MET/HGF pathway",
+      "Original Mapped MSigDB": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_MET",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_MET",
+      "original_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "effective_current_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "llm_reasoning": "The current WikiPathways mapping is too broad and describes metastatic trait amplification rather than the specific MET/HGF signaling axis. The biology in the prompt is explicitly MET/HGF-driven bypass signaling in EGFR-TKI resistance, which is directly captured by the higher-priority Reactome pathway 'Signaling by MET'. This is a much closer and more precise match than the current mapping."
+    },
+    {
+      "Row": "Row9",
+      "Original Pathway Name": "EGFR–STAT3–VEGF/angiogenesis and PD‑L1/immune evasion",
+      "Original Mapped MSigDB": "REACTOME_EGFR_DOWNREGULATION",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "original_mapped_name": "REACTOME_EGFR_DOWNREGULATION",
+      "effective_current_mapped_name": "REACTOME_EGFR_DOWNREGULATION",
+      "llm_reasoning": "REACTOME_EGFR_DOWNREGULATION is not a good match because the original pathway describes EGFR-driven oncogenic signaling leading to VEGF/angiogenesis and PD-L1-mediated immune evasion, not receptor downregulation. Among the candidates, REACTOME_SIGNALING_BY_EGFR_IN_CANCER best captures the core EGFR oncogenic biology and is more appropriate than a downregulation term. HALLMARK_ANGIOGENESIS reflects only one downstream component and does not cover the EGFR/PD-L1 context as well."
+    },
+    {
+      "Row": "Row12",
+      "Original Pathway Name": "ELK1–CIP2A–AKT survival axis (downstream of ERK)",
+      "Original Mapped MSigDB": "WP_APOPTOSIS_MODULATION_AND_SIGNALING",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "original_mapped_name": "WP_APOPTOSIS_MODULATION_AND_SIGNALING",
+      "effective_current_mapped_name": "WP_APOPTOSIS_MODULATION_AND_SIGNALING",
+      "llm_reasoning": "The current mapping to a generic apoptosis term is not the best fit. The original pathway describes the ELK1–CIP2A–AKT survival axis downstream of ERK, with afatinib acting through EGFR/ERBB inhibition to suppress this pro-survival signaling and induce apoptosis. This is primarily an EGFR/ERBB cancer signaling pathway rather than a standalone apoptosis pathway. Among the candidates, REACTOME_SIGNALING_BY_EGFR_IN_CANCER captures the upstream biology most directly and is higher priority than the current WikiPathways apoptosis mapping."
+    }
+  ]
+}

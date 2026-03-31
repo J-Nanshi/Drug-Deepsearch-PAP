@@ -21,7 +21,7 @@ Inputs:
 Logic:
 1. Filter rows by include decision and allowed relationship classes.
 2. Load/normalize MSigDB metadata and build lookup for validation.
-3. Build semantic retrieval model (SentenceTransformer with cached embeddings in
+3. Build semantic retrieval model (MedCPT dual encoders with cached embeddings in
    `.cache/step3_pathway_mapping`, or TF-IDF fallback).
 4. For each row:
    - seed empty mapping with semantic top-1,
@@ -69,25 +69,19 @@ except ImportError:
 client: Optional[OpenAI] = None
 
 # LLM Model Configuration
-LLM_MODEL = "gpt-4o"  # or "gpt-4-turbo", "gpt-4", etc.
-LLM_TEMPERATURE = 0.1  # Low temperature for consistent, factual responses
+LLM_MODEL = "gpt-5.4-mini"  # or "gpt-4-turbo", "gpt-4", etc.
+LLM_TEMPERATURE = 0  # Low temperature for consistent, factual responses
 LLM_MAX_TOKENS = 2000
 
 # Verification configuration
-TOP_CANDIDATES_FOR_CORRECTION = 10  # How many MSigDB candidates to present to LLM
+TOP_CANDIDATES_FOR_CORRECTION = 50  # How many MSigDB candidates to present to LLM
 
-# MSigDB Collection Filter - exclude these collections from candidate search
-# These collections are less relevant for pathway mapping:
-# C1 = Positional gene sets, C2:CGP = Chemical and genetic perturbations,
-# C3 = Regulatory target gene sets, C4 = Computational gene sets,
-# C7 = Immunologic signatures, C8 = Cell type signatures
-EXCLUDED_COLLECTIONS = {
-    "C1",       # Positional gene sets
-    "C2:CGP",   # Chemical and genetic perturbations (keep C2:CP which is Canonical pathways)
-    "C3",       # Regulatory target gene sets (miRNA targets, TF targets)
-    "C4",       # Computational gene sets
-    "C7",       # Immunologic signature gene sets
-    "C8",       # Cell type signature gene sets
+# MSigDB Collection Filter - include only these collections for candidate search
+# H = Hallmark, C2:CP* = Canonical pathways, C5:GO:BP = GO biological process
+INCLUDED_COLLECTIONS = {
+    "H",
+    "C2:CP",
+    "C5:GO:BP",
 }
 
 # Pathway Priority Order for LLM (higher priority first)
@@ -223,7 +217,15 @@ def load_msigdb_metadata(db_path: str) -> List[MSigDBRow]:
             SELECT
                 gs.standard_name AS msigdb_name,
                 gs.collection_name AS collection,
-                COALESCE(NULLIF(gsd.description_full, ''), NULLIF(gsd.description_brief, ''), '') AS description,
+                CASE
+                    WHEN NULLIF(gsd.description_full, '') IS NULL
+                         AND NULLIF(gsd.description_brief, '') IS NULL
+                    THEN ' '
+                    ELSE TRIM(
+                        COALESCE(NULLIF(gsd.description_full, ''), '') || ' ' ||
+                        COALESCE(NULLIF(gsd.description_brief, ''), '')
+                    )
+                END AS description,
                 ns.label AS source
             FROM gene_set gs
             LEFT JOIN gene_set_details gsd
@@ -236,7 +238,15 @@ def load_msigdb_metadata(db_path: str) -> List[MSigDBRow]:
             SELECT
                 gs.standard_name AS msigdb_name,
                 gs.collection_name AS collection,
-                COALESCE(NULLIF(gsd.description_full, ''), NULLIF(gsd.description_brief, ''), '') AS description,
+                CASE
+                    WHEN NULLIF(gsd.description_full, '') IS NULL
+                         AND NULLIF(gsd.description_brief, '') IS NULL
+                    THEN ' '
+                    ELSE TRIM(
+                        COALESCE(NULLIF(gsd.description_full, ''), '') || ' ' ||
+                        COALESCE(NULLIF(gsd.description_brief, ''), '')
+                    )
+                END AS description,
                 NULL AS source
             FROM gene_set gs
             LEFT JOIN gene_set_details gsd
@@ -275,86 +285,92 @@ def validate_msigdb_name(name: str, msigdb_lookup: Dict[str, MSigDBRow]) -> bool
 
 def filter_msigdb_by_collection(
     msig_rows: List[MSigDBRow],
-    excluded_collections: set
+    included_collections: set
 ) -> List[MSigDBRow]:
     """
-    Filter out MSigDB rows from excluded collections.
+    Keep only MSigDB rows from included collections.
     
-    Collection names in MSigDB are like: C1, C2:CGP, C2:CP, C3, H, etc.
-    This function filters by exact match or prefix match (e.g., "C3" matches "C3:MIR:MIRDB").
+    Collection names in MSigDB are like: H, C2:CP, C2:CP:KEGG_MEDICUS, C5:GO:BP, etc.
+    This function keeps rows by exact match or prefix match (e.g., "C2:CP" matches
+    "C2:CP:KEGG_MEDICUS").
     """
     filtered = []
-    excluded_count = 0
+    skipped_count = 0
     
     for row in msig_rows:
         collection = row.collection or ""
         
-        # Check if collection matches any excluded pattern
-        is_excluded = False
-        for excl in excluded_collections:
-            # Exact match
-            if collection == excl:
-                is_excluded = True
+        is_included = False
+        for incl in included_collections:
+            if collection == incl:
+                is_included = True
                 break
-            # Prefix match (e.g., "C3" matches "C3:MIR:MIRDB")
-            if collection.startswith(excl + ":"):
-                is_excluded = True
-                break
-            # Also check if excl is a sub-collection match (e.g., "C2:CGP" in collection)
-            if excl in collection and ":" in excl:
-                is_excluded = True
+            if collection.startswith(incl + ":"):
+                is_included = True
                 break
         
-        if not is_excluded:
+        if is_included:
             filtered.append(row)
         else:
-            excluded_count += 1
+            skipped_count += 1
     
-    print(f"  Filtered {excluded_count} pathways from excluded collections")
-    print(f"  Remaining {len(filtered)} pathways for candidate search")
+    print(f"  Kept {len(filtered)} pathways from included collections")
+    print(f"  Skipped {skipped_count} pathways outside the included collections")
     
     return filtered
 
 # Similarity Model for Semantic Search (from trial3)
 class SimilarityModel:
-    """Semantic similarity model using sentence-transformers or TF-IDF fallback."""
+    """Semantic similarity model using MedCPT encoders or TF-IDF fallback."""
     
     def __init__(self, corpus_texts: List[str]):
         """Build retrieval backend and load/build cached embeddings when available."""
         self.corpus_texts = corpus_texts
         self.use_embeddings = False
-        self.embedding_model_name = "all-MiniLM-L6-v2"
+        self.query_encoder_name = "ncbi/MedCPT-Query-Encoder"
+        self.article_encoder_name = "ncbi/MedCPT-Article-Encoder"
 
         try:
-            from sentence_transformers import SentenceTransformer
+            import torch
             import numpy as np_local
-            print("  Using sentence-transformers for semantic search...")
-            self.embedder = SentenceTransformer(self.embedding_model_name)
+            from tqdm.auto import tqdm
+            from transformers import AutoModel, AutoTokenizer
+
+            print("  Using MedCPT encoders for semantic search...")
+            self.torch = torch
+            self.tqdm = tqdm
+            self.device = "cuda" if torch.cuda.is_available() else "cpu"
+            self.query_tokenizer = AutoTokenizer.from_pretrained(self.query_encoder_name)
+            self.query_encoder = AutoModel.from_pretrained(self.query_encoder_name).to(self.device)
+            self.article_tokenizer = AutoTokenizer.from_pretrained(self.article_encoder_name)
+            self.article_encoder = AutoModel.from_pretrained(self.article_encoder_name).to(self.device)
+            self.query_encoder.eval()
+            self.article_encoder.eval()
 
             CACHE_DIR.mkdir(parents=True, exist_ok=True)
             corpus_hash = hashlib.sha256("\n".join(self.corpus_texts).encode("utf-8")).hexdigest()
-            model_tag = self.embedding_model_name.replace("/", "_")
+            model_tag = f"{self.query_encoder_name}__{self.article_encoder_name}".replace("/", "_")
             emb_cache_path = CACHE_DIR / f"embeddings_{model_tag}_{corpus_hash}.npy"
 
             if emb_cache_path.exists():
                 self.corpus_emb = np_local.load(str(emb_cache_path))
                 if len(self.corpus_emb) != len(self.corpus_texts):
                     print("  Cached embeddings shape mismatch; rebuilding cache...")
-                    self.corpus_emb = self.embedder.encode(
-                        self.corpus_texts, normalize_embeddings=True, batch_size=64, show_progress_bar=True
+                    self.corpus_emb = self._encode_texts(
+                        self.corpus_texts, encoder_type="article", batch_size=16
                     )
                     np_local.save(str(emb_cache_path), self.corpus_emb)
                 else:
                     print(f"  Loaded cached embeddings: {emb_cache_path}")
             else:
-                self.corpus_emb = self.embedder.encode(
-                    self.corpus_texts, normalize_embeddings=True, batch_size=64, show_progress_bar=True
+                self.corpus_emb = self._encode_texts(
+                    self.corpus_texts, encoder_type="article", batch_size=16
                 )
                 np_local.save(str(emb_cache_path), self.corpus_emb)
                 print(f"  Saved embeddings cache: {emb_cache_path}")
             self.use_embeddings = True
         except Exception as e:
-            print(f"  sentence-transformers not available ({e}), using TF-IDF fallback...")
+            print(f"  MedCPT embeddings not available ({e}), using TF-IDF fallback...")
             from sklearn.feature_extraction.text import TfidfVectorizer
             from sklearn.metrics.pairwise import cosine_similarity
             self.cosine_similarity = cosine_similarity
@@ -366,13 +382,46 @@ class SimilarityModel:
             )
             self.corpus_mat = self.vectorizer.fit_transform(self.corpus_texts)
 
+    def _mean_pool(self, last_hidden_state, attention_mask):
+        mask = attention_mask.unsqueeze(-1).expand(last_hidden_state.size()).float()
+        masked = last_hidden_state * mask
+        denom = mask.sum(dim=1).clamp(min=1e-9)
+        return masked.sum(dim=1) / denom
+
+    def _encode_texts(self, texts: List[str], encoder_type: str, batch_size: int = 16):
+        tokenizer = self.query_tokenizer if encoder_type == "query" else self.article_tokenizer
+        encoder = self.query_encoder if encoder_type == "query" else self.article_encoder
+        batches = []
+        show_progress = encoder_type == "article" and len(texts) > batch_size
+        iterator = range(0, len(texts), batch_size)
+        if show_progress:
+            iterator = self.tqdm(iterator, desc="  Encoding MedCPT corpus", unit="batch")
+
+        for i in iterator:
+            batch = texts[i:i + batch_size]
+            encoded = tokenizer(
+                batch,
+                padding=True,
+                truncation=True,
+                max_length=512,
+                return_tensors="pt",
+            )
+            encoded = {k: v.to(self.device) for k, v in encoded.items()}
+            with self.torch.no_grad():
+                outputs = encoder(**encoded)
+                pooled = self._mean_pool(outputs.last_hidden_state, encoded["attention_mask"])
+                pooled = self.torch.nn.functional.normalize(pooled, p=2, dim=1)
+            batches.append(pooled.cpu().numpy())
+
+        return np.vstack(batches)
+
     def topk(self, query_text: str, k: int = 10) -> List[Tuple[int, float]]:
         """Return top-k matches as (index, score) tuples."""
         query_text = norm_text(query_text)
         if not query_text:
             return []
         if self.use_embeddings:
-            q = self.embedder.encode([query_text], normalize_embeddings=True)
+            q = self._encode_texts([query_text], encoder_type="query", batch_size=1)
             scores = (self.corpus_emb @ q[0]).astype(float)
             idx = scores.argsort()[::-1][:k]
             return [(int(i), float(scores[i])) for i in idx]
@@ -892,9 +941,9 @@ if __name__ == "__main__":
     # Build full lookup for validation (includes all collections)
     msigdb_lookup = build_msigdb_lookup(msig_rows_all)
     
-    # Filter rows for candidate search (excludes C1, C2:CGP, C3, C4, C7, C8)
-    print(f"\nFiltering out collections: {', '.join(sorted(EXCLUDED_COLLECTIONS))}")
-    msig_rows = filter_msigdb_by_collection(msig_rows_all, EXCLUDED_COLLECTIONS)
+    # Filter rows for candidate search (keep only H, C2:CP*, and C5:GO:BP)
+    print(f"\nIncluding only collections: {', '.join(sorted(INCLUDED_COLLECTIONS))}")
+    msig_rows = filter_msigdb_by_collection(msig_rows_all, INCLUDED_COLLECTIONS)
     
     # Build semantic similarity model for filtered pathways
     print("\nBuilding semantic similarity model...")

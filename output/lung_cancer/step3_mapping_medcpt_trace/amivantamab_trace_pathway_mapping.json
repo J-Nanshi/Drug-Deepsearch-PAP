@@ -1,0 +1,118 @@
+{
+  "summary": {
+    "drug_name": "amivantamab",
+    "input_file": "output\\lung_cancer\\step2_factcheck_json\\amivantamab.json",
+    "rows_before_filter": 12,
+    "rows_after_include_filter": 11,
+    "rows_after_filter": 9,
+    "rows_dropped_by_include_filter": 1,
+    "rows_dropped_by_relationship_class_filter": 2,
+    "total_rows": 9,
+    "correct_count": 3,
+    "corrected_count": 6,
+    "rejected_suggestions": 0,
+    "errors": 0,
+    "llm_model": "gpt-5.4-mini"
+  },
+  "verifications": [
+    {
+      "Row": "Row1",
+      "Original Pathway Name": "EGFR signaling (KEGG hsa04012)",
+      "Original Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER",
+      "llm_reasoning": "REACTOME_SIGNALING_BY_EGFR_IN_CANCER is an appropriate match for KEGG hsa04012 EGFR signaling in the context of EGFR-driven NSCLC and amivantamab. It captures EGFR pathway signaling with a cancer-specific emphasis, which aligns well with the biological rationale. No higher-priority HALLMARK pathway in the candidate list provides an equally specific EGFR signaling mapping."
+    },
+    {
+      "Row": "Row2",
+      "Original Pathway Name": "MET signaling (KEGG hsa04013)",
+      "Original Mapped MSigDB": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "Final Mapped MSigDB": "REACTOME_SIGNALING_BY_MET",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_SIGNALING_BY_MET",
+      "original_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "effective_current_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+      "llm_reasoning": "The current WikiPathways mapping is not a true match for KEGG hsa04013 MET signaling. It describes a broad metastatic trait program (amplification/expansion of oncogenic pathways), which is much more general than MET receptor signaling. Among the candidates, REACTOME_SIGNALING_BY_MET is the most direct and biologically accurate representation of MET signaling, and Reactome has higher priority than WikiPathways in the requested hierarchy."
+    },
+    {
+      "Row": "Row3",
+      "Original Pathway Name": "EGFR–MET co‑activation / bypass network",
+      "Original Mapped MSigDB": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE",
+      "Final Mapped MSigDB": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE",
+      "llm_reasoning": "WP_EGFR_TYROSINE_KINASE_INHIBITOR_RESISTANCE is an appropriate match because the original pathway describes EGFR-MET co-activation/bypass as a mechanism of resistance to EGFR TKIs. The biology centers on therapeutic resistance driven by EGFR and MET signaling crosstalk, which is captured by the current WikiPathways term. The alternative candidates are mostly narrower EGFR or MET signaling pathways rather than the resistance mechanism itself, and no higher-priority HALLMARK pathway clearly captures this specific biology better."
+    },
+    {
+      "Row": "Row4",
+      "Original Pathway Name": "PI3K–AKT–mTOR pathway (KEGG hsa04151)",
+      "Original Mapped MSigDB": "WP_PI3KAKTMTOR_SIGNALING_AND_THERAPEUTIC_OPPORTUNITIES_IN_PROSTATE_CANCER",
+      "Final Mapped MSigDB": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+      "original_mapped_name": "WP_PI3KAKTMTOR_SIGNALING_AND_THERAPEUTIC_OPPORTUNITIES_IN_PROSTATE_CANCER",
+      "effective_current_mapped_name": "WP_PI3KAKTMTOR_SIGNALING_AND_THERAPEUTIC_OPPORTUNITIES_IN_PROSTATE_CANCER",
+      "llm_reasoning": "The current WikiPathways mapping is biologically relevant but not optimal for the requested pathway name. The original pathway is the canonical PI3K–AKT–mTOR signaling axis (KEGG hsa04151), and the rationale centers on attenuation of this core signaling cascade downstream of EGFR/MET. HALLMARK_PI3K_AKT_MTOR_SIGNALING captures this biology more directly and has higher priority than WikiPathways in the provided hierarchy. It is also a better match than the more cancer- or tissue-specific prostate pathway mapping."
+    },
+    {
+      "Row": "Row5",
+      "Original Pathway Name": "RAS–RAF–MEK–ERK (MAPK) pathway (KEGG hsa04010)",
+      "Original Mapped MSigDB": "REACTOME_ERK_MAPK_TARGETS",
+      "Final Mapped MSigDB": "HALLMARK_KRAS_SIGNALING_UP",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "HALLMARK_KRAS_SIGNALING_UP",
+      "original_mapped_name": "REACTOME_ERK_MAPK_TARGETS",
+      "effective_current_mapped_name": "REACTOME_ERK_MAPK_TARGETS",
+      "llm_reasoning": "REACTOME_ERK_MAPK_TARGETS is a downstream target-gene set for ERK/MAPK activity, not the pathway itself. The original pathway is the upstream RAS–RAF–MEK–ERK signaling cascade (KEGG hsa04010), and the rationale emphasizes KRAS/BRAF-driven MAPK activation in EGFR/MET resistance. Among the candidates, HALLMARK_KRAS_SIGNALING_UP is the highest-priority and best biological match because it captures KRAS-driven MAPK pathway activation more directly than an ERK target signature."
+    },
+    {
+      "Row": "Row6",
+      "Original Pathway Name": "EGFR ligand–dependent signaling (AREG‑high EGFR‑WT tumors)",
+      "Original Mapped MSigDB": "WP_EGFEGFR_SIGNALING",
+      "Final Mapped MSigDB": "WP_EGFEGFR_SIGNALING",
+      "verdict": "correct",
+      "corrected_msigdb_name": null,
+      "original_mapped_name": null,
+      "effective_current_mapped_name": "WP_EGFEGFR_SIGNALING",
+      "llm_reasoning": "WP_EGFEGFR_SIGNALING (EGF/EGFR signaling) accurately captures the core biology of AREG-high, EGFR-wild-type tumor signaling described here: amphiregulin is an EGFR ligand, and the pathway is ligand-dependent EGFR activation. The available alternatives are either broader, cancer-context-specific, or focused on downstream/downregulation events rather than the ligand-driven EGFR signaling process itself. No higher-priority HALLMARK pathway is an equally specific match."
+    },
+    {
+      "Row": "Row7",
+      "Original Pathway Name": "Fc‑mediated ADCC and trogocytosis pathways",
+      "Original Mapped MSigDB": "GOBP_FC_RECEPTOR_MEDIATED_INHIBITORY_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "GOBP_ANTIBODY_DEPENDENT_CELLULAR_CYTOTOXICITY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "GOBP_ANTIBODY_DEPENDENT_CELLULAR_CYTOTOXICITY",
+      "original_mapped_name": "GOBP_FC_RECEPTOR_MEDIATED_INHIBITORY_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "GOBP_FC_RECEPTOR_MEDIATED_INHIBITORY_SIGNALING_PATHWAY",
+      "llm_reasoning": "The current mapping is incorrect because GOBP_FC_RECEPTOR_MEDIATED_INHIBITORY_SIGNALING_PATHWAY describes inhibitory Fc receptor signaling, whereas the original pathway and rationale are about therapeutic antibody effector functions: FcγR-mediated ADCC and macrophage trogocytosis. The best match among the candidates is GOBP_ANTIBODY_DEPENDENT_CELLULAR_CYTOTOXICITY, which directly captures Fc receptor-dependent killing by NK cells, monocytes, and macrophages. No higher-priority HALLMARK pathway in the candidate list captures this biology as well."
+    },
+    {
+      "Row": "Row8",
+      "Original Pathway Name": "EGFR trafficking and lysosomal degradation (endocytosis/ESCRT)",
+      "Original Mapped MSigDB": "WP_EGFEGFR_SIGNALING",
+      "Final Mapped MSigDB": "REACTOME_EGFR_DOWNREGULATION",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "REACTOME_EGFR_DOWNREGULATION",
+      "original_mapped_name": "WP_EGFEGFR_SIGNALING",
+      "effective_current_mapped_name": "WP_EGFEGFR_SIGNALING",
+      "llm_reasoning": "The original pathway describes EGFR trafficking after antibody binding, including internalization, ESCRT-dependent sorting, and lysosomal degradation, which is a receptor downregulation process rather than generic EGFR signaling. WP_EGFEGFR_SIGNALING is too broad and captures ligand-activated signaling, not the trafficking/degradation arm. Among the candidates, REACTOME_EGFR_DOWNREGULATION is the best semantic and biological match; it is also higher-priority than the current WikiPathways mapping."
+    },
+    {
+      "Row": "Row9",
+      "Original Pathway Name": "HER3/ErbB family dimerization network",
+      "Original Mapped MSigDB": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+      "Final Mapped MSigDB": "PID_ERBB2_ERBB3_PATHWAY",
+      "verdict": "mapping_corrected",
+      "corrected_msigdb_name": "PID_ERBB2_ERBB3_PATHWAY",
+      "original_mapped_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+      "effective_current_mapped_name": "GOBP_ERBB2_EGFR_SIGNALING_PATHWAY",
+      "llm_reasoning": "The current GO term is not the best match for the stated biology. The original pathway name and rationale emphasize HER3/ErbB family dimerization and compensatory HER3-mediated signaling in the context of EGFR blockade, which is more specifically captured by ERBB2–ERBB3 signaling than by an EGFR–ERBB2 heterodimer term. Among the candidates, PID_ERBB2_ERBB3_PATHWAY directly represents ErbB2/ErbB3 signaling events and better matches HER3-driven resistance biology. No higher-priority HALLMARK pathway captures this receptor-dimerization mechanism equally well."
+    }
+  ]
+}

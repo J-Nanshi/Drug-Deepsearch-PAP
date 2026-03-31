@@ -1,0 +1,172 @@
+{
+  "Row1": {
+    "Mapped MSigDB Pathway Name": "REACTOME_CO_INHIBITION_BY_PD_1",
+    "Original Pathway Name": "PD‑1/PD‑L1 inhibitory signaling (concept-level)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Atezolizumab blocks PD‑L1, preventing its engagement with PD‑1 and B7.1, reversing SHP‑mediated dephosphorylation of TCR/CD28 signaling components and restoring CD8⁺ T‑cell effector function in NSCLC and SCLC.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761034s043lbl.pdf",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12847340",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_CO_INHIBITION_BY_PD_1",
+    "original_mapped_name": "WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE",
+    "llm_reasoning": "The current mapping is close but too intervention-specific: WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE describes PD-1 blockade therapy, whereas the original pathway name and rationale refer to the underlying inhibitory signaling biology of the PD-1/PD-L1 axis (PD-1 engagement, SHP-mediated suppression of TCR/CD28 signaling, and reversal by blockade). Among the candidates, REACTOME_CO_INHIBITION_BY_PD_1 is the best conceptual match and has higher priority than WikiPathways. No HALLMARK pathway captures this mechanism equally well."
+  },
+  "Row2": {
+    "Mapped MSigDB Pathway Name": "WP_T_CELL_RECEPTOR_AND_COSTIMULATORY_SIGNALING",
+    "Original Pathway Name": "TCR/CD28 co‑stimulation (concept-level)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Effective PD‑L1 blockade requires intact TCR recognition and CD28 co‑stimulation; when these are functional, released PD‑1 brake translates into clonal expansion, cytokine production, and tumor cell killing, underpinning benefit in inflamed NSCLC and SCLC‑I subtypes.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7709126"
+    ],
+    "verdict": "correct",
+    "corrected_msigdb_name": null,
+    "original_mapped_name": null,
+    "llm_reasoning": "WP_T_CELL_RECEPTOR_AND_COSTIMULATORY_SIGNALING accurately captures the described biology of TCR recognition plus CD28 co-stimulation, which is the core process underlying PD-1/PD-L1 blockade responsiveness. Although Reactome candidates are more specific to CD28 biology, the current WikiPathways mapping already represents the combined TCR and co-stimulatory signaling concept well and is not clearly wrong."
+  },
+  "Row3": {
+    "Mapped MSigDB Pathway Name": "REACTOME_INTERFERON_GAMMA_SIGNALING",
+    "Original Pathway Name": "IFN‑γ–JAK/STAT signaling",
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Loss-of-function in IFNGR/JAK/STAT components leads to downregulation of the pathway, contributing to resistance to PD-(L)1 inhibitors like atezolizumab in lung cancer.",
+    "Pathway–drug relationship classification": "mechanistically accurate",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "REACTOME_INTERFERON_GAMMA_SIGNALING",
+    "original_mapped_name": "WP_INTERFERONMEDIATED_SIGNALING",
+    "llm_reasoning": "The original pathway name and rationale are specifically about IFN-γ (type II interferon) signaling through JAK/STAT components, which is more precise than the broad WikiPathways term 'Interferon-mediated signaling' that can include type I and other interferon responses. Among the candidates, REACTOME_INTERFERON_GAMMA_SIGNALING is the best semantic match and is higher-priority than WikiPathways. HALLMARK_IL2_STAT5_SIGNALING and HALLMARK_IL6_JAK_STAT3_SIGNALING are not appropriate because they describe different cytokine pathways."
+  },
+  "Row4": {
+    "Mapped MSigDB Pathway Name": "GOBP_ANTIGEN_PROCESSING_AND_PRESENTATION_OF_ENDOGENOUS_ANTIGEN",
+    "Original Pathway Name": "MHC‑I antigen processing and presentation",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "High expression of HLA‑I and antigen‑processing genes enables presentation of neoantigens to CD8⁺ T cells; pan‑cancer and NSCLC data show that stronger MHC‑I pathway activity and CD8 infiltration correlate with higher response rates to PD‑1/PD‑L1 blockade including atezolizumab.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "GOBP_ANTIGEN_PROCESSING_AND_PRESENTATION_OF_ENDOGENOUS_ANTIGEN",
+    "original_mapped_name": "WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE",
+    "llm_reasoning": "The current mapping to WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE is related to checkpoint therapy response, not the core biology of the original pathway. The original name and rationale describe MHC-I antigen processing/presentation: endogenous antigen processing, HLA-I loading, and presentation to CD8+ T cells. Among the provided candidates, GOBP_ANTIGEN_PROCESSING_AND_PRESENTATION_OF_ENDOGENOUS_ANTIGEN is the closest semantic and biological match. Although GO has lower priority than Reactome/KEGG/Hallmark, no higher-priority candidate capturing MHC-I antigen presentation is present, so this correction is warranted."
+  },
+  "Row5": {
+    "Mapped MSigDB Pathway Name": "WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE",
+    "Original Pathway Name": "Tumor mutational burden / neoantigen load",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "Elevated nonsynonymous mutation load increases neoantigen repertoire; in NSCLC, higher TMB associates with improved outcomes to atezolizumab-based regimens, particularly when coupled to preserved MHC-I and inflamed microenvironments.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761034s057lbl.pdf"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE",
+    "original_mapped_name": "WP_AMPLIFICATION_AND_EXPANSION_OF_ONCOGENIC_PATHWAYS_AS_METASTATIC_TRAITS",
+    "llm_reasoning": "The current mapping is incorrect: 'Amplification and expansion of oncogenic pathways as metastatic traits' describes metastatic oncogenic signaling, which is unrelated to tumor mutational burden/neoantigen load. The original pathway is about immunogenicity from high mutation burden and response to checkpoint blockade, so an immunotherapy pathway is a much better semantic match. Among the candidates, WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE best captures the NSCLC/atezolizumab context and the neoantigen/TMB-driven checkpoint inhibitor biology."
+  },
+  "Row6": {
+    "Mapped MSigDB Pathway Name": "HALLMARK_TGF_BETA_SIGNALING",
+    "Original Pathway Name": "VEGF/TGF‑β‑driven immunosuppressive stroma",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "The VEGF/TGF-β-driven immunosuppressive stroma is upregulated at baseline, contributing to resistance to atezolizumab due to the exclusion of CD8⁺ T cells.",
+    "Pathway–drug relationship classification": "experimental (clinical trials)",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "HALLMARK_TGF_BETA_SIGNALING",
+    "original_mapped_name": "WP_T_CELL_MODULATION_AND_DESMOPLASIA_IN_PANCREATIC_CANCER",
+    "llm_reasoning": "The original pathway describes a VEGF/TGF-β-driven immunosuppressive stroma that excludes CD8+ T cells and contributes to immunotherapy resistance. The current WikiPathways mapping is pancreatic-cancer-specific and focuses on T cell modulation/desmoplasia, which is related but narrower and less directly aligned with the stated VEGF/TGF-β biology. Among the candidates, HALLMARK_TGF_BETA_SIGNALING is the highest-priority and best semantic match to the TGF-β-driven stromal immunosuppressive context."
+  },
+  "Row8": {
+    "Mapped MSigDB Pathway Name": "GOBP_REGULATORY_T_CELL_DIFFERENTIATION",
+    "Original Pathway Name": "Myeloid‑derived suppressor cells / Treg and immunosuppressive cytokines",
+    "Regulation": "upregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "Enrichment of MDSCs, Tregs, and cytokines such as TGF‑β and certain chemokines in the NSCLC TME dampens effector T‑cell activity; these features are prominent in resistant transcriptomic subtypes (e.g., NMF2) with poor benefit from atezolizumab despite PD‑L1 expression.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "GOBP_REGULATORY_T_CELL_DIFFERENTIATION",
+    "original_mapped_name": "GOBP_NEGATIVE_REGULATION_OF_T_CELL_MEDIATED_IMMUNE_RESPONSE_TO_TUMOR_CELL",
+    "llm_reasoning": "The current GO term captures only one consequence of the biology—suppression of T-cell responses to tumor cells—but the original pathway name and rationale emphasize a broader immunosuppressive tumor microenvironment driven by myeloid-derived suppressor cells, Tregs, and suppressive cytokines such as TGF-β. Among the provided candidates, a term centered on regulatory T-cell biology better matches the core mechanism than a generic negative regulation of T-cell anti-tumor immunity. No higher-priority HALLMARK/REACTOME option is available in the candidate list, so the best correction from the provided choices is GOBP_REGULATORY_T_CELL_DIFFERENTIATION."
+  },
+  "Row10": {
+    "Mapped MSigDB Pathway Name": "HALLMARK_KRAS_SIGNALING_UP",
+    "Original Pathway Name": "KRAS/STK11/KEAP1‑linked metabolic and immune pathways",
+    "Regulation": "downregulation",
+    "Baseline effect": "resistant",
+    "Rationale": "KRAS mutations in NSCLC are associated with higher TMB/PD-L1 expression, potentially increasing sensitivity to ICIs like atezolizumab. However, co-mutations in STK11/KEAP1 lead to immune-suppressive environments and metabolic reprogramming, reducing CD8+ T cell infiltration and resulting in resistance to atezolizumab.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12909568"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "HALLMARK_KRAS_SIGNALING_UP",
+    "original_mapped_name": "WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE",
+    "llm_reasoning": "The current mapping to PD-1 blockade is not the best match for the original pathway name, which centers on KRAS/STK11/KEAP1-linked metabolic and immune biology in NSCLC. The rationale emphasizes KRAS-driven tumor biology and the effects of STK11/KEAP1 co-mutations on immune suppression and metabolic reprogramming, not the PD-1 pathway itself. Among the candidates, HALLMARK_KRAS_SIGNALING_UP is the highest-priority and most directly relevant curated hallmark set capturing KRAS activation biology, making it a better MSigDB mapping than a PD-1 blockade pathway."
+  },
+  "Row11": {
+    "Mapped MSigDB Pathway Name": "GOBP_POSITIVE_REGULATION_OF_ADAPTIVE_IMMUNE_RESPONSE",
+    "Original Pathway Name": "B‑/T‑cell–inflamed transcriptional programs (e.g., NMF4 subtype)",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "The NMF4 subtype, enriched for B‑ and T‑cell–inflamed signatures, elevated PD‑L1, and favorable TMB, derived marked PFS/OS benefit from ABCP including atezolizumab, illustrating that pre‑existing adaptive immune activation strongly predicts sensitivity.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12775477"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "GOBP_POSITIVE_REGULATION_OF_ADAPTIVE_IMMUNE_RESPONSE",
+    "original_mapped_name": "WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE",
+    "llm_reasoning": "The original pathway describes a B-/T-cell–inflamed transcriptional program (NMF4) characterized by pre-existing adaptive immune activation, PD-L1 elevation, and response to checkpoint blockade. WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE is mechanistically related but is an intervention-specific pathway, not the underlying biology of an inflamed tumor microenvironment. Among the provided candidates, GOBP_POSITIVE_REGULATION_OF_ADAPTIVE_IMMUNE_RESPONSE best captures the core biology of coordinated B- and T-cell immune activation. No higher-priority HALLMARK/REACTOME option is present in the candidate list, so this GO term is the best available correction."
+  },
+  "Row12": {
+    "Mapped MSigDB Pathway Name": "KEGG_SMALL_CELL_LUNG_CANCER",
+    "Original Pathway Name": "SCLC‑I inflamed subtype gene program",
+    "Regulation": "upregulation",
+    "Baseline effect": "sensitive",
+    "Rationale": "In ES-SCLC, a transcriptionally defined SCLC-I subtype with higher CD8A/B and immune-activation genes experiences greater survival benefit from EP-atezolizumab in IMpower133, whereas non-inflamed SCLC subtypes remain largely refractory.",
+    "Pathway–drug relationship classification": "clinically validated",
+    "References": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6226118",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC10600507"
+    ],
+    "verdict": "mapping_corrected",
+    "corrected_msigdb_name": "KEGG_SMALL_CELL_LUNG_CANCER",
+    "original_mapped_name": "WP_NONSMALL_CELL_LUNG_CANCER",
+    "llm_reasoning": "The original pathway describes the SCLC-I inflamed subtype gene program in small cell lung cancer, with immune activation/CD8A/B features and immunotherapy response. WP_NONSMALL_CELL_LUNG_CANCER is biologically mismatched because it refers to NSCLC rather than SCLC. Among the candidates, KEGG_SMALL_CELL_LUNG_CANCER is the most directly relevant and more appropriate than the current mapping; no higher-priority HALLMARK pathway captures this specific lung cancer subtype program better."
+  }
+}
